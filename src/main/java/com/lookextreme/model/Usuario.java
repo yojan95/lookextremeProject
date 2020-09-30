@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author hoore
+ * @author Alexis
  */
 @Entity
 @Table(name = "usuario")
@@ -46,7 +46,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findByFechaNacimiento", query = "SELECT u FROM Usuario u WHERE u.fechaNacimiento = :fechaNacimiento"),
     @NamedQuery(name = "Usuario.findByEmailContrasena", query = "SELECT u FROM Usuario u WHERE u.email = :email AND u.contrase\u00f1a = :contrase\u00f1a"),
     @NamedQuery(name = "Usuario.findByRollEstilista", query = "SELECT u FROM Usuario u WHERE u.rolesidRoles.idRoles  =:idRoles")})
-    
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;

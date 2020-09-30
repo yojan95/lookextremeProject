@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author hoore
+ * @author Alexis
  */
 @Entity
 @Table(name = "productos")
@@ -38,15 +38,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Productos.findAll", query = "SELECT p FROM Productos p"),
     @NamedQuery(name = "Productos.findByIdCodigo", query = "SELECT p FROM Productos p WHERE p.idCodigo = :idCodigo"),
-    @NamedQuery(name = "Productos.findByNombre", query = "SELECT p FROM Productos p WHERE p.nombre = :nombre"),
     @NamedQuery(name = "Productos.findByTama\u00f1o", query = "SELECT p FROM Productos p WHERE p.tama\u00f1o = :tama\u00f1o"),
     @NamedQuery(name = "Productos.findByFechaVencimiento", query = "SELECT p FROM Productos p WHERE p.fechaVencimiento = :fechaVencimiento"),
     @NamedQuery(name = "Productos.findByCantidad", query = "SELECT p FROM Productos p WHERE p.cantidad = :cantidad"),
     @NamedQuery(name = "Productos.findByColor", query = "SELECT p FROM Productos p WHERE p.color = :color"),
     @NamedQuery(name = "Productos.findByPrecio", query = "SELECT p FROM Productos p WHERE p.precio = :precio"),
-    @NamedQuery(name = "Productos.findByEstado", query = "SELECT p FROM Productos p WHERE p.estado = :estado"),
-    @NamedQuery(name = "Productos.findByCategoria", query = "SELECT p FROM Productos p WHERE p.categoria = :categoria"),
-    @NamedQuery(name = "Productos.findByMarca", query = "SELECT p FROM Productos p WHERE p.marca = :marca")})
+    @NamedQuery(name = "Productos.findByEstado", query = "SELECT p FROM Productos p WHERE p.estado = :estado")})
 public class Productos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,11 +52,6 @@ public class Productos implements Serializable {
     @Basic(optional = false)
     @Column(name = "idCodigo")
     private Integer idCodigo;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "Nombre")
-    private String nombre;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Tama\u00f1o")
@@ -87,23 +79,22 @@ public class Productos implements Serializable {
     @Size(min = 1, max = 15)
     @Column(name = "Estado")
     private String estado;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "Categoria")
-    private String categoria;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 25)
-    @Column(name = "marca")
-    private String marca;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productosidCodigo")
     private List<SalidaVenta> salidaVentaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productosidCodigo")
     private List<SalidaPorConsumo> salidaPorConsumoList;
+    @JoinColumn(name = "NombreProducto_idNombreProducto", referencedColumnName = "idNombreProducto")
+    @ManyToOne(optional = false)
+    private Nombreproducto nombreProductoidNombreProducto;
     @JoinColumn(name = "administrador_usuario_idUsuario", referencedColumnName = "usuario_idUsuario")
     @ManyToOne(optional = false)
     private Administrador administradorusuarioidUsuario;
+    @JoinColumn(name = "categorias_idcategorias", referencedColumnName = "idcategorias")
+    @ManyToOne(optional = false)
+    private Categorias categoriasIdcategorias;
+    @JoinColumn(name = "marca_idmarca", referencedColumnName = "idmarca")
+    @ManyToOne(optional = false)
+    private Marca marcaIdmarca;
 
     public Productos() {
     }
@@ -112,17 +103,14 @@ public class Productos implements Serializable {
         this.idCodigo = idCodigo;
     }
 
-    public Productos(Integer idCodigo, String nombre, short tamaño, Date fechaVencimiento, short cantidad, String color, int precio, String estado, String categoria, String marca) {
+    public Productos(Integer idCodigo, short tamaño, Date fechaVencimiento, short cantidad, String color, int precio, String estado) {
         this.idCodigo = idCodigo;
-        this.nombre = nombre;
         this.tamaño = tamaño;
         this.fechaVencimiento = fechaVencimiento;
         this.cantidad = cantidad;
         this.color = color;
         this.precio = precio;
         this.estado = estado;
-        this.categoria = categoria;
-        this.marca = marca;
     }
 
     public Integer getIdCodigo() {
@@ -131,14 +119,6 @@ public class Productos implements Serializable {
 
     public void setIdCodigo(Integer idCodigo) {
         this.idCodigo = idCodigo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public short getTamaño() {
@@ -189,22 +169,6 @@ public class Productos implements Serializable {
         this.estado = estado;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
     @XmlTransient
     public List<SalidaVenta> getSalidaVentaList() {
         return salidaVentaList;
@@ -223,12 +187,36 @@ public class Productos implements Serializable {
         this.salidaPorConsumoList = salidaPorConsumoList;
     }
 
+    public Nombreproducto getNombreProductoidNombreProducto() {
+        return nombreProductoidNombreProducto;
+    }
+
+    public void setNombreProductoidNombreProducto(Nombreproducto nombreProductoidNombreProducto) {
+        this.nombreProductoidNombreProducto = nombreProductoidNombreProducto;
+    }
+
     public Administrador getAdministradorusuarioidUsuario() {
         return administradorusuarioidUsuario;
     }
 
     public void setAdministradorusuarioidUsuario(Administrador administradorusuarioidUsuario) {
         this.administradorusuarioidUsuario = administradorusuarioidUsuario;
+    }
+
+    public Categorias getCategoriasIdcategorias() {
+        return categoriasIdcategorias;
+    }
+
+    public void setCategoriasIdcategorias(Categorias categoriasIdcategorias) {
+        this.categoriasIdcategorias = categoriasIdcategorias;
+    }
+
+    public Marca getMarcaIdmarca() {
+        return marcaIdmarca;
+    }
+
+    public void setMarcaIdmarca(Marca marcaIdmarca) {
+        this.marcaIdmarca = marcaIdmarca;
     }
 
     @Override
