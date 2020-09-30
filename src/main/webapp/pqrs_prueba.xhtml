@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="modal-body">                        
+                <div class="form-group">
+                    <p:outputLabel value="Tipo: " />
+                    <h:selectOneMenu id="ddl_tipoPqrs" value="#{pqrsController.tipoPqrs.tipoPQRS}">
+                        <f:selectItems value="#{tipopqrsController.pqrsListItems}" />                                    
+                    </h:selectOneMenu>                                
+                </div>
+                <div class="form-group">
+                    <h:outputLabel  for="txt_asunto" value="Asunto:" class="col-form-label"/>
+                    <h:inputText value="${pqrsController.pqrs.asunto}" class="form-control" id="txt_asunto" />
+                </div>
+                <h:inputHidden value="#{loginController.usuario}"></h:inputHidden>
+                <!--<div class="form-group">
+                    <p:outputLabel for="txt_detalles" class="col-form-label" value="Detalles:"/>
+                    <p:inputTextarea value="#{pqrsController.pqrs.detalles}" class="form-control" id="txt_detalles" maxlength="300"/>                                
+                </div>
+                <div class="form-group">
+                    <p:outputLabel class="col-form-label" value="Anexo:"/>
+                    <div class="custom-file">                                    
+                        <p:fileUpload class="custom-file-input" accept="image/png, image/jpeg,application/pdf,application/vnd.ms-excel,text/csv,application/msword" id="flp_anexos" />
+                        <p:outputLabel class="custom-file-label" for="flp_anexos"/>                                    
+                    </div>
+                </div>-->
+            </div>
+            <div class="modal-footer">
+                <!--<p:outputLabel  class="col-form-label" id="lbl_message" style="color:red; font:bold"/>-->
+                <h:commandButton  class="btn btn-primary" value="Crear"  actionListener="#{pqrsController.crearPqrs}" />
+            </div>
+        </h:form>   
+    </h:body>
+</html>
+

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="AdministradorTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <style>
+        section {
+            padding: 40px 40px;
+            height: auto;
+            min-height: 200px;
+        }                        
+        #services,
+        #contact {
+            padding: 50px;
+        }
+
+        #services {
+            background-color: #dfe4ea;
+        }
+
+    </style>
+    <ui:define name="content">
+        <h:form>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card">
+                            <h5 class="card-header">CONTROL DE USUARIOS</h5>
+                            <div class="card-body">
+                                <p:link class="dropdown-item text-dark" value="Registrar Administrador" outcome="cliente-servicios"/>
+                                <p:link class="dropdown-item text-dark" value="Registrar Estilista" outcome="admin-registrarUsuarios"/>
+                                <p:link class="dropdown-item text-dark" value="Consultar Usuarios" outcome="admin-listarUsuarios"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card border border-dark">
+                            <div class="card-header bg-dark text-white">REGISTRAR ESTILISTA
+                            </div>
+                            <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="Nombre"/>
+                                            <p:inputText class="form-control" placeholder="Nombre" value="${estilistaController.usuario.nombre}"/>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="Apellido"/>
+                                            <p:inputText class="form-control" placeholder="Apellido" value="${estilistaController.usuario.apellido}"/>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="Fecha de nacimiento"/>
+                                            <p:calendar value="${estilistaController.usuario.fechaNacimiento}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="Correo"/>
+                                            <p:inputText class="form-control" placeholder="Correo" value="${estilistaController.usuario.email}"/>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="Contraseña"/>
+                                            <p:inputText class="form-control" placeholder="Contraseña" value="${estilistaController.usuario.contraseña}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="Telefono"/>
+                                            <p:inputText class="form-control" placeholder="Telefono" value="${estilistaController.usuario.telefono}"/>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <p:outputLabel value="Edad"/>
+                                            <p:inputText class="form-control" placeholder="Edad" value="${estilistaController.usuario.edad}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="Especialidades"/>
+                                            <p:inputText class="form-control" placeholder="Especialidades" value="${estilistaController.estilista.especialidades}"/>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="Dirección"/>
+                                            <p:inputText class="form-control" placeholder="Dirección" value="${estilistaController.usuario.direccion}"/>
+                                        </div>
+                                    </div>
+                                <p:commandButton  value="Registrar" class="btn btn-primary" action="${estilistaController.registrarEstilista()}"></p:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <p></p>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+        <title>Look Extreme</title>
+        <!--<script src="js/jquery-3.4.1.min.js" ></script> -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <link href="css/utils.css" rel="stylesheet" type="text/css"/>
+        
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.map"></script>
+    </h:head>
+    <h:body>
+        <ui:insert name="header"> 
+            <h:form>
+                <header class="navbar navbar-expand-md fixed-top">                 
+                    <h:commandLink class="navbar-brand" onclick="redirect('landing.html')">                                     
+                        <img src="images/LogoMakr_1EYqX1.png" height="55px"/>
+                    </h:commandLink>
+                    <!-- menu usuario logueado -->
+                    <div id="user_menu" class="navbar-nav-scroll">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link active text-muted" action="cliente-servicios" ></h:commandLink>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Agendamiento
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <p:link class="dropdown-item menuUserNotLogin" value="Servicios" outcome="cliente-servicios"/>
+                                        <p:link class="dropdown-item menuUserNotLogin" value="Consultar Citas" outcome="cliente-consultarCitas"/>
+                                    </div>
+                                </li>
+                            </li>
+                            <li class="nav-item ">
+                                <h:commandLink class="nav-link  text-muted" ></h:commandLink>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        PQRS
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <p:link class="dropdown-item menuUserNotLogin" value="Crear PQRS" outcome="cliente_crearPqrs"/>
+                                        <a class="dropdown-item" href="#">Consultar PQRS</a>
+                                    </div>
+                                </li>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group navbar-nav ml-md-auto">
+                       <h:link class="nav-link dropdown-toggle " value="#{loginController.usuario.nombre}" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >
+                           <h:graphicImage value="images/user.svg" height="30px" />                                                        
+                        </h:link>
+                        <div class="dropdown-menu dropdown-menu-right" >
+                            <p:link class="dropdown-item menuUserNotLogin" value="Mis datos personales" outcome="cliente-datos"/>
+                            <p:link class="dropdown-item menuUserNotLogin" value="Cerrar Sesión" outcome="landing"/>           
+                        </div>
+                    </div>                
+                </header>
+            </h:form>
+            <div id="header" class="jumbotron text-light">
+                <h1 class="display-4">Look Extreme</h1>
+                <p class="lead">Comfort and quality.</p>
+            </div>
+        </ui:insert>
+        <ui:insert name="content">
+            <!--content here-->
+        </ui:insert>
+        <ui:insert name="bottom">
+            <h:form>
+                <div class="blog-footer">
+                    <p><h:commandLink >Look Extreme</h:commandLink> © All Rights Reserved - 2020</p>
+                    <p>
+                        <h:commandLink >Back to top</h:commandLink>
+                    </p>
+                </div>
+            </h:form>
+        </ui:insert>
+    </h:body>
+</html>

@@ -1,0 +1,89 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition template="AdministradorTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <section id="about">
+
+
+            <div class="container">      
+                <h:form class="needs-validation" >
+
+
+                    <div class="py-5 text-center">
+                        <h4 class="mb-3" > Registro de productos</h4>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel value="Nombre del producto"/>                    
+                            <p:inputText type="text" class="form-control" id="Nombre" placeholder="" value="${registrarProductoController.productos.nombre}" /> 
+                            <div class="invalid-feedback"> Se requiere un nombre valido</div>
+
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel value="Cantidad"/>                   
+                            <p:inputText  type="number" class="form-control" id="Cantidad" placeholder="10" value="${registrarProductoController.productos.cantidad}"  />
+                            <div class="invalid-feedback">Por favor introducir la cantidad del producto</div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <p:outputLabel value="Precio"/>                    
+                            <p:inputText type="number" class="form-control" id="Precio" placeholder="" value="${registrarProductoController.productos.precio}"  />
+                            <div class="invalid-feedback">Por favor introducir el valor correspondinente</div>
+
+                        </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Marca"/>
+                            <p:inputText type="text" class="form-control" id="Marca" placeholder="" value="${registrarProductoController.productos.marca}" />
+                            <div class="invalid-feedback">Por favor ingresar la marca del producto</div>
+
+                        </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Color"/>                                        
+                            <p:inputText type="text" class="form-control" id="Color" placeholder="" value="${registrarProductoController.productos.color}" />
+                            <div class="invalid-feedback">Por favor ingrese el color del producto</div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <p:outputLabel value="Categoria"/>                         
+                            <p:inputText type="text" class="form-control" id="Categoria" placeholder="" value="${registrarProductoController.productos.categoria}" />
+                            <div class="invalid-feedback">Por favor seleccione segun la Categoria</div>
+                        </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Fecha de Vencimiento"/>                    
+                            <p:calendar value="${registrarProductoController.productos.fechaVencimiento}"/>
+                            <div class="invalid-feedback">Por favor ingresar fecha de vencimiento</div>
+
+                        </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Tamaño"/>                                        
+                            <p:inputText type="text" class="form-control" id="Descripcion" placeholder="" value="${registrarProductoController.productos.tamaño}"/>
+
+
+
+                        </div>
+                    </div>
+                    <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${registrarProductoController.registrarProductos()}"   > </p:commandButton>>
+                </h:form>
+                <hr class="mb-4"></hr>
+
+            </div>    
+
+
+
+        </section>
+    </ui:define>
+</ui:composition>

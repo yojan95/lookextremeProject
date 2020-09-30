@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="AdministradorTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <style>
+        section {
+            padding: 40px 40px;
+            height: auto;
+            min-height: 200px;
+        }                        
+        #services,
+        #contact {
+            padding: 50px;
+        }
+
+        #services {
+            background-color: #dfe4ea;
+        }
+
+    </style>
+    <ui:define name="content">
+        <h:form>
+            
+            <p:dataTable id="tbl" var="car" value="#{usuarioController.listarUsuarios}"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                         paginator="true" rows="10" style="margin-bottom:20px">
+
+                <f:facet name="{Exporters}">
+                    <div style="float:right;padding-top: 5px;">
+                        <h:commandLink>
+                            <p:graphicImage url="icons/excelmp.png" width="24"/>
+                            <p:dataExporter type="xls" target="tbl" fileName="usuarios" />
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage name="/demo/images/xlsx.png" width="24"/>
+                            <p:dataExporter type="xlsxstream" target="tbl" fileName="cars" />
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage url="icons/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage name="/demo/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="tbl" fileName="cars" />
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage name="/demo/images/xml.png" width="24"/>
+                            <p:dataExporter type="xml" target="tbl" fileName="cars" />
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage name="/demo/images/keyboardpencil.png" width="24"/>
+                            <p:dataExporter type="text" target="tbl" fileName="cars" exporter="#{dataExporterView.textExporter}"/>
+                        </h:commandLink>                        
+                    </div>
+                </f:facet>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id" />
+                    </f:facet>
+                    <h:outputText value="#{car.idUsuario}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"/>
+                    </f:facet>
+                    <h:outputText value="#{car.nombre}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Apellido" />
+                    </f:facet>
+                    <h:outputText value="#{car.apellido}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Correo" />
+                    </f:facet>
+                    <h:outputText value="#{car.email}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Telefono" />
+                    </f:facet>
+                    <h:outputText value="#{car.telefono}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Contraseña" />
+                    </f:facet>
+                    <h:outputText value="#{car.contraseña}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Edad" />
+                    </f:facet>
+                    <h:outputText value="#{car.edad}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Direccion" />
+                    </f:facet>
+                    <h:outputText value="#{car.direccion}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha de nacimiento" />
+                    </f:facet>
+                    <h:outputText value="#{car.fechaNacimiento}" />
+                </p:column>
+            </p:dataTable>
+
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/excel.jpg" />
+                <p:dataExporter type="xls" target="tbl" fileName="cars" pageOnly="true"/>
+            </h:commandLink>
+
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/pdf.png" />
+                <p:dataExporter type="pdf" target="tbl" fileName="cars" pageOnly="true" />
+            </h:commandLink>
+
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/csv.png" />
+                <p:dataExporter type="csv" target="tbl" fileName="cars" pageOnly="true" />
+            </h:commandLink>
+
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/xml.png" />
+                <p:dataExporter type="xml" target="tbl" fileName="cars" pageOnly="true" />
+            </h:commandLink>
+            <p:growl id="messages" showDetail="true" />
+ 
+    <p:toolbar>
+ 
+        <f:facet name="right">
+            <p:commandButton value="Listar" actionListener="#{usuarioController.listar()}" update="tbl">
+                <f:ajax execute="tbl"/>
+            </p:commandButton>
+        </f:facet>
+ 
+    </p:toolbar>
+        </h:form>
+        <h:form>     
+    
+</h:form>
+        <p></p>
+    </ui:define>
+</ui:composition>
