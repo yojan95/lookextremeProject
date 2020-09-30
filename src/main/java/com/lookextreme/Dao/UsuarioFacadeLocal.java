@@ -12,7 +12,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author hoore
+ * @author Alexis
  */
 @Local
 public interface UsuarioFacadeLocal {

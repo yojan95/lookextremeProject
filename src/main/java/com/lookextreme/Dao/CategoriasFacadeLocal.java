@@ -5,7 +5,7 @@
  */
 package com.lookextreme.Dao;
 
-import com.lookextreme.model.Productos;
+import com.lookextreme.model.Categorias;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -14,19 +14,19 @@ import javax.ejb.Local;
  * @author Alexis
  */
 @Local
-public interface ProductosFacadeLocal {
+public interface CategoriasFacadeLocal {
 
-    void create(Productos productos);
+    void create(Categorias categorias);
 
-    void edit(Productos productos);
+    void edit(Categorias categorias);
 
-    void remove(Productos productos);
+    void remove(Categorias categorias);
 
-    Productos find(Object id);
+    Categorias find(Object id);
 
-    List<Productos> findAll();
+    List<Categorias> findAll();
 
-    List<Productos> findRange(int[] range);
+    List<Categorias> findRange(int[] range);
 
     int count();
     
