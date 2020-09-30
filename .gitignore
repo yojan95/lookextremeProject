@@ -5,7 +5,7 @@
 *.clase
 *.tarro
 *.guerra
-*.oído
+*.oï¿½do
 * .nar
 hs_err_pid *
 /target/**
@@ -73,7 +73,7 @@ nbactions.xml
 nb-configuration.xml
 
 #############################
-## Código de Visual Studio
+## Cï¿½digo de Visual Studio
 #############################
 .vscode /
 .code-espacio de trabajo
@@ -82,3 +82,4 @@ nb-configuration.xml
 ## OS X
 #############################
 .DS_Store
+/target/
