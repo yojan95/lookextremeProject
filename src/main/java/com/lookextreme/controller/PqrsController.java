@@ -10,10 +10,13 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 @Named
 @ViewScoped
@@ -25,6 +28,16 @@ public class PqrsController implements Serializable{
     private TipoPqrs tipoPqrs;
     private UIComponent buttonCreate;
     private Usuario usuario;
+    private List<Pqrs> pqrsList;
+
+    public List<Pqrs> getPqrsList() {
+        return pqrsList;
+    }
+
+    public void setPqrsList(List<Pqrs> pqrsList) {
+        this.pqrsList = pqrsList;
+    }
+    
 
     public PqrsFacadeLocal getEjbPqrs() {
         return EjbPqrs;
@@ -63,9 +76,23 @@ public class PqrsController implements Serializable{
     public void init(){
         FacesContext context = FacesContext.getCurrentInstance();
         usuario = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
-        System.out.println("id usuario " + usuario.getIdUsuario());
-        pqrs = new Pqrs();
-        tipoPqrs = new TipoPqrs();
+        String origin = obtenerUri();
+        System.out.println("uri: " + origin);
+        if(origin.contains("cliente_crearPqrs.xhtml")){                        
+            pqrs = new Pqrs();
+            tipoPqrs = new TipoPqrs();
+        }else if(origin.contains("cliente_consultarpqrs.xhtml")){
+            obtenerPqrsPorCliente(usuario.getIdUsuario());
+        }
+    }
+    
+    private String obtenerUri(){
+        String uri ;
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest servletRequest = (HttpServletRequest) context.getExternalContext().getRequest();
+        uri = servletRequest.getRequestURI();
+        System.out.println("init pqrs controller from :" + uri);
+        return uri;
     }
     
     public void validarPqrs(){
@@ -108,11 +135,16 @@ public class PqrsController implements Serializable{
         } catch (Exception e) {
             System.out.println("Crear Pqrs Error: " + e.getMessage());
         }
-        
-        
-        /*System.out.println("CrearPqrs");
-        System.out.println("tipo: "+tipoPqrs.getTipoPQRS());
-        System.out.println("asunto: "+pqrs.getAsunto());
-        System.out.println("detalles: "+pqrs.getDetalles());*/
+    }
+    
+    private void obtenerPqrsPorCliente(int idCliente){
+        if(idCliente > 0){
+            try {
+                pqrsList = new ArrayList();                
+                pqrsList = EjbPqrs.obtenerPqrsPorCliente(idCliente);                
+            } catch (Exception e) {
+                System.out.println("obtener pqrs cliente error: " + e.getLocalizedMessage());
+            }
+        }
     }
 }

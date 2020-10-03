@@ -6,6 +6,8 @@
 package com.lookextreme.Dao;
 
 import com.lookextreme.model.Pqrs;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +29,19 @@ public class PqrsFacade extends AbstractFacade<Pqrs> implements PqrsFacadeLocal 
 
     public PqrsFacade() {
         super(Pqrs.class);
+    }
+    
+    @Override
+    public List<Pqrs> obtenerPqrsPorCliente(int idCliente){
+        List<Pqrs> listaPqrs = new ArrayList();
+        try{
+            listaPqrs = em.createNamedQuery("Pqrs.findByClient")
+                .setParameter("idUsuario" , idCliente)
+                .getResultList();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return listaPqrs;
     }
     
 }

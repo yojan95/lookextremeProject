@@ -17,6 +17,7 @@ public class RegistrarProductoController implements Serializable {
     private ProductosFacadeLocal productoEJB;
     private Productos productos;
     private Administrador administrador;
+    
             
             
     public Productos getProductos() {
@@ -39,6 +40,8 @@ public class RegistrarProductoController implements Serializable {
             administrador.setUsuarioidUsuario(1);
             productos.setAdministradorusuarioidUsuario(administrador);
             productos.setEstado("registrado");
+            productos.setMarca("marcel france");
+            productos.setNombre("esmalte");
             productoEJB.create(productos);
         }catch (Exception e){
             System.out.println(e.getMessage()); 
