@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -73,15 +74,21 @@ public class CitaController implements Serializable {
         estilista = new Estilista();
         servicio = new Servicios();
         serviciosCitas = new ServiciosCitas();
+        usuario = new Usuario();
         listarEstilistas();
+        //FacesContext context = FacesContext.getCurrentInstance();
+        //usuario = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
     }
 
     public void registrarCita() throws Exception {
         System.out.println("Cita_registrada");
         try {
-            cliente.setUsuarioidUsuario(3);
+            //cliente.setUsuarioidUsuario(3);
+            //cita.setClienteusuarioidUsuario(cliente);
+            usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+            cliente.setUsuarioidUsuario(usuario.getIdUsuario());
             cita.setClienteusuarioidUsuario(cliente);
-            estilista.setUsuarioidUsuario(2);
+            //estilista.setUsuarioidUsuario(2);
             cita.setEstilistausuarioidUsuario(estilista);
             cita.setIdCita(2);
             cita.setEstado("agendada");
@@ -100,18 +107,19 @@ public class CitaController implements Serializable {
 
     public void listarEstilistas() {        
         estilistaListItem = new ArrayList();
-        
+       
+        List<Usuario> listaEstilistas = new ArrayList();
         try {
-            List<Usuario> listaEstilistas = new ArrayList();
+            
             Roles rol = new Roles();
             rol.setIdRoles(2);
             listaEstilistas = EJBusuario.consultarRoll(rol);
-            for (Usuario usuario : listaEstilistas) {
-                estilistaListItem.add(new SelectItem(usuario.getIdUsuario(), usuario.getNombre()));
+            for (Usuario estilistaitem : listaEstilistas) {
+                estilistaListItem.add(new SelectItem(estilistaitem.getIdUsuario(), estilistaitem.getNombre()));
             }
         } catch (Exception e) {            
             System.out.println("listar-estilistas");
             System.out.println(e.getMessage());
-        }       
+        } 
     }
 }
