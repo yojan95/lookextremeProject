@@ -26,9 +26,9 @@ and open the template in the editor.
 
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="Nombre del producto"/>                    
-                            <p:inputText type="text" class="form-control" id="Nombre" placeholder="" value="" /> 
-                            <div class="invalid-feedback"> Se requiere un nombre valido</div>
-
+                            <h:selectOneMenu  class="form-control" id="Nombre"  value="${registrarProductoController.nombrep.nombreProductocol}" > 
+                                <f:selectItems value="${registrarProductoController.nombrepList}" var="nomp" itemLabel="${nomp.nombreProductocol}" itemValue="${nomp.idNombreProducto}"/>
+                            </h:selectOneMenu>   
                         </div>
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="Cantidad"/>                   
@@ -38,56 +38,52 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm">
+                        <div class="col-md-6 mb-3">
                             <p:outputLabel value="Precio"/>                    
                             <p:inputText type="number" class="form-control" id="Precio" placeholder="" value="${registrarProductoController.productos.precio}"  />
                             <div class="invalid-feedback">Por favor introducir el valor correspondinente</div>
 
                         </div>
-                        <div class="col-sm">
+                        <div class="col-md-6 mb-3">
                             <p:outputLabel value="Marca"/>
-                            <p:inputText type="text" class="form-control" id="Marca" placeholder="" value="" />
+                            <p:inputText type="text" class="form-control" id="Marca" placeholder="" value="${registrarProductoController.productos.marcaIdmarca}" />
                             <div class="invalid-feedback">Por favor ingresar la marca del producto</div>
 
                         </div>
-                        <div class="col-sm">
+                    </div>  
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
                             <p:outputLabel value="Color"/>                                        
                             <p:inputText type="text" class="form-control" id="Color" placeholder="" value="${registrarProductoController.productos.color}" />
                             <div class="invalid-feedback">Por favor ingrese el color del producto</div>
 
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel value="Categoria"/>                         
+                            <h:selectOneMenu class="form-control" id="categoria"  value="${registrarProductoController.categorias.idcategorias}" >
+                                <f:selectItems value="${registrarProductoController.categoriasList}" var="cat" itemLabel="${cat.caNombre}" itemValue="${cat.idcategorias}"/>
+                            </h:selectOneMenu>
+                            
+                        </div>
                     </div>
                     <div class="row">
-                        <!--<p:outputLabel value="Estilistas: " />
-                            <h:selectOneMenu id="ddl_estilistas" value="#{citaController.usuario.idUsuario}">
-                                <f:selectItems value="#{citaController.estilistaListItem}" />                                    
-                            </h:selectOneMenu>--> 
-                        <div class="col-sm">
-                            <p:outputLabel value="Categoria"/>                         
-                            <h:selectOneMenu id="categoria" value="${registrarProductoController.productos.idCodigo}" >
-                                <f:selectItems value="${registrarProductoController.categoriaListItem}"/>
-                            </h:selectOneMenu>
-                            <div class="invalid-feedback">Por favor seleccione segun la Categoria</div>
-                        </div>
-                        <div class="col-sm">
-                            <p:outputLabel value="Fecha de Vencimiento"/>                    
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel class="form-control" value="Fecha de Vencimiento"/>                    
                             <p:calendar value="${registrarProductoController.productos.fechaVencimiento}"/>
                             <div class="invalid-feedback">Por favor ingresar fecha de vencimiento</div>
-
-                        </div>
-                        <div class="col-sm">
+                        </div>                    
+                        <div class="col-md-6 mb-3">
                             <p:outputLabel value="Tamaño"/>                                        
-                            <p:inputText type="text" class="form-control" id="Descripcion" placeholder="" value="${registrarProductoController.productos.tamaño}"/>
-
-
-
+                            <p:inputText type="text" class="form-control" id="Descripcion" placeholder="" value=""/>
                         </div>
                     </div>
-                    <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${registrarProductoController.registrarProductos()}"   > </p:commandButton>>
-                </h:form>
-                <hr class="mb-4"></hr>
+                    <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${registrarProductoController.registrarProductos()}"   > </p:commandButton>
 
+                    <hr class="mb-4"></hr>
+                </h:form>
             </div>    
+
+
 
 
 
