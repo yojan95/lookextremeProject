@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Alexis
+ * @author hoore
  */
 @Entity
 @Table(name = "pqrs")
@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pqrs.findByDetalles", query = "SELECT p FROM Pqrs p WHERE p.detalles = :detalles"),
     @NamedQuery(name = "Pqrs.findByEstado", query = "SELECT p FROM Pqrs p WHERE p.estado = :estado"),
     @NamedQuery(name = "Pqrs.findByRespuesta", query = "SELECT p FROM Pqrs p WHERE p.respuesta = :respuesta"),
-    @NamedQuery(name = "Pqrs.findByAsunto", query = "SELECT p FROM Pqrs p WHERE p.asunto = :asunto")})
+    @NamedQuery(name = "Pqrs.findByAsunto", query = "SELECT p FROM Pqrs p WHERE p.asunto = :asunto"),
+    @NamedQuery(name = "Pqrs.findByClient", query = "SELECT p FROM Pqrs p WHERE p.clienteusuarioidUsuario.usuario.idUsuario = :idUsuario")})
 public class Pqrs implements Serializable {
 
     private static final long serialVersionUID = 1L;

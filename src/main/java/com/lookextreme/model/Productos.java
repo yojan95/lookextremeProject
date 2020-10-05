@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Alexis
+ * @author hoore
  */
 @Entity
 @Table(name = "productos")

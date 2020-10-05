@@ -67,6 +67,8 @@ public class EstilistaController implements Serializable{
             roles.setIdRoles(2);
             roles.setTiporoles("Estilista");
             usuario.setRolesidRoles(roles);
+            estilista.setUsuario(usuario);
+            //usuario.setEstilista(estilista);
             usuarioEJB.create(usuario);
            
         }catch(Exception e){

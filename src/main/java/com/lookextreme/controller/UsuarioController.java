@@ -6,7 +6,6 @@
 package com.lookextreme.controller;
 
 import com.lookextreme.Dao.UsuarioFacadeLocal;
-import com.lookextreme.model.Roles;
 import com.lookextreme.model.Usuario;
 import java.io.Serializable;
 import java.util.List;

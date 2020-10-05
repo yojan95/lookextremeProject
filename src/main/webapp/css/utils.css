@@ -1,3 +1,4 @@
+
 .blog-footer {
     padding: 2.5rem 0;
     color: #fff;
@@ -6,16 +7,16 @@
     border-top: .05rem solid #e5e5e5;
 }
 .blog-footer  a{
-  color: #1e90ff;
+    color: #1e90ff;
 }
 .nav-item > a{
-  cursor: pointer;
+    cursor: pointer;
 }
 .nav-item > a:hover{
-  color:#000 !important;          
+    color:#000 !important;          
 }
 header{
-  background-color: #f9fbe7 ;
+    background-color: #f9fbe7 ;
 }
 #header{ 
     background-image: url("../images/fondo3.jpg"); 
@@ -23,4 +24,9 @@ header{
     background-position: center center;
     height: 350px; 
     margin-top: 75px ;
-  } 
+} 
+section {
+    padding: 40px 20px;
+    height: auto;
+    min-height: 400px;
+}
