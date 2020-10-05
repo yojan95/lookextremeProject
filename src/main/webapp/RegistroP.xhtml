@@ -26,7 +26,7 @@ and open the template in the editor.
 
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="Nombre del producto"/>                    
-                            <h:selectOneMenu  class="form-control" id="Nombre"  value="${registrarProductoController.nombrep.nombreProductocol}" > 
+                            <h:selectOneMenu  class="form-control" id="Nombre"  value="${registrarProductoController.nombrep.idNombreProducto}" > 
                                 <f:selectItems value="${registrarProductoController.nombrepList}" var="nomp" itemLabel="${nomp.nombreProductocol}" itemValue="${nomp.idNombreProducto}"/>
                             </h:selectOneMenu>   
                         </div>
@@ -46,15 +46,15 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="Marca"/>
-                            <p:inputText type="text" class="form-control" id="Marca" placeholder="" value="${registrarProductoController.productos.marcaIdmarca}" />
-                            <div class="invalid-feedback">Por favor ingresar la marca del producto</div>
-
+                            <h:selectOneMenu class="form-control" id="Marca"  value="${registrarProductoController.marcas.idmarca}" >
+                                <f:selectItems value="${registrarProductoController.marcaList}" var="mar"   itemLabel="${mar.maNombre}" itemValue="${mar.idmarca}"   />
+                            </h:selectOneMenu>             
                         </div>
                     </div>  
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="Color"/>                                        
-                            <p:inputText type="text" class="form-control" id="Color" placeholder="" value="${registrarProductoController.productos.color}" />
+                            <p:inputText type="text" class="form-control" id="Color"  value="${registrarProductoController.productos.color}" />
                             <div class="invalid-feedback">Por favor ingrese el color del producto</div>
 
                         </div>
@@ -74,7 +74,7 @@ and open the template in the editor.
                         </div>                    
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="Tamaño"/>                                        
-                            <p:inputText type="text" class="form-control" id="Descripcion" placeholder="" value=""/>
+                            <p:inputText type="text" class="form-control" id="Descripcion"  value="${registrarProductoController.productos.tamaño}"/>
                         </div>
                     </div>
                     <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${registrarProductoController.registrarProductos()}"   > </p:commandButton>
