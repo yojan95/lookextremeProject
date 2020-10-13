@@ -32,9 +32,7 @@ public class LoginController implements Serializable {
     public void setButtonLogin(UIComponent buttonLogin) {
         this.buttonLogin = buttonLogin;
     }
-
-    
-    
+       
     @PostConstruct
     public void init() {
         usuario = new Usuario();

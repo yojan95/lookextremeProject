@@ -20,11 +20,11 @@
                     <h3>Reclamo</h3>
                     <p class="lead">Es el derecho que tiene toda persona de exigir, reivindicar o demandar una solución o atención satisfactoria, ya sea por motivo general o particular, referente a la prestación indebida de un servicio o a la falta de atención de una solicitud.</p>
                     <h3>Sugerencia</h3>
-                    <p class="lead">Es la manifestación de ideas o propuestas tendientes al mejoramiento de un servicio o la gestión de la misma entidad.</p>                    
+                    <p class="lead">Es la manifestación de ideas o propuestas tendientes al mejoramiento de un servicio o la gestión de la misma entidad.</p>
                     <div class="text-center">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#PQRSmodal">Nuevo PQRS</button>
                     </div>
-                </div>                 
+                </div>                
             </div>
         </section>
         <!-- modal creacion -->    
@@ -64,13 +64,11 @@
                         </div>
                         <div class="modal-footer">
                             <h:message for="btn_create"></h:message>
-                            <h:commandButton id="btn_create" class="btn btn-primary" value="Crear" binding="#{pqrsController.buttonCreate}"   actionListener="#{pqrsController.validarPqrs}" />
+                            <p:commandButton ajax="true" id="btn_create" class="btn btn-primary" value="Crear"    actionListener="#{pqrsController.validarPqrs}" />
                         </div>
                     </h:form>                        
                 </div>
             </div>
-        </div>
-
-        <p></p>
+        </div>       
     </ui:define>
 </ui:composition>
