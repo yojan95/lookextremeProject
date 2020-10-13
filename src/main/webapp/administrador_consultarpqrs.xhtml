@@ -67,11 +67,11 @@
                 </div>
                 <div class="form-group">
                     <p:outputLabel for="txt_detalles" class="col-form-label" value="Detalles:"/>
-                    <h:outputText value="#{pqrsController.pqrs.detalles}" class="form-control" id="txt_detalles" />
+                    <p:inputTextarea value="#{pqrsController.pqrs.detalles}" class="form-control" id="txt_detalles" disabled="true" />
                 </div>
                 <div class="form-group">
                     <p:outputLabel for="txt_respuesta" class="col-form-label" value="Respuesta:"/>
-                    <h:inputText value="#{pqrsController.pqrs.respuesta}" class="form-control" id="txt_respuesta" />
+                    <p:inputTextarea value="#{pqrsController.pqrs.respuesta}" class="form-control" id="txt_respuesta" />
                 </div>                
                 <div class="modal-footer">
                     <p:commandButton value="Responder" actionListener="#{pqrsController.guardarRespuesta()}"/>                    

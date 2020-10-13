@@ -14,15 +14,15 @@
                     <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
                     <!--<label id="lbl_pqrs" style="display: none;">No se encontraron PQRS</label>-->
                     <h:form id="pqrs">
-                        <p:dataTable id="tbl_pqrs" var="table_pqrs" value="#{pqrsController.pqrsList}" >
+                        <p:dataTable id="tbl_pqrs" var="table_pqrs" value="#{pqrsController.pqrsList}" rowIndexVar="index">
                             <p:column>
                                 <f:facet name="header">N°</f:facet>
-                                <h:outputText value="#{tbl_pqrs.rowIndex + 1}" />                        
+                                <h:outputText value="#{index + 1}" />                        
                             </p:column>                    
                             <p:column>
                                 <f:facet name="header">Fecha/Hora de creación</f:facet>
                                 <h:outputText value="#{table_pqrs.fechaHoraCreacion}" >
-                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>                                    
                                 </h:outputText>
                             </p:column>
                             <p:column>
