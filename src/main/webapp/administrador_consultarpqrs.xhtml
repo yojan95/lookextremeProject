@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="content">
+        <h:form>
+            <section class="container">
+                <div class="row justify-content-md-start">
+                    <div class="col col-lg-12">
+                        <h:outputLabel id="lbl_pqrs" style="display: none;" >No se encontraron PQRS</h:outputLabel>
+                        <p:dataTable id="tbl_pqrs" var="table_pqrs" value="#{pqrsController.pqrsList}">
+                            <p:column>
+                                <f:facet name="header">N°</f:facet>
+                                <h:outputText value="#{tbl_pqrs.rowIndex + 1}" />                        
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Tipo</f:facet>
+                                <h:outputText value="#{table_pqrs.tipopqrsidTipoPQRS.tipoPQRS}" />                        
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Fecha/Hora de creación</f:facet>
+                                <h:outputText value="#{table_pqrs.fechaHoraCreacion}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Asunto</f:facet>                        
+                                <h:outputText value="#{table_pqrs.asunto}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Detalles</f:facet>                        
+                                <h:outputText value="#{table_pqrs.detalles}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Anexos</f:facet>                        
+                                <h:outputText value="#{table_pqrs.anexos}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Estado</f:facet>
+                                <h:outputText value="#{table_pqrs.estado}" />
+                            </p:column>
+                            <p:column>                            
+                                <f:facet name="header">
+                                    Respuesta                                
+                                </f:facet>
+                                <h:outputText rendered="#{table_pqrs.estado == 'Respondido'}" value="#{table_pqrs.respuesta}" />
+                                <p:commandButton ajax="true" rendered="#{table_pqrs.estado != 'Respondido' }" value="Responder" actionListener="#{pqrsController.openModal(table_pqrs)}" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </div>
+            </section>            
+            <p:dialog header="PQRS" widgetVar="dialog_pqrs" modal="true" width="600" height="450">
+                <h:outputText></h:outputText>
+                <div class="form-group">
+                    <p:outputLabel for="txt_tipo" class="col-form-label" value="Tipo PQRS:"/>
+                    <h:outputText value="#{pqrsController.pqrs.tipopqrsidTipoPQRS.tipoPQRS}" class="form-control" id="txt_tipo" />
+                </div>
+                <div class="form-group">
+                    <p:outputLabel for="txt_asunto" class="col-form-label" value="Asunto:"/>
+                    <h:outputText value="#{pqrsController.pqrs.asunto}" class="form-control" id="txt_asunto" />
+                </div>
+                <div class="form-group">
+                    <p:outputLabel for="txt_detalles" class="col-form-label" value="Detalles:"/>
+                    <h:outputText value="#{pqrsController.pqrs.detalles}" class="form-control" id="txt_detalles" />
+                </div>
+                <div class="form-group">
+                    <p:outputLabel for="txt_respuesta" class="col-form-label" value="Respuesta:"/>
+                    <h:inputText value="#{pqrsController.pqrs.respuesta}" class="form-control" id="txt_respuesta" />
+                </div>                
+                <div class="modal-footer">
+                    <p:commandButton value="Responder" actionListener="#{pqrsController.guardarRespuesta()}"/>                    
+                </div>                    
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

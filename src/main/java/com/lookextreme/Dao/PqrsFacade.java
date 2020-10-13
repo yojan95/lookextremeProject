@@ -44,4 +44,16 @@ public class PqrsFacade extends AbstractFacade<Pqrs> implements PqrsFacadeLocal 
         return listaPqrs;
     }
     
+    @Override
+    public List<Pqrs> obtenerPqrsAdministrador(){
+        List<Pqrs> listaPqrs = new ArrayList();
+        try{
+            listaPqrs = em.createNamedQuery("Pqrs.findAll")                
+                .getResultList();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return listaPqrs;
+    }
+    
 }
