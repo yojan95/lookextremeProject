@@ -6,6 +6,7 @@
 package com.lookextreme.Dao;
 
 import com.lookextreme.model.Cita;
+import com.lookextreme.model.Cliente;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,6 +28,10 @@ public interface CitaFacadeLocal {
     List<Cita> findAll();
 
     List<Cita> findRange(int[] range);
+    
+    List<Cita> obtenerCitaPorCliente(int idCliente);
+    
+    //List<Cita> buscarEstadoCliente(int idcliente,String estado)throws Exception;
 
     int count();
     

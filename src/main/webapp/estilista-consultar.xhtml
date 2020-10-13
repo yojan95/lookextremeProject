@@ -23,57 +23,69 @@
 
     </style>
     <ui:define name="content">
-        <h:form>
+        <section>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
-                            <a class="navbar-brand">Buscar citas</a>
-                            <div class="form-inline">
-                                <p:inputText class="form-control mr-sm-2" type="search" placeholder="Buscar"/>
-                                <p:commandButton class="btn btn-outline-primary my-2 my-sm-0" type="search" value="Buscar"></p:commandButton>
+            <h:form>
+                <p:messages showDetail="true" showSummary="false">
+                    <p:autoUpdate rendered="true"/>
+                </p:messages>
+
+                <div class="row justify-content-md-start">
+
+                    <div class="col-lg-10 mx-auto">
+                        <div class="row">
+                            <div class="col">
+                                <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
+                                    <a class="navbar-brand">Buscar citas</a>
+                                    <div class="form-inline">
+                                        <p:calendar class="mr-sm-2"  type="search" placeholder="Buscar"></p:calendar>
+                                        <p:commandButton class="btn btn-outline-primary my-2 my-sm-0"  type="search" value="Buscar"></p:commandButton>
+                                    </div>
+                                </nav>
                             </div>
-                        </nav>
+                        </div>
+                        <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
+                        <p:dataTable id="tbl_pqrs" var="table_cit" value="#{citaConsultarController.listServiciosCita}" >
+                            <f:facet name="{Exporters}">
+                                 <h:commandLink>
+                            <p:graphicImage url="icons/excelmp.png" width="24"/>
+                            <p:dataExporter type="xls" target="tbl_pqrs" fileName="usuarios" />
+                        </h:commandLink>
+                            </f:facet>
+                            <p:column filterBy="#{table_cit.citaidCita.idCita}">
+                                <f:facet name="header">Turno</f:facet>
+                                <h:outputText value="#{table_cit.citaidCita.idCita}" />                        
+                            </p:column>                    
+                            <p:column filterBy="#{table_cit.citaidCita.estado}" headerText="bs">
+                                <f:facet name="header">Estado</f:facet>
+                                <h:outputText value="#{table_cit.citaidCita.estado}" >
+
+                                </h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{table_cit.citaidCita.hora}">
+                                <f:facet name="header">Hora</f:facet>                        
+                                <h:outputText value="#{table_cit.citaidCita.hora}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Fecha</f:facet>                        
+                                <h:outputText value="#{table_cit.citaidCita.fecha}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Cliente</f:facet>                        
+                                <h:outputText value="${table_cit.citaidCita.clienteusuarioidUsuario.usuario.nombre}" />
+                            </p:column>
+                            <p:column filterBy="#{table_cit.serviciosidServicios.nombre}">
+                                <f:facet name="header">Servicio</f:facet>                        
+                                <h:outputText value="${table_cit.serviciosidServicios.nombre}" />
+                            </p:column>
+
+
+                        </p:dataTable>
+
                     </div>
                 </div>
-                <div class="col-w-100">
-                    <p:dataTable id="data" value="#{personaBean.lstPersonas}" var="persona" >
-                        <p:column headerText="Nombre">
-                            <p:outputLabel value="#{cliente.nombre}"/>
-                        </p:column>
-                        <p:column headerText="Apellido">
-                            <p:outputLabel value="#{cliente.apellido}">
-                            </p:outputLabel>
-                        </p:column>
-                        <p:column headerText="Servicio">
-                            <p:commandLink value="Modificar" actionListener="#{personaBean.leerID(persona)}" oncomplete="PF('wdlgDatos').show();" update="dlDatos"/>
-                        </p:column>
-                        <p:column headerText="Turno">
-                            <p:commandLink value="Eliminar" actionListener="#{personaBean.eliminar(persona)}"  update="data"/>
-                        </p:column>
-                        <p:column headerText="Hora">
-                            <p:commandLink value="Eliminar" actionListener="#{personaBean.eliminar(persona)}"  update="data"/>
-                        </p:column>
-                        <p:column headerText="Fecha">
-                            <p:commandLink value="Eliminar" actionListener="#{personaBean.eliminar(persona)}"  update="data"/>
-                        </p:column>
-                        <p:column headerText="Estado">
-                            <p:commandLink value="Eliminar" actionListener="#{personaBean.eliminar(persona)}"  update="data"/>
-                        </p:column>
-                        <p:column headerText="Cancelar">
-                            
-                            <!--<p:commandButton class="btn btn-dark" type="submit" value="Cancelar"></p:commandButton>-->
-                            <p:commandButton icon="ui-icon-trash"
-                           title="Delete this actor"
-                           actionListener="#{actorsMB.remove(item)}"
-                           ajax="false" />
-                        </p:column>
-
-                    </p:dataTable>
-                </div>
-            </div>   
-        </h:form>
+            </h:form>
+        </section>
         <p></p>
     </ui:define>
 </ui:composition>

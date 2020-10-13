@@ -27,6 +27,8 @@ public interface ServiciosCitasFacadeLocal {
     List<ServiciosCitas> findAll();
 
     List<ServiciosCitas> findRange(int[] range);
+    
+    List<ServiciosCitas> obtenerCitaPorEstilistas(int idEstilista);
 
     int count();
     
