@@ -8,6 +8,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui">    
     <ui:define name="content">
+        <!--citaController.usuario.idUsuario-->
         <h:form>
             <div class="card ml-5 mr-5 mt-5 mb-5">
                 <div class="card-header bg-dark text-white">
@@ -16,10 +17,10 @@
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
                         <div class="form-inline">
-                            <!--<p:outputLabel value="Estilistas: " />
-                            <h:selectOneMenu id="ddl_estilistas" value="#{citaController.usuario.idUsuario}">
+                            <p:outputLabel value="Estilistas: " />
+                            <h:selectOneMenu id="ddl_estilistas" value="#{citaController.estilista.usuarioidUsuario}">
                                 <f:selectItems value="#{citaController.estilistaListItem}" />                                    
-                            </h:selectOneMenu>--> 
+                            </h:selectOneMenu>
                             <p:commandButton class="btn btn-primary my-1" value="Verificar Disponibilidad"></p:commandButton>
                             <p:commandButton class="btn btn-primary my-1 ml-5" value="Agendar Cita" actionListener="${citaController.registrarCita()}"></p:commandButton>
                         </div>

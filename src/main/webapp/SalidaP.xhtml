@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -9,108 +9,97 @@ and open the template in the editor.
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content">
-        <div class="container">      
-            <form action="">
-      <div class="py-5 text-center">
-        <h2 class="mb-3">Salida por venta</h2>
-      </div>
-        </form>  
-            <form class="needs-validation" >
-                <!-- Id_Producto Precio Unitario -->
-                <div class="row">
-                    <div class="col-sm">
-                        <p:outputLabel value="Codigo"/>
-                        <input type="number" class="form-control" id="Codigo" placeholder="Codigo" ></input>
-                            <div class="invalid-feedback">Por favor diligenciar.</div>
-                    </div>
-                    <div class="col-sm">
-                        <p:outputLabel value="Precio Unitario"/>                        
-                        <input type="number" class="form-control" Precio="" placeholder="Precio" ></input>
-                            <div class="invalid-feedback">Por favor diligenciar.</div>
-                    </div>
-                    <div class="col-sm">
-                        <p:outputLabel value="Nombre del producto"/>                        
-                        <input type="text" class="form-control" id="Nombre" placeholder="Nombre" value="" ></input>
-                            <div class="invalid-feedback">Por favor diligenciar.</div>
-                    </div>
+        <section id="about">
+            <div class="container">      
+
+                <div class="py-5 text-center">
+                    <h4 class="mb-3" > Salida de producto por venta</h4>
                 </div>
-                <div class="row">
 
-                    <div class="col-md-6 mb-3">
-                        <p:outputLabel value="Cantidad"/>                        
-                        <input type="number" class="form-control" id="Cantidad" placeholder="0-100" value="" ></input>
-                        <div class="invalid-feedback">Por favor diligenciar.</div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <p:outputLabel value="Total"/>                        
-                        <input type="number" class="form-control" id="Total" placeholder="" value="" ></input>
-                        <div class="invalid-feedback"> Por favor diligenciar.</div>
-                        <br></br>
+                <h:form class="needs-validation" >
+                    <!-- Id_Producto Precio Unitario -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel value="Nombre del producto"/>                    
+                            <h:selectOneMenu  class="form-control"   value="" > 
+                                <f:selectItems value="" />
+                            </h:selectOneMenu>   
+                        </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Precio Unitario"/>                        
+                            <p:inputText type="number" class="form-control"   />
+                            
+                        </div>
 
                     </div>
-                    <button class="btn btn-outline-secondary" type="submit">Guardar </button>
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel value="Cantidad"/>                        
+                            <p:inputText type="number" class="form-control"   value="" />
+                            
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel value="Total"/>                        
+                            <p:inputText type="number" class="form-control"   value="" />
+                            
+                            <br></br>
+
+                        </div>
+                        <p:commandButton value="Guardar" />
+                    </div>
+                </h:form>
+            </div>
+            <div class="container">    
+
+
+                <div class="py-5 text-center">
+                    <h4 class="mb-3" > Salida por consumo</h4>
                 </div>
-            </form>
-        </div>
-    <div class="container">    
-        
-        <form action="">
-      <div class="py-5 text-center">
-        <h2 class="mb-3">Salida por consumo interno</h2>
-      </div>
-        </form>      
-      <form class="needs-validation" >
-        <!-- Id_Producto Precio Unitario -->
-        <div class="row">
-          <div class="col-sm">
-              <p:outputLabel value="Codigo"/>              
-            <input type="number" class="form-control" id="Codigo" placeholder="Codigo"> </input>
-            <div class="invalid-feedback">Por favor diligenciar.</div>
-          </div>
-          
-          <div class="col-sm">
-              <p:outputLabel value="Nombre del producto"/>              
-            <input type="text" class="form-control" id="Nombre" placeholder="Nombre" value="" ></input>
-            <div class="invalid-feedback">Por favor diligenciar.</div>
-          </div>
-        </div>
-        <div class="row">
-  
-          <div class="col-sm">
-              <p:outputLabel value="Cantidad"/>              
-            <input type="number" class="form-control" id="Cantidad" placeholder="0-100" value="" ></input>
-            <div class="invalid-feedback">Por favor diligenciar.</div>
-          </div>
-          <div class="col-sm">
-              <p:outputLabel value="Tamaño"/>             
-            <input type="text" class="form-control" id="Tamaño" placeholder="" value="" ></input>
-            <div class="invalid-feedback"> Por favor diligenciar.</div>
-          </div>    
-          <div class="col-sm">
-              <p:outputLabel value="Color"/>  
-              <input type="text" class="form-control" id="Color" placeholder="" ></input>
-              <div class="invalid-feedback">Por favor ingrese el color del producto</div>
-          </div>
-          <div class="col-sm">
-              <p:outputLabel value="Estilista"/>              
-            <select class="custom-select d-block w-100" id="Estilista" >
-              <option value="">Esoge...</option>
-              <option>Alberto</option>
-              <option>Francisco</option>
-              <option>Camila</option>
-              <option>Alejandra</option>
-              
-            </select>
-            <div class="invalid-feedback">Por favor seleccione segun la Categoria</div>
-          </div>
-        </div>
-        <br></br>
-        <button class="btn btn-outline-secondary" type="submit">Guardar </button>
-    </form>
-    </div>
+
+                <h:form class="needs-validation" >
+                    <!-- Id_Producto Precio Unitario -->
+                    <div class="row">
 
 
-                                </ui:define>
-                                </ui:composition>
+                        <div class="col-sm">
+                            <p:outputLabel value="Nombre del producto"/>                    
+                            <h:selectOneMenu  class="form-control"   value="" > 
+                                <f:selectItems value="" var="" itemLabel="" itemValue=""/>
+                            </h:selectOneMenu>   
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm">
+                            <p:outputLabel value="Cantidad"/>              
+                            <p:inputText type="number" class="form-control"  value="" />
+                            
+                        </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Tamaño"/>             
+                            <p:inputText type="text" class="form-control"   value="" />
+                            
+                        </div>    
+                        <div class="col-sm">
+                            <p:outputLabel value="Color"/>  
+                            <p:inputText type="text" class="form-control"   />
+                            
+                        </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Estilista"/>                    
+                            <h:selectOneMenu  class="form-control"   value="" > 
+                                <f:selectItems value="" />
+                            </h:selectOneMenu>   
+                        </div>
+                    </div>
+                    <br></br>
+                    <p:commandButton value="Guardar" >  </p:commandButton>
+                </h:form>
+            </div>
+        </section>
+    </ui:define>
+</ui:composition>
