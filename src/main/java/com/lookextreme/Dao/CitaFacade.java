@@ -61,4 +61,17 @@ public class CitaFacade extends AbstractFacade<Cita> implements CitaFacadeLocal 
         return ListaBusqueda;
     }
     */
+
+    @Override
+    public List<Cita> obtenerCitaPorEstilistaEstadoIncumpliento(int idEstilista) {
+         List<Cita> listaCita = new ArrayList();
+        try{
+            listaCita = em.createNamedQuery("Estilista.findbyCita")
+                    .setParameter("idUsuario", idEstilista)
+                    .getResultList();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return listaCita;
+    }
 }

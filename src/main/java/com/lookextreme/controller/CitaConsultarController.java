@@ -24,10 +24,20 @@ public class CitaConsultarController implements Serializable {
     private Usuario usuario;
     private Cita cita;
     private List<Cita> citalist;
+    private List<Cita> listCitaEstadoImcumpliento;
     @EJB
     private ServiciosCitasFacadeLocal EJBserviciosCitas;
     private ServiciosCitas serviciosCita;
     private List<ServiciosCitas> ListServiciosCita;
+
+    public List<Cita> getListCitaEstadoImcumpliento() {
+        return listCitaEstadoImcumpliento;
+    }
+
+    public void setListCitaEstadoImcumpliento(List<Cita> listCitaEstadoImcumpliento) {
+        this.listCitaEstadoImcumpliento = listCitaEstadoImcumpliento;
+    }
+    
 
     public ServiciosCitas getServiciosCita() {
         return serviciosCita;
@@ -80,6 +90,7 @@ public class CitaConsultarController implements Serializable {
         
         obtenerCitaPorCliente(usuario.getIdUsuario());
         obtenerCitaPorEstilistas(usuario.getIdUsuario());
+        obtenerCitaPorEstilistaEstadoIncumpliento(usuario.getIdUsuario());
     }
          /*
     =================
@@ -106,6 +117,16 @@ public class CitaConsultarController implements Serializable {
             try{
                 ListServiciosCita = new ArrayList();
                 ListServiciosCita = EJBserviciosCitas.obtenerCitaPorEstilistas(idEstilista);
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    public void obtenerCitaPorEstilistaEstadoIncumpliento(int idEstilistaa){
+        if (idEstilistaa > 0) {
+            try{
+                listCitaEstadoImcumpliento = new ArrayList();
+                listCitaEstadoImcumpliento = EJBcita.obtenerCitaPorEstilistaEstadoIncumpliento(idEstilistaa);
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }

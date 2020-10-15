@@ -5,8 +5,10 @@
  */
 package com.lookextreme.controller;
 
+import com.lookextreme.Dao.CitaFacadeLocal;
 import com.lookextreme.Dao.EstilistaFacadeLocal;
 import com.lookextreme.Dao.UsuarioFacadeLocal;
+import com.lookextreme.model.Cita;
 import com.lookextreme.model.Estilista;
 import com.lookextreme.model.Roles;
 import com.lookextreme.model.Usuario;
@@ -31,6 +33,9 @@ public class EstilistaController implements Serializable{
     @EJB
     private EstilistaFacadeLocal estilistaEJB;
     private Estilista estilista;
+    
+    @EJB
+    private CitaFacadeLocal EJBcita;
     
     public Roles getRoles() {
         return roles;
@@ -79,4 +84,5 @@ public class EstilistaController implements Serializable{
             System.out.println(e.getMessage());
         }
     }
+    
 }

@@ -78,14 +78,75 @@
                                 <f:facet name="header">Servicio</f:facet>                        
                                 <h:outputText value="${table_cit.serviciosidServicios.nombre}" />
                             </p:column>
-
-
                         </p:dataTable>
-
                     </div>
                 </div>
             </h:form>
         </section>
-        <p></p>
+        <section>
+
+            <h:form>
+                <p:messages showDetail="true" showSummary="false">
+                    <p:autoUpdate rendered="true"/>
+                </p:messages>
+
+                <div class="row justify-content-md-start">
+
+                    <div class="col-lg-10 mx-auto">
+                        <div class="row">
+                            <div class="col">
+                                <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
+                                    <a class="navbar-brand">Incuplimiento de citas</a>
+                                    <div class="form-inline">
+                                        
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
+                        <p:dataTable id="tbl_pqrs" var="table_cita" value="#{citaConsultarController.listCitaEstadoImcumpliento}" >
+                            <f:facet name="{Exporters}">
+                                 <h:commandLink>
+                            <p:graphicImage url="icons/excelmp.png" width="24"/>
+                            <p:dataExporter type="xls" target="tbl_pqrs" fileName="usuarios" />
+                        </h:commandLink>
+                            </f:facet>
+                            <p:column filterBy="#{table_cit.idCita}">
+                                <f:facet name="header">Turno</f:facet>
+                                <h:outputText value="#{table_cita.idCita}" />                        
+                            </p:column>                    
+                            <p:column filterBy="#{table_cita.estado}" headerText="bs">
+                                <f:facet name="header">Estado</f:facet>
+                                <h:outputText value="#{table_cita.estado}" >
+
+                                </h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{table_cita.hora}">
+                                <f:facet name="header">Hora</f:facet>                        
+                                <h:outputText value="#{table_cita.hora}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Fecha</f:facet>                        
+                                <h:outputText value="#{table_cita.fecha}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Cliente</f:facet>                        
+                                <h:outputText value="${table_cita.clienteusuarioidUsuario.usuario.nombre}" />
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Confirmar" actionListener="${citaController.actionIncumpliCitaEstilista(table_cita)}" update="tbl_pqrs">
+                                    <p:confirm header="Confirmación" message="Esta seguro de realizar la acción de incumplimiento" icon="ui-icon-alert"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+
+                    </div>
+                </div>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>
+            </h:form>
+        </section>
     </ui:define>
 </ui:composition>

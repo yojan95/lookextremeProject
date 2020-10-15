@@ -298,6 +298,16 @@ public class CitaController implements Serializable {
             
         }      
     }
+    public void actionIncumpliCitaEstilista(Cita cita){
+        
+        try{
+           cita.setEstado("Incumplida");
+           EJBcita.edit(cita);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            
+        }      
+    }
     public boolean isPostBack(){
         boolean rpta;
         rpta = FacesContext.getCurrentInstance().isPostback();

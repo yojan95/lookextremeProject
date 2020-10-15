@@ -31,6 +31,8 @@ public interface CitaFacadeLocal {
     
     List<Cita> obtenerCitaPorCliente(int idCliente);
     
+    List<Cita> obtenerCitaPorEstilistaEstadoIncumpliento(int idEstilista);
+    
     //List<Cita> buscarEstadoCliente(int idcliente,String estado)throws Exception;
 
     int count();
