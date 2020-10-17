@@ -1,6 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.lookextreme.controller;
 
 import com.lookextreme.model.Usuario;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -8,8 +14,7 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class clienteTemplateController implements Serializable {
-    
+public class administradorTemplateController implements Serializable {
     private String userName ;
 
     public String getUserName() {
@@ -20,13 +25,14 @@ public class clienteTemplateController implements Serializable {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             Usuario usuario = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
-            if (usuario == null){
+            if (usuario == null || usuario.getRolesidRoles().getIdRoles() != 1){
                 context.getExternalContext().redirect("landing.xhtml");
             }else{
                 userName = usuario.getNombre();
+                System.out.println("username :"+ userName);
             }            
-        } catch (Exception e) {
-            System.out.println("clienteTemplateController Error : " + e.getMessage());            
+        } catch (IOException e) {
+            System.out.println("administradorTemplateController Error : " + e.getMessage());            
         }
     }
 }

@@ -163,6 +163,8 @@ public class RegistrarProductoController implements Serializable {
             administrador.setUsuarioidUsuario(usuario.getIdUsuario());
             productos.setAdministradorusuarioidUsuario(administrador);
             productos.setEstado("registrado");
+            //productos.setMarca("marcel france");
+            //productos.setNombre("esmalte");
             productoEJB.create(productos);
         }catch (Exception e){
             System.out.println(e.getMessage()); 

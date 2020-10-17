@@ -31,4 +31,6 @@ public interface PqrsFacadeLocal {
     int count();
     
     List<Pqrs> obtenerPqrsPorCliente(int idCliente);
+    
+    List<Pqrs> obtenerPqrsAdministrador();
 }

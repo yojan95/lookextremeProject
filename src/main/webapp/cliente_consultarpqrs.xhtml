@@ -7,44 +7,54 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui">
-    <ui:define name="content">
+    <ui:define name="content">        
         <section>
             <div class="row justify-content-md-start">
                 <div class="col-lg-10 mx-auto">
                     <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
                     <!--<label id="lbl_pqrs" style="display: none;">No se encontraron PQRS</label>-->
-                    <p:dataTable id="tbl_pqrs" var="table_pqrs" value="#{pqrsController.pqrsList}" >
-                        <p:column>
-                            <f:facet name="header">N°</f:facet>
-                            <h:outputText value="#{tbl_pqrs.rowIndex + 1}" />                        
-                        </p:column>                    
-                        <p:column>
-                            <f:facet name="header">Fecha/Hora de creación</f:facet>
-                            <h:outputText value="#{table_pqrs.fechaHoraCreacion}" >
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">Asunto</f:facet>                        
-                            <h:outputText value="#{table_pqrs.asunto}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">Detalles</f:facet>                        
-                            <h:outputText value="#{table_pqrs.detalles}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">Anexos</f:facet>                        
-                            <h:outputText value="#{table_pqrs.anexos}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">Estado</f:facet>
-                            <h:outputText value="#{table_pqrs.estado}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">Respuesta</f:facet>
-                            <h:outputText value="#{table_pqrs.respuesta}" />
-                        </p:column>
-                    </p:dataTable>                
+                    <h:form id="pqrs">
+                        <p:dataTable id="tbl_pqrs" var="table_pqrs" value="#{pqrsController.pqrsList}" >
+                            <p:column>
+                                <f:facet name="header">N°</f:facet>
+                                <h:outputText value="#{tbl_pqrs.rowIndex + 1}" />                        
+                            </p:column>                    
+                            <p:column>
+                                <f:facet name="header">Fecha/Hora de creación</f:facet>
+                                <h:outputText value="#{table_pqrs.fechaHoraCreacion}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Tipo</f:facet>
+                                <h:outputText value="#{table_pqrs.tipopqrsidTipoPQRS.tipoPQRS}" />                        
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Asunto</f:facet>                        
+                                <h:outputText value="#{table_pqrs.asunto}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Detalles</f:facet>                        
+                                <h:outputText value="#{table_pqrs.detalles}" />
+                            </p:column>
+                            <p:column style="text-align: center;">                                         
+                                <f:facet name="header">
+                                    Anexos
+                                </f:facet>
+                                <h:outputText rendered="#{table_pqrs.anexos == null}" value="--" />
+                                <p:commandButton  type="submit" rendered="#{table_pqrs.anexos != null }" value="Descargar"  onclick="descargarAnexo('#{table_pqrs.idPQRS}');"/>
+                                <h:inputHidden id="hidden_#{table_pqrs.idPQRS}" value="#{table_pqrs.anexos}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Estado</f:facet>
+                                <h:outputText value="#{table_pqrs.estado}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Respuesta</f:facet>
+                                <h:outputText value="#{table_pqrs.respuesta}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
                 </div>
             </div>
         </section>
