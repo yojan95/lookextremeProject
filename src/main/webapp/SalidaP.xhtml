@@ -20,36 +20,52 @@ and open the template in the editor.
                 </div>
 
                 <h:form class="needs-validation" >
-                    <!-- Id_Producto Precio Unitario -->
+                    <!-- Id_Producto Precio Unitario   -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <!--<p:outputLabel value="Nombre del producto"/>                    
-                            <h:selectOneMenu  class="form-control"   value="" > 
-                                <f:selectItems value="" />
-                            </h:selectOneMenu> -->  
+                             <p:outputLabel value="Id producto"/>                                                    
+                             <h:selectOneMenu  class="form-control" id="Nombre"   value="${salidaProductoVenta.salidaM.productosidCodigo}"> 
+                                 <f:selectItems value="${salidaProductoVenta.proList}" var="ven" itemLabel="${ven.idCodigo}" itemValue="${ven.idCodigo}"/>
+                            </h:selectOneMenu> 
+                        </div>
+                        <div class="col-md-6 mb-3">
+                             <p:outputLabel value="Nombre del producto"/>                        
+                             <p:inputText type="text" class="form-control"   value="${salidaProductoVenta.salidaM.nombre}" />
                         </div>
                         <div class="col-sm">
                             <p:outputLabel value="Precio Unitario"/>                        
-                            <p:inputText type="number" class="form-control"   />
+                            <p:inputText type="number" class="form-control"  value="${salidaProductoVenta.salidaM.precioUnitario}" />
                             
                         </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Color"/>                        
+                            <p:inputText type="text" class="form-control" value="${salidaProductoVenta.salidaM.color}"  />
+                            
+                        </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Tamaño"/>                        
+                            <p:inputText type="number" class="form-control" value="${salidaProductoVenta.salidaM.tamaño}"  />
+                            
+                        </div>
+                        
 
                     </div>
                     <div class="row">
 
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="Cantidad"/>                        
-                            <p:inputText type="number" class="form-control"   value="" />
+                            <p:inputText type="number" class="form-control"   value="${salidaProductoVenta.salidaM.cantidad}" />
                             
                         </div>
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="Total"/>                        
-                            <p:inputText type="number" class="form-control"   value="" />
+                            <p:inputText type="number" class="form-control"   value="${salidaProductoVenta.salidaM.total}" />
                             
                             <br></br>
 
                         </div>
-                        <p:commandButton value="Guardar" />
+                        <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${salidaProductoVenta.salidaRegistrada()}"/>
+                    
                     </div>
                 </h:form>
             </div>
