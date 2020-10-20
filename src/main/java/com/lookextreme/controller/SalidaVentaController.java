@@ -5,7 +5,6 @@
  */
 package com.lookextreme.controller;
 
-;
 import com.lookextreme.Dao.ProductosFacadeLocal;
 import com.lookextreme.Dao.SalidaVentaFacadeLocal;
 import com.lookextreme.model.Administrador;
@@ -20,18 +19,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-
-
 @Named
 @ViewScoped
-public class SalidaProductoVenta implements Serializable {
+public class SalidaVentaController implements Serializable {
 
     @EJB
-    private SalidaVentaFacadeLocal SalidaF;
+    private SalidaVentaFacadeLocal salidaVenta;
     private SalidaVenta SalidaM;
     private Administrador administrador;
     private Usuario usuario;
     private Productos pro;
+    private ProductosFacadeLocal prof;
 
     @EJB
     private ProductosFacadeLocal productoEJB;
@@ -43,15 +41,8 @@ public class SalidaProductoVenta implements Serializable {
         SalidaM = new SalidaVenta();
         administrador = new Administrador();
         usuario = new Usuario();
+        proList = productoEJB.findAll();
 
-    }
-
-    public SalidaVentaFacadeLocal getSalidaF() {
-        return SalidaF;
-    }
-
-    public void setSalidaF(SalidaVentaFacadeLocal SalidaF) {
-        this.SalidaF = SalidaF;
     }
 
     public SalidaVenta getSalidaM() {
@@ -86,14 +77,6 @@ public class SalidaProductoVenta implements Serializable {
         this.pro = pro;
     }
 
-    public ProductosFacadeLocal getProductoEJB() {
-        return productoEJB;
-    }
-
-    public void setProductoEJB(ProductosFacadeLocal productoEJB) {
-        this.productoEJB = productoEJB;
-    }
-
     public List<Productos> getProList() {
         return proList;
     }
@@ -101,7 +84,6 @@ public class SalidaProductoVenta implements Serializable {
     public void setProList(List<Productos> proList) {
         this.proList = proList;
     }
-    
 
     public void salidaRegistrada() {
         System.out.println("Producto Registrado");
@@ -111,29 +93,13 @@ public class SalidaProductoVenta implements Serializable {
             SalidaM.setProductosidCodigo(pro);
             usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
             administrador.setUsuarioidUsuario(usuario.getIdUsuario());
-            SalidaF.create(SalidaM);
+            salidaVenta.create(SalidaM);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
 
         }
     }
-    /*
-          public void ConsumoRegistrado(){
-        System.out.println("Producto Registrado");
-        
-        try {
-            productos.setNombreProductoidNombreProducto(nombrep);            
-            productos.setMarcaIdmarca(marcas);            
-            usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            administrador.setUsuarioidUsuario(usuario.getIdUsuario());            
-            productos.setAdministradorusuarioidUsuario(administrador);
-            productos.setEstado("registrado");
-            productoEJB.create(productos);
-        }catch (Exception e){
-            System.out.println(e.getMessage()); 
-            
-        }
-     }*/
+
 }
 
