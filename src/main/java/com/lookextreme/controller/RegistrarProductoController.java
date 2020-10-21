@@ -3,13 +3,15 @@ package com.lookextreme.controller;
 
 import com.lookextreme.Dao.ProductosFacadeLocal;
 import com.lookextreme.Dao.NombreproductoFacadeLocal;
+import com.lookextreme.Dao.EstilistaFacadeLocal;
 import com.lookextreme.Dao.MarcaFacadeLocal;
+import com.lookextreme.Dao.CategoriasFacadeLocal;
 import com.lookextreme.model.Administrador;
 import com.lookextreme.model.Productos;
 import com.lookextreme.model.Categorias;
 import com.lookextreme.model.Marca;
 import com.lookextreme.model.Nombreproducto;     
-import com.lookextreme.Dao.CategoriasFacadeLocal;
+import com.lookextreme.model.Estilista;
 import com.lookextreme.model.Usuario;
 import java.io.Serializable;
 import java.util.List;
@@ -30,6 +32,7 @@ public class RegistrarProductoController implements Serializable {
     private Marca marcas;
     private Nombreproducto nombrep;
     private Usuario usuario ;
+    private Estilista estilista;
     
     
     @EJB 
@@ -44,6 +47,10 @@ public class RegistrarProductoController implements Serializable {
     private MarcaFacadeLocal marcaEJB;
     private List<Marca> marcaList;
     
+    @EJB
+    private EstilistaFacadeLocal estilistaEJB;
+    private List<Estilista> estilistaList;
+    
     
     @PostConstruct 
     
@@ -57,8 +64,18 @@ public class RegistrarProductoController implements Serializable {
         categoriasList = categoriasEJB.findAll();
         nombrepList = nombreEJB.findAll();
         marcaList = marcaEJB.findAll();
+        estilistaList = estilistaEJB.findAll();
                 
     }
+
+    public Estilista getEstilista() {
+        return estilista;
+    }
+
+    public void setEstilista(Estilista estilista) {
+        this.estilista = estilista;
+    }
+    
 
     public Usuario getUsuario() {
         return usuario;
@@ -108,6 +125,14 @@ public class RegistrarProductoController implements Serializable {
         this.marcaList = marcaList;
     }
 
+    public List<Estilista> getEstilistaList() {
+        return estilistaList;
+    }
+
+    public void setEstilistaList(List<Estilista> estilistaList) {
+        this.estilistaList = estilistaList;
+    }
+    
   
 
 
@@ -133,7 +158,7 @@ public class RegistrarProductoController implements Serializable {
         try {
             productos.setCategoriasIdcategorias(categorias);
             productos.setNombreProductoidNombreProducto(nombrep);            
-            productos.setMarcaIdmarca(marcas);            
+            productos.setMarcaIdmarca(marcas);                                     
             usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
             administrador.setUsuarioidUsuario(usuario.getIdUsuario());
             productos.setAdministradorusuarioidUsuario(administrador);
