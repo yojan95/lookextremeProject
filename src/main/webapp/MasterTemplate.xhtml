@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{controllerTranslation.local}" />
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
         <title>Look Extreme</title>
@@ -26,13 +28,13 @@
                     <div id="user_menu" class="navbar-nav-scroll">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <h:commandLink class="nav-link active text-muted" >Acerca</h:commandLink>
+                                <h:commandLink class="nav-link active text-muted" ><b>#{msgs['landing.btnAcerca']}</b></h:commandLink>
                             </li>
                             <li class="nav-item ">
-                                <h:commandLink class="nav-link  text-muted" >Servicios</h:commandLink>
+                                <h:commandLink class="nav-link  text-muted" ><b>#{msgs['landing.btnServicios']}</b></h:commandLink>
                             </li>
                             <li class="nav-item">
-                                <h:commandLink class="nav-link  text-muted"  >Contacto</h:commandLink>
+                                <h:commandLink class="nav-link  text-muted"  ><b>#{msgs['landing.btnContacto']}</b></h:commandLink>
                             </li>
                         </ul>
                     </div>
@@ -74,11 +76,16 @@
                         <a class="nav-link dropdown-toggle " data-toggle="dropdown"  role="button" aria-haspopup="true"
                            aria-expanded="false" >                        
                             <img src="images/user.svg" height="30px" />
-                            <label id="userName">Ingrese</label>
+                            <label id="userName">#{msgs['landing.btnIngresar']}</label>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" >
-                            <p:link class="dropdown-item menuUserNotLogin" value="Iniciar Sesión" outcome="login"/>
-                            <p:link class="dropdown-item menuUserNotLogin" value="Registrarse" outcome="registrarse"/>
+                            <!--<p:link class="dropdown-item menuUserNotLogin" value="" outcome="login"/>
+                            <p:link class="dropdown-item menuUserNotLogin" value="" outcome="registrarse"/>-->
+                            <p:commandButton class="dropdown-item menuUserNotLogin" value="#{msgs['landing.btnIniciarSesion']}" action="#{usuarioController.irLogin()}"></p:commandButton>
+                            <p:commandButton class="dropdown-item menuUserNotLogin" value="#{msgs['landing.btnRegistrarse']}" action="#{usuarioController.irRegistrarse()}"></p:commandButton>
+                            <p:commandButton class="dropdown-item menuUserNotLogin" value="Español" action="#{controllerTranslation.cambiarIdioma('ES')}"></p:commandButton>
+                            <p:commandButton class="dropdown-item menuUserNotLogin" value="English" action="#{controllerTranslation.cambiarIdioma('EN')}"></p:commandButton>
+
                         </div>
                     </div>                
                 </header>

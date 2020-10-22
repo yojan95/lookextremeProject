@@ -12,92 +12,94 @@ and open the template in the editor.
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content">
-        <section id="about">
+        <section id="about"> 
             <div class="container">      
 
                 <div class="py-5 text-center">
                     <h4 class="mb-3" > Salida de producto por venta</h4>
                 </div>
 
-                <h:form class="needs-validation" >
-                    <!-- Id_Producto Precio Unitario -->
+                <h:form class="needs-validation" >                    
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Nombre del producto"/>                    
-                            <h:selectOneMenu  class="form-control"   value="" > 
-                                <f:selectItems value="" />
-                            </h:selectOneMenu>   
+                            <p:outputLabel value="Id producto"/>                                                    
+                            <h:selectOneMenu  class="form-control" id="Nombre"   value="${salidaVentaController.pro.idCodigo}"> 
+                                <f:selectItems value="${salidaVentaController.proList}" var="ven" itemLabel="${ven.idCodigo}" itemValue="${ven.idCodigo}"/>
+                            </h:selectOneMenu> 
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel value="Nombre del producto"/>                        
+                            <p:inputText type="text" class="form-control"   value="${salidaVentaController.salidaM.nombre}" />
                         </div>
                         <div class="col-sm">
                             <p:outputLabel value="Precio Unitario"/>                        
-                            <p:inputText type="number" class="form-control"   />
-                            
-                        </div>
+                            <p:inputText type="number" class="form-control"  value="${salidaVentaController.salidaM.precioUnitario}" />
 
+                        </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Color"/>                        
+                            <p:inputText type="text" class="form-control" value="${salidaVentaController.salidaM.color}"  />
+
+                        </div>
+                        <div class="col-sm">
+                            <p:outputLabel value="Tamaño"/>                        
+                            <p:inputText type="number" class="form-control" value="${salidaVentaController.salidaM.tamaño}"  />                           
+                        </div>                       
                     </div>
                     <div class="row">
-
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="Cantidad"/>                        
-                            <p:inputText type="number" class="form-control"   value="" />
-                            
+                            <p:inputText type="number" class="form-control" value="${salidaVentaController.salidaM.cantidad}" />                            
                         </div>
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="Total"/>                        
-                            <p:inputText type="number" class="form-control"   value="" />
-                            
-                            <br></br>
-
+                            <p:inputText type="number" class="form-contro" value="${salidaVentaController.salidaM.total}"  />                                                      
                         </div>
-                        <p:commandButton value="Guardar" />
+                        <br></br>
+                        <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${salidaVentaController.salidaRegistrada()}"/>                    
                     </div>
-                </h:form>
-            </div>
+                </h:form> 
+            </div>-->
             <div class="container">    
-
 
                 <div class="py-5 text-center">
                     <h4 class="mb-3" > Salida por consumo</h4>
                 </div>
 
-                <h:form class="needs-validation" >
-                    <!-- Id_Producto Precio Unitario -->
+                <h:form class="needs-validation" >                    
                     <div class="row">
-
-
-                        <div class="col-sm">
-                            <p:outputLabel value="Nombre del producto"/>                    
-                            <h:selectOneMenu  class="form-control"   value="" > 
-                                <f:selectItems value="" var="" itemLabel="" itemValue=""/>
-                            </h:selectOneMenu>   
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel value="Id producto"/>                                                    
+                            <h:selectOneMenu  class="form-control" id="Nombre"   value="${salidaConsumoController.proModel.idCodigo}"> 
+                                <f:selectItems value="${salidaConsumoController.proList}" var="con" itemLabel="${con.idCodigo}" itemValue="${con.idCodigo}"/>
+                            </h:selectOneMenu> 
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel value="Nombre del producto"/>                        
+                            <p:inputText type="text" class="form-control"   value="${salidaConsumoController.salidaModel.nombre}" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p:outputLabel value="Cantidad"/>                        
+                            <p:inputText type="number" class="form-control" value="${salidaConsumoController.salidaModel.cantidad}" />                            
                         </div>
                     </div>
                     <div class="row">
-
                         <div class="col-sm">
-                            <p:outputLabel value="Cantidad"/>              
-                            <p:inputText type="number" class="form-control"  value="" />
-                            
+                            <p:outputLabel value="Tamaño"/>                        
+                            <p:inputText type="number" class="form-control" value="${salidaConsumoController.salidaModel.tamaño}"  />
                         </div>
                         <div class="col-sm">
-                            <p:outputLabel value="Tamaño"/>             
-                            <p:inputText type="text" class="form-control"   value="" />
-                            
-                        </div>    
+                            <p:outputLabel value="Color"/>                        
+                            <p:inputText type="text" class="form-control" value="${salidaConsumoController.salidaModel.color}"  />
+                        </div>                            
                         <div class="col-sm">
-                            <p:outputLabel value="Color"/>  
-                            <p:inputText type="text" class="form-control"   />
-                            
-                        </div>
-                        <div class="col-sm">
-                            <p:outputLabel value="Estilista"/>                    
-                            <h:selectOneMenu  class="form-control"   value="" > 
-                                <f:selectItems value="" />
-                            </h:selectOneMenu>   
-                        </div>
+                            <p:outputLabel value="Estilista"/>
+                            <h:selectOneMenu  class="form-control" id="Nombre"   value="${salidaConsumoController.estilistaModel.usuarioidUsuario}"> 
+                                <f:selectItems value="${salidaConsumoController.estilistaList}" var="est" itemLabel="${est.usuarioidUsuario}" itemValue="${est.usuarioidUsuario}"/>
+                            </h:selectOneMenu>                                                                             </div>
                     </div>
                     <br></br>
-                    <p:commandButton value="Guardar" >  </p:commandButton>
+                    <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${salidaConsumoController.cosumoRegistrado()}"/>
                 </h:form>
             </div>
         </section>

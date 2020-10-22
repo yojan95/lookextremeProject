@@ -25,6 +25,7 @@ public interface ClienteFacadeLocal {
     Cliente find(Object id);
 
     List<Cliente> findAll();
+    
 
     List<Cliente> findRange(int[] range);
 

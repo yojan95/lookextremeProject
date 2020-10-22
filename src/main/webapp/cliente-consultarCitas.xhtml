@@ -1,101 +1,127 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="ClienteTemplate.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:b="http://bootsfaces.net/ui">    
-    <ui:define name="content">
-        <h:form>
-            <div class="container">
-                <div class="row justify-content-md-start">
-
-                    <div class="col-8 mx-auto">
-                        <div class="card border border-dark">
-                            <div class="card-header bg-dark text-white">
-                                CONSULTAR CITAS
-                            </div>
-                            <div class="card-body">
-                                <div class="card" style="width: 18rem;">
-                                    <div class="p-3 mb-2 bg-dark text-white">
-                                        <div class="card-body">
-
-                                            <h5 class="card-title">Alisado de cabello</h5>
-
-                                            <p>Precio $14.000 pesos</p>
-                                            <p>Estilista:</p>
-                                            <p>Turno:</p>
-                                            <p>Fecha:</p>
-                                            <p>Hora:</p>
-
-                                            <div class="row d-flex justify-content-center">
-                                                <p:commandButton class="btn btn-outline-light my-2 my-sm-0 btn-block" type="submit" value="Cancelar"></p:commandButton>
-                                            </div>
-                                        </div>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+        <title>Consultar-Citas</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <link href="css/utils.css" rel="stylesheet" type="text/css"/>
+       
+    </h:head>
+    <h:body>
+         <h:form>
+                <header class="navbar navbar-expand-md fixed-top">                 
+                    <h:commandLink class="navbar-brand" onclick="redirect('landing.html')">                                     
+                        <img src="images/LogoMakr_1EYqX1.png" height="55px"/>
+                    </h:commandLink>
+                    <!-- menu usuario logueado -->
+                    <div id="user_menu" class="navbar-nav-scroll">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link active text-muted" action="cliente-servicios" ></h:commandLink>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Agendamiento
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <p:link class="dropdown-item menuUserNotLogin" value="Servicios" outcome="cliente-servicios"/>
+                                        <p:link class="dropdown-item menuUserNotLogin" value="Consultar Citas" outcome="cliente-consultarCitas"/>
                                     </div>
-                                </div>
-                            </div>
+                                </li>
+                            </li>
+                            <li class="nav-item ">
+                                <h:commandLink class="nav-link  text-muted" ></h:commandLink>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        PQRS
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <p:link class="dropdown-item menuUserNotLogin" value="Crear PQRS" outcome="cliente_crearPqrs"/>
+                                        <a class="dropdown-item" href="#">Consultar PQRS</a>
+                                    </div>
+                                </li>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group navbar-nav ml-md-auto">
+                       <h:link class="nav-link dropdown-toggle " value="#{loginController.usuario.nombre}" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >
+                           <h:graphicImage value="images/user.svg" height="30px" />                                                        
+                        </h:link>
+                        <div class="dropdown-menu dropdown-menu-right" >
+                            <p:link class="dropdown-item menuUserNotLogin" value="Mis datos personales" outcome="cliente-datos"/>
+                            <p:link class="dropdown-item menuUserNotLogin" value="Cerrar Sesión" outcome="landing"/>           
                         </div>
-                    </div>
-                </div>
+                    </div>                
+                </header>
+            </h:form>
+            <div id="header" class="jumbotron text-light">
+                <h1 class="display-4">Look Extreme</h1>
+                <p class="lead">Comfort and quality.</p>
             </div>
-        </h:form>
-        <h:form id="form">
-            <div class="container">
+           <section>
+            
+            <h:form>
+                <p:messages showDetail="true" showSummary="false">
+                    <p:autoUpdate rendered="true"/>
+                </p:messages>
                 <div class="row justify-content-md-start">
-                    <div class="col-12">
-                        <p:dataGrid var="car" value="#{dataGridView.cars}" columns="3" layout="grid"
-        rows="12" paginator="true" id="cars"
-        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-        rowsPerPageTemplate="6,12,16">
-         
-        <f:facet name="header">
-            Cars for Sale
-        </f:facet>
- 
-        <p:panel header="#{car.id}" style="text-align:center">
-            <h:panelGrid columns="1" style="width:100%">
-                <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
- 
-                <h:outputText value="#{car.year}" />
- 
-                <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
-                    <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
-                    <f:setPropertyActionListener value="#{car}" target="#{dataGridView.selectedCar}" />
-                </p:commandLink>
-            </h:panelGrid>
-        </p:panel>
- 
-    </p:dataGrid>
- 
-    <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-        <p:outputPanel id="carDetail" style="text-align:center;">
-            <p:panelGrid  columns="2" rendered="#{not empty dataGridView.selectedCar}" columnClasses="label,value">
-                <f:facet name="header">
-                    <p:graphicImage name="demo/images/car/#{dataGridView.selectedCar.brand}-big.gif"/> 
-                </f:facet>
-                 
-                <h:outputText value="Id:" />
-                <h:outputText value="#{dataGridView.selectedCar.id}" />
- 
-                <h:outputText value="Year" />
-                <h:outputText value="#{dataGridView.selectedCar.year}" />
- 
-                <h:outputText value="Color:" />
-                <h:outputText value="#{dataGridView.selectedCar.color}" style="color:#{dataGridView.selectedCar.color}"/>
-             
-                <h:outputText value="Price" />
-                <h:outputText value="$#{dataGridView.selectedCar.price}" />
-            </p:panelGrid>
-        </p:outputPanel>
-    </p:dialog>
+                    <div class="col-lg-10 mx-auto">
+                        <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
+                        <p:dataTable id="tbl_pqrs" var="table_cita" value="#{citaConsultarController.citalist}" >
+                            <p:column>
+                                <f:facet name="header">Turno</f:facet>
+                                <h:outputText value="#{table_cita.idCita}" />                        
+                            </p:column>                    
+                            <p:column filterBy="#{table_cita.estado}">
+                                <f:facet name="header">Estado</f:facet>
+                                <h:outputText value="#{table_cita.estado}" >
+
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Hora</f:facet>                        
+                                <h:outputText value="#{table_cita.hora}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Fecha</f:facet>                        
+                                <h:outputText value="#{table_cita.fecha}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Estilista</f:facet>                        
+                                <h:outputText value="${table_cita.estilistausuarioidUsuario.usuario.nombre}" />
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Cancelar" actionListener="#{citaController.actionCancelarCita(table_cita)}" update="tbl_pqrs">
+                                    <p:confirm header="Confirmación" message="Esta seguro de cancelar su cita!" icon="ui-icon-alert"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                        
                     </div>
                 </div>
-            </div>
-    
-</h:form>
-        <p></p>
-    </ui:define>
-</ui:composition>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>
+            </h:form>
+        </section>
+        <h:form>
+                <div class="blog-footer">
+                    <p><h:commandLink >Look Extreme</h:commandLink> © All Rights Reserved - 2020</p>
+                    <p>
+                        <h:commandLink >Back to top</h:commandLink>
+                    </p>
+                </div>
+            </h:form>
+    </h:body>
+</html>

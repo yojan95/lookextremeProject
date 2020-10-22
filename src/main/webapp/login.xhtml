@@ -11,6 +11,7 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <f:view locale="#{controllerTranslation.local}" />
     <h:head>
         <title>Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -54,25 +55,23 @@ and open the template in the editor.
                                     <img src="images/LogoMakr_1EYqX1.png" width="95%"/>
                                 </div>
                                     <div class="form-group">
-                                        <p:outputLabel value="Usuario" />
+                                        <p:outputLabel value="#{msgs['login.FormCorreo']}" />
                                         <p:inputText type="text" class="form-control" id="usuario" value="#{loginController.usuario.email}" validatorMessage="El usuario es obligatorio" rendered="true"/>
                                     </div>
                                     <div class="form-group">
-                                        <p:outputLabel value="Contraseña" />
+                                        <p:outputLabel value="#{msgs['login.FormContraseña']}" />
                                         <p:inputText type="password" class="form-control" id="password" value="#{loginController.usuario.contraseña}" validatorMessage="La contraseña es obligatoria" rendered="true"/>
                                     </div>
                                     <div class="form-group">
-                                         <p:link class="card-link" value="¿Olvidaste tu contraseña?" outcome="registrarse"/>
+                                         <p:link class="card-link" value="#{msgs['login.FormOlvidoContra']}" outcome="registrarse"/>
                                         <!-- <a href="#" class="stretched-link">¿No tienes una cuenta? Registrate</a> -->
                                     </div> 
-                                    <div class="form-group">                                
-                                        <!--<a href="#" target="_blank" class="card-link" onclick="redirect('registrarse.xhtml');"> Registrate</a>
-                                        <h:commandLink  action="${loginController.redireccionarRegistrarse()}"/>-->
-                                        <p:link class="card-link" value="¿Registrarse" outcome="registrarse"/>
-                                        <p:link class="card-link" value="¿No tienes una cuenta?" outcome="registrarse"/>                                        
+                                    <div class="form-group">
+                                        <p:link class="card-link" value="#{msgs['login.FormRegistrarse']}" outcome="registrarse"/>
+                                        <p:link class="card-link" value="#{msgs['login.FormNotieneCuenta']}" outcome="registrarse"/>                                        
                                     </div>
                                     <h:message for="btn_login"/>
-                                    <p:commandButton id="btn_login" binding="#{loginController.buttonLogin}" type="submit" class="btn btn-primary" value="Ingresar" action="#{loginController.iniciarSesion()}"></p:commandButton>
+                                    <p:commandButton id="btn_login" binding="#{loginController.buttonLogin}" type="submit" class="btn btn-primary" value="#{msgs['login.FormBtn']}" action="#{loginController.iniciarSesion()}"></p:commandButton>
                             </div>
                         </div>
                     </div>

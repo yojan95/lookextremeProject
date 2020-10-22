@@ -66,13 +66,7 @@ public class UsuarioController implements Serializable{
         return redireccion;
     }
 */
-    public String irAlaCita(){
-        String agendar= null;
-        
-        agendar = "cliente-disponibilidad";
-        
-        return agendar;
-    }
+    
     public void listar(){
         System.out.println("usuarios_Listados");
         try{
@@ -81,5 +75,15 @@ public class UsuarioController implements Serializable{
             System.out.println(e.getMessage());
         }
         
+    }
+    public String irRegistrarse(){
+        String registrarse = null;
+        registrarse = "registrarse";
+        return registrarse;
+    }
+    public String irLogin(){
+        String login = null;
+        login = "login";
+        return login;
     }
 }

@@ -10,6 +10,7 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{controllerTranslation.local}" />
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
         <title>Registrarse</title>
@@ -32,68 +33,69 @@ and open the template in the editor.
             }   
         </style>
     </h:head>
-    <h:body>        
-        <h:form>
-            <div class="container">
-                <div class="row justify-content-md-start">
-                    <div class="col-lg-8 mx-auto">
-                        <div class="card border border-dark">
-                            <div class="card-header">
-                                <img src="images/LogoMakr_1EYqX1.png" width="20%"/>
-                            </div>
-                            <div class="card-body">                                
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <p:outputLabel value="Nombre"/>
-                                        <p:inputText class="form-control" placeholder="Nombre" value="${clienteController.usuario.nombre}"/> 
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <p:outputLabel value="Apellido"/>
-                                        <p:inputText class="form-control" placeholder="Apellido" value="${clienteController.usuario.apellido}"/> 
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <p:outputLabel value="Edad"/>
-                                        <p:inputText class="form-control" placeholder="Numero" value="${clienteController.usuario.edad}"/>
-                                    </div>
-                                    
+    <h:body>
+        <section>
+            <h:form>
+                <div class="container">
+                    <div class="row justify-content-md-start">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="card border border-dark">
+                                <div class="card-header">
+                                    <img src="images/LogoMakr_1EYqX1.png" width="20%"/>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <p:outputLabel value="Correo"/>
-                                        <p:inputText class="form-control" placeholder="Correo" value="${clienteController.usuario.email}"/>
+                                <div class="card-body">                                
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="#{msgs['registrarse.FormName']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormNamePlaceholder']}" value="${clienteController.usuario.nombre}"/> 
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="#{msgs['registrarse.FormApellido']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormApellidoPlaceholder']}" value="${clienteController.usuario.apellido}"/> 
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <p:outputLabel value="#{msgs['registrarse.FormEdad']}"/>
+                                            <p:inputText class="form-control" placeholder="Numero" value="${clienteController.usuario.edad}"/>
+                                        </div>
+
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <p:outputLabel value="Contraseña"/>
-                                        <p:inputText type="password" class="form-control" placeholder="Contraseña" value="${clienteController.usuario.contraseña}"/>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="#{msgs['registrarse.FormCorreo']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormCorreoPlaceholder']}" value="${clienteController.usuario.email}"/>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="#{msgs['registrarse.FormContraseña']}"/>
+                                            <p:inputText type="password" class="form-control" placeholder="#{msgs['registrarse.FormContraseñaPlaceholder']}" value="${clienteController.usuario.contraseña}"/>
+                                        </div>
                                     </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="#{msgs['registrarse.FormTelefono']}"/>
+                                            <p:inputText class="form-control" placeholder="Numero" value="${clienteController.usuario.telefono}"/>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="#{msgs['registrarse.FormFechaNaci']}"/>
+                                            <p:calendar value="${clienteController.usuario.fechaNacimiento}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <!--<div class="form-group col-md-4">
+                                            <p:outputLabel value="Cedula"/>
+                                            <p:inputText class="form-control" placeholder="Ciudad"/>
+                                        </div>-->
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="#{msgs['registrarse.FormDireccion']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormDireccionPlaceholder']}" value="${clienteController.usuario.direccion}"/>
+                                        </div>
+                                    </div>
+                                    <p:commandButton  value="#{msgs['registrarse.FormBtnEnviar']}" class="btn btn-primary" action="${clienteController.registrarCliente()}"></p:commandButton>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <p:outputLabel value="Telefono"/>
-                                        <p:inputText class="form-control" placeholder="Numero" value="${clienteController.usuario.telefono}"/>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <p:outputLabel value="Fecha de Nacimiento"/>
-                                        <p:calendar value="${clienteController.usuario.fechaNacimiento}" />
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <!--<div class="form-group col-md-4">
-                                        <p:outputLabel value="Cedula"/>
-                                        <p:inputText class="form-control" placeholder="Ciudad"/>
-                                    </div>-->
-                                    <div class="form-group col-md-6">
-                                        <p:outputLabel value="Dirección"/>
-                                        <p:inputText class="form-control" placeholder="Dirección" value="${clienteController.usuario.direccion}"/>
-                                    </div>
-                                </div>
-                                <p:commandButton  value="Registrarse" class="btn btn-primary" action="${clienteController.registrarCliente()}"></p:commandButton>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </h:form>
-        <p></p>
+            </h:form>
+        </section>
     </h:body>
 </html>
