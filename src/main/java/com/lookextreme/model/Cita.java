@@ -19,7 +19,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +31,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import static org.eclipse.persistence.platform.database.oracle.plsql.OraclePLSQLTypes.Int;
 
 /**
  *
@@ -35,6 +40,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "cita")
 @XmlRootElement
+@NamedStoredProcedureQueries({
+    @NamedStoredProcedureQuery(
+            name = "cita.findByVerificarDisponibilidad",
+            procedureName = "GetStylistAvailability",
+            parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN,  type=Integer.class, name = "id_usuario" ),
+                @StoredProcedureParameter(mode = ParameterMode.IN,  type= Date.class, name = "fechaCita" )
+            })
+            })
 @NamedQueries({
     @NamedQuery(name = "Cita.findAll", query = "SELECT c FROM Cita c"),
     @NamedQuery(name = "Cita.findByIdCita", query = "SELECT c FROM Cita c WHERE c.idCita = :idCita"),

@@ -70,16 +70,27 @@ public class EstilistaController implements Serializable{
         roles = new Roles();
         usuario = new Usuario();
     }
-    public void registrarEstilista(){
+    public void registrarUsuarioEstilista(){
         System.out.println("estilista-registrado");
         try{
             roles.setIdRoles(2);
             usuario.setRolesidRoles(roles);
-            estilista.setUsuario(usuario);
-            //usuario.setEstilista(estilista);
             usuarioEJB.create(usuario);
-            estilistaEJB.create(estilista);
+            
            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void registrarEstilista(Usuario usuario){
+        System.out.println("estilista-satisfactoriamente");
+        try{
+           estilista = new Estilista();
+           estilista.setUsuarioidUsuario(usuario.getIdUsuario());
+           //usuario.setEstilista(estilista);
+           estilista.setUsuario(usuario);
+           estilistaEJB.create(estilista);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

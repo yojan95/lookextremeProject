@@ -16,6 +16,7 @@ import com.lookextreme.model.ServiciosCitas;
 import com.lookextreme.model.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -34,7 +35,7 @@ public class CitaController implements Serializable {
     @EJB
     private CitaFacadeLocal EJBcita;    
     private Cita cita;
-    //private List<Cita> citalist;
+    private List<Cita> citalistVerificarDispo;
     private List<Cita> busquedaCitaList;
     @EJB
     private EstilistaFacadeLocal EJBestilista;
@@ -57,6 +58,16 @@ public class CitaController implements Serializable {
     private ClienteFacadeLocal clienteEJB;
     private Cliente cliente;
     private String estado;
+
+    public List<Cita> getCitalistVerificarDispo() {
+        return citalistVerificarDispo;
+    }
+
+    public void setCitalistVerificarDispo(List<Cita> citalistVerificarDispo) {
+        this.citalistVerificarDispo = citalistVerificarDispo;
+    }
+    
+    
 
     public String getEstado() {
         return estado;
@@ -148,6 +159,7 @@ public class CitaController implements Serializable {
         carrito = new ArrayList<Servicios>();
         usuario = new Usuario();
         listarEstilistas();
+       
         
     }
 
@@ -313,6 +325,16 @@ public class CitaController implements Serializable {
         rpta = FacesContext.getCurrentInstance().isPostback();
         
         return rpta;
+    }
+    public void verificarDisponibilidad(){
+        
+        try{
+            if (cita.getFecha().getTime()>0 && estilista.getUsuarioidUsuario()>0) {
+               EJBcita.verificarDisponibilidad(estilista.getUsuarioidUsuario(), cita.getFecha());
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /*

@@ -76,4 +76,14 @@ public class UsuarioController implements Serializable{
         }
         
     }
+    public String irRegistrarse(){
+        String registrarse = null;
+        registrarse = "registrarse";
+        return registrarse;
+    }
+    public String irLogin(){
+        String login = null;
+        login = "login";
+        return login;
+    }
 }

@@ -8,11 +8,13 @@ package com.lookextreme.Dao;
 import com.lookextreme.model.Cita;
 import com.lookextreme.model.Cliente;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 
 /**
  *
@@ -73,5 +75,21 @@ public class CitaFacade extends AbstractFacade<Cita> implements CitaFacadeLocal 
             System.out.println(e.getMessage());
         }
         return listaCita;
+    }
+
+    @Override
+    public List<Cita> verificarDisponibilidad(int idUsuario, Date fechacita) {
+        List<Cita> listaCitaVerificar = new ArrayList();
+        
+        try {
+            StoredProcedureQuery query = this.em.createNamedStoredProcedureQuery("cita.findByVerificarDisponibilidad");
+            query.setParameter("id_usuario", idUsuario);
+            query.setParameter("fechaCita", fechacita);
+            query.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaCitaVerificar;
     }
 }

@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{controllerTranslation.local}" />
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
         <title>Look Extreme</title>
@@ -28,14 +30,14 @@
                     <div id="user_menu" class="navbar-nav-scroll">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <h:commandLink class="nav-link active text-muted" action="cliente-servicios" ></h:commandLink>
+                               <!-- <h:commandLink class="nav-link active text-muted" action="cliente-servicios" ></h:commandLink>-->
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Agendamiento
+                                        #{msgs['clienteTemplate.NavBarCitas']}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <p:link class="dropdown-item menuUserNotLogin" value="Servicios" outcome="cliente-servicios"/>
-                                        <p:link class="dropdown-item menuUserNotLogin" value="Consultar Citas" outcome="cliente-consultarCitas"/>
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['clienteTemplate.dropdownCitas1']}" outcome="cliente-servicios"/>
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['clienteTemplate.dropdownCitas2']}" outcome="cliente-consultarCitas"/>
                                     </div>
                                 </li>
                             </li>
