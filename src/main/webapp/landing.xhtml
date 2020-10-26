@@ -124,8 +124,10 @@
                                 </div>
                                 <div class="md-form">
                                     <p:outputLabel value="#{msgs['landing.FormMensaje']}"/>
-                                    <p:inputTextarea id="mens" class="form-control" placeholder="#{msgs['landing.FormMensajePlanceHolder']}" rows="3" value="#{emailJSFManagedBean.descr}"/>
+                                    <p:inputTextarea id="mens" class="form-control" placeholder="#{msgs['landing.FormMensajePlanceHolder']}" rows="3" value="#{emailJSFManagedBean.descr}" validatorMessage="Por favor ingrese como maximo 20 caracteres" required="true">                                   
+                                    </p:inputTextarea>
                                     <label for="form-Subject"></label>
+                                    <h:message for="mens" style="color: red"/>
                                 </div>
                                 <div class="text-center mt-4">
                                     <p:commandButton type="submit" class="btn btn-primary btn-block" value="#{msgs['landing.FormBtn']}" action="#{emailJSFManagedBean.submitEmail()}"></p:commandButton>
