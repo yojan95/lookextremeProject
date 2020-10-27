@@ -88,6 +88,7 @@
             </div>
         </section>
          <h:form>
+             <p:messages showDetail="true" showSummary="false"/>
         <section class="section pb-5" id="contact">
             <h2 class="section-heading h1 pt-4">#{msgs['landing.FormContactH2']}</h2>
             <div class="row">        
@@ -100,24 +101,36 @@
                                 <p>#{msgs['landing.FormContactP']}</p>
                                 <br/>
                                 <div class="md-form">
-                                    <p:outputLabel value="#{msgs['landing.FormName']}"/>
+                                    <p:outputLabel value="#{msgs['landing.FormDe']}"/>
                                     <i class="fas fa-envelope prefix grey-text"></i>
-                                    <p:inputText id="nomb" placeholder="#{msgs['landing.FormNamePlaceHolder']}" class="form-control"/>
+                                    <p:inputText id="correoo" placeholder="#{msgs['landing.FormNamePlaceHolder']}" class="form-control" validatorMessage="El correo no es valido" value="#{emailJSFManagedBean.from}">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    </p:inputText>
                                     <label for="validationTooltip01"></label>
+                                    <h:message for="correoo" style="color: red"/>
                                 </div>
                                 <div class="md-form">
                                     <p:outputLabel value="#{msgs['landing.FormCorreo']}"/>
                                     <i class="fas fa-envelope prefix grey-text"></i>
-                                    <p:inputText id="correo" type="text" placeholder="#{msgs['landing.FormCorreoPlaceHolder']}"  class="form-control"/>
+                                    <p:inputText id="correo" type="text" placeholder="#{msgs['landing.FormCorreoPlaceHolder']}"  class="form-control" validatorMessage="El correo no es valido" value="#{emailJSFManagedBean.username}">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    </p:inputText>
                                     <label for="form-email"></label>
+                                    <h:message for="correo" style="color: red"/>
+                                </div>
+                                <div class="md-form">
+                                    <p:outputLabel value="#{msgs['landing.FormPass']}"/>
+                                    <p:password class="form-control" value="#{emailJSFManagedBean.password}"/>
                                 </div>
                                 <div class="md-form">
                                     <p:outputLabel value="#{msgs['landing.FormMensaje']}"/>
-                                    <p:inputTextarea id="mens" class="form-control" placeholder="#{msgs['landing.FormMensajePlanceHolder']}" rows="3"/>
+                                    <p:inputTextarea id="mens" class="form-control" placeholder="#{msgs['landing.FormMensajePlanceHolder']}" rows="3" value="#{emailJSFManagedBean.descr}" validatorMessage="Por favor ingrese como maximo 20 caracteres" required="true">                                   
+                                    </p:inputTextarea>
                                     <label for="form-Subject"></label>
+                                    <h:message for="mens" style="color: red"/>
                                 </div>
                                 <div class="text-center mt-4">
-                                    <p:commandButton type="submit" class="btn btn-primary btn-block" value="#{msgs['landing.FormBtn']}"></p:commandButton>
+                                    <p:commandButton type="submit" class="btn btn-primary btn-block" value="#{msgs['landing.FormBtn']}" action="#{emailJSFManagedBean.submitEmail()}"></p:commandButton>
                                 </div>
                             </div>
                         </div>
