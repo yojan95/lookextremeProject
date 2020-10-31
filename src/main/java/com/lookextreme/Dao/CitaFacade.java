@@ -7,6 +7,7 @@ package com.lookextreme.Dao;
 
 import com.lookextreme.model.Cita;
 import com.lookextreme.model.Cliente;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,12 +81,20 @@ public class CitaFacade extends AbstractFacade<Cita> implements CitaFacadeLocal 
     @Override
     public List<Cita> verificarDisponibilidad(int idUsuario, Date fechacita) {
         List<Cita> listaCitaVerificar = new ArrayList();
+        Cita citaProcedure = new Cita();
+        List<Cita>  procedure; 
         
         try {
             StoredProcedureQuery query = this.em.createNamedStoredProcedureQuery("cita.findByVerificarDisponibilidad");
             query.setParameter("id_usuario", idUsuario);
-            query.setParameter("fechaCita", fechacita);
-            query.execute();
+            query.setParameter("fechaCita", fechacita);   
+             List result = query.getResultList();
+             for(Object record: result) {
+                 citaProcedure = new Cita();
+                 //citaProcedure.setEstado(record.);
+                 //citaProcedure.setHora(record[0]);
+             }
+             
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
