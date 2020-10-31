@@ -10,6 +10,7 @@ import com.lookextreme.model.Cita;
 import static com.lookextreme.model.Cita_.serviciosCitasList;
 import com.lookextreme.model.Cliente;
 import com.lookextreme.model.Estilista;
+import com.lookextreme.model.HorarioDisponibilidad;
 import com.lookextreme.model.Roles;
 import com.lookextreme.model.Servicios;
 import com.lookextreme.model.ServiciosCitas;
@@ -330,7 +331,11 @@ public class CitaController implements Serializable {
         
         try{
             if (cita.getFecha().getTime()>0 && estilista.getUsuarioidUsuario()>0) {
-               EJBcita.verificarDisponibilidad(estilista.getUsuarioidUsuario(), cita.getFecha());
+               List<HorarioDisponibilidad> horarios = EJBcita.verificarDisponibilidad(estilista.getUsuarioidUsuario(), cita.getFecha());
+               for(HorarioDisponibilidad horario : horarios){
+                   System.out.println("estado: "+ horario.getEstado());
+                   System.out.println("horario: "+ horario.getHora());
+               }
             }
         }catch(Exception e){
             System.out.println(e.getMessage());

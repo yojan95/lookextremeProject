@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import static org.eclipse.persistence.platform.database.oracle.plsql.OraclePLSQLTypes.Int;
+
 
 /**
  *
@@ -42,7 +42,7 @@ import static org.eclipse.persistence.platform.database.oracle.plsql.OraclePLSQL
 @XmlRootElement
 @NamedStoredProcedureQueries({
     @NamedStoredProcedureQuery(
-            name = "cita.findByVerificarDisponibilidad",
+            name = "cita.verificarDisponibilidad",
             procedureName = "GetStylistAvailability",
             parameters = {
                 @StoredProcedureParameter(mode = ParameterMode.IN,  type=Integer.class, name = "id_usuario" ),
@@ -181,7 +181,7 @@ public class Cita implements Serializable {
     }
 
     @Override
-    public String toString() {
+    public String toString() {        
         return "com.lookextreme.model.Cita[ idCita=" + idCita + " ]";
     }
     
