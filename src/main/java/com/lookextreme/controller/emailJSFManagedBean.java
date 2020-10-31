@@ -5,9 +5,11 @@
  */
 package com.lookextreme.controller;
 
+import java.util.HashSet;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import java.util.Properties;
+import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -45,8 +47,8 @@ public class emailJSFManagedBean {
         this.from = null;
         this.subject = "contacto lookextreme";
         this.descr = null;
-        this.username = null;
-        this.password = null;
+        this.username = "alookextreme@gmail.com";
+        this.password = "S6ZZGNdKSkym8cu";
         this.smtp = "smtp.gmail.com";
         this.port = 587;
         this.descr = null;
@@ -152,12 +154,13 @@ public class emailJSFManagedBean {
         message = new MimeMessage(session);
         try{
             message.setContent(getDescr(),"text/plain");
-            message.setSubject(getSubject());
-            fromAddress = new InternetAddress(getFrom());
-            message.setFrom(fromAddress);
-            toAddress = new InternetAddress(getTo());
-            message.setRecipient(Message.RecipientType.TO, toAddress);
+            message.setSubject(getSubject());            
+            message.setFrom(new InternetAddress(getFrom()));
+            System.out.println(getFrom());
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(getTo()));
             message.saveChanges();
+            message.setReplyTo(new Address[]{ new InternetAddress(getFrom())});
+            
             
             Transport transport = session.getTransport("smtp");
             transport.connect(this.smtp,this.port,this.username,this.password);

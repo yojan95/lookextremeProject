@@ -103,7 +103,7 @@
                                 <div class="md-form">
                                     <p:outputLabel value="#{msgs['landing.FormDe']}"/>
                                     <i class="fas fa-envelope prefix grey-text"></i>
-                                    <p:inputText id="correoo" placeholder="#{msgs['landing.FormNamePlaceHolder']}" class="form-control" validatorMessage="El correo no es valido" value="#{emailJSFManagedBean.from}">
+                                    <p:inputText id="correoo" placeholder="#{msgs['landing.FormNamePlaceHolder']}" class="form-control" validatorMessage="El correo no es valido" value="#{emailController.smtp.from}">
                                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                     </p:inputText>
                                     <label for="validationTooltip01"></label>
@@ -111,13 +111,13 @@
                                 </div>                                
                                 <div class="md-form">
                                     <p:outputLabel value="#{msgs['landing.FormMensaje']}"/>
-                                    <p:inputTextarea id="mens" class="form-control" placeholder="#{msgs['landing.FormMensajePlanceHolder']}" rows="3" value="#{emailJSFManagedBean.descr}" validatorMessage="Por favor ingrese como maximo 20 caracteres" required="true">                                   
+                                    <p:inputTextarea id="mens" class="form-control" placeholder="#{msgs['landing.FormMensajePlanceHolder']}" rows="3" value="#{emailController.smtp.descr}" validatorMessage="Por favor ingrese como maximo 20 caracteres" required="true">                                   
                                     </p:inputTextarea>
                                     <label for="form-Subject"></label>
                                     <h:message for="mens" style="color: red"/>
                                 </div>
                                 <div class="text-center mt-4">
-                                    <p:commandButton type="submit" class="btn btn-primary btn-block" value="#{msgs['landing.FormBtn']}" action="#{emailJSFManagedBean.submitEmail()}"></p:commandButton>
+                                    <p:commandButton type="submit" class="btn btn-primary btn-block" value="#{msgs['landing.FormBtn']}" action="#{emailController.submitEmail()}"></p:commandButton>
                                 </div>
                             </div>
                         </div>
