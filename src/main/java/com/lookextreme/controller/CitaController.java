@@ -148,7 +148,7 @@ public class CitaController implements Serializable {
     public void setCita(Cita cita) {
         this.cita = cita;
     }
-
+    //constructor
     @PostConstruct
     public void init() {
         cita = new Cita();
