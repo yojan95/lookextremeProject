@@ -39,6 +39,7 @@ public interface CitaFacadeLocal {
     
     //List<Cita> buscarEstadoCliente(int idcliente,String estado)throws Exception;
 
-    int count();
+    List<Cita> obtenerEstadosAgendamiento();
     
+    int count();    
 }
