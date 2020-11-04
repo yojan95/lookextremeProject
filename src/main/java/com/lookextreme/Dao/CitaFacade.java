@@ -99,4 +99,25 @@ public class CitaFacade extends AbstractFacade<Cita> implements CitaFacadeLocal 
         }
         return horarios;
     }
+    
+    @Override
+    public List<Cita> obtenerEstadosAgendamiento(){
+        List<Object>  result = new ArrayList();
+        List<Cita> citas = new ArrayList();
+        try {
+            result = em.createNamedQuery("Cita.findAllGroupedByState")
+                    .getResultList();
+            Iterator itr = result.iterator();            
+            while(itr.hasNext()){
+                Object[] obj = (Object[]) itr.next();
+                Cita cita = new Cita();                
+                cita.setEstado(String.valueOf(obj[1]));
+                cita.setIdCita(Integer.valueOf(String.valueOf(obj[0])));
+                citas.add(cita);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+        return citas;
+    }
 }
