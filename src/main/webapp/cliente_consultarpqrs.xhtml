@@ -7,6 +7,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui">
+    <f:view locale="#{controllerTranslation.local}" />
     <ui:define name="content">        
         <section>
             <div class="row justify-content-md-start">
@@ -16,41 +17,41 @@
                     <h:form id="pqrs">
                         <p:dataTable id="tbl_pqrs" var="table_pqrs" value="#{pqrsController.pqrsList}" rowIndexVar="index">
                             <p:column>
-                                <f:facet name="header">N°</f:facet>
+                                <f:facet name="header">#{msgs['clientePqrs.tablaN']}</f:facet>
                                 <h:outputText value="#{index + 1}" />                        
                             </p:column>                    
                             <p:column>
-                                <f:facet name="header">Fecha/Hora de creación</f:facet>
+                                <f:facet name="header">#{msgs['clientePqrs.tablaDateP']}</f:facet>
                                 <h:outputText value="#{table_pqrs.fechaHoraCreacion}" >
                                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>                                    
                                 </h:outputText>
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Tipo</f:facet>
+                                <f:facet name="header">#{msgs['clientePqrs.tablaTipo']}</f:facet>
                                 <h:outputText value="#{table_pqrs.tipopqrsidTipoPQRS.tipoPQRS}" />                        
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Asunto</f:facet>                        
+                                <f:facet name="header">#{msgs['clientePqrs.tablaAsunto']}</f:facet>                        
                                 <h:outputText value="#{table_pqrs.asunto}" />
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Detalles</f:facet>                        
+                                <f:facet name="header">#{msgs['clientePqrs.tablaDetalles']}</f:facet>                        
                                 <h:outputText value="#{table_pqrs.detalles}" />
                             </p:column>
                             <p:column style="text-align: center;">                                         
                                 <f:facet name="header">
-                                    Anexos
+                                    #{msgs['clientePqrs.tablaAnexos']}
                                 </f:facet>
                                 <h:outputText rendered="#{table_pqrs.anexos == null}" value="--" />
-                                <p:commandButton  type="submit" rendered="#{table_pqrs.anexos != null }" value="Descargar"  onclick="descargarAnexo('#{table_pqrs.idPQRS}');"/>
+                                <p:commandButton  type="submit" rendered="#{table_pqrs.anexos != null }" value="#{msgs['clientePqrs.tablaBtn']}"  onclick="descargarAnexo('#{table_pqrs.idPQRS}');"/>
                                 <h:inputHidden id="hidden_#{table_pqrs.idPQRS}" value="#{table_pqrs.anexos}"/>
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Estado</f:facet>
+                                <f:facet name="header">#{msgs['clientePqrs.tablaEstado']}</f:facet>
                                 <h:outputText value="#{table_pqrs.estado}" />
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Respuesta</f:facet>
+                                <f:facet name="header">#{msgs['clientePqrs.tablaResp']}</f:facet>
                                 <h:outputText value="#{table_pqrs.respuesta}" />
                             </p:column>
                         </p:dataTable>
