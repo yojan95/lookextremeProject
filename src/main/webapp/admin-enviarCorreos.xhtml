@@ -1,41 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <f:view locale="#{controllerTranslation.local}" />
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
-        <title>Registrarse</title>
-        <script src="js/jquery-3.4.1.min.js" ></script>
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <link href="css/utils.css" rel="stylesheet" type="text/css"/>
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.map"></script>
-        <style>
-            html, body {
-                height: 100%;
-                background: url("images/fondo3.jpg");
-                background-repeat: no-repeat;
-                background-size: 100em;     
-            }
-            .card{
-                border-color: #757575 !important;
-            }   
-        </style>
-    </h:head>
-    <h:body>
-        <section>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content">
+             <section>
             <h:form>
+                <p:messages showDetail="true" showSummary="false"/>
                 <div class="container">
                     <div class="row justify-content-md-start">
                         <div class="col-lg-8 mx-auto">
@@ -47,22 +21,22 @@ and open the template in the editor.
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <p:outputLabel value="Destinatario"/>
-                                            <p:inputText class="form-control" placeholder="Destinatario" value=""/> 
+                                            <p:inputText class="form-control" placeholder="Destinatario" value="#{emailJSFManagedBean.to}"/> 
                                         </div>                                       
                                     </div>
                                     <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 <p:outputLabel value="Asunto"/>
-                                                <p:inputText class="form-control" placeholder="Numero" value="Asunto"/>
+                                                <p:inputText class="form-control" placeholder="Numero" value="#{emailJSFManagedBean.subject}"/>
                                             </div>
                                         </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <p:outputLabel value="Mensaje"/>
-                                            <p:inputTextarea class="form-control" placeholder="Mensaje" value=""/>
+                                            <p:inputTextarea class="form-control" placeholder="Mensaje" value="#{emailJSFManagedBean.descr}"/>
                                         </div>
                                     </div>  
-                                    <p:commandButton  value="#{msgs['registrarse.FormBtnEnviar']}" class="btn btn-primary" ></p:commandButton>
+                                    <p:commandButton  value="Enviar" class="btn btn-primary" actionListener="#{emailJSFManagedBean.submitEmail()}"></p:commandButton>
                                 </div>
                             </div>
                         </div>
@@ -70,5 +44,6 @@ and open the template in the editor.
                 </div>
             </h:form>
         </section>
-    </h:body>
-</html>
+    </ui:define>
+</ui:composition>
+
