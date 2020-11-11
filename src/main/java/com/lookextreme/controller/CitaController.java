@@ -197,7 +197,7 @@ public class CitaController implements Serializable {
             rol.setIdRoles(2);
             listaEstilistas = EJBusuario.consultarRoll(rol);
             for (Usuario estilistaitem : listaEstilistas) {
-                estilistaListItem.add(new SelectItem(estilistaitem.getIdUsuario(), estilistaitem.getNombre()));
+                estilistaListItem.add(new SelectItem(estilistaitem.getIdUsuario() ));
             }
         } catch (Exception e) {
             System.out.println("listar-estilistas");
