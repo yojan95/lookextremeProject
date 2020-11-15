@@ -160,14 +160,13 @@ public class CitaController implements Serializable {
         listarEstilistas();
     }
 
-    public void registrarCita() throws Exception {
-        System.out.println("Cita_registrada");
+    public void registrarCita() throws Exception {        
         try {
             usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
             cliente.setUsuarioidUsuario(usuario.getIdUsuario());
             cita.setClienteusuarioidUsuario(cliente);
             cita.setEstilistausuarioidUsuario(estilista);
-            cita.setEstado("agendada");
+            cita.setEstado("agendada");            
             serviciosCitas.setServiciosidServicios(servicios);
             serviciosCitas.setCitaidCita(cita);
             serviciosCitas.setIdServiciocita(1);
@@ -313,13 +312,12 @@ public class CitaController implements Serializable {
     public void verificarDisponibilidad() {
 
         try {
-            if (cita.getFecha().getTime() > 0 && estilista.getUsuarioidUsuario() > 0) {
-                List<HorarioDisponibilidad> horarios = EJBcita.verificarDisponibilidad(estilista.getUsuarioidUsuario(), cita.getFecha());
+            if (estilista.getUsuarioidUsuario() > 0) {
+                List<HorarioDisponibilidad> horarios = EJBcita.verificarDisponibilidad(estilista.getUsuarioidUsuario(), cita.getFecha());                
                 horarioListItem = new ArrayList();
-                for (HorarioDisponibilidad horario : horarios) {
-                    SelectItem item = new SelectItem(horario.getHora(), Integer.toString(horario.getHora()));
-                    if ("ocupado".equals(horario.getEstado().toLowerCase())) 
-                        item.setDisabled(true);    
+                for (HorarioDisponibilidad horario : horarios) {                    
+                    if ("libre".equals(horario.getEstado().toLowerCase()))
+                        horarioListItem.add(new SelectItem(horario.getHora() + ":00:00", Integer.toString(horario.getHora()) + ":00:00"));
                 }
             }
         } catch (Exception e) {
