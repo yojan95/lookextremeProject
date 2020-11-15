@@ -1,16 +1,12 @@
-
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="AdministradorTemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">>
     <ui:define name="content">
         <section id="about"> 
             <div class="container">      
@@ -22,44 +18,45 @@ and open the template in the editor.
                 <h:form class="needs-validation" >                    
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Id producto"/>                                                    
-                            <h:selectOneMenu  class="form-control" id="Nombre"   value="${salidaVentaController.pro.idCodigo}"> 
+                            <p:outputLabel value="Id producto1"/>                                                    
+                            <h:selectOneMenu  class="form-control"    value="${salidaVentaController.pro.idCodigo}"> 
                                 <f:selectItems value="${salidaVentaController.proList}" var="ven" itemLabel="${ven.idCodigo}" itemValue="${ven.idCodigo}"/>
                             </h:selectOneMenu> 
                         </div>
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Nombre del producto"/>                        
+                            <p:outputLabel value="Nombre del producto1"/>                        
                             <p:inputText type="text" class="form-control"   value="${salidaVentaController.salidaM.nombre}" />
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm">
                             <p:outputLabel value="Precio Unitario"/>                        
                             <p:inputText type="number" class="form-control"  value="${salidaVentaController.salidaM.precioUnitario}" />
-
                         </div>
                         <div class="col-sm">
-                            <p:outputLabel value="Color"/>                        
+                            <p:outputLabel value="Color1"/>                        
                             <p:inputText type="text" class="form-control" value="${salidaVentaController.salidaM.color}"  />
 
                         </div>
+                    </div>    
+                    <div class="row">
                         <div class="col-sm">
                             <p:outputLabel value="Tamaño"/>                        
                             <p:inputText type="number" class="form-control" value="${salidaVentaController.salidaM.tamaño}"  />                           
-                        </div>                       
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Cantidad"/>                        
+                        </div>      
+                        <div class="col-sm">
+                            <p:outputLabel value="Cantidad1"/>                        
                             <p:inputText type="number" class="form-control" value="${salidaVentaController.salidaM.cantidad}" />                            
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-sm-3">
                             <p:outputLabel value="Total"/>                        
                             <p:inputText type="number" class="form-contro" value="${salidaVentaController.salidaM.total}"  />                                                      
                         </div>
-                        <br></br>
-                        <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${salidaVentaController.salidaRegistrada()}"/>                    
                     </div>
+                    <br></br>
+                    <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${salidaVentaController.salidaRegistrada()}"/>                    
                 </h:form> 
-            </div>-->
+            </div> 
             <div class="container">    
 
                 <div class="py-5 text-center">
@@ -69,37 +66,38 @@ and open the template in the editor.
                 <h:form class="needs-validation" >                    
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Id producto"/>                                                    
-                            <h:selectOneMenu  class="form-control" id="Nombre"   value="${salidaConsumoController.proModel.idCodigo}"> 
+                            <p:outputLabel value="Id producto2"/>                                                    
+                            <h:selectOneMenu  class="form-control"    value="${salidaConsumoController.pro.idCodigo}"> 
                                 <f:selectItems value="${salidaConsumoController.proList}" var="con" itemLabel="${con.idCodigo}" itemValue="${con.idCodigo}"/>
                             </h:selectOneMenu> 
                         </div>
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Nombre del producto"/>                        
-                            <p:inputText type="text" class="form-control"   value="${salidaConsumoController.salidaModel.nombre}" />
+                            <p:outputLabel value="Nombre del producto2"/>                        
+                            <p:inputText type="text" class="form-control"   value="${salidaConsumoController.consumoModel.nombre}" />
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Cantidad"/>                        
-                            <p:inputText type="number" class="form-control" value="${salidaConsumoController.salidaModel.cantidad}" />                            
-                        </div>
-                    </div>
+                    </div>    
                     <div class="row">
-                        <div class="col-sm">
-                            <p:outputLabel value="Tamaño"/>                        
-                            <p:inputText type="number" class="form-control" value="${salidaConsumoController.salidaModel.tamaño}"  />
+                        <div class="col-sm-2">
+                            <p:outputLabel value="Cantidad2"/>                        
+                            <p:inputText type="number" class="form-control" value="${salidaConsumoController.consumoModel.cantidad}" />                            
                         </div>
-                        <div class="col-sm">
-                            <p:outputLabel value="Color"/>                        
-                            <p:inputText type="text" class="form-control" value="${salidaConsumoController.salidaModel.color}"  />
+                        <div class="col-md-2">
+                            <p:outputLabel value="Tamaño2"/>                        
+                            <p:inputText type="number" class="form-control" value="${salidaConsumoController.consumoModel.tamaño}"  />
+                        </div>
+                        <div class="col-md-4">
+                            <p:outputLabel value="Color2"/>                        
+                            <p:inputText type="text" class="form-control" value="${salidaConsumoController.consumoModel.color}"  />
                         </div>                            
-                        <div class="col-sm">
+                        <div class="col-md-4">
                             <p:outputLabel value="Estilista"/>
-                            <h:selectOneMenu  class="form-control" id="Nombre"   value="${salidaConsumoController.estilistaModel.usuarioidUsuario}"> 
-                                <f:selectItems value="${salidaConsumoController.estilistaList}" var="est" itemLabel="${est.usuarioidUsuario}" itemValue="${est.usuarioidUsuario}"/>
-                            </h:selectOneMenu>                                                                             </div>
+                            <<h:selectOneMenu  class="form-control"  id="ddl_estilistas"  value="#{salidaConsumoController.estilista.usuarioidUsuario}" rendered="true"> 
+                                <f:selectItems value="#{salidaConsumoController.estList}" />
+                            </h:selectOneMenu>                                                                             
+                        </div>
                     </div>
                     <br></br>
-                    <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${salidaConsumoController.cosumoRegistrado()}"/>
+                    <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="#{salidaConsumoController.consumoRegistrado()}"/>
                 </h:form>
             </div>
         </section>
