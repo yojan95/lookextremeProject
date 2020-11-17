@@ -9,8 +9,8 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{controllerTranslation.local}" />
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
         <title>Look Extreme</title>
@@ -36,11 +36,11 @@ and open the template in the editor.
                             <li class="nav-item ">                                
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Control de Usuarios
+                                        #{msgs['adminTemplate.NavControlUser']}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <p:link class="dropdown-item menuUserNotLogin" value="Registrar Usuarios" outcome="admin-registrarUsuarios"/>
-                                        <p:link class="dropdown-item menuUserNotLogin" value="Consultar Usuarios" outcome="admin-listarUsuarios"/>
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavControlUserDropdown1']}" outcome="admin-registrarUsuarios"/>
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavControlUserDropdown2']}" outcome="admin-listarUsuarios"/>
                                     </div>
                                 </li>
                             </li>
@@ -55,7 +55,7 @@ and open the template in the editor.
                                 </div>
                             </div>
                             <li class="nav-item">
-                                <p:link class="nav-link" outcome="administrador_consultarpqrs" >PQRS</p:link>
+                                <p:link class="nav-link" outcome="administrador_consultarpqrs" >#{msgs['adminTemplate.NavPQRS']}</p:link>
                             </li>
                             <div class="btn-group navbar-nav ml-md-auto">
                                 <a class="nav-link dropdown-toggle " data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >                                                            
@@ -66,7 +66,7 @@ and open the template in the editor.
                                 </div>
                             </div>
                             <li class="nav-item">
-                                <p:link class="nav-link" outcome="admin-enviarCorreos" >Envió de correos </p:link>
+                                <p:link class="nav-link" outcome="admin-enviarCorreos" >#{msgs['adminTemplate.NavMail']}</p:link>
                             </li>
                         </ul>
                     </div>                    

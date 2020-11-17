@@ -6,6 +6,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{controllerTranslation.local}" />
     <ui:define name="content">
              <section>
             <h:form>
@@ -20,23 +21,23 @@
                                 <div class="card-body">                                
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <p:outputLabel value="Destinatario"/>
-                                            <p:inputText class="form-control" placeholder="Destinatario" value="#{emailJSFManagedBean.to}"/> 
+                                            <p:outputLabel value="#{msgs['admin.FormDestinatario']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['admin.FormDestinaPlaceHolder']}" value="#{emailJSFManagedBean.to}"/> 
                                         </div>                                       
                                     </div>
                                     <div class="form-row">
                                             <div class="form-group col-md-12">
-                                                <p:outputLabel value="Asunto"/>
-                                                <p:inputText class="form-control" placeholder="Numero" value="#{emailJSFManagedBean.subject}"/>
+                                                <p:outputLabel value="#{msgs['admin.FormAsunto']}"/>
+                                                <p:inputText class="form-control" placeholder="#{msgs['admin.FormAsuntoPlaceHolder']}" value="#{emailJSFManagedBean.subject}"/>
                                             </div>
                                         </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <p:outputLabel value="Mensaje"/>
-                                            <p:inputTextarea class="form-control" placeholder="Mensaje" value="#{emailJSFManagedBean.descr}"/>
+                                            <p:outputLabel value="#{msgs['admin.FormMensaje']}"/>
+                                            <p:inputTextarea class="form-control" placeholder="#{msgs['admin.FormMensajePlaceholder']}" value="#{emailJSFManagedBean.descr}"/>
                                         </div>
                                     </div>  
-                                    <p:commandButton  value="Enviar" class="btn btn-primary" actionListener="#{emailJSFManagedBean.submitEmail()}"></p:commandButton>
+                                    <p:commandButton  value="#{msgs['admin.FormBtn']}" class="btn btn-primary" actionListener="#{emailJSFManagedBean.submitEmail()}"></p:commandButton>
                                 </div>
                             </div>
                         </div>
