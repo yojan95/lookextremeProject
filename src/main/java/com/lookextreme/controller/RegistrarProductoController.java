@@ -1,6 +1,5 @@
 
 package com.lookextreme.controller;
-
 import com.lookextreme.Dao.ProductosFacadeLocal;
 import com.lookextreme.Dao.NombreproductoFacadeLocal;
 import com.lookextreme.Dao.EstilistaFacadeLocal;

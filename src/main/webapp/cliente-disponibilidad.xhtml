@@ -8,58 +8,53 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui">    
     <ui:define name="content">
-        <section>
-            <h:form>
-                <p:messages>
-                    <p:autoUpdate id="fecha" rendered="true"/>
-                    <p:autoUpdate id="hora" rendered="true"/>
-                    <p:autoUpdate id="ddl_estilistas" rendered="true"/>            
-                </p:messages>
-                <div class="container">
-                    <div class="row justify-content-md-start">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="card border border-dark">
-                                <div class="card-header">
-                                    <img src="images/LogoMakr_1EYqX1.png" width="20%"/>
-                                </div>
-                                <div class="card-body">                                
+        <section>            
+            <p:messages>
+                <p:autoUpdate rendered="true"/>
+            </p:messages>
+            <div class="container">
+                <div  class="row justify-content-md-start">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card border border-dark">
+                            <div class="card-header">
+                                <img src="images/LogoMakr_1EYqX1.png" width="20%"/>
+                            </div>
+                            <div class="card-body">
+                                <h:form>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <p:outputLabel value="Estilistas: " />
-                                            <h:selectOneMenu id="ddl_estilistas" value="#{citaController.estilista.usuarioidUsuario}" class="form-control" validatorMessage="seleccione un estilista" rendered="true">
+                                            <h:selectOneMenu id="ddl_estilistas" value="#{citaController.estilista.usuarioidUsuario}" styleClass="form-control" validatorMessage="Seleccione un estilista" >
                                                 <f:selectItems value="#{citaController.estilistaListItem}" />                                    
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <p:outputLabel value="Fecha de la cita"/>
-                                            <p:calendar value="${citaController.cita.fecha}" validatorMessage="La fecha es obligatoria" rendered="true" id="fecha"/>
+                                            <p:calendar value="${citaController.cita.fecha}" validatorMessage="La fecha es obligatoria" id="fecha"/>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <p:commandButton class="btn btn-primary my-1" value="Verificar Disponibilidad" actionListener="#{citaController.verificarDisponibilidad()}"></p:commandButton>
                                         </div> 
                                     </div>
+                                </h:form>
+                                <h:form>
                                     <div class="form-row">
                                         <div class="col-sm">
-                                            <p:outputLabel value="Hora" />
-                                            <p:inputText value="${citaController.cita.hora}" validatorMessage=" El formato de hora no es valido, Ej: 08:00:00" id="hora">*
-                                                <f:validateRegex pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$"/>
-                                            </p:inputText>
-                                            <!--<h:message for="hora" style="color: red"/>-->
+                                            <p:outputLabel value="Hora"/>                                            
+                                            <h:selectOneMenu value="#{citaController.cita.hora}" class="form-control" >
+                                                <f:selectItems value="#{citaController.horarioListItem}"/>
+                                            </h:selectOneMenu>
                                         </div>
                                         <div class="col-sm">
-                                           <p:commandButton class="btn btn-primary my-1 ml-5" value="Agendar Cita" actionListener="${citaController.registrarCita()}"></p:commandButton>
-                                        </div>
-                                        <div class="col-sm">
-                                            
-                                        </div>
+                                            <p:commandButton class="btn btn-primary my-1 ml-5" value="Agendar Cita" actionListener="${citaController.registrarCita()}" />
+                                        </div>                                        
                                     </div>
-                                </div>
+                                </h:form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </h:form>
+            </div>           
         </section>
-
     </ui:define>
 </ui:composition>
