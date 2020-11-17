@@ -1,21 +1,37 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="./WEB-INF/templates/ClienteTemplate.xhtml"
+<ui:composition template="MasterTemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
-                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:b="http://bootsfaces.net/ui">    
-    <f:view locale="#{controllerTranslation.local}" />
+                xmlns:p="http://primefaces.org/ui">
+     <f:view locale="#{controllerTranslation.local}" />
+    <style>
+        section {
+            padding: 40px 40px;
+            height: auto;
+            min-height: 200px;
+        }                        
+        #services,
+        #contact {
+            padding: 50px;
+        }
+
+        #services {
+            background-color: #dfe4ea;
+        }
+
+    </style>
     <ui:define name="content">
+
         <!-- acerca de  -->
         <section id="about">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2>#{msgs['indexCliente.H2Acerca']}</h2>
-                        <p class="lead">#{msgs['indexCliente.Pacerca']}
+                        <h2>#{msgs['landing.H2Acerca']}</h2>
+                        <p class="lead">#{msgs['landing.Pacerca']}
                         </p>
                     </div>
                 </div>
@@ -30,7 +46,7 @@
                             <!-- 600x800 -->
                             <img src="images/CorteFemenino.jpg" class="card-img-top"/>
                             <div class="card-body">
-                                <h5 class="card-title">#{msgs['indexCliente.CardTitle1']}</h5>
+                                <h5 class="card-title">#{msgs['landing.CardTitle1']}</h5>
                             </div>
                         </div>
                     </div>
@@ -38,7 +54,7 @@
                         <div class="card" style="width: 15rem;">
                             <img src="images/corteMasculino.jpg" width="220px" class="card-img-top"/>
                             <div class="card-body">
-                                <h5 class="card-title">#{msgs['indexCliente.CardTitle2']}</h5>
+                                <h5 class="card-title">#{msgs['landing.CardTitle2']}</h5>
                             </div>
                         </div>
                     </div>
@@ -46,7 +62,7 @@
                         <div class="card" style="width: 15rem;">
                             <img src="images/nails.jpg" width="220px" class="card-img-top"/>
                             <div class="card-body">
-                                <h5 class="card-title">#{msgs['indexCliente.CardTitle3']}</h5>
+                                <h5 class="card-title">#{msgs['landing.CardTitle3']}</h5>
                             </div>
                         </div>
                     </div>
@@ -56,7 +72,7 @@
                         <div class="card" style="width: 15rem;">
                             <img src="images/Maquillaje.jpg" width="220px" class="card-img-top"/>
                             <div class="card-body">
-                                <h5 class="card-title">#{msgs['indexCliente.CardTitle4']}</h5>
+                                <h5 class="card-title">#{msgs['landing.CardTitle4']}</h5>
                             </div>
                         </div>
                     </div>
@@ -64,56 +80,56 @@
                         <div class="card" style="width: 15rem;">
                             <img src="images/Peinado.jpg" width="220px" class="card-img-top"/>
                             <div class="card-body">
-                                <h5 class="card-title">#{msgs['indexCliente.CardTitle5']}</h5>
+                                <h5 class="card-title">#{msgs['landing.CardTitle5']}</h5>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <h:form>
-            <section class="section pb-5" id="contact">
-                <h2 class="section-heading h1 pt-4">#{msgs['indexCliente.FormContactH2']}</h2>
-                <div class="row">        
-                    <div class="col-lg-6 mb-4">
+         <h:form>
+             <p:messages showDetail="true" showSummary="false"/>
+        <section class="section pb-5" id="contact">
+            <h2 class="section-heading h1 pt-4">#{msgs['landing.FormContactH2']}</h2>
+            <div class="row">        
+                <div class="col-lg-6 mb-4">
                         <div class="card">
                             <div class="card-body">              
                                 <div class="form-header blue accent-1">
                                     <h3><i class="fas fa-envelope"></i></h3>
                                 </div>
-                                <p>#{msgs['indexCliente.FormContactP']}</p>
+                                <p>#{msgs['landing.FormContactP']}</p>
                                 <br/>
                                 <div class="md-form">
-                                    <p:outputLabel value="#{msgs['indexCliente.FormName']}"/>
+                                    <p:outputLabel value="#{msgs['landing.FormDe']}"/>
                                     <i class="fas fa-envelope prefix grey-text"></i>
-                                    <p:inputText id="nomb" placeholder="#{msgs['indexCliente.FormNamePlaceHolder']}" class="form-control"/>
+                                    <p:inputText id="correoo" placeholder="#{msgs['landing.FormNamePlaceHolder']}" class="form-control" validatorMessage="El correo no es valido" value="#{emailController.smtp.from}">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    </p:inputText>
                                     <label for="validationTooltip01"></label>
-                                </div>
+                                    <h:message for="correoo" style="color: red"/>
+                                </div>                                
                                 <div class="md-form">
-                                    <p:outputLabel value="#{msgs['indexCliente.FormCorreo']}"/>
-                                    <i class="fas fa-envelope prefix grey-text"></i>
-                                    <p:inputText id="correo" type="text" placeholder="#{msgs['indexCliente.FormCorreoPlaceHolder']}"  class="form-control"/>
-                                    <label for="form-email"></label>
-                                </div>
-                                <div class="md-form">
-                                    <p:outputLabel value="#{msgs['indexCliente.FormMensaje']}"/>
-                                    <p:inputTextarea id="mens" class="form-control" placeholder="#{msgs['indexCliente.FormMensajePlanceHolder']}" rows="3"/>
+                                    <p:outputLabel value="#{msgs['landing.FormMensaje']}"/>
+                                    <p:inputTextarea id="mens" class="form-control" placeholder="#{msgs['landing.FormMensajePlanceHolder']}" rows="3" value="#{emailController.smtp.descr}" validatorMessage="Por favor ingrese como maximo 20 caracteres" required="true">                                   
+                                    </p:inputTextarea>
                                     <label for="form-Subject"></label>
+                                    <h:message for="mens" style="color: red"/>
                                 </div>
                                 <div class="text-center mt-4">
-                                    <p:commandButton type="submit" class="btn btn-primary btn-block" value="#{msgs['indexCliente.FormBtn']}"></p:commandButton>
+                                    <p:commandButton type="submit" class="btn btn-primary btn-block" value="#{msgs['landing.FormBtn']}" action="#{emailController.submitEmail()}"></p:commandButton>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!--Google map-->
-                        <iframe src="https://maps.google.com/maps?q=4.754924,-74.107399&hl;=es&z;=14&amp;output=embed" width="100%"
-                                height="380" frameborder="0" style="border:0" ></iframe>
-                        <br/>
-                    </div>
                 </div>
-            </section>
-        </h:form>
+                <div class="col-lg-6">
+                    <!--Google map-->
+                    <iframe src="https://maps.google.com/maps?q=4.754924,-74.107399&hl;=es&z;=14&amp;output=embed" width="100%"
+                            height="380" frameborder="0" style="border:0" ></iframe>
+                    <br/>
+                </div>
+            </div>
+        </section>
+       </h:form>
     </ui:define>
 </ui:composition>

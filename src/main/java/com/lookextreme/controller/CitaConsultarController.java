@@ -1,4 +1,3 @@
-
 package com.lookextreme.controller;
 
 import com.lookextreme.Dao.CitaFacadeLocal;
@@ -18,7 +17,7 @@ import javax.inject.Named;
 @Named
 @ViewScoped
 public class CitaConsultarController implements Serializable {
-    
+
     @EJB
     private CitaFacadeLocal EJBcita;
     private Usuario usuario;
@@ -37,7 +36,6 @@ public class CitaConsultarController implements Serializable {
     public void setListCitaEstadoImcumpliento(List<Cita> listCitaEstadoImcumpliento) {
         this.listCitaEstadoImcumpliento = listCitaEstadoImcumpliento;
     }
-    
 
     public ServiciosCitas getServiciosCita() {
         return serviciosCita;
@@ -54,8 +52,6 @@ public class CitaConsultarController implements Serializable {
     public void setListServiciosCita(List<ServiciosCitas> ListServiciosCita) {
         this.ListServiciosCita = ListServiciosCita;
     }
-    
-    
 
     public Usuario getUsuario() {
         return usuario;
@@ -80,54 +76,54 @@ public class CitaConsultarController implements Serializable {
     public void setCitalist(List<Cita> citalist) {
         this.citalist = citalist;
     }
-    
+
     @PostConstruct
     public void init() {
         cita = new Cita();
         usuario = new Usuario();
         FacesContext context = FacesContext.getCurrentInstance();
         usuario = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
-        
+
         obtenerCitaPorCliente(usuario.getIdUsuario());
         obtenerCitaPorEstilistas(usuario.getIdUsuario());
         obtenerCitaPorEstilistaEstadoIncumpliento(usuario.getIdUsuario());
     }
-         /*
+
+    /*
     =================
     obtener el id del cliente logeado para realizar la consulta de la cita,
     pero primero crea los metodos en la fachada para pasar el parametro
     =================
      */
-    
+
     public void obtenerCitaPorCliente(int idCliente) {
         if (idCliente > 0) {
             try {
-                
-                    citalist = new ArrayList();
-                    citalist = EJBcita.obtenerCitaPorCliente(idCliente);
-                
-
+                citalist = new ArrayList();
+                citalist = EJBcita.obtenerCitaPorCliente(idCliente);
             } catch (Exception e) {
                 System.out.println("obtener error: " + e.getLocalizedMessage());
             }
         }
     }
-    private void obtenerCitaPorEstilistas(int idEstilista){
-        if (idEstilista >0) {
-            try{
+
+    private void obtenerCitaPorEstilistas(int idEstilista) {
+        if (idEstilista > 0) {
+            try {
                 ListServiciosCita = new ArrayList();
                 ListServiciosCita = EJBserviciosCitas.obtenerCitaPorEstilistas(idEstilista);
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
     }
-    public void obtenerCitaPorEstilistaEstadoIncumpliento(int idEstilistaa){
+
+    public void obtenerCitaPorEstilistaEstadoIncumpliento(int idEstilistaa) {
         if (idEstilistaa > 0) {
-            try{
+            try {
                 listCitaEstadoImcumpliento = new ArrayList();
                 listCitaEstadoImcumpliento = EJBcita.obtenerCitaPorEstilistaEstadoIncumpliento(idEstilistaa);
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }

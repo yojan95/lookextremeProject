@@ -6,6 +6,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
+     <f:view locale="#{controllerTranslation.local}" />
     <style>
         section {
             padding: 40px 40px;
@@ -29,9 +30,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2>Acerca de nosotros</h2>
-                        <p class="lead">Somos un salon de belleza y alta peluquería, que cuenta con profesionales preparados para brindarle el mejor servicio, con variados estilos y grandes técnicas en color, corte de caballero, barbería, peinados novia y eventos especiales.
-                            Además contamos con instalaciones de primera calidad para la comodidad y confort de nuestros clientes.
+                        <h2>#{msgs['landing.H2Acerca']}</h2>
+                        <p class="lead">#{msgs['landing.Pacerca']}
                         </p>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                             <!-- 600x800 -->
                             <img src="images/CorteFemenino.jpg" class="card-img-top"/>
                             <div class="card-body">
-                                <h5 class="card-title">Corte Mujer</h5>
+                                <h5 class="card-title">#{msgs['landing.CardTitle1']}</h5>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         <div class="card" style="width: 15rem;">
                             <img src="images/corteMasculino.jpg" width="220px" class="card-img-top"/>
                             <div class="card-body">
-                                <h5 class="card-title">Barberia</h5>
+                                <h5 class="card-title">#{msgs['landing.CardTitle2']}</h5>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <div class="card" style="width: 15rem;">
                             <img src="images/nails.jpg" width="220px" class="card-img-top"/>
                             <div class="card-body">
-                                <h5 class="card-title">Cuidado uñas</h5>
+                                <h5 class="card-title">#{msgs['landing.CardTitle3']}</h5>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                         <div class="card" style="width: 15rem;">
                             <img src="images/Maquillaje.jpg" width="220px" class="card-img-top"/>
                             <div class="card-body">
-                                <h5 class="card-title">Maquillaje</h5>
+                                <h5 class="card-title">#{msgs['landing.CardTitle4']}</h5>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <div class="card" style="width: 15rem;">
                             <img src="images/Peinado.jpg" width="220px" class="card-img-top"/>
                             <div class="card-body">
-                                <h5 class="card-title">Peinados</h5>
+                                <h5 class="card-title">#{msgs['landing.CardTitle5']}</h5>
                             </div>
                         </div>
                     </div>
@@ -88,36 +88,36 @@
             </div>
         </section>
          <h:form>
+             <p:messages showDetail="true" showSummary="false"/>
         <section class="section pb-5" id="contact">
-            <h2 class="section-heading h1 pt-4">Contáctenos</h2>
+            <h2 class="section-heading h1 pt-4">#{msgs['landing.FormContactH2']}</h2>
             <div class="row">        
                 <div class="col-lg-6 mb-4">
                         <div class="card">
                             <div class="card-body">              
                                 <div class="form-header blue accent-1">
-                                    <h3><i class="fas fa-envelope"></i>Escríbenos:</h3>
+                                    <h3><i class="fas fa-envelope"></i></h3>
                                 </div>
-                                <p>Te responderemos lo mas rápido posible.</p>
+                                <p>#{msgs['landing.FormContactP']}</p>
                                 <br/>
                                 <div class="md-form">
-                                    <p:outputLabel value="Nombre"/>
+                                    <p:outputLabel value="#{msgs['landing.FormDe']}"/>
                                     <i class="fas fa-envelope prefix grey-text"></i>
-                                    <p:inputText id="nomb" placeholder="Nombre" class="form-control"/>
+                                    <p:inputText id="correoo" placeholder="#{msgs['landing.FormNamePlaceHolder']}" class="form-control" validatorMessage="El correo no es valido" value="#{emailJSFManagedBean.from}">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    </p:inputText>
                                     <label for="validationTooltip01"></label>
-                                </div>
+                                    <h:message for="correoo" style="color: red"/>
+                                </div>                                
                                 <div class="md-form">
-                                    <p:outputLabel value="Correo"/>
-                                    <i class="fas fa-envelope prefix grey-text"></i>
-                                    <p:inputText id="correo" type="text" placeholder="Correo"  class="form-control"/>
-                                    <label for="form-email"></label>
-                                </div>
-                                <div class="md-form">
-                                    <p:outputLabel value="Mensaje"/>
-                                    <p:inputTextarea id="mens" class="form-control" placeholder="Mensaje" rows="3"/>
+                                    <p:outputLabel value="#{msgs['landing.FormMensaje']}"/>
+                                    <p:inputTextarea id="mens" class="form-control" placeholder="#{msgs['landing.FormMensajePlanceHolder']}" rows="3" value="#{emailJSFManagedBean.descr}" validatorMessage="Por favor ingrese como maximo 20 caracteres" required="true">                                   
+                                    </p:inputTextarea>
                                     <label for="form-Subject"></label>
+                                    <h:message for="mens" style="color: red"/>
                                 </div>
                                 <div class="text-center mt-4">
-                                    <p:commandButton type="submit" class="btn btn-primary btn-block" value="Enviar"></p:commandButton>
+                                    <p:commandButton type="submit" class="btn btn-primary btn-block" value="#{msgs['landing.FormBtn']}" action="#{emailJSFManagedBean.submitEmail()}"></p:commandButton>
                                 </div>
                             </div>
                         </div>

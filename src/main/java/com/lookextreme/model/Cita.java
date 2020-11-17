@@ -19,7 +19,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,6 +32,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+
 /**
  *
  * @author hoore
@@ -35,6 +40,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "cita")
 @XmlRootElement
+@NamedStoredProcedureQueries({
+    @NamedStoredProcedureQuery(
+            name = "cita.verificarDisponibilidad",
+            procedureName = "GetStylistAvailability",
+            parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN,  type=Integer.class, name = "id_usuario" ),
+                @StoredProcedureParameter(mode = ParameterMode.IN,  type= Date.class, name = "fechaCita" )
+            })
+            })
 @NamedQueries({
     @NamedQuery(name = "Cita.findAll", query = "SELECT c FROM Cita c"),
     @NamedQuery(name = "Cita.findByIdCita", query = "SELECT c FROM Cita c WHERE c.idCita = :idCita"),
@@ -42,7 +56,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cita.findByEstado", query = "SELECT c FROM Cita c WHERE c.estado = :estado"),
     @NamedQuery(name = "Cita.findByHora", query = "SELECT c FROM Cita c WHERE c.hora = :hora"),
     @NamedQuery(name = "Cliente.findbyCita", query ="SELECT c FROM Cita c WHERE c.clienteusuarioidUsuario.usuario.idUsuario = :idUsuario"),
-    @NamedQuery(name = "Estilista.findbyCita", query ="SELECT c FROM Cita c WHERE c.estilistausuarioidUsuario.usuario.idUsuario = :idUsuario")})
+    @NamedQuery(name = "Estilista.findbyCita", query ="SELECT c FROM Cita c WHERE c.estilistausuarioidUsuario.usuario.idUsuario = :idUsuario"),
+    @NamedQuery(name = "Cita.findAllGroupedByState", query ="SELECT COUNT(c.idCita), c.estado FROM Cita c GROUP BY c.estado")})
 public class Cita implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -74,7 +89,19 @@ public class Cita implements Serializable {
     @JoinColumn(name = "estilista_usuario_idUsuario", referencedColumnName = "usuario_idUsuario")
     @ManyToOne(optional = false)
     private Estilista estilistausuarioidUsuario;
+    /*
+    private int cantidad;
 
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    */
+    
+    
     public Cita() {
     }
 
@@ -167,7 +194,7 @@ public class Cita implements Serializable {
     }
 
     @Override
-    public String toString() {
+    public String toString() {        
         return "com.lookextreme.model.Cita[ idCita=" + idCita + " ]";
     }
     

@@ -7,6 +7,8 @@ package com.lookextreme.Dao;
 
 import com.lookextreme.model.Cita;
 import com.lookextreme.model.Cliente;
+import com.lookextreme.model.HorarioDisponibilidad;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -33,8 +35,11 @@ public interface CitaFacadeLocal {
     
     List<Cita> obtenerCitaPorEstilistaEstadoIncumpliento(int idEstilista);
     
+    List<HorarioDisponibilidad> verificarDisponibilidad(int idUsuario,Date fechacita);
+    
     //List<Cita> buscarEstadoCliente(int idcliente,String estado)throws Exception;
 
-    int count();
+    List<Cita> obtenerEstadosAgendamiento();
     
+    int count();    
 }

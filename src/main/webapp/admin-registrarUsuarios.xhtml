@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="AdministradorTemplate.xhtml"
+<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
+    <f:view locale="#{controllerTranslation.local}" />
     <style>
         section {
             padding: 40px 40px;
@@ -28,64 +29,64 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="card">
-                            <h5 class="card-header">CONTROL DE USUARIOS</h5>
+                            <h5 class="card-header">#{msgs['adminRegis.CardH5']}</h5>
                             <div class="card-body">
-                                <p:link class="dropdown-item text-dark" value="Registrar Administrador" outcome="cliente-servicios"/>
-                                <p:link class="dropdown-item text-dark" value="Registrar Estilista" outcome="admin-registrarUsuarios"/>
-                                <p:link class="dropdown-item text-dark" value="Consultar Usuarios" outcome="admin-listarUsuarios"/>
+                               <!-- <p:link class="dropdown-item text-dark" value="Registrar Administrador" outcome="cliente-servicios"/>-->
+                                <p:link class="dropdown-item text-dark" value="#{msgs['adminRegis.CardItem1']}" outcome="admin-registrarUsuarios"/>
+                                <p:link class="dropdown-item text-dark" value="#{msgs['adminRegis.CardItem2']}" outcome="admin-listarUsuarios"/>
                             </div>
                         </div>
                     </div>
                     <div class="col-8">
                         <div class="card border border-dark">
-                            <div class="card-header bg-dark text-white">REGISTRAR ESTILISTA
+                            <div class="card-header bg-dark text-white">#{msgs['adminRegis.CardTitle']}
                             </div>
                             <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
-                                            <p:outputLabel value="Nombre"/>
-                                            <p:inputText class="form-control" placeholder="Nombre" value="${estilistaController.usuario.nombre}"/>
+                                            <p:outputLabel value="#{msgs['adminRegis.CardFormName']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormNamePlace']}" value="${estilistaController.usuario.nombre}"/>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <p:outputLabel value="Apellido"/>
-                                            <p:inputText class="form-control" placeholder="Apellido" value="${estilistaController.usuario.apellido}"/>
+                                            <p:outputLabel value="#{msgs['adminRegis.CardFormApellido']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormApellidoPlace']}" value="${estilistaController.usuario.apellido}"/>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <p:outputLabel value="Fecha de nacimiento"/>
+                                            <p:outputLabel value="#{msgs['adminRegis.CardFormFecha']}"/>
                                             <p:calendar value="${estilistaController.usuario.fechaNacimiento}"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <p:outputLabel value="Correo"/>
-                                            <p:inputText class="form-control" placeholder="Correo" value="${estilistaController.usuario.email}"/>
+                                            <p:outputLabel value="#{msgs['adminRegis.CardFormCorreo']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormCorreoPlace']}" value="${estilistaController.usuario.email}"/>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <p:outputLabel value="Contraseña"/>
-                                            <p:inputText class="form-control" placeholder="Contraseña" value="${estilistaController.usuario.contraseña}"/>
+                                            <p:outputLabel value="#{msgs['adminRegis.CardFormContraseña']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormContraseñaPlace']}" value="${estilistaController.usuario.contraseña}"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <p:outputLabel value="Telefono"/>
-                                            <p:inputText class="form-control" placeholder="Telefono" value="${estilistaController.usuario.telefono}"/>
+                                            <p:outputLabel value="#{msgs['adminRegis.CardFormTelefono']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormTelefonoPlace']}" value="${estilistaController.usuario.telefono}"/>
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <p:outputLabel value="Edad"/>
-                                            <p:inputText class="form-control" placeholder="Edad" value="${estilistaController.usuario.edad}"/>
+                                            <p:outputLabel value="#{msgs['adminRegis.CardFormEdad']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormEdadPlace']}" value="${estilistaController.usuario.edad}"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <p:outputLabel value="Especialidades"/>
-                                            <p:inputText class="form-control" placeholder="Especialidades" value="${estilistaController.estilista.especialidades}"/>
+                                            <p:outputLabel value="#{msgs['adminRegis.CardFormEspecialidades']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormEspecialidadesPlace']}" value="${estilistaController.estilista.especialidades}"/>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <p:outputLabel value="Dirección"/>
-                                            <p:inputText class="form-control" placeholder="Dirección" value="${estilistaController.usuario.direccion}"/>
+                                            <p:outputLabel value="#{msgs['adminRegis.CardFormDireccion']}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormDireccionPlace']}" value="${estilistaController.usuario.direccion}"/>
                                         </div>
                                     </div>
-                                <p:commandButton  value="Registrar" class="btn btn-primary" action="${estilistaController.registrarEstilista()}"></p:commandButton>
+                                <p:commandButton  value="#{msgs['adminRegis.CardFormBtn']}" class="btn btn-primary" action="${estilistaController.registrarUsuarioEstilista()}"></p:commandButton>
                             </div>
                         </div>
                     </div>

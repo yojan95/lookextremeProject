@@ -6,13 +6,15 @@
 package com.lookextreme.Dao;
 
 import com.lookextreme.model.Cita;
-import com.lookextreme.model.Cliente;
+import com.lookextreme.model.HorarioDisponibilidad;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 
 /**
  *
@@ -73,5 +75,49 @@ public class CitaFacade extends AbstractFacade<Cita> implements CitaFacadeLocal 
             System.out.println(e.getMessage());
         }
         return listaCita;
+    }
+
+    @Override
+    public List<HorarioDisponibilidad> verificarDisponibilidad(int idUsuario, Date fechacita) {        
+        List<Object>  result = new ArrayList();
+        List<HorarioDisponibilidad> horarios = new ArrayList();
+        try {
+            StoredProcedureQuery query = this.em.createNamedStoredProcedureQuery("cita.verificarDisponibilidad");
+            query.setParameter("id_usuario", idUsuario);
+            query.setParameter("fechaCita", fechacita);   
+            result = query.getResultList();
+            Iterator itr = result.iterator();            
+            while(itr.hasNext()){                
+                Object[] obj = (Object[]) itr.next();
+                HorarioDisponibilidad  horario = new HorarioDisponibilidad();
+                horario.setEstado(String.valueOf(obj[1]));
+                horario.setHora(Integer.valueOf(String.valueOf(obj[0])));
+                horarios.add(horario);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+        return horarios;
+    }
+    
+    @Override
+    public List<Cita> obtenerEstadosAgendamiento(){
+        List<Object>  result = new ArrayList();
+        List<Cita> citas = new ArrayList();
+        try {
+            result = em.createNamedQuery("Cita.findAllGroupedByState")
+                    .getResultList();
+            Iterator itr = result.iterator();            
+            while(itr.hasNext()){
+                Object[] obj = (Object[]) itr.next();
+                Cita cita = new Cita();                
+                cita.setEstado(String.valueOf(obj[1]));
+                cita.setIdCita(Integer.valueOf(String.valueOf(obj[0])));
+                citas.add(cita);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+        return citas;
     }
 }
