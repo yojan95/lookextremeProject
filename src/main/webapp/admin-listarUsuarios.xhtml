@@ -6,6 +6,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
+    <f:view locale="#{controllerTranslation.local}" />
     <style>
         section {
             padding: 40px 40px;
@@ -72,51 +73,51 @@
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Nombre"/>
+                        <h:outputText value="#{msgs['adminListar.tableName']}"/>
                     </f:facet>
                     <h:outputText value="#{car.nombre}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Apellido" />
+                        <h:outputText value="#{msgs['adminListar.tableApellido']}" />
                     </f:facet>
                     <h:outputText value="#{car.apellido}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Correo" />
+                        <h:outputText value="#{msgs['adminListar.tableCorreo']}" />
                     </f:facet>
                     <h:outputText value="#{car.email}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Telefono" />
+                        <h:outputText value="#{msgs['adminListar.tablePhone']}" />
                     </f:facet>
                     <h:outputText value="#{car.telefono}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Contraseña" />
+                        <h:outputText value="#{msgs['adminListar.tableContraseña']}" />
                     </f:facet>
                     <h:outputText value="#{car.contraseña}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Edad" />
+                        <h:outputText value="#{msgs['adminListar.tableEdad']}" />
                     </f:facet>
                     <h:outputText value="#{car.edad}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Direccion" />
+                        <h:outputText value="#{msgs['adminListar.tableDireccion']}" />
                     </f:facet>
                     <h:outputText value="#{car.direccion}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Fecha de nacimiento" />
+                        <h:outputText value="#{msgs['adminListar.tableFechaNacimiento']}" />
                     </f:facet>
                     <h:outputText value="#{car.fechaNacimiento}" />
                 </p:column>
@@ -146,7 +147,7 @@
     <p:toolbar>
  
         <f:facet name="right">
-            <p:commandButton value="Listar" actionListener="#{usuarioController.listar()}" update="tbl">
+            <p:commandButton value="#{msgs['adminListar.tableBtn']}" actionListener="#{usuarioController.listar()}" update="tbl">
                 <f:ajax execute="tbl"/>
             </p:commandButton>
         </f:facet>

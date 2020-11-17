@@ -43,7 +43,9 @@
                                     #{msgs['clientePqrs.tablaAnexos']}
                                 </f:facet>
                                 <h:outputText rendered="#{table_pqrs.anexos == null}" value="--" />
-                                <p:commandButton  type="submit" rendered="#{table_pqrs.anexos != null }" value="#{msgs['clientePqrs.tablaBtn']}"  onclick="descargarAnexo('#{table_pqrs.idPQRS}');"/>
+                                <p:commandButton  type="submit" rendered="#{table_pqrs.anexos != null }" value="#{msgs['clientePqrs.tablaBtn']}" ajax="false" actionListener="#{pqrsController.downloadAnexos()}">
+                                    <p:fileDownload value="#{pqrsController.downloadFile}"/>
+                                </p:commandButton>
                                 <h:inputHidden id="hidden_#{table_pqrs.idPQRS}" value="#{table_pqrs.anexos}"/>
                             </p:column>
                             <p:column>

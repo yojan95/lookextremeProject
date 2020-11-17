@@ -5,9 +5,11 @@ import com.lookextreme.model.Cliente;
 import com.lookextreme.model.Pqrs;
 import com.lookextreme.model.TipoPqrs;
 import com.lookextreme.model.Usuario;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -20,8 +22,9 @@ import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import org.primefaces.PrimeFaces;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
-
 
 @Named
 @ViewScoped
@@ -30,10 +33,19 @@ public class PqrsController implements Serializable {
     @EJB
     PqrsFacadeLocal EjbPqrs;
     private Pqrs pqrs;
-    private TipoPqrs tipoPqrs;   
+    private TipoPqrs tipoPqrs;
     private Usuario usuario;
     private List<Pqrs> pqrsList;
     private UploadedFile file;
+    private StreamedContent downloadFile;
+
+    public StreamedContent getDownloadFile() {
+        return downloadFile;
+    }
+
+    public void setDownloadFile(StreamedContent downloadFile) {
+        this.downloadFile = downloadFile;
+    }
 
     public UploadedFile getFile() {
         return file;
@@ -43,8 +55,6 @@ public class PqrsController implements Serializable {
         this.file = file;
     }
 
-    
-    
     public List<Pqrs> getPqrsList() {
         return pqrsList;
     }
@@ -52,7 +62,8 @@ public class PqrsController implements Serializable {
     public void setPqrsList(List<Pqrs> pqrsList) {
         this.pqrsList = pqrsList;
     }
-/*
+
+    /*
     public UIComponent getButtonCreate() {
         return buttonCreate;
     }
@@ -60,7 +71,7 @@ public class PqrsController implements Serializable {
     public void setButtonCreate(UIComponent buttonCreate) {
         this.buttonCreate = buttonCreate;
     }
-*/
+     */
     public TipoPqrs getTipoPqrs() {
         return tipoPqrs;
     }
@@ -81,11 +92,11 @@ public class PqrsController implements Serializable {
     public void init() {
         FacesContext context = FacesContext.getCurrentInstance();
         usuario = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
-        System.out.println("usuario pqrs: "+ usuario.getIdUsuario());
+        System.out.println("usuario pqrs: " + usuario.getIdUsuario());
         String origin = obtenerUri();
         if (origin.contains("cliente_crearPqrs.xhtml")) {
             pqrs = new Pqrs();
-            tipoPqrs = new TipoPqrs();            
+            tipoPqrs = new TipoPqrs();
         } else if (origin.contains("cliente_consultarpqrs.xhtml")) {
             obtenerPqrsPorCliente(usuario.getIdUsuario());
         } else if (origin.contains("administrador_consultarpqrs.xhtml")) {
@@ -139,8 +150,9 @@ public class PqrsController implements Serializable {
             Cliente cliente = new Cliente();
             cliente.setUsuarioidUsuario(usuario.getIdUsuario());
             pqrs.setClienteusuarioidUsuario(cliente);
-            if(file.getSize()> 0)
+            if (file.getSize() > 0) {
                 pqrs.setAnexos(file.getContent());
+            }
             EjbPqrs.create(pqrs);
         } catch (Exception e) {
             showMessageError("No pudo ser creado correctamente el PQRS.");
@@ -159,23 +171,18 @@ public class PqrsController implements Serializable {
         }
     }
 
-    private void obtenerPqrsAdministrador() 
-    {
-        try 
-        {
+    private void obtenerPqrsAdministrador() {
+        try {
             pqrsList = new ArrayList();
             pqrsList = EjbPqrs.obtenerPqrsAdministrador();
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             System.out.println("obtener pqrs admin error: " + e.getLocalizedMessage());
         }
     }
 
-    public void openModal(Pqrs _pqrs) 
-    {
+    public void openModal(Pqrs _pqrs) {
         PrimeFaces current = PrimeFaces.current();
-        if (_pqrs.getRespuesta() == null) 
-        {
+        if (_pqrs.getRespuesta() == null) {
             _pqrs.setRespuesta("");
         }
         pqrs = _pqrs;
@@ -183,21 +190,18 @@ public class PqrsController implements Serializable {
     }
 
     public void guardarRespuesta() {
-        try 
-        {
-            System.out.println("nueva respuesta: "+ pqrs.getRespuesta());
-            if (!pqrs.getRespuesta().isEmpty())
-            {
+        try {
+            System.out.println("nueva respuesta: " + pqrs.getRespuesta());
+            if (!pqrs.getRespuesta().isEmpty()) {
                 pqrs.setEstado("Respondido");
                 EjbPqrs.edit(pqrs);
             }
-        } catch (Exception e) 
-        {
-            System.out.println("guardar respuesta error: "+ e.getMessage());
+        } catch (Exception e) {
+            System.out.println("guardar respuesta error: " + e.getMessage());
         }
     }
-    
-    public void descargarAnexo(byte[] anexoBytes) throws IOException{               
+
+    public void descargarAnexo(byte[] anexoBytes) throws IOException {
         try {
             File anexoFile = File.createTempFile("Anexo", null);
             try (FileOutputStream fos = new FileOutputStream(anexoFile)) {
@@ -206,6 +210,19 @@ public class PqrsController implements Serializable {
             }
         } catch (IOException e) {
             System.out.println("descargar anexo error: " + e.getMessage());
-        }                
+        }
     }
+
+    public void downloadAnexos() {
+        try {
+            Pqrs a = EjbPqrs.find(pqrs.getIdPQRS());
+            byte[] arreglo= a.getAnexos();
+            arreglo.getClass().getResourceAsStream("anexos");
+            InputStream stream = new ByteArrayInputStream(arreglo);
+            downloadFile = new DefaultStreamedContent(stream, "imag/jpg", "descarga.jpg");
+        } catch (Exception e) {
+            System.out.println("descargar anexo error: " + e.getMessage());
+        }
+    }
+    
 }
