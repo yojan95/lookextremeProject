@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+f<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="AdministradorTemplate.xhtml"
+<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -57,49 +57,7 @@
                     <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${salidaVentaController.salidaRegistrada()}"/>                    
                 </h:form> 
             </div> 
-            <div class="container">    
-
-                <div class="py-5 text-center">
-                    <h4 class="mb-3" > Salida por consumo</h4>
-                </div>
-
-                <h:form class="needs-validation" >                    
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Id producto2"/>                                                    
-                            <h:selectOneMenu  class="form-control"    value="${salidaConsumoController.pro.idCodigo}"> 
-                                <f:selectItems value="${salidaConsumoController.proList}" var="con" itemLabel="${con.idCodigo}" itemValue="${con.idCodigo}"/>
-                            </h:selectOneMenu> 
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Nombre del producto2"/>                        
-                            <p:inputText type="text" class="form-control"   value="${salidaConsumoController.consumoModel.nombre}" />
-                        </div>
-                    </div>    
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <p:outputLabel value="Cantidad2"/>                        
-                            <p:inputText type="number" class="form-control" value="${salidaConsumoController.consumoModel.cantidad}" />                            
-                        </div>
-                        <div class="col-md-2">
-                            <p:outputLabel value="Tamaño2"/>                        
-                            <p:inputText type="number" class="form-control" value="${salidaConsumoController.consumoModel.tamaño}"  />
-                        </div>
-                        <div class="col-md-4">
-                            <p:outputLabel value="Color2"/>                        
-                            <p:inputText type="text" class="form-control" value="${salidaConsumoController.consumoModel.color}"  />
-                        </div>                            
-                        <div class="col-md-4">
-                            <p:outputLabel value="Estilista"/>
-                            <<h:selectOneMenu  class="form-control"  id="ddl_estilistas"  value="#{salidaConsumoController.estilista.usuarioidUsuario}" rendered="true"> 
-                                <f:selectItems value="#{salidaConsumoController.estList}" />
-                            </h:selectOneMenu>                                                                             
-                        </div>
-                    </div>
-                    <br></br>
-                    <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="#{salidaConsumoController.consumoRegistrado()}"/>
-                </h:form>
-            </div>
+           
         </section>
     </ui:define>
 </ui:composition>
