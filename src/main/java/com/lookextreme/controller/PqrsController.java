@@ -221,7 +221,7 @@ public class PqrsController implements Serializable {
             InputStream stream = new ByteArrayInputStream(arreglo);
             downloadFile = new DefaultStreamedContent(stream, "imag/jpg", "descarga.jpg");
         } catch (Exception e) {
-            System.out.println("descargar anexo error: " + e.getMessage());
+            System.out.println("descargar anexo error..: " + e.getMessage());
         }
     }
     
