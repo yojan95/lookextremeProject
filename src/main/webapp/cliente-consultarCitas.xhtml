@@ -10,6 +10,7 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{controllerTranslation.local}" />
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
         <title>Consultar-Citas</title>
@@ -79,30 +80,28 @@ and open the template in the editor.
                         <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
                         <p:dataTable id="tbl_pqrs" var="table_cita" value="#{citaConsultarController.citalist}" >
                             <p:column>
-                                <f:facet name="header">Turno</f:facet>
+                                <f:facet  name="header" >#{msgs['clienteConsultarCitas.turno']}</f:facet>
                                 <h:outputText value="#{table_cita.idCita}" />                        
                             </p:column>                    
                             <p:column filterBy="#{table_cita.estado}">
-                                <f:facet name="header">Estado</f:facet>
-                                <h:outputText value="#{table_cita.estado}" >
-
-                                </h:outputText>
+                                <f:facet name="header">#{msgs['clienteConsultarCitas.estado']}</f:facet>
+                                <h:outputText value="#{table_cita.estado}" />                               
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Hora</f:facet>                        
+                                <f:facet name="header">#{msgs['clienteConsultarCitas.hora']}</f:facet>
                                 <h:outputText value="#{table_cita.hora}" />
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Fecha</f:facet>                        
+                                <f:facet name="header">#{msgs['clienteConsultarCitas.fecha']}</f:facet>                        
                                 <h:outputText value="#{table_cita.fecha}" />
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Estilista</f:facet>                        
+                                <f:facet name="header">#{msgs['clienteConsultarCitas.estilista']}</f:facet>                        
                                 <h:outputText value="${table_cita.estilistausuarioidUsuario.usuario.nombre}" />
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Cancelar" actionListener="#{citaController.actionCancelarCita(table_cita)}" update="tbl_pqrs">
-                                    <p:confirm header="Confirmación" message="Esta seguro de cancelar su cita!" icon="ui-icon-alert"/>
+                                <p:commandButton value="#{msgs['clienteConsultarCitas.cancelar']}" actionListener="#{citaController.actionCancelarCita(table_cita)}" update="tbl_pqrs">
+                                    <p:confirm header="Confirmación" message="#{msgs['clienteConsultarCitas.mensajeCancelar']}" icon="ui-icon-alert"/>
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
@@ -110,8 +109,8 @@ and open the template in the editor.
                     </div>
                 </div>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                    <p:commandButton value="#{msgs['clienteConsultarCitas.mensajeCancelarSi']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="#{msgs['clienteConsultarCitas.mensajeCancelarSi']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                 </p:confirmDialog>
             </h:form>
         </section>
