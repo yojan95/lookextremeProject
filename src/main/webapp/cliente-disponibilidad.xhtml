@@ -6,7 +6,9 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:b="http://bootsfaces.net/ui">    
+                xmlns:b="http://bootsfaces.net/ui"
+                >    
+    <f:view locale="#{controllerTranslation.local}" />
     <ui:define name="content">
         <section>            
             <p:messages>
@@ -23,30 +25,30 @@
                                 <h:form>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
-                                            <p:outputLabel value="Estilistas: " />
+                                            <p:outputLabel value="#{msgs['clienteDisponibilidad.estilistas']}" />
                                             <h:selectOneMenu id="ddl_estilistas" value="#{citaController.estilista.usuarioidUsuario}" styleClass="form-control" validatorMessage="Seleccione un estilista" >
                                                 <f:selectItems value="#{citaController.estilistaListItem}" />                                    
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <p:outputLabel value="Fecha de la cita"/>
+                                            <p:outputLabel value="#{msgs['clienteDisponibilidad.fechaCita']}" />
                                             <p:calendar value="${citaController.cita.fecha}" validatorMessage="La fecha es obligatoria" id="fecha"/>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <p:commandButton class="btn btn-primary my-1" value="Verificar Disponibilidad" actionListener="#{citaController.verificarDisponibilidad()}"></p:commandButton>
+                                            <p:commandButton class="btn btn-primary my-1" value="#{msgs['clienteDisponibilidad.verificarDisponibilidad']}" actionListener="#{citaController.verificarDisponibilidad()}"></p:commandButton>
                                         </div> 
                                     </div>
                                 </h:form>
                                 <h:form>
                                     <div class="form-row">
                                         <div class="col-sm">
-                                            <p:outputLabel value="Hora"/>                                            
+                                            <p:outputLabel value="#{msgs['clienteDisponibilidad.hora']}"/>                                            
                                             <h:selectOneMenu value="#{citaController.cita.hora}" class="form-control" >
                                                 <f:selectItems value="#{citaController.horarioListItem}"/>
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="col-sm">
-                                            <p:commandButton class="btn btn-primary my-1 ml-5" value="Agendar Cita" actionListener="${citaController.registrarCita()}" />
+                                            <p:commandButton class="btn btn-primary my-1 ml-5" value="#{msgs['clienteDisponibilidad.agendarCita']}" actionListener="${citaController.registrarCita()}" />
                                         </div>                                        
                                     </div>
                                 </h:form>
