@@ -57,15 +57,15 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="btn-group navbar-nav ml-md-auto">
-                       <h:link class="nav-link dropdown-toggle " value="#{clienteTemplateController.userName}" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >
+                    
+                       <h:link class="nav-link dropdown-toggle " value="#{clienteTemplateController.userName}"  >
                            <h:graphicImage value="images/user.svg" height="30px" />                                                        
                         </h:link>
                         <div class="dropdown-menu dropdown-menu-right" >
                             <p:link class="dropdown-item menuUserNotLogin" value="Mis datos personales" outcome="cliente-datos"/>
                             <p:link class="dropdown-item menuUserNotLogin" value="Cerrar Sesión" outcome="landing"/>           
                         </div>
-                    </div>
+                    
                 </header>
             </h:form>
             <div id="header" class="jumbotron text-light">

@@ -4,34 +4,35 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<ui:composition template="AdministradorTemplate.xhtml"
+<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                 >
 
     <ui:define name="content">
         <section id="about">
-
+            <f:view locale="#{controllerTranslation.local}" />
 
             <div class="container">      
                 <h:form class="needs-validation" >
 
 
                     <div class="py-5 text-center">
-                        <h4 class="mb-3" > Registro de productos</h4>
+                        <h4 class="mb-3" > #{msgs['admin.h4']}</h4>
                     </div>
                     <div class="row">
 
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Nombre del producto"/>                    
+                            <p:outputLabel value="#{msgs['adminForm.NombreProducto']}"/>                    
                             <h:selectOneMenu  class="form-control" id="Nombre"  value="${registrarProductoController.nombrep.idNombreProducto}" > 
                                 <f:selectItems value="${registrarProductoController.nombrepList}" var="nomp" itemLabel="${nomp.nombreProductocol}" itemValue="${nomp.idNombreProducto}"/>
                             </h:selectOneMenu>   
                         </div>
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Cantidad"/>                   
+                            <p:outputLabel value="#{msgs['adminForm.Cantidad']}"/>                   
                             <p:inputText  type="number" class="form-control" id="Cantidad" placeholder="10" value="${registrarProductoController.productos.cantidad}"  />
                             <div class="invalid-feedback">Por favor introducir la cantidad del producto</div>
 
@@ -39,13 +40,13 @@ and open the template in the editor.
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Precio"/>                    
+                            <p:outputLabel value="#{msgs['adminForm.Precio']}"/>                    
                             <p:inputText type="number" class="form-control" id="Precio" placeholder="" value="${registrarProductoController.productos.precio}"  />
                             <div class="invalid-feedback">Por favor introducir el valor correspondinente</div>
 
                         </div>
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Marca"/>
+                            <p:outputLabel value="#{msgs['adminForm.Marca']}"/>
                             <h:selectOneMenu class="form-control" id="Marca"  value="${registrarProductoController.marcas.idmarca}" >
                                 <f:selectItems value="${registrarProductoController.marcaList}" var="mar"   itemLabel="${mar.maNombre}" itemValue="${mar.idmarca}"   />
                             </h:selectOneMenu>             
@@ -53,13 +54,13 @@ and open the template in the editor.
                     </div>  
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Color"/>                                        
+                            <p:outputLabel value="#{msgs['adminForm.Color']}"/>                                        
                             <p:inputText type="text" class="form-control" id="Color"  value="${registrarProductoController.productos.color}" />
                             <div class="invalid-feedback">Por favor ingrese el color del producto</div>
 
                         </div>
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Categoria"/>                         
+                            <p:outputLabel value="#{msgs['adminForm.Categoria']}"/>                         
                             <h:selectOneMenu class="form-control" id="categoria"  value="${registrarProductoController.categorias.idcategorias}" >
                                 <f:selectItems value="${registrarProductoController.categoriasList}" var="cat" itemLabel="${cat.caNombre}" itemValue="${cat.idcategorias}"/>
                             </h:selectOneMenu>
@@ -68,16 +69,16 @@ and open the template in the editor.
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel class="form-control" value="Fecha de Vencimiento"/>                    
+                            <p:outputLabel class="form-control" value="#{msgs['adminForm.Fechadevencimiento']}"/>                    
                             <p:calendar value="${registrarProductoController.productos.fechaVencimiento}"/>
                             <div class="invalid-feedback">Por favor ingresar fecha de vencimiento</div>
                         </div>                    
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Tamaño"/>                                        
+                            <p:outputLabel value="#{msgs['adminForm.Tamaño']}"/>                                        
                             <p:inputText type="text" class="form-control" id="Descripcion"  value="${registrarProductoController.productos.tamaño}"/>
                         </div>
                     </div>
-                    <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${registrarProductoController.registrarProductos()}"   > </p:commandButton>
+                    <p:commandButton class="btn btn-outline-secondary" value="#{msgs['adminBoton.Guardar']}" actionListener="${registrarProductoController.registrarProductos()}"   > </p:commandButton>
 
                     <hr class="mb-4"></hr>
                 </h:form>

@@ -49,9 +49,9 @@ and open the template in the editor.
                                     <label id="userName">Inventario</label>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" >
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Salida de productos" outcome="SalidaP"/>
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Registro de productos" outcome="RegistroP"/>
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Consulta de productos" outcome="ConsultaP"/>                                    
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavSalidaProductos']}" outcome="admin-SalidaProductos"/>
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavRegistroProductos']}" outcome="admin-RegistroProductos"/>
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavConsultaProductos']}" outcome="admin-ConsultaProductos"/>                                    
                                 </div>
                             </div>
                             <li class="nav-item">
@@ -71,7 +71,7 @@ and open the template in the editor.
                         </ul>
                     </div>                    
                     <div class="btn-group navbar-nav ml-md-auto">                        
-                        <h:link class="nav-link dropdown-toggle " value="#{administradorTemplateController.userName}" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >
+                        <h:link class="nav-link dropdown-toggle " value="#{administradorTemplateController.userName}" >
                             <h:graphicImage value="images/user.svg" height="30px" />                                                        
                         </h:link>                            
                         <div class="dropdown-menu dropdown-menu-right" >
