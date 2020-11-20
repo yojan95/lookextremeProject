@@ -1,126 +1,67 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./WEB-INF/templates/ClienteTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"               
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"> 
     <f:view locale="#{controllerTranslation.local}" />
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
-        <title>Consultar-Citas</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <link href="css/utils.css" rel="stylesheet" type="text/css"/>
-       
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     </h:head>
-    <h:body>
-         <h:form>
-                <header class="navbar navbar-expand-md fixed-top">                 
-                    <h:commandLink class="navbar-brand" onclick="redirect('landing.html')">                                     
-                        <img src="images/LogoMakr_1EYqX1.png" height="55px"/>
-                    </h:commandLink>
-                    <!-- menu usuario logueado -->
-                    <div id="user_menu" class="navbar-nav-scroll">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <h:commandLink class="nav-link active text-muted" action="cliente-servicios" ></h:commandLink>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Agendamiento
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <p:link class="dropdown-item menuUserNotLogin" value="Servicios" outcome="cliente-servicios"/>
-                                        <p:link class="dropdown-item menuUserNotLogin" value="Consultar Citas" outcome="cliente-consultarCitas"/>
-                                    </div>
-                                </li>
-                            </li>
-                            <li class="nav-item ">
-                                <h:commandLink class="nav-link  text-muted" ></h:commandLink>
-                               <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        PQRS
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <p:link class="dropdown-item menuUserNotLogin" value="Crear PQRS" outcome="cliente_crearPqrs"/>
-                                        <a class="dropdown-item" href="#">Consultar PQRS</a>
-                                    </div>
-                                </li>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="btn-group navbar-nav ml-md-auto">
-                       <h:link class="nav-link dropdown-toggle " value="#{loginController.usuario.nombre}" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >
-                           <h:graphicImage value="images/user.svg" height="30px" />                                                        
-                        </h:link>
-                        <div class="dropdown-menu dropdown-menu-right" >
-                            <p:link class="dropdown-item menuUserNotLogin" value="Mis datos personales" outcome="cliente-datos"/>
-                            <p:link class="dropdown-item menuUserNotLogin" value="Cerrar Sesión" outcome="landing"/>           
-                        </div>
-                    </div>                
-                </header>
-            </h:form>
-            <div id="header" class="jumbotron text-light">
-                <h1 class="display-4">Look Extreme</h1>
-                <p class="lead">Comfort and quality.</p>
-            </div>
-           <section>
-            
-            <h:form>
-                <p:messages showDetail="true" showSummary="false">
-                    <p:autoUpdate rendered="true"/>
-                </p:messages>
-                <div class="row justify-content-md-start">
-                    <div class="col-lg-10 mx-auto">
-                        <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
-                        <p:dataTable id="tbl_pqrs" var="table_cita" value="#{citaConsultarController.citalist}" >
-                            <p:column>
-                                <f:facet  name="header" >#{msgs['clienteConsultarCitas.turno']}</f:facet>
-                                <h:outputText value="#{table_cita.idCita}" />                        
-                            </p:column>                    
-                            <p:column filterBy="#{table_cita.estado}">
-                                <f:facet name="header">#{msgs['clienteConsultarCitas.estado']}</f:facet>
-                                <h:outputText value="#{table_cita.estado}" />                               
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">#{msgs['clienteConsultarCitas.hora']}</f:facet>
-                                <h:outputText value="#{table_cita.hora}" />
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">#{msgs['clienteConsultarCitas.fecha']}</f:facet>                        
-                                <h:outputText value="#{table_cita.fecha}" />
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">#{msgs['clienteConsultarCitas.estilista']}</f:facet>                        
-                                <h:outputText value="${table_cita.estilistausuarioidUsuario.usuario.nombre}" />
-                            </p:column>
-                            <p:column>
-                                <p:commandButton value="#{msgs['clienteConsultarCitas.cancelar']}" actionListener="#{citaController.actionCancelarCita(table_cita)}" update="tbl_pqrs">
-                                    <p:confirm header="Confirmación" message="#{msgs['clienteConsultarCitas.mensajeCancelar']}" icon="ui-icon-alert"/>
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable>
-                        
-                    </div>
-                </div>
-                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                    <p:commandButton value="#{msgs['clienteConsultarCitas.mensajeCancelarSi']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-                    <p:commandButton value="#{msgs['clienteConsultarCitas.mensajeCancelarSi']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
-                </p:confirmDialog>
-            </h:form>
-        </section>
+    <style>
+        .ui-panel.borderless .ui-panel-titlebar {
+            background-color: #040505;
+        }
+    </style>
+    <h:outputStylesheet name="style.css" />
+    <ui:define name="content">
+        <section>
         <h:form>
-                <div class="blog-footer">
-                    <p><h:commandLink >Look Extreme</h:commandLink> © All Rights Reserved - 2020</p>
-                    <p>
-                        <h:commandLink >Back to top</h:commandLink>
-                    </p>
+            <p:messages showDetail="true" showSummary="false">
+                <p:autoUpdate rendered="true"/>
+            </p:messages>
+            <div class="row justify-content-md-start">
+                <div class="col-lg-10 mx-auto">
+                    <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
+                    <p:dataTable id="tbl_pqrs" var="table_cita" value="#{citaConsultarController.citalist}" >
+                        <p:column>
+                            <f:facet  name="header" >#{msgs['clienteConsultarCitas.turno']}</f:facet>
+                            <h:outputText value="#{table_cita.idCita}" />                        
+                        </p:column>                    
+                        <p:column filterBy="#{table_cita.estado}">
+                            <f:facet name="header">#{msgs['clienteConsultarCitas.estado']}</f:facet>
+                            <h:outputText value="#{table_cita.estado}" />                               
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">#{msgs['clienteConsultarCitas.hora']}</f:facet>
+                            <h:outputText value="#{table_cita.hora}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">#{msgs['clienteConsultarCitas.fecha']}</f:facet>                        
+                            <h:outputText value="#{table_cita.fecha}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">#{msgs['clienteConsultarCitas.estilista']}</f:facet>                        
+                            <h:outputText value="${table_cita.estilistausuarioidUsuario.usuario.nombre}" />
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="#{msgs['clienteConsultarCitas.cancelar']}" actionListener="#{citaController.actionCancelarCita(table_cita)}" update="tbl_pqrs" rendered="#{table_cita.estado
+                                                      != 'cancelada'}">
+                                <p:confirm header="Confirmación" message="#{msgs['clienteConsultarCitas.mensajeCancelar']}" icon="ui-icon-alert"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
                 </div>
-            </h:form>
-    </h:body>
-</html>
+            </div>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="#{msgs['clienteConsultarCitas.mensajeCancelarSi']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                <p:commandButton value="#{msgs['clienteConsultarCitas.mensajeCancelarSi']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+            </p:confirmDialog>
+        </h:form>
+        </section>
+    </ui:define>
+</ui:composition>

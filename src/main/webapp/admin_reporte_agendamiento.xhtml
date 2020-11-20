@@ -7,13 +7,21 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content">
-        <h:form>
-                          
-                <h:panelGroup id="panel" layout="block">
-                    <p:chart type="pie" model="#{agendamientoReporteController.pieModel}" style="width:400px; height: 300px;" />
-                    <p:outputLabel value="Se encontró información" rendered="#{agendamientoReporteController.pieModel != null}" />
-                </h:panelGroup>
-        </h:form>
+
+        <div class="container-fluid">
+            <div class="row align-self-md-center">
+                <div class="col-md-4 offset-md-2">
+                    <h:form>
+                        <h:panelGroup id="panel" layout="block">
+                            <p:chart type="pie" model="#{agendamientoReporteController.pieModel}" style="width:800px; height: 400px;" />
+                            <p:outputLabel value="Se encontró información" rendered="#{agendamientoReporteController.pieModel != null}" />
+                        </h:panelGroup>
+                    </h:form>
+                </div>
+            </div>
+        </div>          
+
+
     </ui:define>
 </ui:composition>
 
