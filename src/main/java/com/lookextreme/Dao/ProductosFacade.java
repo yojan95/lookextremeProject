@@ -6,6 +6,8 @@
 package com.lookextreme.Dao;
 
 import com.lookextreme.model.Productos;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +29,19 @@ public class ProductosFacade extends AbstractFacade<Productos> implements Produc
 
     public ProductosFacade() {
         super(Productos.class);
+    }
+
+    @Override
+    public List<Productos> ListarAdminProductos(int idAdmin) {
+        List<Productos> listaProductos = new ArrayList();
+        try {
+            listaProductos = em.createNamedQuery("Productos.findByListarProductos")
+            .setParameter("idUsuario",idAdmin )
+            .getResultList();
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+        return listaProductos;
     }
     
 }
