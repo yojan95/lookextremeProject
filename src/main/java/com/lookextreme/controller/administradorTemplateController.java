@@ -35,4 +35,10 @@ public class administradorTemplateController implements Serializable {
             System.out.println("administradorTemplateController Error : " + e.getMessage());            
         }
     }
+    
+    public void cerrarSesion() throws IOException{
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().clear();
+        context.getExternalContext().redirect("landing.xhtml");
+    }
 }
