@@ -38,8 +38,11 @@
                                 <h:outputText value="#{table_pqrs.detalles}" />
                             </p:column>
                             <p:column>
-                                <f:facet name="header">#{msgs['adminPqrs.tablaAnexos']}</f:facet>                        
-                                <h:outputText value="#{table_pqrs.anexos}" />
+                                <f:facet name="header">#{msgs['adminPqrs.tablaAnexos']}</f:facet>
+                                <p:commandButton value="Descargar">
+                                    <p:fileUpload value="#{table_pqrs.anexos}"/>
+                                </p:commandButton>
+                                <!--<h:outputText value="#{table_pqrs.anexos}" />-->
                             </p:column>
                             <p:column filterBy="#{table_pqrs.estado}">
                                 <f:facet name="header">#{msgs['adminPqrs.tablaEstado']}</f:facet>
