@@ -39,7 +39,9 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">#{msgs['adminPqrs.tablaAnexos']}</f:facet>
-                                <h:outputLink value="#{table_pqrs.anexos}" />
+                                <p:commandButton value="Descargar">
+                                    <p:fileUpload value="#{table_pqrs.anexos}"/>
+                                </p:commandButton>
                                 <!--<h:outputText value="#{table_pqrs.anexos}" />-->
                             </p:column>
                             <p:column filterBy="#{table_pqrs.estado}">
