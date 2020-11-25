@@ -20,6 +20,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.primefaces.PrimeFaces;
 
 /**
  * correo: alookextreme@gmail.com contraseña: S6ZZGNdKSkym8cu
@@ -169,8 +170,11 @@ public class emailJSFManagedBean {
             Transport transport = session.getTransport("smtp");
             transport.connect(this.smtp, this.port, this.username, this.password);
             if (!transport.isConnected()) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "se envio su correo"));
-                //return "emailFal";
+                //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "se envio su correo"));
+                
+                PrimeFaces.current().executeScript("PF('wdialog').show();");
+      
+               
             }
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
@@ -181,7 +185,7 @@ public class emailJSFManagedBean {
             //return "emailFal";
 
         }
-         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se envio su correo"));        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se envio su correo"));
     }
 
 }

@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+    <f:view locale="#{controllerTranslation.local}" />
+    <ui:define name="content">        
+        <section>
+            <h:form id="frmPrincipal">
+                <p:messages showDetail="true" showSummary="false">
+                    <p:autoUpdate rendered="true"/>
+                </p:messages>
+
+                <div class="row justify-content-md-start">
+
+                    <div class="col-lg-10 mx-auto">
+                        <div class="row">
+                            <div class="col">
+                                <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
+                                    <a class="navbar-brand">Servicios</a>
+                                    <div class="form-inline">
+
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
+                        <p:dataTable id="tbl_pqrs" var="table_servicios" value="#{serviciosController.listaServicios}" >
+                            <f:facet name="{Exporters}">
+                                <h:commandLink>
+                                    <p:graphicImage url="icons/excelmp.png" width="24"/>
+                                    <p:dataExporter type="xls" target="tbl_pqrs" fileName="usuarios" />
+                                </h:commandLink>
+                            </f:facet>
+
+                            <p:column >
+                                <f:facet name="header">Nombre</f:facet>
+                                <h:outputText value="#{table_servicios.nombre}" >
+
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Precio</f:facet>                        
+                                <h:outputText value="#{table_servicios.precio}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Descricion</f:facet>                        
+                                <h:outputText value="#{table_servicios.descripcion}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">Eliminar</f:facet>
+                                <p:commandButton value="Eliminar" update="@form" actionListener="#{serviciosController.eliminarServicio(table_servicios)}" >
+                                    <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Actualizar</f:facet>
+                                <p:commandLink value="Actualizar" actionListener="${serviciosController.cargarServicios(table_servicios)}" update=":frmPrincipal:tbl_pqrs dialogo" oncomplete="PF('valor').show();">
+                                    <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                                </p:commandLink>
+                            </p:column>
+                        </p:dataTable>
+
+                    </div>
+                </div>
+                <!--<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>-->
+            </h:form>
+            <p:dialog id="dialogo" widgetVar="valor" modal="true" closeOnEscape="true" header="Actualizar Servicio" resizable="false" draggable="false">
+                <h:form>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nombre"/>
+                        <p:inputText value="#{serviciosController.servicios.nombre}"/>
+                        <p:outputLabel value="Precio"/>
+                        <p:inputText value="#{serviciosController.servicios.precio}"/>
+                        <p:outputLabel value="Descripción"/>
+                        <p:inputText value="#{serviciosController.servicios.descripcion}"/>
+                        <p:commandButton value="actualizar" actionListener="#{serviciosController.actulizarServicios()}" oncomplete="PF('valor')hide();"></p:commandButton>
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
+        </section>
+    </ui:define>
+</ui:composition>

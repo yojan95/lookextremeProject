@@ -49,15 +49,17 @@ public class ClienteController implements Serializable{
         cliente = new Cliente();
         roles = new Roles();
     }
-    public String registrarCliente(){
+    public String registrarUsuario(){
         System.out.println("cliente-registrado");
         String redireccion = null;
         
         try{
+            Roles roles = new Roles();
             roles.setIdRoles(3);
-            //roles.setTiporoles("Client");
+            roles.setTiporoles("Cliente");
             usuario.setRolesidRoles(roles);
             usuarioEJB.create(usuario);
+            registrarCliente(usuario);
             redireccion = "indexCliente";
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -65,7 +67,19 @@ public class ClienteController implements Serializable{
         
         return redireccion;
     }
-    
+    public void registrarCliente(Usuario usuario){
+       // String redireccion = null;
+        try{
+            
+            cliente.setUsuarioidUsuario(usuario.getIdUsuario());
+            cliente.setUsuario(usuario);
+            clienteEJB.create(cliente);
+            //redireccion = "indexCliente";
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        //return redireccion;
+    }
     
     
 }

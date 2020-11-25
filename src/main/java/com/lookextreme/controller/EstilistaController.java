@@ -16,27 +16,24 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-
 @Named
 @ViewScoped
-public class EstilistaController implements Serializable{
-    
-    
+public class EstilistaController implements Serializable {
+
     @EJB
     UsuarioFacadeLocal usuarioEJB;
     private Usuario usuario;
     private Roles roles;
-    
+
     @EJB
     private EstilistaFacadeLocal estilistaEJB;
     private Estilista estilista;
-    
-    @EJB
-    private CitaFacadeLocal EJBcita;
-    
+
     public Roles getRoles() {
         return roles;
     }
@@ -44,8 +41,6 @@ public class EstilistaController implements Serializable{
     public void setRoles(Roles roles) {
         this.roles = roles;
     }
-    
-    
 
     public Estilista getEstilista() {
         return estilista;
@@ -62,38 +57,37 @@ public class EstilistaController implements Serializable{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         estilista = new Estilista();
         roles = new Roles();
         usuario = new Usuario();
     }
-    public void registrarUsuarioEstilista(){
+
+    public void registrarUsuarioEstilista() {
         System.out.println("estilista-registrado");
-        try{
+        try {
             roles.setIdRoles(2);
             usuario.setRolesidRoles(roles);
             usuarioEJB.create(usuario);
-            
-           
-        }catch(Exception e){
+            registrarEstilista(usuario);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Estilista Registrado"));
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    public void registrarEstilista(Usuario usuario){
+
+    public void registrarEstilista(Usuario usuario) {
         System.out.println("estilista-satisfactoriamente");
-        try{
-           estilista = new Estilista();
-           estilista.setUsuarioidUsuario(usuario.getIdUsuario());
-           //usuario.setEstilista(estilista);
-           estilista.setUsuario(usuario);
-           estilistaEJB.create(estilista);
-        }catch(Exception e){
+        try {
+
+            estilista.setUsuarioidUsuario(usuario.getIdUsuario());
+            estilista.setUsuario(usuario);
+            estilistaEJB.create(estilista);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
+
 }

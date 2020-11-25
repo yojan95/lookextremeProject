@@ -68,6 +68,15 @@ and open the template in the editor.
                             <li class="nav-item">
                                 <p:link class="nav-link" outcome="admin-enviarCorreos" >#{msgs['adminTemplate.NavMail']}</p:link>
                             </li>
+                            <div class="btn-group navbar-nav ml-md-auto">
+                                <a class="nav-link dropdown-toggle " data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >                                                            
+                                    <label id="userName">Agendamiento</label>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" >
+                                    <p:link class="dropdown-item menuUserNotLogin" value="Gestionar Servicios" outcome="admin-GestionarServicios"/>
+                                    <p:link class="dropdown-item menuUserNotLogin" value="Crear Servicios" outcome="admin-CargarServicios"/>         
+                                </div>
+                            </div>
                         </ul>
                     </div>                    
                     <div class="btn-group navbar-nav ml-md-auto">                        

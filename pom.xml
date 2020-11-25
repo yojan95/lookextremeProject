@@ -100,6 +100,11 @@
             <version>1.4.7</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>localRepo.net.sourceforge</groupId>
+            <artifactId>javacsv</artifactId>
+            <version>2.1</version>
+        </dependency>
     </dependencies>
 
     <build>

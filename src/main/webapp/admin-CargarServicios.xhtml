@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+    <f:view locale="#{controllerTranslation.local}" />
+    <ui:define name="content">        
+        <section>
+            <!--<p:growl showDetail="true" />-->
+            <!--<p:messages>
+                    <p:autoUpdate rendered="true"/>
+                </p:messages>-->
+
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-11 mx-auto">
+                        <div class="card">
+                            <div class="card-header">
+                                Servicios
+                            </div>
+                            <div class="card-body">
+                                <div class="row row-cols-1 row-cols-md-2">
+                                    <div class="col mb-4">
+                                        <!--<p:messages showDetail="true" showSummary="false"/>-->
+                                        
+                                        <h:form id="form1">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Crear Servicio
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-row">
+                                                            <div class="col">
+                                                                <p:outputLabel value="Nombre"/>
+                                                                <p:inputText  class="form-control" value="#{serviciosController.servicios.nombre}" >
+                                                                    <!--<f:validateRegex pattern="^([a-zA-Z]+(.)?[\S]*)$"/>-->
+                                                                </p:inputText>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p:outputLabel value="Precio"/>
+
+                                                                <p:inputNumber  value="#{serviciosController.servicios.precio}" >
+                                                                    <!--<f:validateLength minimum="6" maximum="7"/>-->
+                                                                </p:inputNumber>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <div class="col">
+                                                                <p:outputLabel value="Descripción"/>
+                                                                <p:inputTextarea  class="form-control" value="#{serviciosController.servicios.descripcion}" >
+                                                                    <!--<f:validateRegex pattern="^([a-zA-Z]+(.)?[\S]*)$"/>-->
+                                                                </p:inputTextarea>
+                                                            </div>
+                                                        </div>
+                                                        <br/>
+                                                        <div class="form-row">
+                                                            <div class="col">
+                                                                <p:commandButton  class="btn btn-primary btn-lg btn-block form-control"  actionListener="#{serviciosController.crearServicio()}" process="@this form1" ajax="false"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </h:form>
+                                        
+                                    </div>
+                                    <div class="col mb-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h:form enctype="multipart/form-data" >                                                      
+                                                    <p:outputLabel value="Seleccione el archivo excel"/><br/>
+                                                    <p:fileUpload value="#{cargaDatosServiciosController.file}" mode="simple" skinSimple="true" />
+                                                    <p:commandButton value="realizar cargue" ajax="false"
+                                                                     action="#{cargaDatosServiciosController.actionCargarDatos()}" />
+                                                </h:form>
+                                            </div>
+                                        </div>                                   
+                                    </div>
+                                </div>
+                                <p:messages showDetail="true" showSummary="false"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-11 mx-auto">
+                        <h:form>
+                            <p:panel class="p" header="#{msgs['clienteServicios.servicios']}" >
+                                <p:dataGrid value="${serviciosController.listaServicios}" var="se" >
+                                    <p:panel header="${se.nombre}">
+                                        <p:panelGrid columns="1" style="border: 0 !important">
+                                            <h:outputText value="#{msgs['clienteServicios.descripcion']}"/>
+                                            <h:outputText value="${se.descripcion}"/>
+                                            <h:outputText value="#{msgs['clienteServicios.precio']}"/>
+                                            <h:outputText value="${se.precio}"/>
+                                            <p:row>
+
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:panel>
+                                </p:dataGrid>
+                            </p:panel>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </ui:define>
+</ui:composition>
