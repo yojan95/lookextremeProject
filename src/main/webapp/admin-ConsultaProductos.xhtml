@@ -13,10 +13,10 @@
                     <h:outputLabel style="display:none;" value=""></h:outputLabel>
                     
                     <h:form id="productos">
-                        <p:dataTable id="tproducto" var="prod" value="#{[consultaProductoController.productosList]}" rowIndexVar="index">
+                        <p:dataTable id="tproducto" var="prod" value="#{productoController.productosList}" rowIndexVar="index">
                             <p:column>
                                 <f:facet name="header">#{msgs['admin.tabNombre']}</f:facet>
-                                <h:outputText value="#{prod.nombreProductoidNombreProducto}" />                        
+                                <h:outputText value="#{prod.nombreProductoidNombreProducto.nombreProductocol}" />                        
                             </p:column>r
                             <p:column>
                                 <f:facet name="header">#{msgs['admin.tabTamaño']}</f:facet>
@@ -47,6 +47,14 @@
                             <p:column>
                                 <f:facet name="header"> #{msgs['admin.tabCategoria']}</f:facet>                        
                                 <h:outputText value="#{prod.categoriasIdcategorias.caNombre}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header"> Modificar</f:facet>                        
+                                <h:outputText value="" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Eliminar</f:facet>                        
+                                <h:outputText value="" />
                             </p:column>
                             
                         </p:dataTable>

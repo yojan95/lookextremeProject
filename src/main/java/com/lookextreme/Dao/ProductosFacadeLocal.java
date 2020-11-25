@@ -30,5 +30,5 @@ public interface ProductosFacadeLocal {
 
     int count();
     
-    List<Productos> ListarAdminProductos(int idAdmin);
+    
 }
