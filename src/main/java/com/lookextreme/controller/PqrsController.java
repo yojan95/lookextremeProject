@@ -5,6 +5,7 @@ import com.lookextreme.model.Cliente;
 import com.lookextreme.model.Pqrs;
 import com.lookextreme.model.TipoPqrs;
 import com.lookextreme.model.Usuario;
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,12 +15,15 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.DefaultStreamedContent;
@@ -62,16 +66,7 @@ public class PqrsController implements Serializable {
     public void setPqrsList(List<Pqrs> pqrsList) {
         this.pqrsList = pqrsList;
     }
-
-    /*
-    public UIComponent getButtonCreate() {
-        return buttonCreate;
-    }
-
-    public void setButtonCreate(UIComponent buttonCreate) {
-        this.buttonCreate = buttonCreate;
-    }
-     */
+    
     public TipoPqrs getTipoPqrs() {
         return tipoPqrs;
     }
@@ -131,8 +126,7 @@ public class PqrsController implements Serializable {
         try {
             FacesMessage message;
             FacesContext context = FacesContext.getCurrentInstance();
-            message = new FacesMessage(messageText);
-            //context.addMessage(buttonCreate.getClientId(context), message);
+            message = new FacesMessage(messageText);            
             context.addMessage(null, message);
         } catch (Exception e) {
             System.out.println("showMessageError : " + e.getMessage());
@@ -201,28 +195,13 @@ public class PqrsController implements Serializable {
         }
     }
 
-    public void descargarAnexo(byte[] anexoBytes) throws IOException {
+    public void downloadAnexos(byte[] anexos) {
         try {
-            File anexoFile = File.createTempFile("Anexo", null);
-            try (FileOutputStream fos = new FileOutputStream(anexoFile)) {
-                fos.write(anexoBytes);
-                fos.close();
-            }
+            InputStream stream = new BufferedInputStream(new ByteArrayInputStream(anexos));
+            String mimetype = URLConnection.guessContentTypeFromStream(stream);
+            downloadFile = new DefaultStreamedContent(stream, mimetype, "descarga.jpg");            
         } catch (IOException e) {
-            System.out.println("descargar anexo error: " + e.getMessage());
-        }
-    }
-
-    public void downloadAnexos() {
-        try {
-            Pqrs a = EjbPqrs.find(pqrs.getIdPQRS());
-            byte[] arreglo= a.getAnexos();
-            arreglo.getClass().getResourceAsStream("anexos");
-            InputStream stream = new ByteArrayInputStream(arreglo);
-            downloadFile = new DefaultStreamedContent(stream, "imag/jpg", "descarga.jpg");
-        } catch (Exception e) {
             System.out.println("descargar anexo error..: " + e.getMessage());
         }
     }
-    
 }

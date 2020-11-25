@@ -1,6 +1,6 @@
 <!--
 To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
+To change this template file, choose sTools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
@@ -10,84 +10,75 @@ and open the template in the editor.
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                 >
+                >
 
     <ui:define name="content">
-        <section id="about">
-            <f:view locale="#{controllerTranslation.local}" />
 
-            <div class="container">      
-                <h:form class="needs-validation" >
+        <f:view locale="#{controllerTranslation.local}" />
 
 
-                    <div class="py-5 text-center">
-                        <h4 class="mb-3" > #{msgs['admin.h4']}</h4>
-                    </div>
-                    <div class="row">
+        <h:form class="needs-validation" >
+            <p:messages id="mensaje"  /> 
 
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminForm.NombreProducto']}"/>                    
-                            <h:selectOneMenu  class="form-control" id="Nombre"  value="${registrarProductoController.nombrep.idNombreProducto}" > 
-                                <f:selectItems value="${registrarProductoController.nombrepList}" var="nomp" itemLabel="${nomp.nombreProductocol}" itemValue="${nomp.idNombreProducto}"/>
-                            </h:selectOneMenu>   
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminForm.Cantidad']}"/>                   
-                            <p:inputText  type="number" class="form-control" id="Cantidad" placeholder="10" value="${registrarProductoController.productos.cantidad}"  />
-                            <div class="invalid-feedback">Por favor introducir la cantidad del producto</div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminForm.Precio']}"/>                    
-                            <p:inputText type="number" class="form-control" id="Precio" placeholder="" value="${registrarProductoController.productos.precio}"  />
-                            <div class="invalid-feedback">Por favor introducir el valor correspondinente</div>
-
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminForm.Marca']}"/>
-                            <h:selectOneMenu class="form-control" id="Marca"  value="${registrarProductoController.marcas.idmarca}" >
-                                <f:selectItems value="${registrarProductoController.marcaList}" var="mar"   itemLabel="${mar.maNombre}" itemValue="${mar.idmarca}"   />
-                            </h:selectOneMenu>             
-                        </div>
-                    </div>  
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminForm.Color']}"/>                                        
-                            <p:inputText type="text" class="form-control" id="Color"  value="${registrarProductoController.productos.color}" />
-                            <div class="invalid-feedback">Por favor ingrese el color del producto</div>
-
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminForm.Categoria']}"/>                         
-                            <h:selectOneMenu class="form-control" id="categoria"  value="${registrarProductoController.categorias.idcategorias}" >
-                                <f:selectItems value="${registrarProductoController.categoriasList}" var="cat" itemLabel="${cat.caNombre}" itemValue="${cat.idcategorias}"/>
-                            </h:selectOneMenu>
-                            
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel class="form-control" value="#{msgs['adminForm.Fechadevencimiento']}"/>                    
-                            <p:calendar value="${registrarProductoController.productos.fechaVencimiento}"/>
-                            <div class="invalid-feedback">Por favor ingresar fecha de vencimiento</div>
-                        </div>                    
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminForm.Tamaño']}"/>                                        
-                            <p:inputText type="text" class="form-control" id="Descripcion"  value="${registrarProductoController.productos.tamaño}"/>
-                        </div>
-                    </div>
-                    <p:commandButton class="btn btn-outline-secondary" value="#{msgs['adminBoton.Guardar']}" actionListener="${registrarProductoController.registrarProductos()}"   > </p:commandButton>
-
-                    <hr class="mb-4"></hr>
-                </h:form>
-            </div>    
+            <div class="py-5 text-center">
+                <h4 class="mb-3" > #{msgs['admin.h4']}</h4>
+            </div>
+            <p:fieldset legend="Datos Registro">
 
 
+                <h:panelGrid columns="3" id="Registro1" >
+                    <p:outputLabel value="#{msgs['adminForm.NombreProducto']}" for="selNombre"/>                    
+                    <h:selectOneMenu  value="${registrarProductoController.nombrep.idNombreProducto}" required="true" class="form-control" id="selNombre"  > 
+                        <f:selectItems value="${registrarProductoController.nombrepList}" var="nomp" itemLabel="${nomp.nombreProductocol}" itemValue="${nomp.idNombreProducto}"/>
+                    </h:selectOneMenu>   
+                    <p:messages for="selNombre"   />
 
 
+                    <p:outputLabel value="#{msgs['adminForm.Cantidad']}" for="txtCantidad"/>                   
+                    <p:inputText value="${registrarProductoController.productos.cantidad}"  id="txtCantidad" required="true"  />
+                    <p:messages for="txtCantidad"   />
 
-        </section>
+                    <p:outputLabel value="#{msgs['adminForm.Precio']}" for="txtPrecio"/>                    
+                    <p:inputText value="${registrarProductoController.productos.precio}" required="true"   class="form-control" id="txtPrecio"   />
+                    <p:messages for="txtPrecio"   />
+
+                    <p:outputLabel value="#{msgs['adminForm.Marca']}" for="selMarca"/>
+                    <h:selectOneMenu value="${registrarProductoController.marcas.idmarca}" required="true"  class="form-control" id="selMarca"   >
+                        <f:selectItems value="${registrarProductoController.marcaList}" var="mar"   itemLabel="${mar.maNombre}" itemValue="${mar.idmarca}"   />
+                    </h:selectOneMenu>        
+                    <p:messages for="txtMarca"   />
+                </h:panelGrid>        
+
+                <h:panelGrid columns="3" id="Registro2">
+
+                    <p:outputLabel value="#{msgs['adminForm.Color']}" for="txtColor" />                                        
+                    <p:inputText   value="${registrarProductoController.productos.color}" required="true"    id="txtColor" />
+                    <p:messages for="txtColor"   />
+
+
+                    <p:outputLabel value="#{msgs['adminForm.Categoria']}" for="selCategoria"/>                         
+                    <h:selectOneMenu  value="${registrarProductoController.categorias.idcategorias}" required="true"  class="form-control" id="selCategoria" >
+                        <f:selectItems value="${registrarProductoController.categoriasList}" var="cat"  itemLabel="${cat.caNombre}" itemValue="${cat.idcategorias}"/>
+                    </h:selectOneMenu>
+                    <p:messages for="txtCategoria"   />
+
+                    <p:outputLabel   value="#{msgs['adminForm.Fechadevencimiento']}" class="form-control" for="calFecha"/>                    
+                    <p:calendar value="${registrarProductoController.productos.fechaVencimiento}" required="true" id="calFecha" locale="es"/>
+                    <p:messages for="txtCategoria"   />
+                    
+                    <p:outputLabel value="#{msgs['adminForm.Tamaño']}" for="txtTamaño"/>                                        
+                    <p:inputText  value="${registrarProductoController.productos.tamaño}" required="true"   class="form-control" id="txtTamaño"  />
+                    <p:messages for="txtCategoria"   />
+                    
+                </h:panelGrid>  
+            </p:fieldset>
+
+            <p:commandButton  value="#{msgs['adminBoton.Guardar']}" actionListener="${registrarProductoController.registrarProductos()}" 
+                              update="Registro1 , Registro2"    icon="ui-icon-check" class="btn btn-outline-secondary"  > </p:commandButton>
+
+            <hr class="mb-4"></hr>  
+        </h:form>
+        
+        <h:outputScript library="js" name="spanishLocale.js" /> 
     </ui:define>
 </ui:composition>
