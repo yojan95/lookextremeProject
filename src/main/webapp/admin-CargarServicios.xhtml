@@ -60,7 +60,7 @@
                                                         <br/>
                                                         <div class="form-row">
                                                             <div class="col">
-                                                                <p:commandButton  class="btn btn-primary btn-lg btn-block form-control"  actionListener="#{serviciosController.crearServicio()}" process="@this form1" ajax="false"/>
+                                                                <p:commandButton value="Crear" class="btn btn-primary btn-lg btn-block form-control"  actionListener="#{serviciosController.crearServicio()}" process="@this form1" ajax="false"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -85,30 +85,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-11 mx-auto">
-                        <h:form>
-                            <p:panel class="p" header="#{msgs['clienteServicios.servicios']}" >
-                                <p:dataGrid value="${serviciosController.listaServicios}" var="se" >
-                                    <p:panel header="${se.nombre}">
-                                        <p:panelGrid columns="1" style="border: 0 !important">
-                                            <h:outputText value="#{msgs['clienteServicios.descripcion']}"/>
-                                            <h:outputText value="${se.descripcion}"/>
-                                            <h:outputText value="#{msgs['clienteServicios.precio']}"/>
-                                            <h:outputText value="${se.precio}"/>
-                                            <p:row>
-
-                                            </p:row>
-                                        </p:panelGrid>
-                                    </p:panel>
-                                </p:dataGrid>
-                            </p:panel>
-                        </h:form>
-                    </div>
-                </div>
+                </div>                
             </div>
-
         </section>
     </ui:define>
 </ui:composition>

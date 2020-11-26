@@ -60,7 +60,7 @@ public class ClienteController implements Serializable{
             usuario.setRolesidRoles(roles);
             usuarioEJB.create(usuario);
             registrarCliente(usuario);
-            redireccion = "indexCliente";
+            redireccion = "login";
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
