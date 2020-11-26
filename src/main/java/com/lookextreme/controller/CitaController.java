@@ -324,14 +324,4 @@ public class CitaController implements Serializable {
         }
     }
 
-    /*
-    public void buscarEstadoCliente(){
-        try{
-            
-         busquedaCitaList = EJBcita.buscarEstadoCliente(usuario.getIdUsuario(), estado);
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-     */
 }
