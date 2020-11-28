@@ -37,12 +37,14 @@
                                 <f:facet name="header">#{msgs['adminPqrs.tablaDetalles']}</f:facet>                        
                                 <h:outputText value="#{table_pqrs.detalles}" />
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">#{msgs['adminPqrs.tablaAnexos']}</f:facet>
-                                <p:commandButton value="Descargar">
-                                    <p:fileUpload value="#{table_pqrs.anexos}"/>
-                                </p:commandButton>
-                                <!--<h:outputText value="#{table_pqrs.anexos}" />-->
+                            <p:column style="text-align: center;">                                         
+                                <f:facet name="header">
+                                    #{msgs['clientePqrs.tablaAnexos']}
+                                </f:facet>
+                                <h:outputText rendered="#{table_pqrs.anexos == null}" value="Sin anexos" />
+                                <p:commandButton  type="submit" rendered="#{table_pqrs.anexos != null }" value="#{msgs['clientePqrs.tablaBtn']}" ajax="false" actionListener="#{pqrsController.downloadAnexos(table_pqrs.anexos)}">                                    
+                                    <p:fileDownload value="#{pqrsController.downloadFile}"/>
+                                </p:commandButton>                                
                             </p:column>
                             <p:column filterBy="#{table_pqrs.estado}">
                                 <f:facet name="header">#{msgs['adminPqrs.tablaEstado']}</f:facet>
@@ -53,14 +55,13 @@
                                     #{msgs['adminPqrs.tablaRespuesta']}                               
                                 </f:facet>
                                 <h:outputText rendered="#{table_pqrs.estado == 'Respondido'}" value="#{table_pqrs.respuesta}" />
-                                <p:commandButton ajax="true" rendered="#{table_pqrs.estado != 'Respondido' }" value="#{msgs['adminPqrs.tablaBtn']}" actionListener="#{pqrsController.openModal(table_pqrs)}" />
+                                <p:commandButton ajax="false" rendered="#{table_pqrs.estado != 'Respondido' }" update="PQRSmodal" value="#{msgs['adminPqrs.tablaBtn']}" actionListener="#{pqrsController.openModal(table_pqrs)}" />
                             </p:column>
                         </p:dataTable>
                     </div>
                 </div>
             </section>            
-            <p:dialog header="#{msgs['adminPqrs.Header']}" widgetVar="dialog_pqrs" modal="true" width="600" height="450">
-                <h:outputText></h:outputText>
+            <p:dialog header="#{msgs['adminPqrs.Header']}" id="PQRSmodal" widgetVar="dialog_pqrs" modal="true" width="600" height="450">                
                 <div class="form-group">
                     <p:outputLabel for="txt_tipo" class="col-form-label" value="#{msgs['adminModal.tipoPqrs']}"/>
                     <h:outputText value="#{pqrsController.pqrs.tipopqrsidTipoPQRS.tipoPQRS}" class="form-control" id="txt_tipo" />
