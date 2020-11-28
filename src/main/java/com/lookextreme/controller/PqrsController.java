@@ -3,6 +3,7 @@ package com.lookextreme.controller;
 import com.lookextreme.Dao.PqrsFacadeLocal;
 import com.lookextreme.model.Cliente;
 import com.lookextreme.model.Pqrs;
+import com.lookextreme.model.Smtp;
 import com.lookextreme.model.TipoPqrs;
 import com.lookextreme.model.Usuario;
 import java.io.BufferedInputStream;
@@ -18,12 +19,11 @@ import java.io.Serializable;
 import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.DefaultStreamedContent;
@@ -174,23 +174,29 @@ public class PqrsController implements Serializable {
         }
     }
 
-    public void openModal(Pqrs _pqrs) {
+    public void openModal(Pqrs _pqrs) {        
         PrimeFaces current = PrimeFaces.current();
         if (_pqrs.getRespuesta() == null) {
             _pqrs.setRespuesta("");
         }
-        pqrs = _pqrs;
+        pqrs = _pqrs;        
         current.executeScript("PF('dialog_pqrs').show();");
     }
 
     public void guardarRespuesta() {
         try {
-            System.out.println("nueva respuesta: " + pqrs.getRespuesta());
-            if (!pqrs.getRespuesta().isEmpty()) {
+            
+            if (!pqrs.getRespuesta().isEmpty()) {                
                 pqrs.setEstado("Respondido");
                 EjbPqrs.edit(pqrs);
+                Smtp smtp = new Smtp();
+                smtp.setTo(pqrs.getClienteusuarioidUsuario().getUsuario().getEmail());
+                smtp.setSubject("Respuesta PQRS");
+                smtp.setDescr(pqrs.getRespuesta());
+                smtp.setFrom("lookextrem@notificaciones.co");
+                smtp.enviarCorreo();
             }
-        } catch (Exception e) {
+        } catch (MessagingException e) {
             System.out.println("guardar respuesta error: " + e.getMessage());
         }
     }
