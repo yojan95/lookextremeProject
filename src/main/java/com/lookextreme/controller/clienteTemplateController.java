@@ -1,6 +1,7 @@
 package com.lookextreme.controller;
 
 import com.lookextreme.model.Usuario;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -28,5 +29,10 @@ public class clienteTemplateController implements Serializable {
         } catch (Exception e) {
             System.out.println("clienteTemplateController Error : " + e.getMessage());            
         }
+    }
+    public void cerrarSesion() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().clear();
+        context.getExternalContext().redirect("landing.xhtml");
     }
 }
