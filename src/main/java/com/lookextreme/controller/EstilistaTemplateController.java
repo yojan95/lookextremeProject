@@ -9,27 +9,28 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class clienteTemplateController implements Serializable {
-    
-    private String userName ;
+public class EstilistaTemplateController implements Serializable {
+
+    String userName;
 
     public String getUserName() {
         return userName;
-    }        
-    
-    public void verificarSesion(){
+    }
+
+    public void verificarSesion() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             Usuario usuario = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
-            if (usuario == null){
+            if (usuario == null) {
                 context.getExternalContext().redirect("landing.xhtml");
-            }else{
+            } else {
                 userName = usuario.getNombre();
-            }            
+            }
         } catch (Exception e) {
-            System.out.println("clienteTemplateController Error : " + e.getMessage());            
+            System.out.println("estilistaTemplateController Error : " + e.getMessage());
         }
     }
+
     public void cerrarSesion() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getSessionMap().clear();

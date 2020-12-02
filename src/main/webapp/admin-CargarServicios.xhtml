@@ -21,7 +21,7 @@
                     <div class="col-lg-11 mx-auto">
                         <div class="card">
                             <div class="card-header">
-                                Servicios
+                                #{msgs['adminCard.Header']}
                             </div>
                             <div class="card-body">
                                 <div class="row row-cols-1 row-cols-md-2">
@@ -31,18 +31,18 @@
                                         <h:form id="form1">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        Crear Servicio
+                                                        #{msgs['adminCard.Header1']}
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="form-row">
                                                             <div class="col">
-                                                                <p:outputLabel value="Nombre"/>
+                                                                <p:outputLabel value="#{msgs['adminCard.Name']}"/>
                                                                 <p:inputText  class="form-control" value="#{serviciosController.servicios.nombre}" >
                                                                     <!--<f:validateRegex pattern="^([a-zA-Z]+(.)?[\S]*)$"/>-->
                                                                 </p:inputText>
                                                             </div>
                                                             <div class="col">
-                                                                <p:outputLabel value="Precio"/>
+                                                                <p:outputLabel value="#{msgs['adminCard.Precio']}"/>
 
                                                                 <p:inputNumber  value="#{serviciosController.servicios.precio}" >
                                                                     <!--<f:validateLength minimum="6" maximum="7"/>-->
@@ -51,7 +51,7 @@
                                                         </div>
                                                         <div class="form-row">
                                                             <div class="col">
-                                                                <p:outputLabel value="Descripción"/>
+                                                                <p:outputLabel value="#{msgs['adminCard.Descripcion']}"/>
                                                                 <p:inputTextarea  class="form-control" value="#{serviciosController.servicios.descripcion}" >
                                                                     <!--<f:validateRegex pattern="^([a-zA-Z]+(.)?[\S]*)$"/>-->
                                                                 </p:inputTextarea>
@@ -60,7 +60,7 @@
                                                         <br/>
                                                         <div class="form-row">
                                                             <div class="col">
-                                                                <p:commandButton value="Crear" class="btn btn-primary btn-lg btn-block form-control"  actionListener="#{serviciosController.crearServicio()}" process="@this form1" ajax="false"/>
+                                                                <p:commandButton value="#{msgs['adminBtn.card']}" class="btn btn-primary btn-lg btn-block form-control"  actionListener="#{serviciosController.crearServicio()}" process="@this form1" ajax="false"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -72,9 +72,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h:form enctype="multipart/form-data" >                                                      
-                                                    <p:outputLabel value="Seleccione el archivo excel"/><br/>
+                                                    <p:outputLabel value="#{msgs['adminCard1.Label']}"/><br/>
                                                     <p:fileUpload value="#{cargaDatosServiciosController.file}" mode="simple" skinSimple="true" />
-                                                    <p:commandButton value="realizar cargue" ajax="false"
+                                                    <p:commandButton value="#{msgs['adminCard1.Btn']}" ajax="false"
                                                                      action="#{cargaDatosServiciosController.actionCargarDatos()}" />
                                                 </h:form>
                                             </div>
