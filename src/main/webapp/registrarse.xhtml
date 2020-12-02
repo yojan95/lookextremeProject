@@ -34,8 +34,10 @@ and open the template in the editor.
         </style>
     </h:head>
     <h:body>
+          <p:messages showDetail="true" showSummary="false"/>
         <section>
             <h:form>
+              
                 <div class="container">
                     <div class="row justify-content-md-start">
                         <div class="col-lg-8 mx-auto">
@@ -62,7 +64,9 @@ and open the template in the editor.
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['registrarse.FormCorreo']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormCorreoPlaceholder']}" value="${clienteController.usuario.email}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormCorreoPlaceholder']}" value="${clienteController.usuario.email}">
+                                                 <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                            </p:inputText>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['registrarse.FormContraseña']}"/>
@@ -80,10 +84,13 @@ and open the template in the editor.
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                       <!-- <div class="form-group col-md-4">
+                                       <div class="form-group col-md-4">
                                             <p:outputLabel value="Cedula"/>
-                                            <p:inputText class="form-control" placeholder="Ciudad"/>
-                                        </div>-->
+                                            <p:inputText class="form-control" placeholder="Cedula" required="true" value="#{clienteController.cliente.cedula}">
+                                                <f:validateLength minimum="6" maximum="10"/>
+                                            </p:inputText>
+                                            
+                                        </div>
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['registrarse.FormDireccion']}"/>
                                             <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormDireccionPlaceholder']}" value="${clienteController.usuario.direccion}"/>
