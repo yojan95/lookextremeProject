@@ -14,54 +14,71 @@
                     
                     <h:form id="productos">
                         <p:dataTable id="tproducto" var="prod" value="#{productoController.productosList}" rowIndexVar="index">
+                            <!--
                             <p:column>
-                                <f:facet name="header">#{msgs['admin.tabNombre']}</f:facet>
-                                <h:outputText value="#{prod.nombreProductoidNombreProducto.nombreProductocol}" />                        
-                            </p:column>r
-                            <p:column>
+                                <f:facet name="header">{msgs['admin.tabNombre']}</f:facet>
+                                <h:outputText value="{prod.nombreProductoidNombreProducto.nombreProductocol}" />                        
+                            </p:column>-->
+                            <p:column filterBy="#{prod.tamaño}">
                                 <f:facet name="header">#{msgs['admin.tabTamaño']}</f:facet>
                                 <h:outputText value="#{prod.tamaño}" />                        
                             </p:column>                    
-                            <p:column headerText="fecha">
-                                <f:facet name="header">#{msgs['admin.tabTamaño']}</f:facet>
-                                <h:outputText  value="#{prod.fechaVencimiento}" >
+                            <!--<p:column headerText="fecha">
+                                <f:facet name="header">{msgs['admin.tabFechaVencimiento']}</f:facet>
+                                <h:outputText  value="{prod.fechaVencimiento}" >
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>                                    
                                 </h:outputText>
-                            </p:column>
-                            <p:column>
+                            </p:column>-->
+                            <p:column filterBy="#{(prod.cantidad)}" >
                                      <f:facet name="header">#{msgs['admin.tabCantidad']}</f:facet>
                                 <h:outputText  value="#{prod.cantidad}" />                        
                             </p:column>
-                            <p:column>
+                            <p:column filterBy="#{(prod.color)}" >
                                 <f:facet name="header">#{msgs['admin.tabColor']}</f:facet>                        
                                 <h:outputText value="#{prod.color}" />
                             </p:column>
-                            <p:column>
+                            <p:column filterBy="#{(prod.precio)}">
                                 <f:facet name="header"> #{msgs['admin.tabPrecio']}</f:facet>                        
                                 <h:outputText value="#{prod.precio}" />
                             </p:column>
-                            <p:column>
-                                <f:facet name="header"> #{msgs['admin.tabMarca']}</f:facet>                        
-                                <h:outputText value="#{prod.marcaIdmarca.maNombre}" />
+                           <!-- <p:column>
+                                <f:facet name="header"> {msgs['admin.tabMarca']}</f:facet>                        
+                                <h:outputText value="{prod.marcaIdmarca.maNombre}" />
                             </p:column>
                             <p:column>
-                                <f:facet name="header"> #{msgs['admin.tabCategoria']}</f:facet>                        
-                                <h:outputText value="#{prod.categoriasIdcategorias.caNombre}" />
-                            </p:column>
+                                <f:facet name="header"> {msgs['admin.tabCategoria']}</f:facet>                        
+                                <h:outputText value="{prod.categoriasIdcategorias.caNombre}" />
+                            </p:column>       -->                   
                             <p:column>
-                                <f:facet name="header"> Modificar</f:facet>                        
-                                <p:commandButton value="Modificar" actionListener="#{productoController.modificarProducto(prod)}" update="prod" >
-                                    
-                                </p:commandButton>
+                                <f:facet name="header">Actualizar</f:facet>                                
+                                <p:commandLink value="Actualizar"  actionListener="#{productoController.cargarProductos(prod) }" update=":productos dialogo1" oncomplete="PF('valor').show();">
+                                    <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                                </p:commandLink>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">Eliminar</f:facet>
-                                <p:commandButton value="Eliminar" update="prod" actionListener="#{productoController.eliminarProducto(prod)}"  >
+                                <p:commandButton value="Eliminar" update="productos" actionListener="#{productoController.eliminarProducto(prod)}"  >
                                     <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
                     </h:form>
+                    
+             <p:dialog id="dialogo1" widgetVar="valor" modal="true" closeOnEscape="true" header="Actualizar Producto" resizable="false" draggable="false">
+                <h:form>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Tamaño"/>
+                        <p:inputText value="#{productoController.producto.tamaño}"/>
+                        <p:outputLabel value="Cantidad"/>
+                        <p:inputText value="#{productoController.producto.cantidad}"/>
+                        <p:outputLabel value="Color"/>
+                        <p:inputText value="#{productoController.producto.color}"/>
+                        <p:outputLabel value="Precio"/>
+                        <p:inputText value="#{productoController.producto.precio}"/>                     
+                        <p:commandButton value="actualizar" actionListener="#{productoController.actulizarProducto()}" oncomplete="PF('valor')hide();"></p:commandButton>
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
                 </div>
             </div>
         </section>

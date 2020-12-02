@@ -132,9 +132,6 @@ public class RegistrarProductoController implements Serializable {
         this.estilistaList = estilistaList;
     }
     
-  
-
-
     public List<Nombreproducto> getNombrepList() {
         return nombrepList;
     }
