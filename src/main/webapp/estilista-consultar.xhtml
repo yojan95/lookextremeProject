@@ -6,6 +6,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
+    <f:view locale="#{controllerTranslation.local}" />
     <style>
         section {
             padding: 40px 40px;
@@ -36,10 +37,10 @@
                         <div class="row">
                             <div class="col">
                                 <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
-                                    <a class="navbar-brand">Buscar citas</a>
+                                    <a class="navbar-brand"></a>
                                     <div class="form-inline">
-                                        <p:calendar class="mr-sm-2"  type="search" placeholder="Buscar"></p:calendar>
-                                        <p:commandButton class="btn btn-outline-primary my-2 my-sm-0"  type="search" value="Buscar"></p:commandButton>
+                                        <!--<p:calendar class="mr-sm-2"  type="search" placeholder="Buscar"></p:calendar>
+                                        <p:commandButton class="btn btn-outline-primary my-2 my-sm-0"  type="search" value="Buscar"></p:commandButton>-->
                                     </div>
                                 </nav>
                             </div>
@@ -53,29 +54,29 @@
                         </h:commandLink>
                             </f:facet>
                             <p:column filterBy="#{table_cit.citaidCita.idCita}">
-                                <f:facet name="header">Turno</f:facet>
+                                <f:facet name="header">#{msgs['estilistaTable.Turno']}</f:facet>
                                 <h:outputText value="#{table_cit.citaidCita.idCita}" />                        
                             </p:column>                    
                             <p:column filterBy="#{table_cit.citaidCita.estado}" headerText="bs">
-                                <f:facet name="header">Estado</f:facet>
+                                <f:facet name="header">#{msgs['estlistaTable.Estado']}</f:facet>
                                 <h:outputText value="#{table_cit.citaidCita.estado}" >
 
                                 </h:outputText>
                             </p:column>
                             <p:column filterBy="#{table_cit.citaidCita.hora}">
-                                <f:facet name="header">Hora</f:facet>                        
+                                <f:facet name="header">#{msgs['estilistaTable.Hora']}</f:facet>                        
                                 <h:outputText value="#{table_cit.citaidCita.hora}" />
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Fecha</f:facet>                        
+                                <f:facet name="header">#{msgs['estilistaTable.Fecha']}</f:facet>                        
                                 <h:outputText value="#{table_cit.citaidCita.fecha}" />
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Cliente</f:facet>                        
+                                <f:facet name="header">#{msgs['estilistaTable.Cliente']}</f:facet>                        
                                 <h:outputText value="${table_cit.citaidCita.clienteusuarioidUsuario.usuario.nombre}" />
                             </p:column>
                             <p:column filterBy="#{table_cit.serviciosidServicios.nombre}">
-                                <f:facet name="header">Servicio</f:facet>                        
+                                <f:facet name="header">#{msgs['estilistaTable.Servicio']}</f:facet>                        
                                 <h:outputText value="${table_cit.serviciosidServicios.nombre}" />
                             </p:column>
                         </p:dataTable>
@@ -96,7 +97,7 @@
                         <div class="row">
                             <div class="col">
                                 <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
-                                    <a class="navbar-brand">Incuplimiento de citas</a>
+                                    <a class="navbar-brand">#{msgs['estilistaTable2.HeaderName']}</a>
                                     <div class="form-inline">
                                         
                                     </div>
@@ -112,30 +113,30 @@
                         </h:commandLink>
                             </f:facet>
                             <p:column filterBy="#{table_cit.idCita}">
-                                <f:facet name="header">Turno</f:facet>
+                                <f:facet name="header">#{msgs['estilistaTable.Turno']}</f:facet>
                                 <h:outputText value="#{table_cita.idCita}" />                        
                             </p:column>                    
                             <p:column filterBy="#{table_cita.estado}" headerText="bs">
-                                <f:facet name="header">Estado</f:facet>
+                                <f:facet name="header">#{msgs['estlistaTable.Estado']}</f:facet>
                                 <h:outputText value="#{table_cita.estado}" >
 
                                 </h:outputText>
                             </p:column>
                             <p:column filterBy="#{table_cita.hora}">
-                                <f:facet name="header">Hora</f:facet>                        
+                                <f:facet name="header">#{msgs['estilistaTable.Hora']}</f:facet>                        
                                 <h:outputText value="#{table_cita.hora}" />
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Fecha</f:facet>                        
+                                <f:facet name="header">#{msgs['estilistaTable.Fecha']}</f:facet>                        
                                 <h:outputText value="#{table_cita.fecha}" />
                             </p:column>
                             <p:column>
-                                <f:facet name="header">Cliente</f:facet>                        
+                                <f:facet name="header">#{msgs['estilistaTable.Cliente']}</f:facet>                        
                                 <h:outputText value="${table_cita.clienteusuarioidUsuario.usuario.nombre}" />
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Confirmar" actionListener="${citaController.actionIncumpliCitaEstilista(table_cita)}" update="tbl_pqrs" rendered="#{table_cita.estado != 'Incumplida'}">
-                                    <p:confirm header="Confirmación" message="Esta seguro de realizar la acción de incumplimiento" icon="ui-icon-alert"/>
+                                <p:commandButton value="#{msgs['estilistaTable2.btn']}" actionListener="${citaController.actionIncumpliCitaEstilista(table_cita)}" update="tbl_pqrs" rendered="#{table_cita.estado != 'Incumplida'}">
+                                    <p:confirm header="#{msgs['estilistaTable2.btnHeader']}" message="#{msgs['estilistaTable2.btnMessage']}" icon="ui-icon-alert"/>
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
@@ -143,8 +144,8 @@
                     </div>
                 </div>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                    <p:commandButton value="#{msgs['estilistaTable2.btnYes']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="#{msgs['estilistaTable2.btnNo']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                 </p:confirmDialog>
             </h:form>
         </section>

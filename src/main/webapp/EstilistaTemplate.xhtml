@@ -5,6 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{controllerTranslation.local}" />
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
         <title>Look Extreme</title>
@@ -31,11 +32,11 @@
                                 <h:commandLink class="nav-link active text-muted" action="cliente-servicios" ></h:commandLink>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Agendamiento
+                                        #{msgs['estilistaNav.Nombre']}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <p:link class="dropdown-item menuUserNotLogin" value="Consultar Citas Asignadas" outcome="estilista-consultar"/>
-                                        <p:link class="dropdown-item menuUserNotLogin" value="Generar Reporte" outcome="estilista-reportes"/>
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['estilistaNav.Drop']}" outcome="estilista-consultar"/>
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['estilistaNav.Drop2']}" outcome="estilista-reportes"/>
                                     </div>
                                 </li>
                             </li>
