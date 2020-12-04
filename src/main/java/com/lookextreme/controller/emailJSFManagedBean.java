@@ -170,14 +170,13 @@ public class emailJSFManagedBean {
             Transport transport = session.getTransport("smtp");
             transport.connect(this.smtp, this.port, this.username, this.password);
             if (!transport.isConnected()) {
-                //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "se envio su correo"));
                 
-                PrimeFaces.current().executeScript("PF('wdialog').show();");
-      
-               
+        
             }
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
+            PrimeFaces current = PrimeFaces.current();
+            current.executeScript("PF('wdialog').show();");
         } catch (MessagingException me) {
             System.out.println("error");
             me.printStackTrace();

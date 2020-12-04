@@ -11,9 +11,7 @@
     <f:view locale="#{controllerTranslation.local}" />
     <ui:define name="content">
         <section>            
-            <p:messages>
-                <p:autoUpdate rendered="true"/>
-            </p:messages>
+            
             <div class="container">
                 <div  class="row justify-content-md-start">
                     <div class="col-lg-8 mx-auto">
@@ -52,6 +50,10 @@
                                         </div>                                        
                                     </div>
                                 </h:form>
+                                <p:dialog id="dialog" widgetVar="wdialog" modal="true" header="Aviso">
+                                    Cita agendada exitosamente!!
+                                    
+                                </p:dialog>
                             </div>
                         </div>
                     </div>
