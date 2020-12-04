@@ -135,7 +135,7 @@
                                 <h:outputText value="${table_cita.clienteusuarioidUsuario.usuario.nombre}" />
                             </p:column>
                             <p:column>
-                                <p:commandButton value="#{msgs['estilistaTable2.btn']}" actionListener="${citaController.actionIncumpliCitaEstilista(table_cita)}" update="tbl_pqrs" rendered="#{table_cita.estado != 'Incumplida'}">
+                                <p:commandButton value="#{msgs['estilistaTable2.btn']}" actionListener="${citaController.actionIncumpliCitaEstilista(table_cita)}" update="tbl_pqrs" rendered="#{citaConsultarController.rendered(table_cita.estado)}">
                                     <p:confirm header="#{msgs['estilistaTable2.btnHeader']}" message="#{msgs['estilistaTable2.btnMessage']}" icon="ui-icon-alert"/>
                                 </p:commandButton>
                             </p:column>
