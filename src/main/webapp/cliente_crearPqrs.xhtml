@@ -8,8 +8,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui">
     <f:view locale="#{controllerTranslation.local}" />
-    <ui:define name="content">
-        
+    <ui:define name="content">        
         <section class="container">
             <div class="row justify-content-md-start">
                 <div class="col col-lg-12">
@@ -39,7 +38,9 @@
                         </button>
                     </div>
                     <h:form enctype="multipart/form-data" id="formId">
-                         <p:messages showDetail="true" showSummary="false"/>
+                        <p:messages showDetail="true" showSummary="false">
+                            <p:autoUpdate></p:autoUpdate>
+                        </p:messages>
                         <div class="modal-body">                        
                             <div class="form-group">
                                 <p:outputLabel value="#{msgs['clientePqrs.FormLabelTipo']}" />
@@ -63,15 +64,14 @@
                                 <p:outputLabel class="col-form-label" value="#{msgs['clientePqrs.FormLabelAnex']}"/>                                
                                 <div class="custom-file">
                                     <p:outputLabel class="custom-file-label" for="flp_anexos"/>
-                                    <p:fileUpload value="#{pqrsController.file}" mode="simple"  accept="image/png, image/jpeg,application/pdf,application/vnd.ms-excel,text/csv,application/msword" id="flp_anexos" />
+                                    <p:fileUpload value="#{pqrsController.file}" mode="simple"   accept="image/png, image/jpeg,application/pdf,application/vnd.ms-excel,text/csv,application/msword" id="flp_anexos" />
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <h:message for="btn_create"></h:message>
-                            <p:commandButton ajax="true" id="btn_create" class="btn btn-primary" value="#{msgs['clientePqrs.FormBtn']}"    actionListener="#{pqrsController.validarPqrs}" />
+                        <div class="modal-footer">                            
+                            <p:commandButton ajax="true" id="btn_create" class="btn btn-primary" value="#{msgs['clientePqrs.FormBtn']}" actionListener="#{pqrsController.validarPqrs}" />
                         </div>
-                    </h:form>                        
+                    </h:form>
                 </div>
             </div>
         </div>       

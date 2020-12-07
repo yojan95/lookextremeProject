@@ -87,7 +87,7 @@ public class PqrsController implements Serializable {
     public void init() {
         FacesContext context = FacesContext.getCurrentInstance();
         usuario = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
-        System.out.println("usuario pqrs: " + usuario.getIdUsuario());
+        //System.out.println("usuario pqrs: " + usuario.getIdUsuario());
         String origin = obtenerUri();
         if (origin.contains("cliente_crearPqrs.xhtml")) {
             pqrs = new Pqrs();
@@ -110,7 +110,7 @@ public class PqrsController implements Serializable {
     }
 
     public void validarPqrs() {
-
+        System.out.println("Validando pqrs");
         if (tipoPqrs.getIdTipoPQRS() == -1) {
             showMessageError("Debe seleccionar un tipo válido.");
         } else if (pqrs.getAsunto().isEmpty() || pqrs.getAsunto().length() < 10) {
@@ -144,7 +144,7 @@ public class PqrsController implements Serializable {
             Cliente cliente = new Cliente();
             cliente.setUsuarioidUsuario(usuario.getIdUsuario());
             pqrs.setClienteusuarioidUsuario(cliente);
-            if (file.getSize() > 0) {
+            if ( file != null  && file.getSize() > 0) {
                 pqrs.setAnexos(file.getContent());
             }
             EjbPqrs.create(pqrs);
