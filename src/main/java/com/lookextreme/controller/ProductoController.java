@@ -22,7 +22,10 @@ public class ProductoController implements Serializable {
     private ProductosFacadeLocal prodEJB;
     private List<Productos> productosList;
     private Productos producto;
-    private Productos productoActualizar;
+    
+
+    
+    
     
     public List<Productos> getProductosList() {
         return productosList;
@@ -45,12 +48,12 @@ public class ProductoController implements Serializable {
         //prodList = nomEJB.findAll();
         producto = new Productos();
         productosList = this.prodEJB.findAll();
-        
-      
         FacesContext context = FacesContext.getCurrentInstance();
         
         ListarProductos();
     }
+    
+  
     
     
     public void ListarProductos(){

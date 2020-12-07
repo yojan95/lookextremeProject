@@ -13,12 +13,13 @@
                     <h:outputLabel style="display:none;" value=""></h:outputLabel>
                     
                     <h:form id="productos">
+                        <div class="py-5 text-center"> <h2 class="mb-3">Productos Registrados</h2> </div>
                         <p:dataTable id="tproducto" var="prod" value="#{productoController.productosList}" rowIndexVar="index">
-                            <!--
-                            <p:column>
-                                <f:facet name="header">{msgs['admin.tabNombre']}</f:facet>
-                                <h:outputText value="{prod.nombreProductoidNombreProducto.nombreProductocol}" />                        
-                            </p:column>-->
+                            
+                            <p:column filterBy="#{(prod.nombreProductoidNombreProducto.nombreProductocol)}">
+                                <f:facet name="header">#{msgs['admin.tabNombre']}</f:facet>
+                                <h:outputText value="#{prod.nombreProductoidNombreProducto.nombreProductocol}" />                        
+                            </p:column>
                             <p:column filterBy="#{prod.tamaño}">
                                 <f:facet name="header">#{msgs['admin.tabTamaño']}</f:facet>
                                 <h:outputText value="#{prod.tamaño}" />                        
@@ -41,14 +42,14 @@
                                 <f:facet name="header"> #{msgs['admin.tabPrecio']}</f:facet>                        
                                 <h:outputText value="#{prod.precio}" />
                             </p:column>
-                           <!-- <p:column>
-                                <f:facet name="header"> {msgs['admin.tabMarca']}</f:facet>                        
-                                <h:outputText value="{prod.marcaIdmarca.maNombre}" />
+                            <p:column filterBy="#{(prod.marcaIdmarca.maNombre)}">
+                                <f:facet name="header"> #{msgs['admin.tabMarca']}</f:facet>                        
+                                <h:outputText value="#{prod.marcaIdmarca.maNombre}" />
                             </p:column>
-                            <p:column>
-                                <f:facet name="header"> {msgs['admin.tabCategoria']}</f:facet>                        
-                                <h:outputText value="{prod.categoriasIdcategorias.caNombre}" />
-                            </p:column>       -->                   
+                            <p:column filterBy="#{(prod.categoriasIdcategorias.caNombre)}">
+                                <f:facet name="header"> #{msgs['admin.tabCategoria']}</f:facet>                        
+                                <h:outputText value="#{prod.categoriasIdcategorias.caNombre}" />
+                            </p:column>                 
                             <p:column>
                                 <f:facet name="header">Actualizar</f:facet>                                
                                 <p:commandLink value="Actualizar"  actionListener="#{productoController.cargarProductos(prod) }" update=":productos dialogo1" oncomplete="PF('valor').show();">
@@ -79,8 +80,43 @@
                     </p:panelGrid>
                 </h:form>
             </p:dialog>
+                    <h:form id="venta">
+                        <div class="py-5 text-center"> <h2 class="mb-3">Productos Venta</h2> </div>
+                        <p:dataTable id="tventa" var="venta" value="#{ventaController.listVenta}" rowIndexVar="index"  >
+                            <p:column> 
+                                <f:facet name="header" > Nombre </f:facet>
+                                <h:outputText value="#{venta.productosidCodigo.nombreProductoidNombreProducto.nombreProductocol}" />                        
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header" > Precio Unitario </f:facet>
+                                <h:outputText value="#{venta.precioUnitario}" />                        
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header" > Cantidad </f:facet>
+                                <h:outputText value="#{venta.cantidad}" />  
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header" > Total </f:facet>
+                                <h:outputText value="#{venta.total}" />  
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header" > Actualizar </f:facet>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Eliminar</f:facet>
+                                <p:commandButton value="Eliminar" update="venta" actionListener="#{ventaController.eliminarVenta(venta)}"  >
+                                    <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                                </p:commandButton>
+                            </p:column>
+                            
+                            
+                            
+                        </p:dataTable>
+                        
+                    </h:form>
                 </div>
             </div>
+         
         </section>
     </ui:define>
     
