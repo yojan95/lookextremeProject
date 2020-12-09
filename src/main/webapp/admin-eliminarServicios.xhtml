@@ -10,10 +10,11 @@
     <f:view locale="#{controllerTranslation.local}" />
     <ui:define name="content">        
         <section>
-            <h:form id="frmPrincipal">
-                <p:messages showDetail="true" showSummary="false">
+             <p:messages showDetail="true" showSummary="false">
                     <p:autoUpdate rendered="true"/>
                 </p:messages>
+            <h:form>
+               
 
                 <div class="row justify-content-md-start">
 
@@ -33,7 +34,7 @@
                             </div>
                         </div>
                         <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
-                        <p:dataTable id="tbl_pqrs" var="table_servicios" value="#{serviciosController.listaServicios}" >
+                        <p:dataTable id="tab" var="table_servicios" value="#{serviciosController.listaServicios}" >
                             <f:facet name="{Exporters}">
                                 <h:commandLink>
                                     <p:graphicImage url="icons/excelmp.png" width="24"/>
@@ -58,20 +59,20 @@
 
                             <p:column>
                                 <f:facet name="header"></f:facet>
-                                <p:commandButton value="#{msgs['adminTable.BtnEliminar']}" update="tbl_pqrs" actionListener="#{serviciosController.eliminarServicio(table_servicios)}" >
-                                    <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                                <p:commandButton value="#{msgs['adminTable.BtnEliminar']}" actionListener="#{serviciosController.eliminarServicio(table_servicios)}" update="@form" >
+                               
+                                    <p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
 
                     </div>
                 </div>
-                <!--<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                  <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                      <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
-                </p:confirmDialog>-->
-            </h:form>
-
+                </p:confirmDialog>
+            </h:form>        
         </section>
     </ui:define>
 </ui:composition>
