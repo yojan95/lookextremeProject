@@ -207,7 +207,7 @@ public class PqrsController implements Serializable {
         try {
             InputStream stream = new BufferedInputStream(new ByteArrayInputStream(anexos));
             String mimetype = URLConnection.guessContentTypeFromStream(stream);
-            downloadFile = new DefaultStreamedContent(stream, mimetype, "descarga.jpg");            
+            downloadFile = new DefaultStreamedContent(stream, mimetype, "descarga.pdf");            
         } catch (IOException e) {
             System.out.println("descargar anexo error..: " + e.getMessage());
         }
