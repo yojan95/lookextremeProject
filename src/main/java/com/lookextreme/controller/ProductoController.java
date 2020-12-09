@@ -23,9 +23,6 @@ public class ProductoController implements Serializable {
     private List<Productos> productosList;
     private Productos producto;
     
-
-    
-    
     
     public List<Productos> getProductosList() {
         return productosList;
@@ -87,6 +84,7 @@ public class ProductoController implements Serializable {
             System.out.println(""+e.getMessage());
         }
     }
+     
      public void actulizarProducto(){
         System.out.println("servicios actualizados");
         try{

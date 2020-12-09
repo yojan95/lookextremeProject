@@ -11,49 +11,49 @@
         <section id="about"> 
             <div class="container">      
                 <div class="py-5 text-center">
-                    <h4 class="mb-3" > Salida de producto por venta</h4>
+                    <h4 class="mb-3" > #{msgs['adminSalida.h4']}</h4>
                 </div>
 
                 <h:form class="needs-validation" >                    
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Id producto1"/>                                                    
+                            <p:outputLabel value="#{msgs['adminFormS.NombreProducto']}"/>                                                    
                             <h:selectOneMenu  class="form-control"    value="${salidaVentaController.pro.idCodigo}"> 
-                                <f:selectItems value="${salidaVentaController.proList}" var="ven" itemLabel="${ven.idCodigo}" itemValue="${ven.idCodigo}"/>
+                                <f:selectItems value="${salidaVentaController.proList}" var="ven" itemLabel="${ven.nombreProductoidNombreProducto.nombreProductocol}" itemValue="${ven.idCodigo}"/>
                             </h:selectOneMenu> 
                         </div>
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="Nombre del producto1"/>                        
+                            <p:outputLabel value="#{msgs['adminFormS.Nombre']}"/>                        
                             <p:inputText type="text" class="form-control"   value="${salidaVentaController.salidaM.nombre}" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm">
-                            <p:outputLabel value="Precio Unitario"/>                        
+                            <p:outputLabel value="#{msgs['adminFormS.Precio']}"/>                        
                             <p:inputText type="number" class="form-control"  value="${salidaVentaController.salidaM.precioUnitario}" />
                         </div>
                         <div class="col-sm">
-                            <p:outputLabel value="Color1"/>                        
+                            <p:outputLabel value="#{msgs['adminFormS.Color']}"/>                        
                             <p:inputText type="text" class="form-control" value="${salidaVentaController.salidaM.color}"  />
 
                         </div>
                     </div>    
                     <div class="row">
                         <div class="col-sm">
-                            <p:outputLabel value="Tamaño"/>                        
+                            <p:outputLabel value="#{msgs['adminFormS.Tamaño']}"/>                        
                             <p:inputText type="number" class="form-control" value="${salidaVentaController.salidaM.tamaño}"  />                           
                         </div>      
                         <div class="col-sm">
-                            <p:outputLabel value="Cantidad1"/>                        
+                            <p:outputLabel value="#{msgs['adminFormS.Cantidad']}"/>                        
                             <p:inputText type="number" class="form-control" value="${salidaVentaController.salidaM.cantidad}" />                            
                         </div>
                         <div class="col-sm-3">
-                            <p:outputLabel value="Total"/>                        
+                            <p:outputLabel value="#{msgs['adminFormS.Total']}"/>                        
                             <p:inputText type="number" class="form-control" value="${salidaVentaController.salidaM.total}"  />                                                      
                         </div>
                     </div>
                     <br></br>
-                    <p:commandButton class="btn btn-outline-secondary" value="Guardar" actionListener="${salidaVentaController.salidaRegistrada()}"/>                    
+                    <p:commandButton class="btn btn-outline-secondary" value="#{msgs['adminBotonS.Guardar']}" actionListener="${salidaVentaController.salidaRegistrada()}"/>                    
                 </h:form> 
             </div> 
            
