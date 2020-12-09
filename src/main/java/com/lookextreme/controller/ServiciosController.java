@@ -79,4 +79,17 @@ public class ServiciosController implements Serializable{
             System.out.println("error al actualizar servicios"+e.getMessage());
         }
     }
+    public String irAeliminar(){
+        String redireccionar = null;
+        redireccionar = "admin-eliminarServicios";
+        
+        return redireccionar;
+    }
+    public String irActualizar(){
+        String redireccionar = null;
+        redireccionar = "admin-GestionarServicios";
+        
+        return redireccionar;
+    }
+
 }

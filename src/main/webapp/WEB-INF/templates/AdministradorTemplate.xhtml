@@ -41,6 +41,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" >
                                     <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavSalidaProductos']}" outcome="admin-SalidaProductos"/>
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavConsumoProductos']}" outcome="admin-ConsumoProducto"/>
                                     <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavRegistroProductos']}" outcome="admin-RegistroProductos"/>
                                     <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavConsultaProductos']}" outcome="admin-ConsultaProductos"/>                                    
                                 </div>
@@ -50,10 +51,10 @@
                             </li>
                             <div class="btn-group navbar-nav ml-md-auto">
                                 <a class="nav-link dropdown-toggle " data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >                                                            
-                                    <label id="userName">Reportes</label>
+                                    <label id="userName">#{msgs['adminNav.Nombre']}</label>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" >
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Agendamientos" outcome="admin_reporte_agendamiento"/>                                    
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminNav.Drop']}" outcome="admin_reporte_agendamiento"/>                                    
                                 </div>
                             </div>
                             <li class="nav-item">
@@ -61,12 +62,12 @@
                             </li>
                             <div class="btn-group navbar-nav ml-md-auto">
                                 <a class="nav-link dropdown-toggle " data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >                                                            
-                                    <label id="userName">Agendamiento</label>
+                                    <label id="userName">#{msgs['adminTemplate.NavAgendamiento']}</label>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" >
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Gestionar Servicios" outcome="admin-GestionarServicios"/>
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Crear Servicios" outcome="admin-CargarServicios"/>
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Consultar Servicios" outcome="admin-ConsultarServicios"/>
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavGestionarServi']}" outcome="admin-GestionarServicios"/>
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavCrearServicios']}" outcome="admin-CargarServicios"/>
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavConsultServicios']}" outcome="admin-ConsultarServicios"/>
                                 </div>
                             </div>
                         </ul>

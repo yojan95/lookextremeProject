@@ -48,8 +48,7 @@
                             <h:outputText value="${table_cita.estilistausuarioidUsuario.usuario.nombre}" />
                         </p:column>
                         <p:column>
-                            <p:commandButton value="#{msgs['clienteConsultarCitas.cancelar']}" actionListener="#{citaController.actionCancelarCita(table_cita)}" update="tbl_pqrs" rendered="#{table_cita.estado
-                                                      != 'cancelada'}">
+                            <p:commandButton value="#{msgs['clienteConsultarCitas.cancelar']}" actionListener="#{citaController.actionCancelarCita(table_cita)}" update="tbl_pqrs" rendered="#{citaConsultarController.rendered(table_cita.estado)}">
                                 <p:confirm header="Confirmación" message="#{msgs['clienteConsultarCitas.mensajeCancelar']}" icon="ui-icon-alert"/>
                             </p:commandButton>
                         </p:column>

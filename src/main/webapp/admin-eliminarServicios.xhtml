@@ -22,7 +22,6 @@
                             <div class="col">
                                 <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
                                     <a class="navbar-brand"></a>
-
                                     <p:commandButton icon="ui-icon-document
                                                      " value="#{msgs['adminBtn.GestionarServicios']}" action="#{serviciosController.irActualizar()}"></p:commandButton>
                                     <p:commandButton icon="ui-icon-trash
@@ -59,9 +58,9 @@
 
                             <p:column>
                                 <f:facet name="header"></f:facet>
-                                <p:commandLink value="#{msgs['adminTable.ComandLinkActualizar']}" actionListener="${serviciosController.cargarServicios(table_servicios)}" update=":frmPrincipal:tbl_pqrs dialogo" oncomplete="PF('valor').show();">
+                                <p:commandButton value="#{msgs['adminTable.BtnEliminar']}" update="tbl_pqrs" actionListener="#{serviciosController.eliminarServicio(table_servicios)}" >
                                     <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
-                                </p:commandLink>
+                                </p:commandButton>
                             </p:column>
                         </p:dataTable>
 
@@ -72,19 +71,7 @@
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                 </p:confirmDialog>-->
             </h:form>
-            <p:dialog id="dialogo" widgetVar="valor" modal="true" closeOnEscape="true" header="Actualizar Servicio" resizable="false" draggable="false">
-                <h:form>
-                    <p:panelGrid columns="2">
-                        <p:outputLabel value="#{msgs['adminModal.LabelNombre']}"/>
-                        <p:inputText value="#{serviciosController.servicios.nombre}"/>
-                        <p:outputLabel value="#{msgs['adminModal.LabelPrecio']}"/>
-                        <p:inputText value="#{serviciosController.servicios.precio}"/>
-                        <p:outputLabel value="#{msgs['adminModal.LabelDescripcion']}"/>
-                        <p:inputText value="#{serviciosController.servicios.descripcion}"/>
-                        <p:commandButton value="#{msgs['adminModal.Btn']}" actionListener="#{serviciosController.actulizarServicios()}" oncomplete="PF('valor')hide();"></p:commandButton>
-                    </p:panelGrid>
-                </h:form>
-            </p:dialog>
+
         </section>
     </ui:define>
 </ui:composition>

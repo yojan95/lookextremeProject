@@ -128,4 +128,7 @@ public class CitaConsultarController implements Serializable {
             }
         }
     }
+    public boolean rendered(String estado){
+        return !estado.equals("Incumplida") && !estado.equals("cancelada");
+    }
 }

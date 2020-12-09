@@ -24,6 +24,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
+import org.primefaces.PrimeFaces;
 
 @Named
 @SessionScoped
@@ -173,8 +174,9 @@ public class CitaController implements Serializable {
             EJBcita.create(cita);
             insertarServicioCita(cita);
             System.out.println(cita.getIdCita());
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registro su cita"));
-
+            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registro su cita"));
+            PrimeFaces current = PrimeFaces.current();
+            current.executeScript("PF('wdialog').show();");
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
