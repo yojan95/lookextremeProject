@@ -112,17 +112,17 @@ public class PqrsController implements Serializable {
     public void validarPqrs() {
         System.out.println("Validando pqrs");
         if (tipoPqrs.getIdTipoPQRS() == -1) {
-            showMessageError("Debe seleccionar un tipo válido.");
+            showMessage("Debe seleccionar un tipo válido.");
         } else if (pqrs.getAsunto().isEmpty() || pqrs.getAsunto().length() < 10) {
-            showMessageError("Debe ingresar un asunto mayor a 10 caracteres.");
+            showMessage("Debe ingresar un asunto mayor a 10 caracteres.");
         } else if (pqrs.getDetalles().isEmpty() || pqrs.getDetalles().length() < 30) {
-            showMessageError("Debe ingresar un detalle mayor a 30 caracteres.");
+            showMessage("Debe ingresar un detalle mayor a 30 caracteres.");
         } else {
             crearPqrs();
         }
     }
 
-    private void showMessageError(String messageText) {
+    private void showMessage(String messageText) {
         try {
             FacesMessage message;
             FacesContext context = FacesContext.getCurrentInstance();
@@ -148,8 +148,10 @@ public class PqrsController implements Serializable {
                 pqrs.setAnexos(file.getContent());
             }
             EjbPqrs.create(pqrs);
+            pqrs = new Pqrs();
+            showMessage("Pqrs creado correctamente");            
         } catch (Exception e) {
-            showMessageError("No pudo ser creado correctamente el PQRS.");
+            showMessage("No pudo ser creado correctamente el PQRS.");
             System.out.println("Crear Pqrs Error: " + e.getMessage());
         }
     }
