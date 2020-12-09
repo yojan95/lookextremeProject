@@ -100,8 +100,11 @@
                                 <h:outputText value="#{venta.total}" />  
                             </p:column>
                             <p:column>
-                                <f:facet name="header" > Actualizar </f:facet>
-                            </p:column>
+                                <f:facet name="header" > Modificar </f:facet>
+                                <p:commandLink value="Modificar"  actionListener="#{ventaController.cargarVenta(ven) }" update=":venta:tventa dialogo2" oncomplete="PF('valor').show();">
+                                    <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                                </p:commandLink>
+                            </p:column> 
                             <p:column>
                                 <f:facet name="header">Eliminar</f:facet>
                                 <p:commandButton value="Eliminar" update="venta" actionListener="#{ventaController.eliminarVenta(venta)}"  >
@@ -114,6 +117,24 @@
                         </p:dataTable>
                         
                     </h:form>
+
+                    <p:dialog id="dialogo2" widgetVar="valor" modal="true" closeOnEscape="true" header="Actualizar Producto" resizable="false" draggable="false">
+                        <h:form>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Precio"/>
+                                <p:inputText value="#{ventaController.venta.precioUnitario}"/>
+                                <p:outputLabel value="Cantidad"/>
+                                <p:inputText value="#{ventaController.venta.cantidad}"/>
+                                <p:outputLabel value="Total"/>
+                                <p:inputText value="#{ventaController.venta.total}"/>                                                  
+                                <p:commandButton value="actualizar" actionListener="#{ventaController.actualizarVenta()}" oncomplete="PF('valor')hide();"></p:commandButton>
+                            </p:panelGrid>
+                        </h:form>
+                    </p:dialog>
+                    
+                    
+                    
+                    
                 </div>
             </div>
          
