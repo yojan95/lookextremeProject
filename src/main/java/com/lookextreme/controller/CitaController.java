@@ -148,6 +148,7 @@ public class CitaController implements Serializable {
     public void setCita(Cita cita) {
         this.cita = cita;
     }
+
     //constructor
     @PostConstruct
     public void init() {
@@ -161,13 +162,13 @@ public class CitaController implements Serializable {
         listarEstilistas();
     }
 
-    public void registrarCita() throws Exception {        
+    public void registrarCita() throws Exception {
         try {
             usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
             cliente.setUsuarioidUsuario(usuario.getIdUsuario());
             cita.setClienteusuarioidUsuario(cliente);
             cita.setEstilistausuarioidUsuario(estilista);
-            cita.setEstado("agendada");            
+            cita.setEstado("agendada");
             serviciosCitas.setServiciosidServicios(servicios);
             serviciosCitas.setCitaidCita(cita);
             serviciosCitas.setIdServiciocita(1);
@@ -187,7 +188,6 @@ public class CitaController implements Serializable {
     lista los estilistas mediante un selectItem y muestralos por el nombre obteniendo su rol 
     =================
      */
-
     public void listarEstilistas() {
         estilistaListItem = new ArrayList();
 
@@ -197,7 +197,7 @@ public class CitaController implements Serializable {
             rol.setIdRoles(2);
             listaEstilistas = EJBusuario.consultarRoll(rol);
             for (Usuario estilistaitem : listaEstilistas) {
-                estilistaListItem.add(new SelectItem(estilistaitem.getIdUsuario(), estilistaitem.getNombre() ));
+                estilistaListItem.add(new SelectItem(estilistaitem.getIdUsuario(), estilistaitem.getNombre()));
             }
         } catch (Exception e) {
             System.out.println("listar-estilistas");
@@ -210,9 +210,9 @@ public class CitaController implements Serializable {
     agrega un servicio mediante un arraylist al objeto List<Servicios> carrito.
     =================
      */
-
     public List<Servicios> agregarServicio(List<Servicios> carrito, Servicios se) {
         carrito.add(se);
+        
         return carrito;
     }
 
@@ -226,9 +226,19 @@ public class CitaController implements Serializable {
         }
     }
 
-    public String irAlaCita() {
+    public String validarServicio() {
+        System.out.println("validando servicio");
         String agendar = null;
-        agendar = "cliente-disponibilidad";
+        
+            if (!carrito.isEmpty()) {
+                agendar = "cliente-disponibilidad";
+            }else{
+                System.out.println("seleccione un servicio");
+                 PrimeFaces current = PrimeFaces.current();
+                 current.executeScript("PF('wdialog').show();");
+            }
+        
+        
         return agendar;
     }
 
@@ -314,11 +324,12 @@ public class CitaController implements Serializable {
 
         try {
             if (estilista.getUsuarioidUsuario() > 0) {
-                List<HorarioDisponibilidad> horarios = EJBcita.verificarDisponibilidad(estilista.getUsuarioidUsuario(), cita.getFecha());                
+                List<HorarioDisponibilidad> horarios = EJBcita.verificarDisponibilidad(estilista.getUsuarioidUsuario(), cita.getFecha());
                 horarioListItem = new ArrayList();
-                for (HorarioDisponibilidad horario : horarios) {                    
-                    if ("libre".equals(horario.getEstado().toLowerCase()))
+                for (HorarioDisponibilidad horario : horarios) {
+                    if ("libre".equals(horario.getEstado().toLowerCase())) {
                         horarioListItem.add(new SelectItem(horario.getHora() + ":00:00", Integer.toString(horario.getHora()) + ":00:00"));
+                    }
                 }
             }
         } catch (Exception e) {

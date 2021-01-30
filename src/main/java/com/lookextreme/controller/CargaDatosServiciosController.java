@@ -1,26 +1,28 @@
-
-
 package com.lookextreme.controller;
 
-import com.csvreader.CsvReader;
 import com.lookextreme.Dao.ServiciosFacadeLocal;
 import com.lookextreme.model.Servicios;
-import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Iterator;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.primefaces.model.file.UploadedFile;
 
 @Named
 @ViewScoped
-public class CargaDatosServiciosController implements Serializable{
-    
+public class CargaDatosServiciosController implements Serializable {
+
     @EJB
-    private ServiciosFacadeLocal EJBservicios;
+    private ServiciosFacadeLocal serviciosEJB;
     private Servicios servicios;
     private UploadedFile file;
 
@@ -39,41 +41,44 @@ public class CargaDatosServiciosController implements Serializable{
     public void setFile(UploadedFile file) {
         this.file = file;
     }
-    
+
     @PostConstruct
-    public void insertar(){
-        
+    public void init() {
+        servicios = new Servicios();
     }
-    public void actionCargarDatos(){
-        try{
-            if (file.getSize()>0) {
-                CsvReader leerArchivos;
-                leerArchivos = new CsvReader(new InputStreamReader(file.getInputStream()));
-                leerArchivos.readHeaders();
-                
-                while(leerArchivos.readRecord()){
-                    servicios = new Servicios();
-                    servicios.setDescripcion(leerArchivos.get(0));
-                    servicios.setPrecio(Integer.parseInt(leerArchivos.get(1)));
-                    servicios.setNombre(leerArchivos.get(2));
-                    EJBservicios.create(servicios);
+
+    public void cargarServicios() {
+        System.out.println("cargando servicios");
+        if (file.getSize() > 0) {
+            try {
+                InputStream input = file.getInputStream();
+                XSSFWorkbook libro = new XSSFWorkbook(input);
+                Sheet sheet = libro.getSheetAt(0);
+                Iterator<Row> iterator = sheet.iterator();
+                int i = 0;
+                while (iterator.hasNext()) {
+                    Servicios nuevosServicios = new Servicios();
+                    Row currentRow = iterator.next();
+                    if (i > 0) {
+                        if (currentRow.getCell(0) == null && currentRow.getCell(1) != null
+                                && currentRow.getCell(2) != null && currentRow.getCell(3) != null) {
+                            nuevosServicios.setDescripcion(currentRow.getCell(1).getStringCellValue());
+                            nuevosServicios.setPrecio((int)currentRow.getCell(2).getNumericCellValue());
+                            nuevosServicios.setNombre(currentRow.getCell(3).getStringCellValue());
+                            serviciosEJB.create(nuevosServicios);
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se cargaron los datos exitosamente"));
+                        }else{
+                            break;
+                        }
+                    }
+                    i++;
                 }
-                leerArchivos.close();
-                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se cargaron los datos exitosamente"));
-                 //FacesMessage message = new FacesMessage("Exito", file.getFileName()+"fue subido");
-                  //FacesMessage message = new FacesMessage("Se subio con exito el archivo");
-                 //FacesContext.getCurrentInstance().addMessage(null, message);
-            }else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Por favor seleccione un archivo!"));
-                 //FacesMessage message = new FacesMessage("No se pudo subir el archivo");
-                 //FacesContext.getCurrentInstance().addMessage(null, message);
+                libro.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
-           
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "No se registraron los datos"));
-           // FacesMessage message = new FacesMessage("No se pudo subir el archivo");
-            //FacesContext.getCurrentInstance().addMessage(null, message);
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Por favor seleccione un archivo!"));
         }
     }
 }

@@ -101,7 +101,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>localRepo.net.sourceforge</groupId>
+            <groupId>net.sourceforge.javacsv</groupId>
             <artifactId>javacsv</artifactId>
             <version>2.1</version>
         </dependency>

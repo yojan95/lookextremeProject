@@ -120,13 +120,17 @@ and open the template in the editor.
                                     </p:column>
                                 </p:dataTable>
                                 <p:panelGrid>
-                                    <p:commandButton class="btn btn-primary" value="#{msgs['clienteServicios.iralacita']}" action="${citaController.irAlaCita()}" process="@form"></p:commandButton>
+                                    <p:commandButton class="btn btn-primary" value="#{msgs['clienteServicios.iralacita']}" action="${citaController.validarServicio()}" process="@form"></p:commandButton>
                                 </p:panelGrid>
 
                             </p:panel>
                         </div>
                     </div> 
                 </h:form>
+                <p:dialog id="dialog" widgetVar="wdialog" modal="true" header="Aviso">
+                                    Por favor seleccione un servicio!
+                                    
+                                </p:dialog>
             </div>
         </section>
         <h:form>
