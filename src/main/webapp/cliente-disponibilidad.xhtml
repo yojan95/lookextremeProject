@@ -8,19 +8,28 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui"
                 >    
- 
+
     <f:view locale="#{controllerTranslation.local}" />
     <ui:define name="content">
-           <style>
-        .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-   
-   
-    text-shadow: 0 1px 0 rgba(0);
-    
-}
-    </style>
-        <section>            
+        <style>
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+
+
+                text-shadow: 0 1px 0 rgba(0);
+
+            }
+            .ui-widget-header {
+                background-color: #000;
+                background: #000000;
+            }
             
+            .ui-dialog .ui-dialog-titlebar {
+
+                color: white;
+            }
+        </style>
+        <section>            
+
             <div class="container">
                 <div  class="row justify-content-md-start">
                     <div class="col-lg-8 mx-auto">
@@ -61,11 +70,7 @@
                                 </h:form>
                                 <p:dialog id="dialog" widgetVar="wdialog" modal="true" header="Aviso">
                                     <p:graphicImage value = "/images/check.svg" style="width: 50px; display: block;
-                                    margin:auto;"/>
-<<<<<<< HEAD
-                                    
-=======
->>>>>>> 050c601a6ffcfd679deec4adccd43b91cb94fac4
+                                                    margin:auto;"/>
                                     Cita agendada exitosamente!!
                                 </p:dialog>
                             </div>
