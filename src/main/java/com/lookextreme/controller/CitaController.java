@@ -49,6 +49,7 @@ public class CitaController implements Serializable {
     private Servicios servicios;
     private List<Servicios> serviciosList;
     private List<Servicios> carrito;
+    private Integer totalServicio;
     @EJB
     private ServiciosCitasFacadeLocal serviciosCitasEJB;
     private ServiciosCitas serviciosCitas;
@@ -58,6 +59,15 @@ public class CitaController implements Serializable {
     private Cliente cliente;
     private String estado;
     private List<SelectItem> horarioListItem;
+
+    public Integer getTotalServicio() {
+        return totalServicio;
+    }
+
+    public void setTotalServicio(Integer totalServicio) {
+        this.totalServicio = totalServicio;
+    }
+    
 
     public List<SelectItem> getHorarioListItem() {
         return horarioListItem;
@@ -221,6 +231,7 @@ public class CitaController implements Serializable {
             carrito = agregarServicio(carrito, se);
             System.out.println("" + se);
             System.out.println(carrito.size());
+            totalServicio = calcularTotalServicios(carrito);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -236,9 +247,7 @@ public class CitaController implements Serializable {
                 System.out.println("seleccione un servicio");
                  PrimeFaces current = PrimeFaces.current();
                  current.executeScript("PF('wdialog').show();");
-            }
-        
-        
+            }      
         return agendar;
     }
 
@@ -289,6 +298,7 @@ public class CitaController implements Serializable {
 
         try {
             eliminarServicioCarrito(servicio.getIdServicios());
+            totalServicio = calcularTotalServicios(carrito);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -313,13 +323,6 @@ public class CitaController implements Serializable {
         }
     }
 
-    public boolean isPostBack() {
-        boolean rpta;
-        rpta = FacesContext.getCurrentInstance().isPostback();
-
-        return rpta;
-    }
-
     public void verificarDisponibilidad() {
 
         try {
@@ -335,6 +338,22 @@ public class CitaController implements Serializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public Integer calcularTotalServicios(List<Servicios> carrito){
+        System.out.println("calculando");
+        Integer suma = 0;
+        
+        try{
+            for(Servicios ser:carrito){
+            suma+=ser.getPrecio();
+            System.out.println("sumando: "+suma);
+        }
+        }catch(Exception e){
+            System.out.println(""+e.getMessage());
+        }
+        
+        return suma;
     }
 
 }

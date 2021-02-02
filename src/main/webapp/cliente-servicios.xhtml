@@ -21,6 +21,32 @@ and open the template in the editor.
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.map"></script>
+        <style>
+            .ui-widget-header {
+                background-color: #000;
+                background: #000000;
+            }
+            .ui-panel .ui-panel-titlebar {
+                color: white;
+            }
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+                color: #FFFFFF;
+                text-shadow: 0 1px 0 rgba(0);
+            }
+            .btn {
+                color: #ffffff !important;
+                background: #000000 !important;
+            }
+
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+                background: #000000;
+                text-shadow: 0 1px 0 rgba(0);
+                color: #ffffff !important;
+            }
+            .ui-dialog .ui-dialog-titlebar {
+                color: #ffffff !important;
+            }
+        </style>
     </h:head>
     <h:body>
         <h:form>
@@ -61,17 +87,17 @@ and open the template in the editor.
                     </ul>
                 </div>
                 <div class="navbar-nav ml-md-auto">                        
-                        <a class="nav-link dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >                        
-                            <p:outputLabel value="#{clienteTemplateController.userName}"/>
-                            <img src="images/user.svg" height="30px" />                            
-                        </a>                        
-                        <div class="dropdown-menu dropdown-menu-right" >
-                            <!--<p:link class="dropdown-item menuUserNotLogin" value="Mis datos personales" outcome="cliente-datos"/>-->
-                            <p:commandButton class="dropdown-item menuUserNotLogin" value="Cerrar Sesión" action="#{clienteTemplateController.cerrarSesion()}"/>           
-                            <p:commandButton class="dropdown-item menuUserNotLogin" value="Español" action="#{controllerTranslation.cambiarIdioma('ES')}"></p:commandButton>
-                            <p:commandButton class="dropdown-item menuUserNotLogin" value="English" action="#{controllerTranslation.cambiarIdioma('EN')}"></p:commandButton>
-                        </div>
+                    <a class="nav-link dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >                        
+                        <p:outputLabel value="#{clienteTemplateController.userName}"/>
+                        <img src="images/user.svg" height="30px" />                            
+                    </a>                        
+                    <div class="dropdown-menu dropdown-menu-right" >
+                        <!--<p:link class="dropdown-item menuUserNotLogin" value="Mis datos personales" outcome="cliente-datos"/>-->
+                        <p:commandButton class="dropdown-item menuUserNotLogin" value="Cerrar Sesión" action="#{clienteTemplateController.cerrarSesion()}"/>           
+                        <p:commandButton class="dropdown-item menuUserNotLogin" value="Español" action="#{controllerTranslation.cambiarIdioma('ES')}"></p:commandButton>
+                        <p:commandButton class="dropdown-item menuUserNotLogin" value="English" action="#{controllerTranslation.cambiarIdioma('EN')}"></p:commandButton>
                     </div>
+                </div>
             </header>
         </h:form>
         <div id="header" class="jumbotron text-light">
@@ -114,6 +140,9 @@ and open the template in the editor.
                                     </p:column>
                                     <p:column headerText="#{msgs['clienteServicios.precio']}">
                                         <h:outputText value="${s.precio}"/>
+                                        <f:facet name="footer">
+                                            <h:outputText value="Total:#{citaController.totalServicio}"/>
+                                        </f:facet>
                                     </p:column>
                                     <p:column>
                                         <p:commandButton value="#{msgs['clienteServicios.eliminar']}" process="@form" icon="fa fa-close" actionListener="${citaController.actionEliminarServicioCarrito(s)}"></p:commandButton>
@@ -128,9 +157,11 @@ and open the template in the editor.
                     </div> 
                 </h:form>
                 <p:dialog id="dialog" widgetVar="wdialog" modal="true" header="Aviso">
-                                    Por favor seleccione un servicio!
-                                    
-                                </p:dialog>
+
+                    <p:graphicImage value = "/images/exclamation.svg" style="width: 50px; display: block;
+                                    margin:auto;"/>
+                    Por favor seleccione un servicio!
+                </p:dialog>
             </div>
         </section>
         <h:form>
