@@ -24,6 +24,7 @@ import org.primefaces.PrimeFaces;
 
 /**
  * correo: alookextreme@gmail.com contraseña: S6ZZGNdKSkym8cu
+    * heroku contraseña: WRGJKnxHUCUG7t3 WRGJxHUCUG7t3@
  */
 @Named(value = "emailJSFManagedBean")
 @RequestScoped

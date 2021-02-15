@@ -24,10 +24,10 @@ and open the template in the editor.
         <style>
             .ui-widget-header {
                 background-color: #000;
-                background: #000000;
+                background: #f9fbe7;
             }
             .ui-panel .ui-panel-titlebar {
-                color: white;
+                color: #6c757d;
             }
             .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
                 color: #FFFFFF;
@@ -35,17 +35,20 @@ and open the template in the editor.
             }
             .btn {
                 color: #ffffff !important;
-                background: #000000 !important;
+                background: #007bff !important;
             }
 
             .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
                 background: #000000;
                 text-shadow: 0 1px 0 rgba(0);
-                color: #ffffff !important;
+                color: #6c757d !important;
+                background-color: #f9fbe7 !important;
             }
             .ui-dialog .ui-dialog-titlebar {
-                color: #ffffff !important;
+                color: #6c757d !important;
             }
+            
+
         </style>
     </h:head>
     <h:body>
@@ -86,16 +89,16 @@ and open the template in the editor.
                         </li>
                     </ul>
                 </div>
-                <div class="navbar-nav ml-md-auto">                        
-                    <a class="nav-link dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >                        
+                <div class="navbar-nav ml-md-auto ">                        
+                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >                        
                         <p:outputLabel value="#{clienteTemplateController.userName}"/>
                         <img src="images/user.svg" height="30px" />                            
                     </a>                        
-                    <div class="dropdown-menu dropdown-menu-right" >
+                    <div class="dropdown-menu dropdown-menu-right bg-dark" >
                         <!--<p:link class="dropdown-item menuUserNotLogin" value="Mis datos personales" outcome="cliente-datos"/>-->
-                        <p:commandButton class="dropdown-item menuUserNotLogin" value="Cerrar Sesión" action="#{clienteTemplateController.cerrarSesion()}"/>           
-                        <p:commandButton class="dropdown-item menuUserNotLogin" value="Español" action="#{controllerTranslation.cambiarIdioma('ES')}"></p:commandButton>
-                        <p:commandButton class="dropdown-item menuUserNotLogin" value="English" action="#{controllerTranslation.cambiarIdioma('EN')}"></p:commandButton>
+                        <p:commandButton class="dropdown-item menuUserNotLogin hov" value="Cerrar Sesión" action="#{clienteTemplateController.cerrarSesion()}"/>           
+                        <p:commandButton class="dropdown-item menuUserNotLogin hov" value="Español" action="#{controllerTranslation.cambiarIdioma('ES')}"></p:commandButton>
+                        <p:commandButton class="dropdown-item menuUserNotLogin text-dark" value="English" action="#{controllerTranslation.cambiarIdioma('EN')}"  ></p:commandButton>
                     </div>
                 </div>
             </header>
@@ -110,8 +113,8 @@ and open the template in the editor.
                     <div class="col-12">
                         <h:form>
                             <p:panel class="p" header="#{msgs['clienteServicios.servicios']}" >
-                                <p:dataGrid value="${citaController.serviciosList}" var="se">
-                                    <p:panel header="${se.nombre}">
+                                <p:dataGrid value="${citaController.serviciosList}" var="se" >
+                                    <p:panel header="${se.nombre}" style="height: 250px;" >
                                         <p:panelGrid columns="2" style="border: 0 !important">
                                             <h:outputText value="#{msgs['clienteServicios.descripcion']}"/>
                                             <h:outputText value="${se.descripcion}"/>

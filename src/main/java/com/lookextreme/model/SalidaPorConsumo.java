@@ -6,6 +6,7 @@
 package com.lookextreme.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,10 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "SalidaPorConsumo.findAll", query = "SELECT s FROM SalidaPorConsumo s"),
     @NamedQuery(name = "SalidaPorConsumo.findByIdSalidaporconsumo", query = "SELECT s FROM SalidaPorConsumo s WHERE s.idSalidaporconsumo = :idSalidaporconsumo"),
-    @NamedQuery(name = "SalidaPorConsumo.findByNombre", query = "SELECT s FROM SalidaPorConsumo s WHERE s.nombre = :nombre"),
+    @NamedQuery(name = "SalidaPorConsumo.findByNombre", query = "SELECT s FROM SalidaPorConsumo s WHERE s.estado = :estado"),
     @NamedQuery(name = "SalidaPorConsumo.findByCantidad", query = "SELECT s FROM SalidaPorConsumo s WHERE s.cantidad = :cantidad"),
-    @NamedQuery(name = "SalidaPorConsumo.findByTama\u00f1o", query = "SELECT s FROM SalidaPorConsumo s WHERE s.tama\u00f1o = :tama\u00f1o"),
-    @NamedQuery(name = "SalidaPorConsumo.findByColor", query = "SELECT s FROM SalidaPorConsumo s WHERE s.color = :color")})
+    @NamedQuery(name = "SalidaPorConsumo.findByTama\u00f1o", query = "SELECT s FROM SalidaPorConsumo s WHERE s.fechaSalidaConsumo = :fechaSalidaConsumo")})
 public class SalidaPorConsumo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,21 +48,17 @@ public class SalidaPorConsumo implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-    @Column(name = "Nombre")
-    private String nombre;
+    @Column(name = "Estado")
+    private String estado;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Cantidad")
-    private short cantidad;
+    private Integer cantidad;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "tama\u00f1o")
-    private short tamaño;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "color")
-    private String color;
+    @Column(name = "FechaSalidaConsumo")
+    @Temporal (TemporalType.TIMESTAMP)
+    private Date fechaSalidaConsumo;
     @JoinColumn(name = "estilista_usuario_idUsuario", referencedColumnName = "usuario_idUsuario")
     @ManyToOne(optional = false)
     private Estilista estilistausuarioidUsuario;
@@ -75,12 +73,11 @@ public class SalidaPorConsumo implements Serializable {
         this.idSalidaporconsumo = idSalidaporconsumo;
     }
 
-    public SalidaPorConsumo(Integer idSalidaporconsumo, String nombre, short cantidad, short tamaño, String color) {
+    public SalidaPorConsumo(Integer idSalidaporconsumo, String estado, Integer cantidad, Date fechaSalidaConsumo) {
         this.idSalidaporconsumo = idSalidaporconsumo;
-        this.nombre = nombre;
+        this.estado = estado;
         this.cantidad = cantidad;
-        this.tamaño = tamaño;
-        this.color = color;
+        this.fechaSalidaConsumo = fechaSalidaConsumo;
     }
 
     public Integer getIdSalidaporconsumo() {
@@ -91,38 +88,32 @@ public class SalidaPorConsumo implements Serializable {
         this.idSalidaporconsumo = idSalidaporconsumo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public short getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(short cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
-    public short getTamaño() {
-        return tamaño;
+
+    public Date getFechaSalidaConsumo() {
+        return fechaSalidaConsumo;
     }
 
-    public void setTamaño(short tamaño) {
-        this.tamaño = tamaño;
+    public void setFechaSalidaConsumo(Date fechaSalidaConsumo) {
+        this.fechaSalidaConsumo = fechaSalidaConsumo;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
+   
     public Estilista getEstilistausuarioidUsuario() {
         return estilistausuarioidUsuario;
     }

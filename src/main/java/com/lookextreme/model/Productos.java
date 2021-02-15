@@ -65,7 +65,7 @@ public class Productos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "Cantidad")
-    private short cantidad;
+    private Integer cantidad;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -104,7 +104,7 @@ public class Productos implements Serializable {
         this.idCodigo = idCodigo;
     }
 
-    public Productos(Integer idCodigo, short tamaño, Date fechaVencimiento, short cantidad, String color, int precio, String estado) {
+    public Productos(Integer idCodigo, short tamaño, Date fechaVencimiento, Integer cantidad, String color, int precio, String estado) {
         this.idCodigo = idCodigo;
         this.tamaño = tamaño;
         this.fechaVencimiento = fechaVencimiento;
@@ -138,11 +138,11 @@ public class Productos implements Serializable {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public short getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(short cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 

@@ -8,55 +8,105 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui">>
     <ui:define name="content">
-        <section id="about"> 
-            <div class="container">      
-                <div class="py-5 text-center">
-                    <h4 class="mb-3" > #{msgs['adminSalida.h4']}</h4>
+        <section >    
+            <h:form>
+                <div class="row justify-content-md-start">
+
+                    <div class="col-lg-10 mx-auto">
+                        <div class="row">
+                            <div class="col">
+                                <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
+                                    <b>SALIDA POR CONSUMO INTERNO</b> 
+                                    <a class="navbar-brand"></a>
+                                    <div class="form-inline">
+                                        <p:outputLabel value="Fecha:"/>
+                                        <p:calendar class="mr-sm-2"  type="search" value="#{productoController.fecha}"/>
+                                        <p:commandButton class="btn btn-outline-primary my-2 my-sm-0" type="search" value="Buscar" actionListener="#{productoController.buscarPorFechas()}" update="tbl"/>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <p:dataTable id="tbl" var="productos" value="#{productoController.listaSalidaFechas}">
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{productos.productosidCodigo.nombreProductoidNombreProducto.idNombreProducto}" />
+                            </p:column>
+
+                            <p:column headerText="Nombre" filterBy="#{productos.productosidCodigo.nombreProductoidNombreProducto.nombreProductocol}">
+                                <h:outputText value="#{productos.productosidCodigo.nombreProductoidNombreProducto.nombreProductocol}" />
+                            </p:column>
+
+                            <p:column headerText="Categoria" filterBy="#{productos.productosidCodigo.categoriasIdcategorias.caNombre}">
+                                <h:outputText value="#{productos.productosidCodigo.categoriasIdcategorias.caNombre}" />
+                            </p:column>
+
+                            <p:column headerText="Fecha/Hora">
+                                <h:outputText value="#{productos.fechaSalidaConsumo}" />
+                            </p:column>
+
+                            <p:column headerText="Cantidad" filterBy="#{productos.cantidad}">
+                                <h:outputText value="#{productos.cantidad}" />
+                            </p:column>
+
+                            <p:column headerText="Estado" filterBy="#{productos.estado}">
+                                <h:outputText value="#{productos.estado}" />
+                            </p:column>
+
+                            <p:column headerText="Estilista" filterBy="#{productos.estilistausuarioidUsuario.usuario.nombre}">
+                                <h:outputText value="#{productos.estilistausuarioidUsuario.usuario.nombre}" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
                 </div>
+                
+                <br/>
+                <br/>
+                <div class="row justify-content-md-start">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="row">
+                            <div class="col">
+                                <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
+                                    <b>SALIDA POR VENTA</b>
+                                    <a class="navbar-brand"></a>
+                                    <div class="form-inline">
+                                       <!-- <p:outputLabel value="Fecha:"/>
+                                        <p:calendar class="mr-sm-2"  type="search" value=""/>
+                                        <p:commandButton class="btn btn-outline-primary my-2 my-sm-0" type="search" value="Buscar"  update="tbl"/>-->
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <p:dataTable id="tbe" var="productos" value="#{productoController.listaSalidaVenta}">
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{productos.productosidCodigo.nombreProductoidNombreProducto.idNombreProducto}" />
+                            </p:column>
 
-                <h:form class="needs-validation" >                    
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminFormS.NombreProducto']}"/>                                                    
-                            <h:selectOneMenu  class="form-control"    value="${salidaVentaController.pro.idCodigo}"> 
-                                <f:selectItems value="${salidaVentaController.proList}" var="ven" itemLabel="${ven.nombreProductoidNombreProducto.nombreProductocol}" itemValue="${ven.idCodigo}"/>
-                            </h:selectOneMenu> 
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminFormS.Nombre']}"/>                        
-                            <p:inputText type="text" class="form-control"   value="${salidaVentaController.salidaM.nombre}" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm">
-                            <p:outputLabel value="#{msgs['adminFormS.Precio']}"/>                        
-                            <p:inputText type="number" class="form-control"  value="${salidaVentaController.salidaM.precioUnitario}" />
-                        </div>
-                        <div class="col-sm">
-                            <p:outputLabel value="#{msgs['adminFormS.Color']}"/>                        
-                            <p:inputText type="text" class="form-control" value="${salidaVentaController.salidaM.color}"  />
+                            <p:column headerText="Nombre" filterBy="#{productos.productosidCodigo.nombreProductoidNombreProducto.nombreProductocol}">
+                                <h:outputText value="#{productos.productosidCodigo.nombreProductoidNombreProducto.nombreProductocol}" />
+                            </p:column>
 
-                        </div>
-                    </div>    
-                    <div class="row">
-                        <div class="col-sm">
-                            <p:outputLabel value="#{msgs['adminFormS.Tamaño']}"/>                        
-                            <p:inputText type="number" class="form-control" value="${salidaVentaController.salidaM.tamaño}"  />                           
-                        </div>      
-                        <div class="col-sm">
-                            <p:outputLabel value="#{msgs['adminFormS.Cantidad']}"/>                        
-                            <p:inputText type="number" class="form-control" value="${salidaVentaController.salidaM.cantidad}" />                            
-                        </div>
-                        <div class="col-sm-3">
-                            <p:outputLabel value="#{msgs['adminFormS.Total']}"/>                        
-                            <p:inputText type="number" class="form-control" value="${salidaVentaController.salidaM.total}"  />                                                      
-                        </div>
+                            <p:column headerText="Categoria" filterBy="#{productos.productosidCodigo.categoriasIdcategorias.caNombre}">
+                                <h:outputText value="#{productos.productosidCodigo.categoriasIdcategorias.caNombre}" />
+                            </p:column>
+
+                            <p:column headerText="Fecha/Hora">
+                                <h:outputText value="#{productos.fechaSalidaVenta}" />
+                            </p:column>
+
+                            <p:column headerText="Cantidad" filterBy="#{productos.cantidad}">
+                                <h:outputText value="#{productos.cantidad}" />
+                            </p:column>
+
+                            <p:column headerText="Estado" filterBy="#{productos.estado}">
+                                <h:outputText value="#{productos.estado}" />
+                            </p:column>
+
+                            <p:column headerText="Venta Total" filterBy="#{productos.total}">
+                                <h:outputText value="#{productos.total}" />
+                            </p:column>
+                        </p:dataTable>
                     </div>
-                    <br></br>
-                    <p:commandButton class="btn btn-outline-secondary" value="#{msgs['adminBotonS.Guardar']}" actionListener="${salidaVentaController.salidaRegistrada()}"/>                    
-                </h:form> 
-            </div> 
-           
+                </div>
+            </h:form>
         </section>
     </ui:define>
 </ui:composition>

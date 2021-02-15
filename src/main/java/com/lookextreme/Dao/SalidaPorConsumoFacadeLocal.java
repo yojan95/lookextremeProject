@@ -6,6 +6,7 @@
 package com.lookextreme.Dao;
 
 import com.lookextreme.model.SalidaPorConsumo;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,6 +28,8 @@ public interface SalidaPorConsumoFacadeLocal {
     List<SalidaPorConsumo> findAll();
 
     List<SalidaPorConsumo> findRange(int[] range);
+    
+    List<SalidaPorConsumo> buscarSalidaFecha(Date fecha);
 
     int count();
     
