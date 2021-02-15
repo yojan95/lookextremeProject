@@ -95,7 +95,7 @@ and open the template in the editor.
                         <img src="images/user.svg" height="30px" />                            
                     </a>                        
                     <div class="dropdown-menu dropdown-menu-right bg-dark" >
-                        <!--<p:link class="dropdown-item menuUserNotLogin" value="Mis datos personales" outcome="cliente-datos"/>-->
+                        <p:commandButton class="dropdown-item menuUserNotLogin" value="Mis datos personales" action="#{clienteController.redireccionarDatos()}"/>
                         <p:commandButton class="dropdown-item menuUserNotLogin hov" value="Cerrar Sesión" action="#{clienteTemplateController.cerrarSesion()}"/>           
                         <p:commandButton class="dropdown-item menuUserNotLogin hov" value="Español" action="#{controllerTranslation.cambiarIdioma('ES')}"></p:commandButton>
                         <p:commandButton class="dropdown-item menuUserNotLogin text-dark" value="English" action="#{controllerTranslation.cambiarIdioma('EN')}"  ></p:commandButton>

@@ -31,6 +31,16 @@ public class ClienteFacade extends AbstractFacade<Cliente> implements ClienteFac
         super(Cliente.class);
     }
 
-   
-    
+    @Override
+    public List<Cliente> getDatosCliente(Integer idCliente) {
+       List<Cliente> datosCliente = new ArrayList<>();
+       try{
+           datosCliente = em.createNamedQuery("Cliente.findByUsuarioidUsuario")
+               .setParameter("usuarioidUsuario", idCliente)
+               .getResultList();
+       }catch(Exception e){
+           System.out.println(e.getMessage());
+       }
+       return datosCliente;
+    } 
 }

@@ -3,12 +3,14 @@ package com.lookextreme.controller;
 import com.lookextreme.Dao.CitaFacadeLocal;
 import com.lookextreme.Dao.ClienteFacadeLocal;
 import com.lookextreme.Dao.EstilistaFacadeLocal;
+import com.lookextreme.Dao.HorarioFacadeLocal;
 import com.lookextreme.Dao.ServiciosCitasFacadeLocal;
 import com.lookextreme.Dao.ServiciosFacadeLocal;
 import com.lookextreme.Dao.UsuarioFacadeLocal;
 import com.lookextreme.model.Cita;
 import com.lookextreme.model.Cliente;
 import com.lookextreme.model.Estilista;
+import com.lookextreme.model.Horario;
 import com.lookextreme.model.HorarioDisponibilidad;
 import com.lookextreme.model.Roles;
 import com.lookextreme.model.Servicios;
@@ -59,6 +61,10 @@ public class CitaController implements Serializable {
     private Cliente cliente;
     private String estado;
     private List<SelectItem> horarioListItem;
+    
+    @EJB
+    private HorarioFacadeLocal horarioEJB;
+    private Horario horarioE;
 
     public Integer getTotalServicio() {
         return totalServicio;
@@ -159,6 +165,16 @@ public class CitaController implements Serializable {
         this.cita = cita;
     }
 
+    public Horario getHorarioE() {
+        return horarioE;
+    }
+
+    public void setHorarioE(Horario horarioE) {
+        this.horarioE = horarioE;
+    }
+
+    
+    
     //constructor
     @PostConstruct
     public void init() {
@@ -169,6 +185,7 @@ public class CitaController implements Serializable {
         estilista = new Estilista();
         carrito = new ArrayList();
         usuario = new Usuario();
+        horarioE = new Horario();
         listarEstilistas();
     }
 
@@ -347,13 +364,24 @@ public class CitaController implements Serializable {
         try{
             for(Servicios ser:carrito){
             suma+=ser.getPrecio();
-            System.out.println("sumando: "+suma);
         }
         }catch(Exception e){
             System.out.println(""+e.getMessage());
         }
         
         return suma;
+    }
+    
+    public void registrarHorarioEstilista(){
+        Short dias = 2;
+        try{
+            horarioE.setDias(dias);
+            horarioE.setEstilistausuarioidUsuario(estilista);
+            horarioEJB.create(horarioE);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Horario registrado"));
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
 }

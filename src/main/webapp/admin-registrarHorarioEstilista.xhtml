@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <f:view locale="#{controllerTranslation.local}" />
+    <style>
+        section {
+            padding: 40px 40px;
+            height: auto;
+            min-height: 200px;
+        }                        
+        #services,
+        #contact {
+            padding: 50px;
+        }
+
+        #services {
+            background-color: #dfe4ea;
+        }
+
+    </style>
+    <ui:define name="content">
+        <h:form>
+            <p:messages showDetail="true" showSummary="false">
+                <p:autoUpdate rendered="true"/>
+            </p:messages>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card">
+                            <h5 class="card-header">#{msgs['adminRegis.CardH5']}</h5>
+                            <div class="card-body">
+                                <!-- <p:link class="dropdown-item text-dark" value="Registrar Administrador" outcome="cliente-servicios"/>-->
+                                <p:link class="dropdown-item text-dark" value="#{msgs['adminRegis.CardItem1']}" outcome="admin-registrarUsuarios"/>
+                                <p:link class="dropdown-item text-dark" value="#{msgs['adminRegis.CardItem2']}" outcome="admin-listarUsuarios"/>
+                                <p:link class="dropdown-item text-dark" value="Registrar Horario" outcome="admin-registrarHorarioEstilista"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card border border-dark">
+                            <div class="card-header bg-dark text-white">HORARIO DEL ESTILISTA
+                            </div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <p:outputLabel value="Hora de inicio"/>
+                                        <p:inputText class="form-control" value="#{citaController.horario.horaDeInicio}">
+                                            <f:validateRegex pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$"/>
+                                        </p:inputText>
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <p:outputLabel value="Hora de salida"/>
+                                        <p:inputText class="form-control" value="#{citaController.horario.horaFin}">
+                                            <f:validateRegex pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$"/>
+                                        </p:inputText>
+                                    </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="#{msgs['clienteDisponibilidad.estilistas']}" />
+                                            <h:selectOneMenu id="ddl_estilistas" value="#{citaController.estilista.usuarioidUsuario}" styleClass="form-control" validatorMessage="Seleccione un estilista" >
+                                                <f:selectItems value="#{citaController.estilistaListItem}" />                                    
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                
+
+                                <p:commandButton  value="Registrar" class="btn btn-primary" action="#{citaController.registrarHorarioEstilista()}"></p:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <p></p>
+    </ui:define>
+</ui:composition>
