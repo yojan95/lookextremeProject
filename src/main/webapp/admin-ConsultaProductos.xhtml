@@ -108,15 +108,24 @@
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>
-
+             
+             <p:dialog id="dialog2" widgetVar="wdialog2" modal="true" header="Aviso">
+                <p:graphicImage value = "/images/check.svg" style="width: 50px; display: block;
+                                                    margin:auto;"/>
+                Productos agregados exitosamente
+            </p:dialog>
          
 
             <p:dialog id="dialog" widgetVar="wdialog" modal="true" header="Aviso">
+                <p:graphicImage value = "/images/check.svg" style="width: 50px; display: block;
+                                                    margin:auto;"/>
                 salida exitosamente
             </p:dialog>
 
             <p:dialog id="dialog1" widgetVar="wdialog1" modal="true" header="Aviso">
-                <p>No existe esa cantidad en el sistema</p>
+                <p:graphicImage value = "/images/exclamation.svg" style="width: 50px; display: block;
+                                    margin:auto;"/>
+                <p>No existe esa cantidad en el sistema!</p>
             </p:dialog>
         </h:form>
         </section>

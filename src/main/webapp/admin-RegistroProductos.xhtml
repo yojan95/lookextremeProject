@@ -16,12 +16,13 @@ and open the template in the editor.
 
 
             <div class="container">      
-                <h:form class="needs-validation" >
-
-
+                <h:form class="needs-validation" >              
                     <div class="py-5 text-center">
                         <h4 class="mb-3"  > #{msgs['admin.h4']} </h4>
                     </div>
+                    <p:messages showDetail="true" showSummary="false">
+                        <p:autoUpdate rendered="true"/>
+                    </p:messages>
                     <div class="row">
 
                         <div class="col-md-6 mb-3">
@@ -63,7 +64,7 @@ and open the template in the editor.
                             <h:selectOneMenu class="form-control" id="categoria"  value="${registrarProductoController.categorias.idcategorias}" >
                                 <f:selectItems value="${registrarProductoController.categoriasList}" var="cat" itemLabel="${cat.caNombre}" itemValue="${cat.idcategorias}"/>
                             </h:selectOneMenu>
-                            
+
                         </div>
                     </div>
                     <div class="row">

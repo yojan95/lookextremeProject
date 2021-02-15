@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -162,6 +163,7 @@ public class RegistrarProductoController implements Serializable {
             //productos.setMarca("marcel france");
             //productos.setNombre("esmalte");
             productoEJB.create(productos);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto registrado"));
         }catch (Exception e){
             System.out.println(e.getMessage()); 
             

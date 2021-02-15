@@ -303,6 +303,8 @@ public class ProductoController implements Serializable {
                 resultado = productos.getCantidad() + entrada;
                 productos.setCantidad(resultado);
                 prodEJB.edit(productos);
+                PrimeFaces current = PrimeFaces.current();
+                current.executeScript("PF('wdialog2').show();");
                 System.out.println("resultado de la suma: " + resultado);
             } else {
                 System.out.println("el dato ingresado no es equivalente");
