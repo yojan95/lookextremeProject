@@ -41,7 +41,9 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">#{msgs['clienteConsultarCitas.fecha']}</f:facet>                        
-                            <h:outputText value="#{table_cita.fecha}" />
+                            <h:outputText value="#{table_cita.fecha}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>   
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">#{msgs['clienteConsultarCitas.estilista']}</f:facet>                        

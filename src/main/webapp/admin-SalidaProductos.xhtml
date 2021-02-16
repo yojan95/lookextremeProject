@@ -52,7 +52,9 @@
                             </p:column>
 
                             <p:column headerText="Fecha/Hora">
-                                <h:outputText value="#{productos.fechaSalidaConsumo}" />
+                                <h:outputText value="#{productos.fechaSalidaConsumo}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>   
+                                </h:outputText>
                             </p:column>
 
                             <p:column headerText="Cantidad" filterBy="#{productos.cantidad}">
@@ -109,7 +111,9 @@
                             </p:column>
 
                             <p:column headerText="Fecha/Hora">
-                                <h:outputText value="#{productos.fechaSalidaVenta}" />
+                                <h:outputText value="#{productos.fechaSalidaVenta}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>      
+                                </h:outputText>
                             </p:column>
 
                             <p:column headerText="Cantidad" filterBy="#{productos.cantidad}">
