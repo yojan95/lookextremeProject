@@ -249,6 +249,8 @@ public class CitaController implements Serializable {
             System.out.println("" + se);
             System.out.println(carrito.size());
             totalServicio = calcularTotalServicios(carrito);
+            FacesContext  context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Aviso","Servicio agregado"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
