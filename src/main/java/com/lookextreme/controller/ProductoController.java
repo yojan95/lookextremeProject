@@ -1,11 +1,17 @@
 package com.lookextreme.controller;
 
+import com.lookextreme.Dao.CategoriasFacadeLocal;
 import com.lookextreme.Dao.EstilistaFacadeLocal;
+import com.lookextreme.Dao.MarcaFacadeLocal;
+import com.lookextreme.Dao.NombreproductoFacadeLocal;
 import com.lookextreme.Dao.ProductosFacadeLocal;
 import com.lookextreme.Dao.SalidaPorConsumoFacadeLocal;
 import com.lookextreme.Dao.SalidaVentaFacadeLocal;
 import com.lookextreme.Dao.UsuarioFacadeLocal;
+import com.lookextreme.model.Categorias;
 import com.lookextreme.model.Estilista;
+import com.lookextreme.model.Marca;
+import com.lookextreme.model.Nombreproducto;
 import com.lookextreme.model.Productos;
 import com.lookextreme.model.Roles;
 import com.lookextreme.model.SalidaPorConsumo;
@@ -59,6 +65,44 @@ public class ProductoController implements Serializable {
     private EstilistaFacadeLocal EJBestilista;
     private Estilista estilista;
     private List<SelectItem> estilistaListItem;
+    
+    @EJB
+    private MarcaFacadeLocal EJBmarca;
+    private Marca marca;
+    
+    @EJB
+    private NombreproductoFacadeLocal EJBnombreProducto;
+    private Nombreproducto nombreProducto;
+    
+    @EJB
+    private CategoriasFacadeLocal EJBcategoria;
+    private Categorias categorias;
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
+    public Nombreproducto getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(Nombreproducto nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public Categorias getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(Categorias categorias) {
+        this.categorias = categorias;
+    }
+    
+    
 
     public List<SalidaPorConsumo> getListaSalidaFechas() {
         return listaSalidaFechas;
@@ -207,6 +251,9 @@ public class ProductoController implements Serializable {
         salidaVenta = new SalidaVenta();
         usuario = new Usuario();
         estilista = new Estilista();
+        nombreProducto = new Nombreproducto();
+        categorias = new Categorias();
+        marca = new Marca();
         productosList = this.prodEJB.findAll();
         listaSalidaVenta = this.salidaVentaEJB.findAll();
         salidaPorConsumo.setFechaSalidaConsumo(new Date());
@@ -379,6 +426,35 @@ public class ProductoController implements Serializable {
              
          }
      }
-             
+     
+     public void registrarNombreProducto(){
+         System.out.println("registrando nombre del producto");
+         try{
+             EJBnombreProducto.create(nombreProducto);
+              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Nombre del producto registrado"));
+         }catch(Exception e){
+             System.out.println(e.getMessage());
+         }
+     }
+     
+     public void registrarCategoria(){
+         System.out.println("registrando categoria");
+         try{
+             EJBcategoria.create(categorias);
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "categoria registrada"));
+         }catch(Exception e){
+             System.out.println(e.getMessage());
+         }
+     }
+     
+     public void registrarMarca(){
+         System.out.println("registrando marca");
+         try{
+             EJBmarca.create(marca);
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "marca registrada"));
+         }catch(Exception e){
+             System.out.println(e.getMessage());
+         }
+     }
 
 }

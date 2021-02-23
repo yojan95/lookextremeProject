@@ -95,9 +95,10 @@ public class ClienteController implements Serializable {
     }
 
     public void getDatosCliente() {
+        
         try {
             usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            listaDatosCliente = clienteEJB.getDatosCliente(usuario.getIdUsuario());
+            cliente = clienteEJB.getDatosCliente(usuario.getIdUsuario());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

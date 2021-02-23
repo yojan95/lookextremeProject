@@ -57,7 +57,7 @@
                         <h:form>
                             <p:panel class="p" header="#{msgs['clienteServicios.servicios']}" >
                                 <p:dataGrid value="${citaController.serviciosList}" var="se" >
-                                    <p:panel header="${se.nombre}" style="height: 250px;" >
+                                    <p:panel header="${se.nombre}" style="height: 250px !important;" >
                                         <p:panelGrid columns="2" style="border: 0 !important">
                                             <h:outputText value="#{msgs['clienteServicios.descripcion']}"/>
                                             <h:outputText value="${se.descripcion}"/>
@@ -79,7 +79,7 @@
                 <h:form id="form1">
                     <div class="row">
                         <div class="col-6">
-                            <p:panel class="border-dark" header="#{msgs['clienteServicios.resumenPedido']}">
+                            <p:panel  header="#{msgs['clienteServicios.resumenPedido']}">
                                 <p:dataTable id="carrito" value="${citaController.carrito}" var="s">
                                     <p:column headerText="#{msgs['clienteServicios.descripcion']}">
                                         <h:outputText value="${s.descripcion}"/>

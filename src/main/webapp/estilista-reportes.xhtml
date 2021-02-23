@@ -24,8 +24,13 @@
     </style>
     <ui:define name="content">
         <section>
-           <h:form>         
-               <p:dataTable id="tbl" var="rep" value="#{citaConsultarController.listServiciosCita}"
+           <h:form>
+               <p:outputLabel value="Fecha Inicio"></p:outputLabel>
+               <p:calendar value="#{citaController.inicioFecha}"/>
+               <p:outputLabel value="Fecha fin"></p:outputLabel>
+               <p:calendar  value="#{citaController.finFecha}"/>
+               <p:commandButton value="Buscar" actionListener="#{citaController.citasPorFechasEstilista()}" update="tbl"></p:commandButton>
+               <p:dataTable id="tbl" var="rep" value="#{citaController.listaCitaPorFechas}"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                          paginator="true" rows="10" style="margin-bottom:20px">
                 <f:facet name="{Exporters}">
@@ -42,16 +47,25 @@
                 </f:facet>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Turno" />
+                        <h:outputText value="Fecha " />
                     </f:facet>
-                    <h:outputText value="#{rep.citaidCita.idCita}" />
+                    <h:outputText value="#{rep.citaidCita.fecha}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Estilista"/>
+                        <h:outputText value="Estado"/>
                     </f:facet>
-                    <h:outputText value="#{rep.citaidCita.estilistausuarioidUsuario.usuario.nombre}" />
+                    <h:outputText value="#{rep.citaidCita.estado}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Hora" />
+                    </f:facet>
+                    <h:outputText value="#{rep.citaidCita.hora}" />
                 </p:column>
 
                 <p:column>
@@ -60,19 +74,20 @@
                     </f:facet>
                     <h:outputText value="#{rep.citaidCita.clienteusuarioidUsuario.usuario.nombre}" />
                 </p:column>
-
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Fecha" />
+                        <h:outputText value="Estilista" />
                     </f:facet>
-                    <h:outputText value="#{rep.citaidCita.fecha}" />
+                    <h:outputText value="#{rep.citaidCita.estilistausuarioidUsuario.usuario.nombre}" />
                 </p:column>
-                <p:column>
+                
+                   <p:column>
                     <f:facet name="header">
                         <h:outputText value="Servicio" />
                     </f:facet>
-                    <h:outputText value="#{rep.serviciosidServicios.nombre}" />
+                       <h:outputText value="#{rep.serviciosidServicios.nombre}" />
                 </p:column>
+          
             </p:dataTable>
 
             <h:commandLink>

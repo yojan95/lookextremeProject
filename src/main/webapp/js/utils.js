@@ -6,10 +6,12 @@ $(document).ready(function () {
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 });
-
+/*
 const descargarAnexo = (idHidden) => {    
     let anexoBytes = $(`#pqrs:hidden_${idHidden}`).val();
     alert(idHidden);
     alert(anexoBytes);
     return false;
 };
+ * 
+ */

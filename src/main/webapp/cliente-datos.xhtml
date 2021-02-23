@@ -8,92 +8,72 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui">    
     <ui:define name="content">
-             <section>
-         <h:form id="pro">
-          
-            <p:outputPanel id="panel">
-                
+        <section>
             
-                <p:dataTable id="data" var="cliente" value="#{clienteController.listaDatosCliente}" styleClass="tabla">
-                    <p:column headerText="Nombre" >
-                        <h:outputText value="#{cliente.usuario.nombre}" />
-                </p:column>
-
-                    <p:column headerText="Cedula" >
-                        <h:outputText value="#{cliente.usuario.cliente.cedula}" />
-                </p:column>
-
-                <p:column headerText="Actualizar">
-         
-                      <div class="form-row">
-                        <div class="col">
-                            <p:commandButton value="Actualizar" onclick="PF('dlg1').show();" actionListener="#{clienteController.cargarDatosCliente(cliente)}" update=":pro:detail"/>
-                        </div>
-                        
-                    </div>
-                </p:column>
-                
-            </p:dataTable>
-                </p:outputPanel>
-                
-             <p:dialog   header="MIS DATOS PERSONALES" widgetVar="dlg1"  width="600" >
-                <p:outputPanel id="detail">
-                   
-                      
-                       <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <p:outputLabel value="Nombre"/>
-                                <p:inputText class="form-control"  value="#{clienteController.usuario.nombre}"/> 
-                            </div>
-                            <div class="form-group col-md-4">
-                                <p:outputLabel value="Apellido"/>
-                                <p:inputText class="form-control" value="#{clienteController.usuario.apellido}"/> 
-                            </div>
-                            <div class="form-group col-md-4">
-                                <p:outputLabel value="Fecha de Nacimiento"/>
-                                <p:calendar value="#{clienteController.usuario.fechaNacimiento}" />
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <p:outputLabel value="Correo"/>
-                                <p:inputText class="form-control" value="#{clienteController.usuario.email}"/>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <p:outputLabel value="Contraseña"/>
-                                <p:inputText type="password" class="form-control" value="#{clienteController.usuario.contraseña}"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <p:outputLabel value="Telefono"/>
-                                <p:inputText class="form-control" value="#{clienteController.usuario.telefono}"/>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <p:outputLabel value="Edad"/>
-                                <p:inputText class="form-control" value="#{clienteController.usuario.edad}"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <p:outputLabel value="Cedula"/>
-                                <p:inputText class="form-control" value="#{clienteController.cliente.cedula}"/>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <p:outputLabel value="Dirección"/>
-                                <p:inputText class="form-control" value="#{clienteController.usuario.direccion}"/>
-                            </div>
-                        </div>
-                      <p:commandButton  value="Guardar Cambios" class="btn btn-primary btn-lg btn-block"  actionListener="#{clienteController.actualizarDatosUsuario()}" onclick="PF('dlg1').hide();"/>
-                </p:outputPanel>
-            </p:dialog>
-                        
-             <p:dialog id="dialog2" widgetVar="wdialog2" modal="true" header="Aviso">
+            <p:dialog id="dialog2" widgetVar="wdialog2" modal="true" header="Aviso">
                 <p:graphicImage value = "/images/check.svg" style="width: 50px; display: block;
-                                                    margin:auto;"/>
+                                margin:auto;"/>
                 Datos actualizados exitosamente
             </p:dialog>
-        </h:form>
+            <h:form>
+                <div class="container">
+                    <div class="row justify-content-md-start">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="card border border-dark">
+                                <div class="card-header bg-dark text-white">MIS DATOS PERSONALES
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="Nombre"/>
+                                            <p:inputText class="form-control"  value="#{clienteController.usuario.nombre}"/> 
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="Apellido"/>
+                                            <p:inputText class="form-control" value="#{clienteController.usuario.apellido}"/> 
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="Fecha de Nacimiento"/>
+                                            <p:calendar value="#{clienteController.usuario.fechaNacimiento}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="Correo"/>
+                                            <p:inputText class="form-control" value="#{clienteController.usuario.email}"/>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="Contraseña"/>
+                                            <p:inputText type="password" class="form-control" value="#{clienteController.usuario.contraseña}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="Telefono"/>
+                                            <p:inputText class="form-control" value="#{clienteController.usuario.telefono}"/>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <p:outputLabel value="Edad"/>
+                                            <p:inputText class="form-control" value="#{clienteController.usuario.edad}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <p:outputLabel value="Cedula"/>
+                                            <p:inputText class="form-control" value="#{clienteController.cliente.cedula}"/>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <p:outputLabel value="Dirección"/>
+                                            <p:inputText class="form-control" value="#{clienteController.usuario.direccion}"/>
+                                        </div>
+                                    </div>
+                                    <p:commandButton  value="Guardar Cambios" class="btn btn-primary btn-lg btn-block"  actionListener="#{clienteController.actualizarDatosUsuario()}" onclick="PF('dlg1').hide();"/> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
         </section>
     </ui:define>
 </ui:composition>

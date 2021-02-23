@@ -16,18 +16,16 @@ and open the template in the editor.
 
 
             <div class="container">      
-                <h:form class="needs-validation" >              
+                <h:form class="needs-validation" id="form2">              
                     <div class="py-5 text-center">
                         <h4 class="mb-3"  > #{msgs['admin.h4']} </h4>
                     </div>
-                    <p:messages showDetail="true" showSummary="false">
-                        <p:autoUpdate rendered="true"/>
-                    </p:messages>
+                   
                     <div class="row">
 
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.NombreProducto']}" />                    
-                            <h:selectOneMenu  class="form-control" id="Nombre"  value="${registrarProductoController.nombrep.idNombreProducto}" > 
+                            <h:selectOneMenu  class="form-control" id="oneMenu"  value="${registrarProductoController.nombrep.idNombreProducto}" > 
                                 <f:selectItems value="${registrarProductoController.nombrepList}" var="nomp" itemLabel="${nomp.nombreProductocol}" itemValue="${nomp.idNombreProducto}"/>
                             </h:selectOneMenu>   
                         </div>
@@ -83,10 +81,37 @@ and open the template in the editor.
                     <hr class="mb-4"></hr>
                 </h:form>
             </div>    
-
-
-
-
+             <p:messages showDetail="true" showSummary="false">
+                        <p:autoUpdate rendered="true"/>
+                    </p:messages>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm">
+                        <h:form >
+                            <p:outputLabel value="Nombre Producto"/>
+                            <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}"/>
+                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarNombreProducto()}" update=":form2:oneMenu"/>
+                        </h:form>
+                        <hr class="mb-4"></hr>
+                    </div>
+                    <div class="col-sm">
+                        <h:form>
+                            <p:outputLabel value="Nombre Categoria"/>
+                            <p:inputText class="form-control" value="#{productoController.categorias.caNombre}"/>
+                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarCategoria()}"/>
+                        </h:form>
+                        <hr class="mb-4"></hr>
+                    </div>
+                    <div class="col-sm">
+                        <h:form>
+                            <p:outputLabel value="Nombre Marca"/>
+                            <p:inputText class="form-control" value="#{productoController.marca.maNombre}"/>
+                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarMarca()}"/>
+                        </h:form>
+                        <hr class="mb-4"></hr>
+                    </div>
+                </div>
+            </div>
 
         </section>
     </ui:define>

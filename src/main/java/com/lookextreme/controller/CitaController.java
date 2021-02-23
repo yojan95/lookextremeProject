@@ -18,6 +18,7 @@ import com.lookextreme.model.ServiciosCitas;
 import com.lookextreme.model.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -37,6 +38,8 @@ public class CitaController implements Serializable {
     private Cita cita;
     private List<Cita> citalistVerificarDispo;
     private List<Cita> busquedaCitaList;
+    private List<ServiciosCitas> listaCitaPorFechas;
+    private Date inicioFecha,finFecha;
     @EJB
     private EstilistaFacadeLocal EJBestilista;
     private Estilista estilista;
@@ -65,6 +68,33 @@ public class CitaController implements Serializable {
     @EJB
     private HorarioFacadeLocal horarioEJB;
     private Horario horarioE;
+
+    public List<ServiciosCitas> getListaCitaPorFechas() {
+        return listaCitaPorFechas;
+    }
+
+    public void setListaCitaPorFechas(List<ServiciosCitas> listaCitaPorFechas) {
+        this.listaCitaPorFechas = listaCitaPorFechas;
+    }
+    
+
+    public Date getInicioFecha() {
+        return inicioFecha;
+    }
+
+    public void setInicioFecha(Date inicioFecha) {
+        this.inicioFecha = inicioFecha;
+    }
+
+    public Date getFinFecha() {
+        return finFecha;
+    }
+
+    public void setFinFecha(Date finFecha) {
+        this.finFecha = finFecha;
+    }
+    
+    
 
     public Integer getTotalServicio() {
         return totalServicio;
@@ -385,5 +415,15 @@ public class CitaController implements Serializable {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void citasPorFechasEstilista(){
+        try{
+             usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+            listaCitaPorFechas = EJBcita.buscarCitaFecha(inicioFecha, finFecha,usuario.getIdUsuario());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+            
 
 }

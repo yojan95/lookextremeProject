@@ -26,7 +26,7 @@ public interface ClienteFacadeLocal {
 
     List<Cliente> findAll();
     
-    List<Cliente> getDatosCliente(Integer idCliente);
+    Cliente getDatosCliente(Integer idCliente);
 
     List<Cliente> findRange(int[] range);
 

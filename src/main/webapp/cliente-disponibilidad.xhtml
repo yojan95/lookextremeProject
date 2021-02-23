@@ -22,10 +22,14 @@
                 background-color: #000;
                 background: #000000;
             }
-            
+
             .ui-dialog .ui-dialog-titlebar {
 
                 color: white;
+            }
+            .ui-dialog {
+                width: 350px !important;
+                top: 0 !important;
             }
         </style>
         <section>            
@@ -68,10 +72,11 @@
                                         </div>                                        
                                     </div>
                                 </h:form>
-                                <p:dialog id="dialog" widgetVar="wdialog" modal="true" header="Aviso">
+                                <p:dialog id="dialog" widgetVar="wdialog" modal="true" header="Aviso" style="height: 250px;">
                                     <p:graphicImage value = "/images/check.svg" style="width: 50px; display: block;
                                                     margin:auto;"/>
                                     Cita agendada exitosamente!!
+                                    
                                 </p:dialog>
                             </div>
                         </div>

@@ -7,6 +7,7 @@ package com.lookextreme.Dao;
 
 import com.lookextreme.model.Cita;
 import com.lookextreme.model.HorarioDisponibilidad;
+import com.lookextreme.model.ServiciosCitas;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -14,7 +15,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.StoredProcedureQuery;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -46,23 +49,6 @@ public class CitaFacade extends AbstractFacade<Cita> implements CitaFacadeLocal 
         }
         return listaCita;
     }
-/*
-    @Override
-    public List<Cita> buscarEstadoCliente(int idCliente, String estado) throws Exception{
-        List<Cita> ListaBusqueda;
-        try{
-            String jpql = "FROM Cita c WHERE c.clienteusuarioidUsuario.usuario.idUsuario = ?1 and c.estado = ?2";
-            Query query = em.createNamedQuery(jpql);
-            query.setParameter(1, idCliente);
-            query.setParameter(2, estado);
-            
-            ListaBusqueda = query.getResultList();
-        }catch(Exception e){
-            throw e;
-        }
-        return ListaBusqueda;
-    }
-    */
 
     @Override
     public List<Cita> obtenerCitaPorEstilistaEstadoIncumpliento(int idEstilista) {
@@ -119,5 +105,21 @@ public class CitaFacade extends AbstractFacade<Cita> implements CitaFacadeLocal 
             System.out.println(e.getMessage());
         }
         return citas;
+    }
+    
+     @Override
+    public List<ServiciosCitas> buscarCitaFecha(Date inicio,Date fin,Integer idEstlista) {
+        List<ServiciosCitas> lista = null;
+        try{
+            String jpql = "FROM ServiciosCitas c WHERE c.citaidCita.estilistausuarioidUsuario.usuario.idUsuario = ?1 and c.citaidCita.fecha between ?2 and ?3";
+            Query query = em.createQuery(jpql);
+            query.setParameter(1, idEstlista);
+            query.setParameter(2, inicio, TemporalType.DATE);
+            query.setParameter(3, fin, TemporalType.DATE);
+            lista = query.getResultList();
+        }catch(Exception e){
+            System.out.println("error en la consulta"+e);
+        }
+        return lista;
     }
 }
