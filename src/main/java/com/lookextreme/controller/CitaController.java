@@ -17,7 +17,10 @@ import com.lookextreme.model.Servicios;
 import com.lookextreme.model.ServiciosCitas;
 import com.lookextreme.model.Usuario;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -39,7 +42,8 @@ public class CitaController implements Serializable {
     private List<Cita> citalistVerificarDispo;
     private List<Cita> busquedaCitaList;
     private List<ServiciosCitas> listaCitaPorFechas;
-    private Date inicioFecha,finFecha;
+    private Date inicioFecha, finFecha;
+    
     @EJB
     private EstilistaFacadeLocal EJBestilista;
     private Estilista estilista;
@@ -64,7 +68,7 @@ public class CitaController implements Serializable {
     private Cliente cliente;
     private String estado;
     private List<SelectItem> horarioListItem;
-    
+
     @EJB
     private HorarioFacadeLocal horarioEJB;
     private Horario horarioE;
@@ -76,7 +80,6 @@ public class CitaController implements Serializable {
     public void setListaCitaPorFechas(List<ServiciosCitas> listaCitaPorFechas) {
         this.listaCitaPorFechas = listaCitaPorFechas;
     }
-    
 
     public Date getInicioFecha() {
         return inicioFecha;
@@ -93,8 +96,6 @@ public class CitaController implements Serializable {
     public void setFinFecha(Date finFecha) {
         this.finFecha = finFecha;
     }
-    
-    
 
     public Integer getTotalServicio() {
         return totalServicio;
@@ -103,7 +104,6 @@ public class CitaController implements Serializable {
     public void setTotalServicio(Integer totalServicio) {
         this.totalServicio = totalServicio;
     }
-    
 
     public List<SelectItem> getHorarioListItem() {
         return horarioListItem;
@@ -203,8 +203,6 @@ public class CitaController implements Serializable {
         this.horarioE = horarioE;
     }
 
-    
-    
     //constructor
     @PostConstruct
     public void init() {
@@ -217,9 +215,11 @@ public class CitaController implements Serializable {
         usuario = new Usuario();
         horarioE = new Horario();
         listarEstilistas();
+        
     }
 
-    public void registrarCita() throws Exception {
+    public String registrarCita() throws Exception {
+        String redireccionar = null;
         try {
             usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
             cliente.setUsuarioidUsuario(usuario.getIdUsuario());
@@ -233,11 +233,11 @@ public class CitaController implements Serializable {
             insertarServicioCita(cita);
             System.out.println(cita.getIdCita());
             //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registro su cita"));
-            PrimeFaces current = PrimeFaces.current();
-            current.executeScript("PF('wdialog').show();");
+            redireccionar = "cliente-citaRegistradaExito";
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
+        return redireccionar;
     }
 
     /*
@@ -269,7 +269,7 @@ public class CitaController implements Serializable {
      */
     public List<Servicios> agregarServicio(List<Servicios> carrito, Servicios se) {
         carrito.add(se);
-        
+
         return carrito;
     }
 
@@ -279,8 +279,8 @@ public class CitaController implements Serializable {
             System.out.println("" + se);
             System.out.println(carrito.size());
             totalServicio = calcularTotalServicios(carrito);
-            FacesContext  context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Aviso","Servicio agregado"));
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Aviso", "Servicio agregado"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -289,14 +289,14 @@ public class CitaController implements Serializable {
     public String validarServicio() {
         System.out.println("validando servicio");
         String agendar = null;
-        
-            if (!carrito.isEmpty()) {
-                agendar = "cliente-disponibilidad";
-            }else{
-                System.out.println("seleccione un servicio");
-                 PrimeFaces current = PrimeFaces.current();
-                 current.executeScript("PF('wdialog').show();");
-            }      
+
+        if (!carrito.isEmpty()) {
+            agendar = "cliente-disponibilidad";
+        } else {
+            System.out.println("seleccione un servicio");
+            PrimeFaces current = PrimeFaces.current();
+            current.executeScript("PF('wdialog').show();");
+        }
         return agendar;
     }
 
@@ -355,7 +355,7 @@ public class CitaController implements Serializable {
 
     public void actionCancelarCita(Cita cita) {
         try {
-            cita.setEstado("cancelada");
+            cita.setEstado("Cancelada");
             EJBcita.edit(cita);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Cita cancelada"));
         } catch (Exception e) {
@@ -388,42 +388,48 @@ public class CitaController implements Serializable {
             System.out.println(e.getMessage());
         }
     }
-    
-    public Integer calcularTotalServicios(List<Servicios> carrito){
+
+    public Integer calcularTotalServicios(List<Servicios> carrito) {
         System.out.println("calculando");
         Integer suma = 0;
-        
-        try{
-            for(Servicios ser:carrito){
-            suma+=ser.getPrecio();
+
+        try {
+            for (Servicios ser : carrito) {
+                suma += ser.getPrecio();
+            }
+        } catch (Exception e) {
+            System.out.println("" + e.getMessage());
         }
-        }catch(Exception e){
-            System.out.println(""+e.getMessage());
-        }
-        
+
         return suma;
     }
-    
-    public void registrarHorarioEstilista(){
+
+    public void registrarHorarioEstilista() {
         Short dias = 2;
-        try{
+        try {
             horarioE.setDias(dias);
             horarioE.setEstilistausuarioidUsuario(estilista);
             horarioEJB.create(horarioE);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Horario registrado"));
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    public void citasPorFechasEstilista(){
-        try{
-             usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            listaCitaPorFechas = EJBcita.buscarCitaFecha(inicioFecha, finFecha,usuario.getIdUsuario());
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-            
 
+    public void citasPorFechasEstilista() {
+        try {
+            usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+            listaCitaPorFechas = EJBcita.buscarCitaFecha(inicioFecha, finFecha, usuario.getIdUsuario());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public String volverAlInicio() {
+        String inicio = null;
+        inicio = "indexCliente";
+        return inicio;
+    }
+
+ 
 }

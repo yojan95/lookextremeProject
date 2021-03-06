@@ -24,85 +24,105 @@
     </style>
     <ui:define name="content">
         <section>
-           <h:form>
-               <p:outputLabel value="Fecha Inicio"></p:outputLabel>
-               <p:calendar value="#{citaController.inicioFecha}"/>
-               <p:outputLabel value="Fecha fin"></p:outputLabel>
-               <p:calendar  value="#{citaController.finFecha}"/>
-               <p:commandButton value="Buscar" actionListener="#{citaController.citasPorFechasEstilista()}" update="tbl"></p:commandButton>
-               <p:dataTable id="tbl" var="rep" value="#{citaController.listaCitaPorFechas}"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                         paginator="true" rows="10" style="margin-bottom:20px">
-                <f:facet name="{Exporters}">
-                    <div style="float:right;padding-top: 5px;">
+
+            <h:form>
+                <div class="row justify-content-md-start">
+
+                    <div class="col-lg-10 mx-auto">
+                        <div class="row">
+                            <div class="col">
+                                <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
+                                    <a class="navbar-brand"></a>
+                                    <div class="form-inline">
+                                        <p:outputLabel value="Fecha Inicio"></p:outputLabel>
+                                        <p:calendar class="mr-sm-2" type="search"  value="#{citaController.inicioFecha}"/>
+                                        <p:outputLabel  value="Fecha Fin"></p:outputLabel>
+                                        <p:calendar type="search" class="mr-sm-2" value="#{citaController.finFecha}"/>
+                                        <p:commandButton value="Buscar" type="search"  actionListener="#{citaController.citasPorFechasEstilista()}" update="tbl"></p:commandButton>
+                                        <!--<p:calendar class="mr-sm-2"  type="search" placeholder="Buscar"></p:calendar>
+                                        <p:commandButton class="btn btn-outline-primary my-2 my-sm-0"  type="search" value="Buscar"></p:commandButton>-->
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <p:dataTable id="tbl" var="rep" value="#{citaController.listaCitaPorFechas}"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                     paginator="true" rows="10" style="margin-bottom:20px">
+                            <f:facet name="{Exporters}">
+                                <div style="float:right;padding-top: 5px;">
+                                    <h:commandLink>
+                                        <p:graphicImage url="icons/excelmp.png" width="24"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="Reporte_Servicios" />
+                                    </h:commandLink>
+                                    <h:commandLink>
+                                        <p:graphicImage url="icons/pdf.png" width="24"/>
+                                        <p:dataExporter type="pdf" target="tbl" fileName="Reporte_Servicios"/>
+                                    </h:commandLink>                     
+                                </div>
+                            </f:facet>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha " />
+                                </f:facet>
+                                <h:outputText value="#{rep.citaidCita.fecha}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column filterBy="#{rep.citaidCita.estado}">
+                                <f:facet name="header">
+                                    <h:outputText value="Estado"/>
+                                </f:facet>
+                                <h:outputText value="#{rep.citaidCita.estado}" />
+                            </p:column>
+
+                            <p:column filterBy="#{rep.citaidCita.hora}">
+                                <f:facet name="header">
+                                    <h:outputText value="Hora" />
+                                </f:facet>
+                                <h:outputText value="#{rep.citaidCita.hora}" />
+                            </p:column>
+
+                            <p:column filterBy="#{rep.citaidCita.clienteusuarioidUsuario.usuario.nombre}">
+                                <f:facet name="header">
+                                    <h:outputText value="Cliente" />
+                                </f:facet>
+                                <h:outputText value="#{rep.citaidCita.clienteusuarioidUsuario.usuario.nombre}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Estilista" />
+                                </f:facet>
+                                <h:outputText value="#{rep.citaidCita.estilistausuarioidUsuario.usuario.nombre}" />
+                            </p:column>
+
+                            <p:column filterBy="#{rep.serviciosidServicios.nombre}">
+                                <f:facet name="header">
+                                    <h:outputText value="Servicio" />
+                                </f:facet>
+                                <h:outputText value="#{rep.serviciosidServicios.nombre}" />
+                            </p:column>
+
+                        </p:dataTable>
+
                         <h:commandLink>
-                            <p:graphicImage url="icons/excelmp.png" width="24"/>
-                            <p:dataExporter type="xls" target="tbl" fileName="Reporte_Servicios" />
+                            <p:graphicImage name="/demo/images/excel.jpg" />
+                            <p:dataExporter type="xls" target="tbl" fileName="cars" pageOnly="true"/>
                         </h:commandLink>
+
                         <h:commandLink>
-                            <p:graphicImage url="icons/pdf.png" width="24"/>
-                            <p:dataExporter type="pdf" target="tbl" fileName="Reporte_Servicios"/>
-                        </h:commandLink>                     
+                            <p:graphicImage name="/demo/images/pdf.png" />
+                            <p:dataExporter type="pdf" target="tbl" fileName="cars" pageOnly="true" />
+                        </h:commandLink>
+
+                        <p:growl id="messages" showDetail="true" />
+
+
                     </div>
-                </f:facet>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Fecha " />
-                    </f:facet>
-                    <h:outputText value="#{rep.citaidCita.fecha}">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
-                </p:column>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Estado"/>
-                    </f:facet>
-                    <h:outputText value="#{rep.citaidCita.estado}" />
-                </p:column>
-
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Hora" />
-                    </f:facet>
-                    <h:outputText value="#{rep.citaidCita.hora}" />
-                </p:column>
-
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Cliente" />
-                    </f:facet>
-                    <h:outputText value="#{rep.citaidCita.clienteusuarioidUsuario.usuario.nombre}" />
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Estilista" />
-                    </f:facet>
-                    <h:outputText value="#{rep.citaidCita.estilistausuarioidUsuario.usuario.nombre}" />
-                </p:column>
-                
-                   <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Servicio" />
-                    </f:facet>
-                       <h:outputText value="#{rep.serviciosidServicios.nombre}" />
-                </p:column>
-          
-            </p:dataTable>
-
-            <h:commandLink>
-                <p:graphicImage name="/demo/images/excel.jpg" />
-                <p:dataExporter type="xls" target="tbl" fileName="cars" pageOnly="true"/>
-            </h:commandLink>
-
-            <h:commandLink>
-                <p:graphicImage name="/demo/images/pdf.png" />
-                <p:dataExporter type="pdf" target="tbl" fileName="cars" pageOnly="true" />
-            </h:commandLink>
-
-            <p:growl id="messages" showDetail="true" />
- 
-        </h:form>
+                </div>
+            </h:form>
         </section>
     </ui:define>
 </ui:composition>

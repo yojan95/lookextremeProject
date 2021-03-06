@@ -6,7 +6,12 @@ import com.lookextreme.model.Cita;
 import com.lookextreme.model.ServiciosCitas;
 import com.lookextreme.model.Usuario;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -23,6 +28,7 @@ public class CitaConsultarController implements Serializable {
     private Usuario usuario;
     private Cita cita;
     private List<Cita> citalist;
+    private List<Cita> listaCitaEstados;
     private List<Cita> listCitaEstadoImcumpliento;
     @EJB
     private ServiciosCitasFacadeLocal EJBserviciosCitas;
@@ -46,6 +52,7 @@ public class CitaConsultarController implements Serializable {
     }
 
     public List<ServiciosCitas> getListServiciosCita() {
+        
         return ListServiciosCita;
     }
 
@@ -83,6 +90,7 @@ public class CitaConsultarController implements Serializable {
         usuario = new Usuario();
         FacesContext context = FacesContext.getCurrentInstance();
         usuario = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
+       
 
         obtenerCitaPorCliente(usuario.getIdUsuario());
         obtenerCitaPorEstilistas(usuario.getIdUsuario());
@@ -99,6 +107,7 @@ public class CitaConsultarController implements Serializable {
     public void obtenerCitaPorCliente(int idCliente) {
         if (idCliente > 0) {
             try {
+                actualizarEstadoCita();
                 citalist = new ArrayList();
                 citalist = EJBcita.obtenerCitaPorCliente(idCliente);
             } catch (Exception e) {
@@ -108,10 +117,12 @@ public class CitaConsultarController implements Serializable {
     }
 
     private void obtenerCitaPorEstilistas(int idEstilista) {
+        System.out.println("listando citas");
         if (idEstilista > 0) {
             try {
                 ListServiciosCita = new ArrayList();
                 ListServiciosCita = EJBserviciosCitas.obtenerCitaPorEstilistas(idEstilista);
+                System.out.println(ListServiciosCita.size());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -129,6 +140,35 @@ public class CitaConsultarController implements Serializable {
         }
     }
     public boolean rendered(String estado){
-        return !estado.equals("Incumplida") && !estado.equals("cancelada");
+        return !estado.equals("Incumplida") && !estado.equals("Cancelada") && !estado.equals("Cumplida");
+    }
+    
+       /*
+    =================
+    Actualiza automaticamente el estado de la cita solo si el estado es agendada,
+    solo si an pasado 24 horas despues del dia del registro de la cita
+    entonces cambia el estado a cumplida.
+    formatea las fechas para compararlas ya que vienen en distinto formato
+    =================
+     */
+    public void actualizarEstadoCita() {
+        listaCitaEstados = EJBcita.findAll();
+        Date diaActual = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        boolean result;
+        String estadoC = "agendada";
+        try {
+            for (Cita citaE : listaCitaEstados) {                     
+                if (citaE.getEstado().equals(estadoC)) {
+                    if (dateFormat.format(diaActual).compareTo(dateFormat.format(citaE.getFecha()))>0) {
+                        citaE.setEstado("Cumplida");
+                        EJBcita.edit(citaE);
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

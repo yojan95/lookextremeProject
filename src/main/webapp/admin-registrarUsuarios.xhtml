@@ -49,45 +49,45 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <p:outputLabel value="#{msgs['adminRegis.CardFormName']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormNamePlace']}" value="${estilistaController.usuario.nombre}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormNamePlace']}" value="${estilistaController.usuario.nombre}" validatorMessage="El nombre es obligatorio"/>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <p:outputLabel value="#{msgs['adminRegis.CardFormApellido']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormApellidoPlace']}" value="${estilistaController.usuario.apellido}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormApellidoPlace']}" value="${estilistaController.usuario.apellido}" validatorMessage="El apellido es obligatorio"/>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <p:outputLabel value="#{msgs['adminRegis.CardFormFecha']}"/>
-                                            <p:calendar value="${estilistaController.usuario.fechaNacimiento}"/>
+                                            <p:calendar value="${estilistaController.usuario.fechaNacimiento}" validatorMessage="La fecha de Nacimiento es obligatoria"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['adminRegis.CardFormCorreo']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormCorreoPlace']}" value="${estilistaController.usuario.email}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormCorreoPlace']}" value="${estilistaController.usuario.email}" validatorMessage="El correo no es valido"/>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['adminRegis.CardFormContraseña']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormContraseñaPlace']}" value="${estilistaController.usuario.contraseña}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormContraseñaPlace']}" value="${estilistaController.usuario.contraseña}" validatorMessage="La contraseña es obligatoria"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['adminRegis.CardFormTelefono']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormTelefonoPlace']}" value="${estilistaController.usuario.telefono}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormTelefonoPlace']}" value="${estilistaController.usuario.telefono}" validatorMessage="El Telefono es obligatorio"/>
                                         </div>
                                         <div class="form-group col-md-2">
                                             <p:outputLabel value="#{msgs['adminRegis.CardFormEdad']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormEdadPlace']}" value="${estilistaController.usuario.edad}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormEdadPlace']}" value="${estilistaController.usuario.edad}" validatorMessage="La edad es obligatoria"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['adminRegis.CardFormEspecialidades']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormEspecialidadesPlace']}" value="${estilistaController.estilista.especialidades}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormEspecialidadesPlace']}" value="${estilistaController.estilista.especialidades}" validatorMessage="La especialidad es obligatoria"/>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <p:outputLabel value="#{msgs['adminRegis.CardFormDireccion']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormDireccionPlace']}" value="${estilistaController.usuario.direccion}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['adminRegis.CardFormDireccionPlace']}" value="${estilistaController.usuario.direccion}" validatorMessage="La dirección es obligatoria"/>
                                         </div>
                                     </div>
                                 <p:commandButton  value="#{msgs['adminRegis.CardFormBtn']}" class="btn btn-primary" action="${estilistaController.registrarUsuarioEstilista()}"></p:commandButton>

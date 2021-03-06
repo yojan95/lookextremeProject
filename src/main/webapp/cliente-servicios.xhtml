@@ -57,19 +57,26 @@
                         <h:form>
                             <p:panel class="p" header="#{msgs['clienteServicios.servicios']}" >
                                 <p:dataGrid value="${citaController.serviciosList}" var="se" >
-                                    <p:panel header="${se.nombre}" style="height: 250px !important;" >
-                                        <p:panelGrid columns="2" style="border: 0 !important">
-                                            <h:outputText value="#{msgs['clienteServicios.descripcion']}"/>
-                                            <h:outputText value="${se.descripcion}"/>
-                                            <h:outputText value="#{msgs['clienteServicios.precio']}"/>
-                                            <h:outputText value="${se.precio}"/>
+                                    <div class="card text-center" style="width: 18rem;">
+                                        <div class="card-header" style="background-color: #f9fbe7;">
+                                            ${se.nombre}
+                                        </div>
+                                        <br/>
+
+                                        <h:outputText class="card-text" value="${se.descripcion}"/>
+                                        <br/>
+                                        $
+                                        <h:outputText  value="${se.precio}"/>
+                                        
+                                        <div class="card-footer text-muted" style="background-color: #ffffff;border: none">
                                             <p:row>
                                                 <p:column colspan="2">
                                                     <p:commandButton  class="btn btn-outline-light my-2 my-sm-0 btn-block" value="#{msgs['clienteServicios.agregar']}" update=":form1:carrito gro" actionListener="${citaController.actionAgregarServicio(se)}" ></p:commandButton>
                                                 </p:column>
                                             </p:row>
-                                        </p:panelGrid>
-                                    </p:panel>
+                                        </div>
+
+                                    </div>
                                 </p:dataGrid>
                             </p:panel>
                         </h:form>

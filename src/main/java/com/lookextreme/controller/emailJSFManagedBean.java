@@ -25,7 +25,10 @@ import org.primefaces.PrimeFaces;
 /**
  * correo: alookextreme@gmail.com contraseña: S6ZZGNdKSkym8cu
     * heroku contraseña: WRGJKnxHUCUG7t3 WRGJxHUCUG7t3@
+    * port pc home 587
+    * port amazon aws server windows 465
  */
+
 @Named(value = "emailJSFManagedBean")
 @RequestScoped
 public class emailJSFManagedBean {
@@ -42,11 +45,11 @@ public class emailJSFManagedBean {
     public emailJSFManagedBean() {
 
         this.to = null;
-        this.from = "alookextreme@gmail.com";
+        this.from = "lookextreme7@gmail.com";
         this.subject = null;
         this.descr = null;
-        this.username = "alookextreme@gmail.com";
-        this.password = "S6ZZGNdKSkym8cu";
+        this.username = "lookextreme7@gmail.com";
+        this.password = "aYM6Lb9dgUHBmwg";
         this.smtp = "smtp.gmail.com";
         this.port = 587;
         this.descr = null;

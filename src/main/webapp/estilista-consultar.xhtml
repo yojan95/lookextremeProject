@@ -46,12 +46,16 @@
                             </div>
                         </div>
                         <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
-                        <p:dataTable id="tbl_pqrs" var="table_cit" value="#{citaConsultarController.listServiciosCita}" >
+                        <p:dataTable id="tbl" var="table_cit" value="#{citaConsultarController.listServiciosCita}" paginator="true"
+                                     rows="10"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,15">
                             <f:facet name="{Exporters}">
-                                 <h:commandLink>
-                            <p:graphicImage url="icons/excelmp.png" width="24"/>
-                            <p:dataExporter type="xls" target="tbl_pqrs" fileName="usuarios" />
-                        </h:commandLink>
+                                <h:commandLink>
+                                    <p:graphicImage url="icons/excelmp.png" width="24"/>
+                                    <p:dataExporter type="xls" target="tbl" fileName="usuarios" />
+                                </h:commandLink>
                             </f:facet>
                             <p:column filterBy="#{table_cit.citaidCita.idCita}">
                                 <f:facet name="header">#{msgs['estilistaTable.Turno']}</f:facet>
@@ -99,18 +103,22 @@
                                 <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
                                     <a class="navbar-brand">#{msgs['estilistaTable2.HeaderName']}</a>
                                     <div class="form-inline">
-                                        
+
                                     </div>
                                 </nav>
                             </div>
                         </div>
                         <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
-                        <p:dataTable id="tbl_pqrs" var="table_cita" value="#{citaConsultarController.listCitaEstadoImcumpliento}" >
+                        <p:dataTable id="tbl_pqrs" var="table_cita" value="#{citaConsultarController.listCitaEstadoImcumpliento}" paginator="true"
+                                     rows="10"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,15">
                             <f:facet name="{Exporters}">
-                                 <h:commandLink>
-                            <p:graphicImage url="icons/excelmp.png" width="24"/>
-                            <p:dataExporter type="xls" target="tbl_pqrs" fileName="usuarios" />
-                        </h:commandLink>
+                                <h:commandLink>
+                                    <p:graphicImage url="icons/excelmp.png" width="24"/>
+                                    <p:dataExporter type="xls" target="tbl_pqrs" fileName="usuarios" />
+                                </h:commandLink>
                             </f:facet>
                             <p:column filterBy="#{table_cit.idCita}">
                                 <f:facet name="header">#{msgs['estilistaTable.Turno']}</f:facet>

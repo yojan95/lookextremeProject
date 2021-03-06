@@ -34,10 +34,10 @@ and open the template in the editor.
         </style>
     </h:head>
     <h:body>
-          <p:messages showDetail="true" showSummary="false"/>
+          
         <section>
             <h:form>
-              
+              <p:messages showDetail="true" showSummary="false"/>
                 <div class="container">
                     <div class="row justify-content-md-start">
                         <div class="col-lg-8 mx-auto">
@@ -49,54 +49,54 @@ and open the template in the editor.
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <p:outputLabel value="#{msgs['registrarse.FormName']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormNamePlaceholder']}" value="${clienteController.usuario.nombre}"/> 
+                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormNamePlaceholder']}" value="#{clienteController.usuario2.nombre}" validatorMessage="El nombre es obligatorio"/> 
                                         </div>
                                         <div class="form-group col-md-4">
                                             <p:outputLabel value="#{msgs['registrarse.FormApellido']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormApellidoPlaceholder']}" value="${clienteController.usuario.apellido}"/> 
+                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormApellidoPlaceholder']}" value="#{clienteController.usuario2.apellido}" validatorMessage="El apellido es obligatorio"/> 
                                         </div>
                                         <div class="form-group col-md-2">
                                             <p:outputLabel value="#{msgs['registrarse.FormEdad']}"/>
-                                            <p:inputText class="form-control" placeholder="Numero" value="${clienteController.usuario.edad}"/>
+                                            <p:inputText class="form-control" placeholder="Numero" value="${clienteController.usuario2.edad}" validatorMessage="La edad es obligatoria"/>
                                         </div>
 
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['registrarse.FormCorreo']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormCorreoPlaceholder']}" value="${clienteController.usuario.email}">
+                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormCorreoPlaceholder']}" value="#{clienteController.usuario2.email}" validatorMessage="El correo no es valido">
                                                  <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                             </p:inputText>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['registrarse.FormContraseña']}"/>
-                                            <p:inputText type="password" class="form-control" placeholder="#{msgs['registrarse.FormContraseñaPlaceholder']}" value="${clienteController.usuario.contraseña}"/>
+                                            <p:inputText type="password" class="form-control" placeholder="#{msgs['registrarse.FormContraseñaPlaceholder']}" value="#{clienteController.usuario2.contraseña}" validatorMessage="La contraseña es obligatoria"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['registrarse.FormTelefono']}"/>
-                                            <p:inputText class="form-control" placeholder="Numero" value="${clienteController.usuario.telefono}"/>
+                                            <p:inputText class="form-control" placeholder="Numero" value="#{clienteController.usuario2.telefono}" validatorMessage="El Telefono es obligatorio"/>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <p:outputLabel value="#{msgs['registrarse.FormFechaNaci']}"/>
-                                            <p:calendar value="${clienteController.usuario.fechaNacimiento}" />
+                                            <p:calendar value="#{clienteController.usuario2.fechaNacimiento}" validatorMessage="La fecha de Nacimiento es obligatoria"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                        <div class="form-group col-md-4">
                                             <p:outputLabel value="Cedula"/>
-                                            <p:inputText class="form-control" placeholder="Cedula" required="true" value="#{clienteController.cliente.cedula}">
+                                            <p:inputText class="form-control" placeholder="Cedula" validatorMessage="La cedula es obligatoria" value="#{clienteController.cliente.cedula}" >
                                                 <f:validateLength minimum="6" maximum="10"/>
                                             </p:inputText>
                                             
                                         </div>
                                         <div class="form-group col-md-6">
                                             <p:outputLabel value="#{msgs['registrarse.FormDireccion']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormDireccionPlaceholder']}" value="${clienteController.usuario.direccion}"/>
+                                            <p:inputText class="form-control" placeholder="#{msgs['registrarse.FormDireccionPlaceholder']}" value="#{clienteController.usuario2.direccion}" validatorMessage="La dirección es obligatoria"/>
                                         </div>
                                     </div>
-                                    <p:commandButton  value="#{msgs['registrarse.FormBtnEnviar']}" class="btn btn-primary" action="${clienteController.registrarUsuario()}"></p:commandButton>
+                                    <p:commandButton  value="#{msgs['registrarse.FormBtnEnviar']}" class="btn btn-primary" action="#{clienteController.registrarUsuario()}"></p:commandButton>
                                 </div>
                             </div>
                         </div>

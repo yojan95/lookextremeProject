@@ -6,7 +6,6 @@ import com.lookextreme.model.Cliente;
 import com.lookextreme.model.Roles;
 import com.lookextreme.model.Usuario;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -22,12 +21,23 @@ public class ClienteController implements Serializable {
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
     private Usuario usuario;
+    private Usuario usuario2;
     private Roles roles;
 
     @EJB
     private ClienteFacadeLocal clienteEJB;
     private Cliente cliente;
     private List<Cliente> listaDatosCliente;
+
+    public Usuario getUsuario2() {
+        return usuario2;
+    }
+
+    public void setUsuario2(Usuario usuario2) {
+        this.usuario2 = usuario2;
+    }
+    
+    
 
     public List<Cliente> getListaDatosCliente() {
         return listaDatosCliente;
@@ -37,7 +47,7 @@ public class ClienteController implements Serializable {
         this.listaDatosCliente = listaDatosCliente;
     }
 
-    public Usuario getUsuario() {
+        public Usuario getUsuario() {
         return usuario;
     }
 
@@ -55,6 +65,7 @@ public class ClienteController implements Serializable {
 
     @PostConstruct
     public void init() {
+        usuario2 = new Usuario();
         usuario = new Usuario();
         cliente = new Cliente();
         roles = new Roles();
@@ -66,12 +77,12 @@ public class ClienteController implements Serializable {
         String redireccion = null;
 
         try {
-            Roles roles = new Roles();
-            roles.setIdRoles(3);
-            roles.setTiporoles("Cliente");
-            usuario.setRolesidRoles(roles);
-            usuarioEJB.create(usuario);
-            registrarCliente(usuario);
+            Roles roles1 = new Roles();
+            roles1.setIdRoles(3);
+            roles1.setTiporoles("Cliente");
+            usuario2.setRolesidRoles(roles1);
+            usuarioEJB.create(usuario2);
+            registrarCliente(usuario2);
             redireccion = "login";
         } catch (Exception e) {
             System.out.println(e.getMessage());
