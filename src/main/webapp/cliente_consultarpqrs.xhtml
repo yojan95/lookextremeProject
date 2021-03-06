@@ -43,7 +43,7 @@
                                     #{msgs['clientePqrs.tablaAnexos']}
                                 </f:facet>
                                 <h:outputText rendered="#{table_pqrs.anexos == null}" value="Sin anexos" />
-                                <p:commandButton  type="submit" rendered="#{table_pqrs.anexos != null }" value="#{msgs['clientePqrs.tablaBtn']}" ajax="false" actionListener="#{pqrsController.downloadAnexos(table_pqrs.anexos)}">                                    
+                                <p:commandButton  type="submit" rendered="#{table_pqrs.anexos != null }" value="#{msgs['clientePqrs.tablaBtn']}" ajax="false" actionListener="#{pqrsController.downloadAnexos(table_pqrs.anexos, table_pqrs.extension_anexo)}">                                    
                                     <p:fileDownload value="#{pqrsController.downloadFile}"/>
                                 </p:commandButton>                                
                             </p:column>

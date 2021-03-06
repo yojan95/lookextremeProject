@@ -7,22 +7,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
      <f:view locale="#{controllerTranslation.local}" />
-    <style>
-        section {
-            padding: 40px 40px;
-            height: auto;
-            min-height: 200px;
-        }                        
-        #services,
-        #contact {
-            padding: 50px;
-        }
-
-        #services {
-            background-color: #dfe4ea;
-        }
-
-    </style>
+    
     <ui:define name="content">
 
         <!-- acerca de look -->
@@ -38,50 +23,55 @@
             </div>
         </section>
         <!-- servicios -->
-        <section id="services">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card" style="width: 15rem;">
-                            <!-- 600x800 -->
-                            <img src="images/CorteFemenino.jpg" class="card-img-top"/>
-                            <div class="card-body">
-                                <h5 class="card-title">#{msgs['landing.CardTitle1']}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 offset-md-1">
-                        <div class="card" style="width: 15rem;">
-                            <img src="images/corteMasculino.jpg" width="220px" class="card-img-top"/>
-                            <div class="card-body">
-                                <h5 class="card-title">#{msgs['landing.CardTitle2']}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 offset-md-1 ">
-                        <div class="card" style="width: 15rem;">
-                            <img src="images/nails.jpg" width="220px" class="card-img-top"/>
-                            <div class="card-body">
-                                <h5 class="card-title">#{msgs['landing.CardTitle3']}</h5>
-                            </div>
+        <section id="services" style="background-color: #eceff1;" class="container-fluid">            
+            <div class="row justify-content-around">
+                <div class="col-4">
+                    <div class="card" >                        
+                        <img src="images/CorteFemenino.jpg" class="card-img-top"/>
+                        <div class="card-body">
+                            <h5 class="card-title">#{msgs['landing.CardTitle1']}</h5>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3 offset-md-2">
-                        <div class="card" style="width: 15rem;">
-                            <img src="images/Maquillaje.jpg" width="220px" class="card-img-top"/>
-                            <div class="card-body">
-                                <h5 class="card-title">#{msgs['landing.CardTitle4']}</h5>
-                            </div>
+                <div class="col-4 ">
+                    <div class="card" >
+                        <img src="images/corteMasculino.jpg"  class="card-img-top"/>
+                        <div class="card-body">
+                            <h5 class="card-title">#{msgs['landing.CardTitle2']}</h5>
                         </div>
                     </div>
-                    <div class="col-md-3 offset-md-1">
-                        <div class="card" style="width: 15rem;">
-                            <img src="images/Peinado.jpg" width="220px" class="card-img-top"/>
-                            <div class="card-body">
-                                <h5 class="card-title">#{msgs['landing.CardTitle5']}</h5>
-                            </div>
+                </div>
+                <div class="col-4 ">
+                    <div class="card" >
+                        <img src="images/nails.jpg"  class="card-img-top"/>
+                        <div class="card-body">
+                            <h5 class="card-title">#{msgs['landing.CardTitle3']}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-around mt-5">
+                <div class="col-4">
+                    <div class="card">
+                        <img src="images/Maquillaje.jpg"  class="card-img-top"/>
+                        <div class="card-body">
+                            <h5 class="card-title">#{msgs['landing.CardTitle4']}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <img src="images/Peinado.jpg"  class="card-img-top"/>
+                        <div class="card-body">
+                            <h5 class="card-title">#{msgs['landing.CardTitle5']}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <img src="images/Corte_Hombre.jpg"  class="card-img-top"/>
+                        <div class="card-body">
+                            <h5 class="card-title">#{msgs['landing.CardTitle6']}</h5>
                         </div>
                     </div>
                 </div>
