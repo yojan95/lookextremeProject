@@ -40,6 +40,7 @@
                             </div>
                             <div class="card-body">
                                 <h:form >
+                                    <p:growl id="gro" showDetail="true" sticky="false" />
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <p:outputLabel value="#{msgs['clienteDisponibilidad.estilistas']}" />
@@ -52,9 +53,10 @@
                                             <p:calendar value="${citaController.cita.fecha}" validatorMessage="La fecha es obligatoria" id="fecha"/>
                                         </div>
                                         <div class="form-inline col-4 align-items-center">
-                                            <p:commandButton class="btn btn-primary my-1" value="#{msgs['clienteDisponibilidad.verificarDisponibilidad']}" actionListener="#{citaController.verificarDisponibilidad()}" style="margin: 10px" update=":form1:oneMenu"></p:commandButton>
+                                            <p:commandButton class="btn btn-primary my-1" value="#{msgs['clienteDisponibilidad.verificarDisponibilidad']}" actionListener="#{citaController.verificarDisponibilidad()}" style="margin: 10px" update=":form1:oneMenu input1"></p:commandButton>
                                         </div> 
                                     </div>
+                                     <h:outputFormat value="#{citaController.fechaNoValida}" id="input1"/>
                                 </h:form>
                                 <h:form id="form1">
                                     <div class="form-row">
@@ -68,6 +70,7 @@
                                             <p:commandButton class="btn btn-primary my-1 ml-5" value="#{msgs['clienteDisponibilidad.agendarCita']}" action="${citaController.registrarCita()}" style="display: inline-block"/>
                                         </div>                                        
                                     </div>
+                                   
                                 </h:form>
                             </div>
                         </div>

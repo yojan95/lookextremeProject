@@ -153,20 +153,25 @@ public class CitaConsultarController implements Serializable {
      */
     public void actualizarEstadoCita() {
         listaCitaEstados = EJBcita.findAll();
-        Date diaActual = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.HOUR_OF_DAY, 5);
+        Date fecha = cal.getTime();
+       // Date diaActual = new Date();
+        
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        boolean result;
         String estadoC = "agendada";
         try {
             for (Cita citaE : listaCitaEstados) {                     
                 if (citaE.getEstado().equals(estadoC)) {
-                    if (dateFormat.format(diaActual).compareTo(dateFormat.format(citaE.getFecha()))>0) {
+                    if (dateFormat.format(fecha).compareTo(dateFormat.format(citaE.getFecha()))>0) {
                         citaE.setEstado("Cumplida");
                         EJBcita.edit(citaE);
-                    }
+                     }
                 }
 
             }
+            System.out.println(cal);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

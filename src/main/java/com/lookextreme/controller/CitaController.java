@@ -43,7 +43,7 @@ public class CitaController implements Serializable {
     private List<Cita> busquedaCitaList;
     private List<ServiciosCitas> listaCitaPorFechas;
     private Date inicioFecha, finFecha;
-    
+    private String FechaNoValida;
     @EJB
     private EstilistaFacadeLocal EJBestilista;
     private Estilista estilista;
@@ -72,6 +72,16 @@ public class CitaController implements Serializable {
     @EJB
     private HorarioFacadeLocal horarioEJB;
     private Horario horarioE;
+
+    public String getFechaNoValida() {
+        return FechaNoValida;
+    }
+
+    public void setFechaNoValida(String FechaNoValida) {
+        this.FechaNoValida = FechaNoValida;
+    }
+    
+    
 
     public List<ServiciosCitas> getListaCitaPorFechas() {
         return listaCitaPorFechas;
@@ -215,7 +225,7 @@ public class CitaController implements Serializable {
         usuario = new Usuario();
         horarioE = new Horario();
         listarEstilistas();
-        
+
     }
 
     public String registrarCita() throws Exception {
@@ -371,19 +381,37 @@ public class CitaController implements Serializable {
             System.out.println(e.getMessage());
         }
     }
-
+       /*
+    =================
+    Verificar la disponibilidad de la cita y valida el rango de la fecha que este estre un maximo
+    15 dias para poder agendar
+    =================
+     */
     public void verificarDisponibilidad() {
+        Calendar fecha = Calendar.getInstance();
+        fecha.setTime(new Date());
+        fecha.add(Calendar.HOUR_OF_DAY, -5);
+        fecha.add(Calendar.DATE, 15);
 
         try {
-            if (estilista.getUsuarioidUsuario() > 0) {
-                List<HorarioDisponibilidad> horarios = EJBcita.verificarDisponibilidad(estilista.getUsuarioidUsuario(), cita.getFecha());
-                horarioListItem = new ArrayList();
-                for (HorarioDisponibilidad horario : horarios) {
-                    if ("libre".equals(horario.getEstado().toLowerCase())) {
-                        horarioListItem.add(new SelectItem(horario.getHora() + ":00:00", Integer.toString(horario.getHora()) + ":00:00"));
+            if (cita.getFecha().before(fecha.getTime())) {
+
+                if (estilista.getUsuarioidUsuario() > 0) {
+                    List<HorarioDisponibilidad> horarios = EJBcita.verificarDisponibilidad(estilista.getUsuarioidUsuario(), cita.getFecha());
+                    horarioListItem = new ArrayList();
+                    for (HorarioDisponibilidad horario : horarios) {
+                        if ("libre".equals(horario.getEstado().toLowerCase())) {
+                            horarioListItem.add(new SelectItem(horario.getHora() + ":00:00", Integer.toString(horario.getHora()) + ":00:00"));
+                        }
                     }
                 }
+            }else{
+                System.out.println("fecha no valida");
+                FechaNoValida= "La fecha limite para buscar una cita es de 15 dias";
+                FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Aviso", "El limite de la fecha es 15 dias"));
             }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -431,5 +459,4 @@ public class CitaController implements Serializable {
         return inicio;
     }
 
- 
 }
