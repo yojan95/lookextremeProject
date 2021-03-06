@@ -124,10 +124,8 @@ public class PqrsController implements Serializable {
 
     private void showMessage(String messageText) {
         try {
-            FacesMessage message;
             FacesContext context = FacesContext.getCurrentInstance();
-            message = new FacesMessage(messageText);            
-            context.addMessage(null, message);
+            context.addMessage(null, new FacesMessage("Aviso", messageText));            
         } catch (Exception e) {
             System.out.println("showMessageError : " + e.getMessage());
         }
@@ -146,10 +144,12 @@ public class PqrsController implements Serializable {
             pqrs.setClienteusuarioidUsuario(cliente);
             if ( file != null  && file.getSize() > 0) {
                 pqrs.setAnexos(file.getContent());
+                int posicionExtension = file.getFileName().lastIndexOf(".");
+                pqrs.setExtension_anexo(file.getFileName().substring(posicionExtension));
             }
             EjbPqrs.create(pqrs);
             pqrs = new Pqrs();
-            showMessage("Pqrs creado correctamente");            
+            showMessage("Pqrs creado correctamente");
         } catch (Exception e) {
             showMessage("No pudo ser creado correctamente el PQRS.");
             System.out.println("Crear Pqrs Error: " + e.getMessage());
@@ -197,17 +197,22 @@ public class PqrsController implements Serializable {
                 smtp.setDescr(pqrs.getRespuesta());
                 smtp.setFrom("lookextrem@notificaciones.co");
                 smtp.enviarCorreo();
+                obtenerPqrsAdministrador();                
+                showMessage("Respuesta guardada correctamente");
             }
         } catch (MessagingException e) {
+            showMessage("No se pudo guardar la respuesta.");
             System.out.println("guardar respuesta error: " + e.getMessage());
         }
     }
 
-    public void downloadAnexos(byte[] anexos) {
+    
+    
+    public void downloadAnexos(byte[] anexos, String extension) {
         try {
             InputStream stream = new BufferedInputStream(new ByteArrayInputStream(anexos));
             String mimetype = URLConnection.guessContentTypeFromStream(stream);
-            downloadFile = new DefaultStreamedContent(stream, mimetype, "descarga.pdf");            
+            downloadFile = new DefaultStreamedContent(stream, mimetype, "descarga" + extension);            
         } catch (IOException e) {
             System.out.println("descargar anexo error..: " + e.getMessage());
         }

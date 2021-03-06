@@ -10,7 +10,7 @@
     <f:view locale="#{controllerTranslation.local}" />
     <ui:define name="content">
         <h:form>
-            <section class="container">
+            <section class="container">                
                 <div class="row justify-content-md-start">
                     <div class="col col-lg-12">
                         <h:outputLabel id="lbl_pqrs" style="display: none;" >No se encontraron PQRS</h:outputLabel>
@@ -42,7 +42,7 @@
                                     #{msgs['clientePqrs.tablaAnexos']}
                                 </f:facet>
                                 <h:outputText rendered="#{table_pqrs.anexos == null}" value="Sin anexos" />
-                                <p:commandButton  type="submit" rendered="#{table_pqrs.anexos != null }" value="#{msgs['clientePqrs.tablaBtn']}" ajax="false" actionListener="#{pqrsController.downloadAnexos(table_pqrs.anexos)}">                                    
+                                <p:commandButton  type="submit" rendered="#{table_pqrs.anexos != null }" value="#{msgs['clientePqrs.tablaBtn']}" ajax="false" actionListener="#{pqrsController.downloadAnexos(table_pqrs.anexos, table_pqrs.extension_anexo)}">                                    
                                     <p:fileDownload value="#{pqrsController.downloadFile}"/>
                                 </p:commandButton>                                
                             </p:column>
@@ -61,7 +61,8 @@
                     </div>
                 </div>
             </section>            
-            <p:dialog header="#{msgs['adminPqrs.Header']}" id="PQRSmodal" widgetVar="dialog_pqrs" modal="true" width="600" height="450">                
+            <p:dialog header="#{msgs['adminPqrs.Header']}" id="PQRSmodal" style="margin-top:80px;"  widgetVar="dialog_pqrs" modal="true" width="600" height="450">                
+                <p:growl id="gro" showDetail="true" sticky="false"/>
                 <div class="form-group">
                     <p:outputLabel for="txt_tipo" class="col-form-label" value="#{msgs['adminModal.tipoPqrs']}"/>
                     <h:outputText value="#{pqrsController.pqrs.tipopqrsidTipoPQRS.tipoPQRS}" class="form-control" id="txt_tipo" />

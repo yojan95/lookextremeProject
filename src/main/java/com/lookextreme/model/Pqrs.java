@@ -84,7 +84,10 @@ public class Pqrs implements Serializable {
     @JoinColumn(name = "tipo_pqrs_idTipo_PQRS", referencedColumnName = "idTipo_PQRS")
     @ManyToOne(optional = false)
     private TipoPqrs tipopqrsidTipoPQRS;
-
+    @Size(min = 1, max = 10)
+    @Column(name = "extension_anexo")
+    private String extension_anexo;
+    
     public Pqrs() {
     }
 
@@ -179,6 +182,16 @@ public class Pqrs implements Serializable {
     public void setTipopqrsidTipoPQRS(TipoPqrs tipopqrsidTipoPQRS) {
         this.tipopqrsidTipoPQRS = tipopqrsidTipoPQRS;
     }
+
+    public String getExtension_anexo() {
+        return extension_anexo;
+    }
+
+    public void setExtension_anexo(String extension_anexo) {
+        this.extension_anexo = extension_anexo;
+    }
+    
+    
 
     @Override
     public int hashCode() {
