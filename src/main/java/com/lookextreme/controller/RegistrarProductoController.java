@@ -13,6 +13,7 @@ import com.lookextreme.model.Nombreproducto;
 import com.lookextreme.model.Estilista;
 import com.lookextreme.model.Usuario;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -151,8 +152,9 @@ public class RegistrarProductoController implements Serializable {
     
     public void registrarProductos(){
         System.out.println("Producto Registrado");
-        
+        Date actual =  new Date();
         try {
+           if(productos.getFechaVencimiento().after(actual) ){
             productos.setCategoriasIdcategorias(categorias);
             productos.setNombreProductoidNombreProducto(nombrep);            
             productos.setMarcaIdmarca(marcas);                                     
@@ -160,10 +162,16 @@ public class RegistrarProductoController implements Serializable {
             administrador.setUsuarioidUsuario(usuario.getIdUsuario());
             productos.setAdministradorusuarioidUsuario(administrador);
             productos.setEstado("registrado");
+            //productos = new Productos();
             //productos.setMarca("marcel france");
             //productos.setNombre("esmalte");
             productoEJB.create(productos);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto registrado"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto registrado"));   
+           }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "la fecha no es valida"));   
+               System.out.println("la fecha no es valida");
+           }
+            
         }catch (Exception e){
             System.out.println(e.getMessage()); 
             
