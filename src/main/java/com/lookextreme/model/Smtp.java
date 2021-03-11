@@ -27,8 +27,8 @@ public class Smtp {
     private String from;
     private String subject;
     private String descr;
-    private final String username = "alookextreme@gmail.com";
-    private final String password = "S6ZZGNdKSkym8cu";
+    private final String username = "lookextreme7@gmail.com";
+    private final String password = "aYM6Lb9dgUHBmwg";
     private final String smtp = "smtp.gmail.com";
     private final int port = 587;
 
