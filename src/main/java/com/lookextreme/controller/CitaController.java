@@ -80,8 +80,6 @@ public class CitaController implements Serializable {
     public void setFechaNoValida(String FechaNoValida) {
         this.FechaNoValida = FechaNoValida;
     }
-    
-    
 
     public List<ServiciosCitas> getListaCitaPorFechas() {
         return listaCitaPorFechas;
@@ -230,20 +228,34 @@ public class CitaController implements Serializable {
 
     public String registrarCita() throws Exception {
         String redireccionar = null;
+        Calendar fecha = Calendar.getInstance();
+        fecha.setTime(new Date());
+        Date diaAtual = new Date();
         try {
-            usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            cliente.setUsuarioidUsuario(usuario.getIdUsuario());
-            cita.setClienteusuarioidUsuario(cliente);
-            cita.setEstilistausuarioidUsuario(estilista);
-            cita.setEstado("agendada");
-            serviciosCitas.setServiciosidServicios(servicios);
-            serviciosCitas.setCitaidCita(cita);
-            serviciosCitas.setIdServiciocita(1);
-            EJBcita.create(cita);
-            insertarServicioCita(cita);
-            System.out.println(cita.getIdCita());
-            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registro su cita"));
-            redireccionar = "cliente-citaRegistradaExito";
+            if (cita.getFecha().after(diaAtual)) {
+                usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+                cliente.setUsuarioidUsuario(usuario.getIdUsuario());
+                cita.setClienteusuarioidUsuario(cliente);
+                cita.setEstilistausuarioidUsuario(estilista);
+                cita.setEstado("agendada");
+                serviciosCitas.setServiciosidServicios(servicios);
+                serviciosCitas.setCitaidCita(cita);
+                serviciosCitas.setIdServiciocita(1);
+                EJBcita.create(cita);
+                insertarServicioCita(cita);
+                System.out.println(cita.getIdCita());
+                //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registro su cita"));
+                redireccionar = "cliente-citaRegistradaExito";
+                cita = new Cita();
+                carrito = new ArrayList<>();
+                totalServicio = 0;
+                horarioListItem = new ArrayList<>();
+            } else {
+                System.out.println("fecha no valida1");
+                PrimeFaces current = PrimeFaces.current();
+                current.executeScript("PF('wdialog1').show();");
+            }
+
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
         }
@@ -299,9 +311,16 @@ public class CitaController implements Serializable {
     public String validarServicio() {
         System.out.println("validando servicio");
         String agendar = null;
+        Integer servicioAgregado = 1;
 
         if (!carrito.isEmpty()) {
-            agendar = "cliente-disponibilidad";
+            if (carrito.size() <= 1) {
+                agendar = "cliente-disponibilidad";
+            } else {
+                PrimeFaces current = PrimeFaces.current();
+                current.executeScript("PF('wdialog1').show();");
+            }
+
         } else {
             System.out.println("seleccione un servicio");
             PrimeFaces current = PrimeFaces.current();
@@ -317,6 +336,7 @@ public class CitaController implements Serializable {
     =================
      */
     public void insertarServicioCita(Cita cita) {
+
         try {
             for (Servicios servicio : carrito) {
                 serviciosCitas = new ServiciosCitas();
@@ -381,7 +401,8 @@ public class CitaController implements Serializable {
             System.out.println(e.getMessage());
         }
     }
-       /*
+
+    /*
     =================
     Verificar la disponibilidad de la cita y valida el rango de la fecha que este estre un maximo
     15 dias para poder agendar
@@ -402,14 +423,15 @@ public class CitaController implements Serializable {
                     for (HorarioDisponibilidad horario : horarios) {
                         if ("libre".equals(horario.getEstado().toLowerCase())) {
                             horarioListItem.add(new SelectItem(horario.getHora() + ":00:00", Integer.toString(horario.getHora()) + ":00:00"));
+
                         }
                     }
                 }
-            }else{
+            } else {
                 System.out.println("fecha no valida");
-                FechaNoValida= "La fecha limite para buscar una cita es de 15 dias";
+                FechaNoValida = "La fecha limite para buscar una cita es de 15 dias";
                 FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Aviso", "El limite de la fecha es 15 dias"));
+                context.addMessage(null, new FacesMessage("Aviso", "El limite de la fecha es 15 dias"));
             }
 
         } catch (Exception e) {
@@ -458,5 +480,9 @@ public class CitaController implements Serializable {
         inicio = "indexCliente";
         return inicio;
     }
-
+    
+    public boolean renderizarBotonRegistrar(){
+        //Date diaActual = new Date();
+        return cita.getFecha() != null;
+    }
 }
