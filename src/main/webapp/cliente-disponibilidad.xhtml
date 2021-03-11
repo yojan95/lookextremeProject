@@ -20,12 +20,17 @@
             }
             .ui-widget-header {
                 background-color: #000;
-                background: #000000;
+                background: #f9fbe7 !important;
             }
 
             .ui-dialog .ui-dialog-titlebar {
 
-                color: white;
+                color: #6c757d !important;
+            }
+            .ui-dialog {
+               
+                width: 250px !important;
+                margin: auto;
             }
 
         </style>
@@ -56,7 +61,7 @@
                                             <p:commandButton class="btn btn-primary my-1" value="#{msgs['clienteDisponibilidad.verificarDisponibilidad']}" actionListener="#{citaController.verificarDisponibilidad()}" style="margin: 10px" update=":form1:oneMenu input1"></p:commandButton>
                                         </div> 
                                     </div>
-                                     <h:outputFormat value="#{citaController.fechaNoValida}" id="input1"/>
+                                    <h:outputFormat value="#{citaController.fechaNoValida}" id="input1"/>
                                 </h:form>
                                 <h:form id="form1">
                                     <div class="form-row">
@@ -67,10 +72,15 @@
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="col-sm">
-                                            <p:commandButton class="btn btn-primary my-1 ml-5" value="#{msgs['clienteDisponibilidad.agendarCita']}" action="${citaController.registrarCita()}" style="display: inline-block"/>
+                                            <p:commandButton class="btn btn-primary my-1 ml-5" value="#{msgs['clienteDisponibilidad.agendarCita']}" action="${citaController.registrarCita()}" style="display: inline-block" />
                                         </div>                                        
                                     </div>
-                                   
+                                    <p:dialog id="dialog1" widgetVar="wdialog1" modal="true" header="Aviso" style="width: 100px;">
+
+                                        <p:graphicImage value = "/images/exclamation.svg" style="width: 50px; display: block;
+                                                        margin:auto;"/>
+                                        <h5 style="text-align: center;">Fecha no valida</h5>
+                                    </p:dialog>
                                 </h:form>
                             </div>
                         </div>
