@@ -9,6 +9,7 @@ import com.lookextreme.model.Servicios;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +28,20 @@ public class ServiciosFacade extends AbstractFacade<Servicios> implements Servic
 
     public ServiciosFacade() {
         super(Servicios.class);
+    }
+    
+    @Override
+    public void updateService(Servicios servicios){
+        try{
+            Query q = em.createNativeQuery("UPDATE servicios SET Descripcion = ?, Precio = ?, Nombre = ? WHERE idServicios = ?");
+            q.setParameter(1, servicios.getDescripcion());
+            q.setParameter(1, servicios.getPrecio());
+            q.setParameter(1, servicios.getNombre());
+            q.setParameter(4, servicios.getIdServicios());
+            q.executeUpdate();
+        }catch(Exception e){
+            System.out.println("Error en la consulta"+e.getMessage());
+        }
     }
     
 }

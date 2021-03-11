@@ -37,14 +37,14 @@
                                                         <div class="form-row">
                                                             <div class="col">
                                                                 <p:outputLabel value="#{msgs['adminCard.Name']}"/>
-                                                                <p:inputText  class="form-control" value="#{serviciosController.servicios.nombre}" >
+                                                                <p:inputText  class="form-control" value="#{serviciosController.servicios.nombre}"  validatorMessage="El nombre es obligatorio">
                                                                     <!--<f:validateRegex pattern="^([a-zA-Z]+(.)?[\S]*)$"/>-->
                                                                 </p:inputText>
                                                             </div>
                                                             <div class="col">
                                                                 <p:outputLabel value="#{msgs['adminCard.Precio']}"/>
 
-                                                                <p:inputNumber  value="#{serviciosController.servicios.precio}" >
+                                                                <p:inputNumber  value="#{serviciosController.servicios.precio}" validatorMessage="El precio es obligatorio">
                                                                     <!--<f:validateLength minimum="6" maximum="7"/>-->
                                                                 </p:inputNumber>
                                                             </div>
@@ -52,7 +52,7 @@
                                                         <div class="form-row">
                                                             <div class="col">
                                                                 <p:outputLabel value="#{msgs['adminCard.Descripcion']}"/>
-                                                                <p:inputTextarea  class="form-control" value="#{serviciosController.servicios.descripcion}" >
+                                                                <p:inputTextarea  class="form-control" value="#{serviciosController.servicios.descripcion}" validatorMessage="La descripcion es obligatoria">
                                                                     <!--<f:validateRegex pattern="^([a-zA-Z]+(.)?[\S]*)$"/>-->
                                                                 </p:inputTextarea>
                                                             </div>
@@ -73,7 +73,7 @@
                                             <div class="card-body">
                                                 <h:form enctype="multipart/form-data" >                                                      
                                                     <p:outputLabel value="#{msgs['adminCard1.Label']}"/><br/>
-                                                    <p:fileUpload value="#{cargaDatosServiciosController.file}" mode="simple" skinSimple="true" />
+                                                    <p:fileUpload value="#{cargaDatosServiciosController.file}" mode="simple" skinSimple="true" accept=".xlsx,application/msexcel"/>
                                                     <p:commandButton value="#{msgs['adminCard1.Btn']}" ajax="false"
                                                                      action="#{cargaDatosServiciosController.cargarServicios()}" />
                                                     <p:link value="Servicios" href="js/servicios.xlsx"></p:link>
