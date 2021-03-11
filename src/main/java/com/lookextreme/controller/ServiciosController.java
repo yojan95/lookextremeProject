@@ -5,6 +5,7 @@ import com.lookextreme.Dao.ServiciosFacadeLocal;
 import com.lookextreme.model.Servicios;
 import java.io.Serializable;
 import java.util.List;
+import java.util.ListIterator;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -90,6 +91,16 @@ public class ServiciosController implements Serializable{
         redireccionar = "admin-GestionarServicios";
         
         return redireccionar;
+    }
+    
+    public void deleteService(Servicios se){
+        try{
+        
+            EJBservicios.updateService(se);
+         
+        }catch(Exception e){
+            System.out.println("error al eliminar el servicio"+e.getMessage());
+        }
     }
 
 }

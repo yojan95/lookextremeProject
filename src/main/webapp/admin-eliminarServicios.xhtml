@@ -13,7 +13,7 @@
              <p:messages showDetail="true" showSummary="false">
                     <p:autoUpdate rendered="true"/>
                 </p:messages>
-            <h:form>
+            <h:form id="form1">
                
 
                 <div class="row justify-content-md-start">
@@ -23,10 +23,7 @@
                             <div class="col">
                                 <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
                                     <a class="navbar-brand"></a>
-                                    <p:commandButton icon="ui-icon-document
-                                                     " value="#{msgs['adminBtn.GestionarServicios']}" action="#{serviciosController.irActualizar()}"></p:commandButton>
-                                    <p:commandButton icon="ui-icon-trash
-                                                     " value="#{msgs['adminBtn1.GestionarServicios']}" action="#{serviciosController.irAeliminar()}"></p:commandButton>
+                                 
                                     <div class="form-inline">
 
                                     </div>
@@ -34,7 +31,7 @@
                             </div>
                         </div>
                         <h:outputLabel style="display:none;" value="No se encontraron PQRS asignados"></h:outputLabel>
-                        <p:dataTable id="tab" var="table_servicios" value="#{serviciosController.listaServicios}" >
+                        <p:dataTable id="UserTable" var="table_servicios" value="#{serviciosController.listaServicios}" >
                             <f:facet name="{Exporters}">
                                 <h:commandLink>
                                     <p:graphicImage url="icons/excelmp.png" width="24"/>
@@ -59,17 +56,17 @@
 
                             <p:column>
                                 <f:facet name="header"></f:facet>
-                                <p:commandButton value="#{msgs['adminTable.BtnEliminar']}" actionListener="#{serviciosController.eliminarServicio(table_servicios)}" update="@form" >
-                               
+                                <p:commandLink value="#{msgs['adminTable.BtnEliminar']}" actionListener="#{serviciosController.eliminarServicio(table_servicios)}" update="form1:UserTable" ajax="true"> 
+                                    <f:event type="preRenderView" listener="#{serviciosController.init()}"/>
                                     <p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>
-                                </p:commandButton>
+                                </p:commandLink>
                             </p:column>
                         </p:dataTable>
 
                     </div>
                 </div>
-                  <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                      <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" id="dialogConfirm">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="form1" immediate="true" global="false"/>
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                 </p:confirmDialog>
             </h:form>        

@@ -23,6 +23,8 @@ public interface ServiciosFacadeLocal {
     void remove(Servicios servicios);
 
     Servicios find(Object id);
+    
+    void updateService(Servicios servicios);
 
     List<Servicios> findAll();
 

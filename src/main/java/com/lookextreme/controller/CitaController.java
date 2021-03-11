@@ -290,7 +290,15 @@ public class CitaController implements Serializable {
     =================
      */
     public List<Servicios> agregarServicio(List<Servicios> carrito, Servicios se) {
-        carrito.add(se);
+        if (carrito.size()< 1) {
+            carrito.add(se);
+        }else{
+            PrimeFaces current = PrimeFaces.current();
+            current.executeScript("PF('wdialog1').show();");
+        }
+            
+       
+        
 
         return carrito;
     }
