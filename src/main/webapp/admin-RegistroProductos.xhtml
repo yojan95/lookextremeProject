@@ -73,7 +73,7 @@ and open the template in the editor.
                         </div>                    
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.Tamaño']}" />                                        
-                            <p:inputText  class="form-control" id="Descripcion"  value="${registrarProductoController.productos.tamaño}"  validatorMessage="El tamaño debe ser un numero mayor de cero"><f:validateLongRange minimum="0" /></p:inputText>
+                            <p:inputText  class="form-control" id="Tamaño"  value="${registrarProductoController.productos.tamaño}"  validatorMessage="El tamaño debe ser un numero mayor de cero"><f:validateLongRange minimum="0" /></p:inputText>
                         </div>
                     </div>
                     <p:commandButton class="btn btn-outline-secondary" update="form2" value="#{msgs['adminBoton.Guardar']}"  actionListener="${registrarProductoController.registrarProductos()}"   > </p:commandButton>
@@ -89,9 +89,14 @@ and open the template in the editor.
                     <div class="col-sm">
                         <h:form >
                             <p:outputLabel value="Nombre Producto"/>
+<<<<<<< HEAD
                             <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}" required="true"/>
                             <p:commandButton value="Registrar" actionListener="#{productoController.registrarNombreProducto()}" update=":form2:oneMenu"/>
                             <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
+=======
+                            <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}"/>
+                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarNombreProducto()}" update=":oneMenu"/>
+>>>>>>> 1e747836ab3a722baf3583f02c0f5add77e10a4d
                         </h:form>
                         <hr class="mb-4"></hr>
                     </div>
