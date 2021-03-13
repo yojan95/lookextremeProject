@@ -68,7 +68,9 @@
                         <p:outputLabel value="Cantidad actual:"/>
                         <h:outputLabel value="#{productoController.productos.cantidad}"/>
                         <p:outputLabel value="Salida:"/>
-                        <h:inputText value="#{productoController.salida}"/>
+                        <h:inputText value="#{productoController.salida}">
+                         <f:validateLongRange minimum="0" />
+                        </h:inputText>
                         <p:outputLabel value="#{msgs['clienteDisponibilidad.estilistas']}" />
                         <p:selectOneMenu id="ddl_estilistas" value="#{productoController.estilista.usuarioidUsuario}"  validatorMessage="Seleccione un estilista" style="width: 230px;">
                             <f:selectItems value="#{productoController.estilistaListItem}" />                                    
@@ -90,7 +92,9 @@
                         <p:outputLabel value="Cantidad actual:"/>
                         <h:outputLabel value="#{productoController.productos.cantidad}"/>
                         <p:outputLabel value="Salida:"/>
-                        <h:inputText value="#{productoController.salidaV}"/>
+                        <h:inputText value="#{productoController.salidaV}">
+                            <f:validateLongRange minimum="0" />
+                        </h:inputText>
                         <p:outputLabel value="Precio total sacado:"/>
                         <h:outputFormat id="pert" value="#{productoController.text2}"/>
                         <p:commandButton value="Registrar salida"   update="pro:data detail4" actionListener="#{productoController.salidaDeProductosPorVenta()}"/>

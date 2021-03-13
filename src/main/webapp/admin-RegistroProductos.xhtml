@@ -45,7 +45,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.Marca']}" />
-                            <h:selectOneMenu class="form-control" id="Marca"  value="${registrarProductoController.marcas.idmarca}" >
+                            <h:selectOneMenu class="form-control" id="oneMenu1"  value="${registrarProductoController.marcas.idmarca}" >
                                 <f:selectItems value="${registrarProductoController.marcaList}" var="mar"   itemLabel="${mar.maNombre}" itemValue="${mar.idmarca}"   />
                             </h:selectOneMenu>             
                         </div>
@@ -59,7 +59,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.Categoria']}" />                         
-                            <h:selectOneMenu class="form-control" id="categoria"  value="${registrarProductoController.categorias.idcategorias}" >
+                            <h:selectOneMenu class="form-control" id="oneMenu2"  value="${registrarProductoController.categorias.idcategorias}" >
                                 <f:selectItems value="${registrarProductoController.categoriasList}" var="cat" itemLabel="${cat.caNombre}" itemValue="${cat.idcategorias}"/>
                             </h:selectOneMenu>
 
@@ -89,24 +89,27 @@ and open the template in the editor.
                     <div class="col-sm">
                         <h:form >
                             <p:outputLabel value="Nombre Producto"/>
-                            <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}"/>
+                            <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}" required="true"/>
                             <p:commandButton value="Registrar" actionListener="#{productoController.registrarNombreProducto()}" update=":form2:oneMenu"/>
+                            <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
                         </h:form>
                         <hr class="mb-4"></hr>
                     </div>
                     <div class="col-sm">
                         <h:form>
                             <p:outputLabel value="Nombre Categoria"/>
-                            <p:inputText class="form-control" value="#{productoController.categorias.caNombre}"/>
-                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarCategoria()}"/>
+                            <p:inputText class="form-control" value="#{productoController.categorias.caNombre}" required="true"/>
+                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarCategoria()}" update=":form2:oneMenu2"/>
+                            <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
                         </h:form>
                         <hr class="mb-4"></hr>
                     </div>
                     <div class="col-sm">
                         <h:form>
                             <p:outputLabel value="Nombre Marca"/>
-                            <p:inputText class="form-control" value="#{productoController.marca.maNombre}"/>
-                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarMarca()}"/>
+                            <p:inputText class="form-control" value="#{productoController.marca.maNombre}" required="true"/>
+                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarMarca()}" update=":form2:oneMenu1"/>
+                            <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
                         </h:form>
                         <hr class="mb-4"></hr>
                     </div>

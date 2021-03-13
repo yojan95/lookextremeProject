@@ -316,6 +316,7 @@ public class ProductoController implements Serializable {
                 System.out.println("total de productos salidos precio: " + text);
                 PrimeFaces current = PrimeFaces.current();
                 current.executeScript("PF('wdialog').show();");
+                salida = 0;
             } else {
                 PrimeFaces current = PrimeFaces.current();
                 current.executeScript("PF('wdialog1').show();");
@@ -353,6 +354,7 @@ public class ProductoController implements Serializable {
                 PrimeFaces current = PrimeFaces.current();
                 current.executeScript("PF('wdialog2').show();");
                 System.out.println("resultado de la suma: " + resultado);
+                entrada = 0;
             } else {
                 System.out.println("el dato ingresado no es equivalente");
             }
@@ -402,6 +404,7 @@ public class ProductoController implements Serializable {
                 System.out.println("total de productos salidos precio: " + text2);
                 PrimeFaces current = PrimeFaces.current();
                 current.executeScript("PF('wdialog').show();");
+                salidaV = 0;
             } else {
                 PrimeFaces current = PrimeFaces.current();
                 current.executeScript("PF('wdialog1').show();");
@@ -432,6 +435,7 @@ public class ProductoController implements Serializable {
          try{
              EJBnombreProducto.create(nombreProducto);
               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Nombre del producto registrado"));
+              nombreProducto = new Nombreproducto();
          }catch(Exception e){
              System.out.println(e.getMessage());
          }
@@ -442,6 +446,7 @@ public class ProductoController implements Serializable {
          try{
              EJBcategoria.create(categorias);
              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "categoria registrada"));
+             categorias = new Categorias();
          }catch(Exception e){
              System.out.println(e.getMessage());
          }
@@ -452,6 +457,7 @@ public class ProductoController implements Serializable {
          try{
              EJBmarca.create(marca);
              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "marca registrada"));
+             marca = new Marca();
          }catch(Exception e){
              System.out.println(e.getMessage());
          }

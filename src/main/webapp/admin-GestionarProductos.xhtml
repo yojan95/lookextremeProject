@@ -58,7 +58,8 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">Eliminar</f:facet>
-                                <p:commandButton value="Eliminar" update="productos" actionListener="#{productoController.eliminarProducto(prod)}"  >
+                                <p:commandButton value="Eliminar" update="productos" actionListener="#{productoController.eliminarProducto(prod)}">
+                                    <f:event type="preRenderView" listener="#{productoController.init()}"/>
                                     <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
                                 </p:commandButton>
                             </p:column>

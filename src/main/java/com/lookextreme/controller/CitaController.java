@@ -290,15 +290,12 @@ public class CitaController implements Serializable {
     =================
      */
     public List<Servicios> agregarServicio(List<Servicios> carrito, Servicios se) {
-        if (carrito.size()< 1) {
+        if (carrito.size() < 1) {
             carrito.add(se);
-        }else{
+        } else {
             PrimeFaces current = PrimeFaces.current();
             current.executeScript("PF('wdialog1').show();");
         }
-            
-       
-        
 
         return carrito;
     }
@@ -402,9 +399,20 @@ public class CitaController implements Serializable {
     }
 
     public void actionIncumpliCitaEstilista(Cita cita) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.HOUR_OF_DAY, 21);
         try {
-            cita.setEstado("Incumplida");
-            EJBcita.edit(cita);
+            System.out.println("hora actual" + cal);
+            if (cita.getFecha().after(cal.getTime())) {
+                cita.setEstado("Incumplida");
+                EJBcita.edit(cita);
+            } else {
+                System.out.println("todavia no puede ejecutar esta accion");
+                PrimeFaces current = PrimeFaces.current();
+                current.executeScript("PF('wdialog').show();");
+            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -488,8 +496,8 @@ public class CitaController implements Serializable {
         inicio = "indexCliente";
         return inicio;
     }
-    
-    public boolean renderizarBotonRegistrar(){
+
+    public boolean renderizarBotonRegistrar() {
         //Date diaActual = new Date();
         return cita.getFecha() != null;
     }

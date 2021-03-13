@@ -151,6 +151,13 @@
 
                     </div>
                 </div>
+                <p:dialog id="dialog" widgetVar="wdialog" modal="true" header="Aviso">
+
+                    <p:graphicImage value = "/images/exclamation.svg" style="width: 50px; display: block;
+                                    margin:auto;"/>
+                    <p>Todavia No puede ejecutar esta acción
+                    </p>
+                </p:dialog>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                     <p:commandButton value="#{msgs['estilistaTable2.btnYes']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
                     <p:commandButton value="#{msgs['estilistaTable2.btnNo']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
