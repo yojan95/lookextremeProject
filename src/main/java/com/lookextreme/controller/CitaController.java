@@ -72,6 +72,15 @@ public class CitaController implements Serializable {
     @EJB
     private HorarioFacadeLocal horarioEJB;
     private Horario horarioE;
+    private List<Horario> listHorario;
+
+    public List<Horario> getListHorario() {
+        return listHorario;
+    }
+
+    public void setListHorario(List<Horario> listHorario) {
+        this.listHorario = listHorario;
+    }
 
     public String getFechaNoValida() {
         return FechaNoValida;
@@ -446,8 +455,8 @@ public class CitaController implements Serializable {
             } else {
                 System.out.println("fecha no valida");
                 FechaNoValida = "La fecha limite para buscar una cita es de 15 dias";
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.addMessage(null, new FacesMessage("Aviso", "El limite de la fecha es 15 dias"));
+                PrimeFaces current = PrimeFaces.current();
+                current.executeScript("PF('wdialog2').show();");
             }
 
         } catch (Exception e) {
@@ -470,16 +479,62 @@ public class CitaController implements Serializable {
         return suma;
     }
 
-    public void registrarHorarioEstilista() {
-        Short dias = 2;
+    public boolean ValidarHorarioEstilista() {
+        listHorario = horarioEJB.findAll();
+        Horario hour = new Horario();
+        boolean estado = true;
+
         try {
-            horarioE.setDias(dias);
-            horarioE.setEstilistausuarioidUsuario(estilista);
-            horarioEJB.create(horarioE);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Horario registrado"));
+            //listaa = horarioEJB.validarRegistroHorario(estilista.getUsuarioidUsuario());
+            /*
+            for (Horario horario : listHorario) {
+                if (!horario.getEstilistausuarioidUsuario().getUsuarioidUsuario().equals(estilista.getUsuarioidUsuario())) {
+                    horarioE.setDias(dias);
+                    horarioE.setEstilistausuarioidUsuario(estilista);
+                    horarioEJB.create(horarioE);
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Horario registrado"));
+                    
+                } else {
+                    System.out.println("ya existe");
+                }
+            }
+             */
+
+            for (int i = 0; i < listHorario.size(); i++) {
+                if (listHorario.get(i).getEstilistausuarioidUsuario().getUsuarioidUsuario().equals(estilista.getUsuarioidUsuario())) {
+                    hour.setEstilistausuarioidUsuario(listHorario.get(i).getEstilistausuarioidUsuario());
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "ya existe el registro"));
+                    estado = true;
+                    break;
+                } else {
+                    estado = false;
+                }
+
+            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return estado;
+    }
+
+    public void registrarHorario() {
+        boolean estadod;
+        Short dias = 2;
+        try {
+            estadod = ValidarHorarioEstilista();
+            if (estadod == false) {
+                horarioE.setDias(dias);
+                horarioE.setEstilistausuarioidUsuario(estilista);
+                horarioEJB.create(horarioE);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registro el horario"));
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public void citasPorFechasEstilista() {
@@ -501,4 +556,5 @@ public class CitaController implements Serializable {
         //Date diaActual = new Date();
         return cita.getFecha() != null;
     }
+
 }

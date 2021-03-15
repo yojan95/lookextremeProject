@@ -89,14 +89,9 @@ and open the template in the editor.
                     <div class="col-sm">
                         <h:form >
                             <p:outputLabel value="Nombre Producto"/>
-<<<<<<< HEAD
                             <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}" required="true"/>
                             <p:commandButton value="Registrar" actionListener="#{productoController.registrarNombreProducto()}" update=":form2:oneMenu"/>
                             <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
-=======
-                            <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}"/>
-                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarNombreProducto()}" update=":oneMenu"/>
->>>>>>> 1e747836ab3a722baf3583f02c0f5add77e10a4d
                         </h:form>
                         <hr class="mb-4"></hr>
                     </div>
@@ -105,7 +100,7 @@ and open the template in the editor.
                             <p:outputLabel value="Nombre Categoria"/>
                             <p:inputText class="form-control" value="#{productoController.categorias.caNombre}" required="true"/>
                             <p:commandButton value="Registrar" actionListener="#{productoController.registrarCategoria()}" update=":form2:oneMenu2"/>
-                            <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
+                            <f:event type="preRenderView" listener="#{productoController.init()}"/>
                         </h:form>
                         <hr class="mb-4"></hr>
                     </div>
@@ -114,13 +109,12 @@ and open the template in the editor.
                             <p:outputLabel value="Nombre Marca"/>
                             <p:inputText class="form-control" value="#{productoController.marca.maNombre}" required="true"/>
                             <p:commandButton value="Registrar" actionListener="#{productoController.registrarMarca()}" update=":form2:oneMenu1"/>
-                            <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
+                            <f:event type="preRenderView" listener="#{productoController.init()}"/>
                         </h:form>
                         <hr class="mb-4"></hr>
                     </div>
                 </div>
             </div>
-
         </section>
     </ui:define>
 </ui:composition>

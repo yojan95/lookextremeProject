@@ -73,7 +73,9 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">#{msgs['estilistaTable.Fecha']}</f:facet>                        
-                                <h:outputText value="#{table_cit.citaidCita.fecha}" />
+                                <h:outputText value="#{table_cit.citaidCita.fecha}">
+                                     <f:convertDateTime pattern="dd/MM/yyyy"/>  
+                                </h:outputText>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">#{msgs['estilistaTable.Cliente']}</f:facet>                        
@@ -136,7 +138,9 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">#{msgs['estilistaTable.Fecha']}</f:facet>                        
-                                <h:outputText value="#{table_cita.fecha}" />
+                                <h:outputText value="#{table_cita.fecha}">
+                                     <f:convertDateTime pattern="dd/MM/yyyy"/>  
+                                </h:outputText>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">#{msgs['estilistaTable.Cliente']}</f:facet>                        

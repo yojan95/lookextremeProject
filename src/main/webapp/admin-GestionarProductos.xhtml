@@ -8,8 +8,7 @@
                  xmlns:b="http://bootsfaces.net/ui">
     <ui:define name="content">
      <section>
-            <div class="row justify-content-md-start">
-                <div class="col-lg-10 mx-auto">
+         <div class="container">
                     <h:outputLabel style="display:none;" value=""></h:outputLabel>
                     
                     <h:form id="productos">
@@ -52,17 +51,11 @@
                             </p:column>                 
                             <p:column>
                                 <f:facet name="header">Actualizar</f:facet>                                
-                                <p:commandLink value="Actualizar"  actionListener="#{productoController.cargarProductos(prod) }" update=":productos dialogo1" oncomplete="PF('valor').show();">
+                                <p:commandLink value="Actualizar"  actionListener="#{productoController.cargarProductos(prod)}" update=":productos dialogo1" oncomplete="PF('valor').show();">
                                     <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
                                 </p:commandLink>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">Eliminar</f:facet>
-                                <p:commandButton value="Eliminar" update="productos" actionListener="#{productoController.eliminarProducto(prod)}">
-                                    <f:event type="preRenderView" listener="#{productoController.init()}"/>
-                                    <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
-                                </p:commandButton>
-                            </p:column>
+                           
                         </p:dataTable>
                     </h:form>
                     
@@ -81,10 +74,8 @@
                     </p:panelGrid>
                 </h:form>
             </p:dialog>
-                                    
-                </div>
-            </div>
-         
+         </div>                           
+             
         </section>
     </ui:define>   
 </ui:composition>
