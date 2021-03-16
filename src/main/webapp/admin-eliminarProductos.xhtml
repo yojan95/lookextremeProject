@@ -1,0 +1,63 @@
+
+<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="content">                                   
+        <section>
+            <div class="container">
+                <h:form id="productos1">
+
+                    <p:dataTable id="tproducto" var="prod" value="#{productoController.productosList}" rowIndexVar="index">
+
+                        <p:column filterBy="#{(prod.nombreProductoidNombreProducto.nombreProductocol)}">
+                            <f:facet name="header">#{msgs['admin.tabNombre']}</f:facet>
+                            <h:outputText value="#{prod.nombreProductoidNombreProducto.nombreProductocol}" />                        
+                        </p:column>
+                        <p:column filterBy="#{prod.tamaño}">
+                            <f:facet name="header">#{msgs['admin.tabTamaño']}</f:facet>
+                            <h:outputText value="#{prod.tamaño}" />                        
+                        </p:column>                    
+                        <!--<p:column headerText="fecha">
+                            <f:facet name="header">{msgs['admin.tabFechaVencimiento']}</f:facet>
+                            <h:outputText  value="{prod.fechaVencimiento}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>                                    
+                            </h:outputText>
+                        </p:column>-->
+                        <p:column filterBy="#{(prod.cantidad)}" >
+                            <f:facet name="header">#{msgs['admin.tabCantidad']}</f:facet>
+                            <h:outputText  value="#{prod.cantidad}" />                        
+                        </p:column>
+                        <p:column filterBy="#{(prod.color)}" >
+                            <f:facet name="header">#{msgs['admin.tabColor']}</f:facet>                        
+                            <h:outputText value="#{prod.color}" />
+                        </p:column>
+                        <p:column filterBy="#{(prod.precio)}">
+                            <f:facet name="header"> #{msgs['admin.tabPrecio']}</f:facet>                        
+                            <h:outputText value="#{prod.precio}" />
+                        </p:column>
+                        <p:column filterBy="#{(prod.marcaIdmarca.maNombre)}">
+                            <f:facet name="header"> #{msgs['admin.tabMarca']}</f:facet>                        
+                            <h:outputText value="#{prod.marcaIdmarca.maNombre}" />
+                        </p:column>
+                        <p:column filterBy="#{(prod.categoriasIdcategorias.caNombre)}">
+                            <f:facet name="header"> #{msgs['admin.tabCategoria']}</f:facet>                        
+                            <h:outputText value="#{prod.categoriasIdcategorias.caNombre}" />
+                        </p:column>                 
+                        <p:column>
+                            <f:facet name="header">Eliminar</f:facet>
+                            <p:commandButton value="Eliminar" update="productos1" actionListener="#{productoController.eliminarProducto(prod)}">
+                                <f:event type="preRenderView" listener="#{productoController.init()}"/>
+                                <!--<p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </section>
+    </ui:define>   
+</ui:composition>
+

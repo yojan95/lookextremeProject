@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.PrimeFaces;
 
 @Named
 @ViewScoped
@@ -49,6 +50,7 @@ public class ServiciosController implements Serializable{
         try{
             EJBservicios.create(servicios);
          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "se creo el servicio con exito!"));
+         servicios =  new Servicios();
         }catch(Exception e){
             System.out.println(e.getMessage());
           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "No se creo el servicio!"));
@@ -76,6 +78,8 @@ public class ServiciosController implements Serializable{
         System.out.println("servicios actualizados");
         try{
             this.EJBservicios.edit(servicios);
+            PrimeFaces current = PrimeFaces.current();
+            current.executeScript("PF('wdialog1').show();");
         }catch(Exception e){
             System.out.println("error al actualizar servicios"+e.getMessage());
         }

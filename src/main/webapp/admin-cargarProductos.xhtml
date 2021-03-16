@@ -11,7 +11,7 @@
         <h:form enctype="multipart/form-data">
             <p:messages showDetail="true" showSummary="false"/>
             <p:outputLabel value="seleccione el archivo"/>
-            <p:fileUpload value="#{cargaDatosProductos.file}" mode="simple" skinSimple="true" /><br/>
+            <p:fileUpload value="#{cargaDatosProductos.file}" mode="simple" skinSimple="true" accept=".xlsx,application/msexcel"/><br/>
             <p:commandButton value="Crear" action="#{cargaDatosProductos.cargarProductos()}" ajax="false"/>
             <p:link value="Productos" href="js/productos.xlsx"></p:link>
         </h:form>

@@ -22,19 +22,19 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <p:outputLabel value="#{msgs['admin.FormDestinatario']}"/>
-                                            <p:inputText class="form-control" placeholder="#{msgs['admin.FormDestinaPlaceHolder']}" value="#{emailJSFManagedBean.to}"/> 
+                                            <p:inputText class="form-control" placeholder="#{msgs['admin.FormDestinaPlaceHolder']}" value="#{emailJSFManagedBean.to}" required="true"/> 
                                         </div>                                       
                                     </div>
                                     <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 <p:outputLabel value="#{msgs['admin.FormAsunto']}"/>
-                                                <p:inputText class="form-control" placeholder="#{msgs['admin.FormAsuntoPlaceHolder']}" value="#{emailJSFManagedBean.subject}"/>
+                                                <p:inputText class="form-control" placeholder="#{msgs['admin.FormAsuntoPlaceHolder']}" value="#{emailJSFManagedBean.subject}" required="true"/>
                                             </div>
                                         </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <p:outputLabel value="#{msgs['admin.FormMensaje']}"/>
-                                            <p:inputTextarea class="form-control" placeholder="#{msgs['admin.FormMensajePlaceholder']}" value="#{emailJSFManagedBean.descr}"/>
+                                            <p:inputTextarea class="form-control" placeholder="#{msgs['admin.FormMensajePlaceholder']}" value="#{emailJSFManagedBean.descr}" required="true"/>
                                         </div>
                                     </div>  
                                     <p:commandButton  value="#{msgs['admin.FormBtn']}" class="btn btn-primary" actionListener="#{emailJSFManagedBean.submitEmail()}"></p:commandButton>

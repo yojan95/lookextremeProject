@@ -73,7 +73,9 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">#{msgs['estilistaTable.Fecha']}</f:facet>                        
-                                <h:outputText value="#{table_cit.citaidCita.fecha}" />
+                                <h:outputText value="#{table_cit.citaidCita.fecha}">
+                                     <f:convertDateTime pattern="dd/MM/yyyy"/>  
+                                </h:outputText>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">#{msgs['estilistaTable.Cliente']}</f:facet>                        
@@ -136,7 +138,9 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">#{msgs['estilistaTable.Fecha']}</f:facet>                        
-                                <h:outputText value="#{table_cita.fecha}" />
+                                <h:outputText value="#{table_cita.fecha}">
+                                     <f:convertDateTime pattern="dd/MM/yyyy"/>  
+                                </h:outputText>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">#{msgs['estilistaTable.Cliente']}</f:facet>                        
@@ -151,6 +155,13 @@
 
                     </div>
                 </div>
+                <p:dialog id="dialog" widgetVar="wdialog" modal="true" header="Aviso">
+
+                    <p:graphicImage value = "/images/exclamation.svg" style="width: 50px; display: block;
+                                    margin:auto;"/>
+                    <p>Todavia No puede ejecutar esta acción
+                    </p>
+                </p:dialog>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                     <p:commandButton value="#{msgs['estilistaTable2.btnYes']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
                     <p:commandButton value="#{msgs['estilistaTable2.btnNo']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>

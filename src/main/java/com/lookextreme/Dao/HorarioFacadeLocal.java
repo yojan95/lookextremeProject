@@ -27,6 +27,8 @@ public interface HorarioFacadeLocal {
     List<Horario> findAll();
 
     List<Horario> findRange(int[] range);
+    
+    Horario validarRegistroHorario(int idhorario);
 
     int count();
     
