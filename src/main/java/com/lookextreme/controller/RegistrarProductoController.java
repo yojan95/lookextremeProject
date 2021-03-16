@@ -165,7 +165,9 @@ public class RegistrarProductoController implements Serializable {
             //productos.setMarca("marcel france");
             //productos.setNombre("esmalte");
             productoEJB.create(productos);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto registrado"));   
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Aviso", "Producto Registrado"));
+            
             productos = new Productos();
            }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "la fecha no es valida"));   

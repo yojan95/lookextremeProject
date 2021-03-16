@@ -434,7 +434,7 @@ public class ProductoController implements Serializable {
              EJBnombreProducto.create(nombreProducto);
               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Nombre del producto registrado"));
               nombreProducto = new Nombreproducto();
-              productos = new Productos();
+              
          }catch(Exception e){
              System.out.println(e.getMessage());
          }

@@ -31,7 +31,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.Cantidad']}" />                   
-                            <p:inputText  type="number" class="form-control" id="Cantidad" placeholder="" value="${registrarProductoController.productos.cantidad}" validatorMessage="La cantidad debe ser un numero mayor de cero" ><f:validateLongRange minimum="0" /></p:inputText>
+                            <p:inputText  class="form-control" id="Cantidad" value="${registrarProductoController.productos.cantidad}" validatorMessage="La cantidad debe ser un numero mayor de cero" ><f:validateLongRange minimum="0" /></p:inputText>
                             <div class="invalid-feedback">Por favor introducir la cantidad del producto</div>
 
                         </div>
@@ -39,7 +39,7 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.Precio']}" />                    
-                            <p:inputText type="number" class="form-control" id="Precio" placeholder="" value="${registrarProductoController.productos.precio}" validatorMessage="El precio debe ser un numero mayor de cero" ><f:validateLongRange minimum="0" /></p:inputText>
+                            <p:inputText  class="form-control" id="Precio" value="${registrarProductoController.productos.precio}" validatorMessage="El precio debe ser un numero mayor de cero" ><f:validateLongRange minimum="0" /></p:inputText>
                             <div class="invalid-feedback">Por favor introducir el valor correspondinente</div>
 
                         </div>
@@ -90,7 +90,7 @@ and open the template in the editor.
                         <h:form >
                             <p:outputLabel value="Nombre Producto"/>
                             <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}"/>
-                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarNombreProducto()}" update=":oneMenu"/>
+                            <p:commandButton class="btn btn-outline-secondary" update="form2" value="#{msgs['adminBoton.Guardar']}" actionListener="#{productoController.registrarNombreProducto()}" ></p:commandButton>
                         </h:form>
                         <hr class="mb-4"></hr>
                     </div>
