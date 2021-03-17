@@ -52,7 +52,7 @@
                                         <!--  <p:inputText class="form-control" value="" validatorMessage="El formato ingresado no es valido Ej: 08:00:00">
                                               <f:validateRegex pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$"/>
                                           </p:inputText>-->
-                                        <p:selectOneMenu id="option" value="#{citaController.horarioE.horaDeInicio}" required="true">
+                                        <p:selectOneMenu id="option" value="#{horarioController.horarioE.horaDeInicio}" required="true">
                                             <f:selectItem itemLabel="Seleccione la hora" itemValue=""/>
                                             <f:selectItem itemLabel="08:00:00" itemValue="08:00:00"/>
                                             <f:selectItem itemLabel="09:00:00" itemValue="09:00:00"/>
@@ -67,7 +67,7 @@
                                         <!-- <p:inputText class="form-control" value="" validatorMessage="El formato ingresado no es valido Ej: 08:00:00">
                                              <f:validateRegex pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$"/>
                                          </p:inputText>-->
-                                        <p:selectOneMenu id="option2" value="#{citaController.horarioE.horaFin}" required="true">
+                                        <p:selectOneMenu id="option2" value="#{horarioController.horarioE.horaFin}" required="true">
                                             <f:selectItem itemLabel="Seleccione la hora" itemValue=""/>
                                             <f:selectItem itemLabel="13:00:00" itemValue="13:00:00"/>
                                             <f:selectItem itemLabel="14:00:00" itemValue="14:00:00"/>
@@ -81,15 +81,15 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <p:outputLabel value="#{msgs['clienteDisponibilidad.estilistas']}" />
-                                        <h:selectOneMenu id="ddl_estilistas" value="#{citaController.estilista.usuarioidUsuario}" styleClass="form-control" validatorMessage="Seleccione un estilista" >
-                                            <f:selectItems value="#{citaController.estilistaListItem}" />                                    
+                                        <h:selectOneMenu id="ddl_estilistas" value="#{horarioController.estilista.usuarioidUsuario}" styleClass="form-control" validatorMessage="Seleccione un estilista" >
+                                            <f:selectItems value="#{horarioController.estilistaListItem}" />                                    
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
 
 
 
-                                <p:commandButton  value="Registrar" class="btn btn-primary" actionListener="#{citaController.registrarHorario()}" ajax=":form3:hourTable"></p:commandButton>
+                                <p:commandButton  value="Registrar" class="btn btn-primary" actionListener="#{horarioController.registrarHorario()}" ajax=":form3:hourTable"></p:commandButton>
                                 <f:event type="preRenderView" listener="#{horarioController.init()}"/>
                             </div>
                         </div>
