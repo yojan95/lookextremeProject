@@ -501,4 +501,5 @@ public class CitaController implements Serializable {
         return cita.getFecha() != null;
     }
 
+    
 }
