@@ -12,6 +12,8 @@ and open the template in the editor.
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
+        
+             
         <section id="about">
 
 
@@ -20,7 +22,7 @@ and open the template in the editor.
                     <div class="py-5 text-center">
                         <h4 class="mb-3"  > #{msgs['admin.h4']} </h4>
                     </div>
-                   
+               
                     <div class="row">
 
                         <div class="col-md-6 mb-3">
@@ -31,7 +33,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.Cantidad']}" />                   
-                            <p:inputText  class="form-control" id="Cantidad" value="${registrarProductoController.productos.cantidad}" validatorMessage="La cantidad debe ser un numero mayor de cero" ><f:validateLongRange minimum="0" /></p:inputText>
+                            <p:inputText  class="form-control" id="Cantidad" maxlength="3"  value="${registrarProductoController.productos.cantidad}" validatorMessage="La cantidad debe ser un numero mayor de cero" ><f:validateLongRange minimum="0" /></p:inputText>
                             <div class="invalid-feedback">Por favor introducir la cantidad del producto</div>
 
                         </div>
@@ -39,7 +41,7 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.Precio']}" />                    
-                            <p:inputText  class="form-control" id="Precio" value="${registrarProductoController.productos.precio}" validatorMessage="El precio debe ser un numero mayor de cero" ><f:validateLongRange minimum="0" /></p:inputText>
+                            <p:inputText  class="form-control" id="Precio" maxlength="6" value="${registrarProductoController.productos.precio}" validatorMessage="El precio debe ser un numero mayor de cero" ><f:validateLongRange minimum="0" /></p:inputText>
                             <div class="invalid-feedback">Por favor introducir el valor correspondinente</div>
 
                         </div>
@@ -73,30 +75,31 @@ and open the template in the editor.
                         </div>                    
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.Tamaño']}" />                                        
-                            <p:inputText  class="form-control" id="Tamaño"  value="${registrarProductoController.productos.tamaño}"  validatorMessage="El tamaño debe ser un numero mayor de cero"><f:validateLongRange minimum="0" /></p:inputText>
+                            <p:inputText  class="form-control" id="Tamaño" maxlength="3" value="${registrarProductoController.productos.tamaño}"  validatorMessage="El tamaño debe ser un numero mayor de cero"><f:validateLongRange minimum="0" /></p:inputText>
                         </div>
                     </div>
                     <p:commandButton class="btn btn-outline-secondary" update="form2" value="#{msgs['adminBoton.Guardar']}"  actionListener="${registrarProductoController.registrarProductos()}"   > </p:commandButton>
 
                     <hr class="mb-4"></hr>
+             
                 </h:form>
             </div>    
              <p:messages showDetail="true" showSummary="false">
                         <p:autoUpdate rendered="true"/>
-                    </p:messages>
-            <div class="container-fluid">
+             </p:messages>
+            <div class="py-5 text-center">
+                        <h4 class="mb-3"  > #{msgs['admin.h9']} </h4>
+                    </div>
+            <div class="container">
                 <div class="row">
+
                     <div class="col-sm">
                         <h:form >
-                            <p:outputLabel value="Nombre Producto"/>
-<<<<<<< HEAD
-                            <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}"/>
-                            <p:commandButton class="btn btn-outline-secondary" update="form2" value="#{msgs['adminBoton.Guardar']}" actionListener="#{productoController.registrarNombreProducto()}" ></p:commandButton>
-=======
+                            <p:outputLabel value="Nombre del Producto"/>
                             <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}" required="true"/>
-                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarNombreProducto()}" update=":form2:oneMenu"/>
+                            <p:commandButton value="Registrar" class="btn btn-outline-secondary"  actionListener="#{productoController.registrarNombreProducto()}" update=":form2:oneMenu"/>
                             <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
->>>>>>> f530f2a858d49e9ac5cc1718d5cca1f3f2607ff9
+
                         </h:form>
                         <hr class="mb-4"></hr>
                     </div>
@@ -104,7 +107,7 @@ and open the template in the editor.
                         <h:form>
                             <p:outputLabel value="Nombre Categoria"/>
                             <p:inputText class="form-control" value="#{productoController.categorias.caNombre}" required="true"/>
-                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarCategoria()}" update=":form2:oneMenu2"/>
+                            <p:commandButton value="Registrar" class="btn btn-outline-secondary"  actionListener="#{productoController.registrarCategoria()}" update=":form2:oneMenu2"/>
                             <f:event type="preRenderView" listener="#{productoController.init()}"/>
                         </h:form>
                         <hr class="mb-4"></hr>
@@ -113,7 +116,7 @@ and open the template in the editor.
                         <h:form>
                             <p:outputLabel value="Nombre Marca"/>
                             <p:inputText class="form-control" value="#{productoController.marca.maNombre}" required="true"/>
-                            <p:commandButton value="Registrar" actionListener="#{productoController.registrarMarca()}" update=":form2:oneMenu1"/>
+                            <p:commandButton value="Registrar" class="btn btn-outline-secondary" actionListener="#{productoController.registrarMarca()}" update=":form2:oneMenu1"/>
                             <f:event type="preRenderView" listener="#{productoController.init()}"/>
                         </h:form>
                         <hr class="mb-4"></hr>
@@ -121,5 +124,6 @@ and open the template in the editor.
                 </div>
             </div>
         </section>
+            
     </ui:define>
 </ui:composition>
