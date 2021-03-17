@@ -65,15 +65,15 @@ public class ProductoController implements Serializable {
     private EstilistaFacadeLocal EJBestilista;
     private Estilista estilista;
     private List<SelectItem> estilistaListItem;
-
+    
     @EJB
     private MarcaFacadeLocal EJBmarca;
     private Marca marca;
-
+    
     @EJB
     private NombreproductoFacadeLocal EJBnombreProducto;
     private Nombreproducto nombreProducto;
-
+    
     @EJB
     private CategoriasFacadeLocal EJBcategoria;
     private Categorias categorias;
@@ -101,6 +101,8 @@ public class ProductoController implements Serializable {
     public void setCategorias(Categorias categorias) {
         this.categorias = categorias;
     }
+    
+    
 
     public List<SalidaPorConsumo> getListaSalidaFechas() {
         return listaSalidaFechas;
@@ -133,6 +135,8 @@ public class ProductoController implements Serializable {
     public void setListaSalidaVenta(List<SalidaVenta> listaSalidaVenta) {
         this.listaSalidaVenta = listaSalidaVenta;
     }
+    
+    
 
     public Productos getProductos() {
         return productos;
@@ -302,26 +306,20 @@ public class ProductoController implements Serializable {
         Integer resultado;
         resultado = null;
         try {
-            if (salida > 0) {
-                if (salida <= productos.getCantidad()) {
-                    resultado = productos.getCantidad() - salida;
-                    text = Integer.toString(total = productos.getPrecio() * salida);
-                    productos.setCantidad(resultado);
-                    prodEJB.edit(productos);
-                    registrarSalida(salida);
-                    System.out.println("resultado operacion: " + resultado);
-                    System.out.println("total de productos salidos precio: " + text);
-                    PrimeFaces current = PrimeFaces.current();
-                    current.executeScript("PF('wdialog').show();");
-                    salida = 0;
-                } else {
-                    PrimeFaces current = PrimeFaces.current();
-                    current.executeScript("PF('wdialog1').show();");
-                    System.out.println("el dato ingresado es mayor al que esta en el sistema");
-                }
+            if (salida <= productos.getCantidad()) {
+                resultado = productos.getCantidad() - salida;
+                text = Integer.toString(total = productos.getPrecio() * salida);
+                productos.setCantidad(resultado);
+                prodEJB.edit(productos);
+                registrarSalida(salida);
+                System.out.println("resultado operacion: " + resultado);
+                System.out.println("total de productos salidos precio: " + text);
+                PrimeFaces current = PrimeFaces.current();
+                current.executeScript("PF('wdialog').show();");
             } else {
                 PrimeFaces current = PrimeFaces.current();
-                current.executeScript("PF('wdialog3').show();");
+                current.executeScript("PF('wdialog1').show();");
+                System.out.println("el dato ingresado es mayor al que esta en el sistema");
             }
 
         } catch (ELException | NullPointerException e) {
@@ -332,7 +330,7 @@ public class ProductoController implements Serializable {
     }
 
     public void registrarSalida(int result) {
-
+        
         try {
             salidaPorConsumo.setCantidad(result);
             salidaPorConsumo.setEstado("inexistente");
@@ -343,7 +341,7 @@ public class ProductoController implements Serializable {
             System.out.println(e.getMessage());
         }
     }
-
+    
     public void actionAgregarProducto() {
         Integer resultado;
         resultado = null;
@@ -355,10 +353,7 @@ public class ProductoController implements Serializable {
                 PrimeFaces current = PrimeFaces.current();
                 current.executeScript("PF('wdialog2').show();");
                 System.out.println("resultado de la suma: " + resultado);
-                entrada = 0;
             } else {
-                PrimeFaces current = PrimeFaces.current();
-                current.executeScript("PF('wdialog3').show();");
                 System.out.println("el dato ingresado no es equivalente");
             }
 
@@ -392,31 +387,25 @@ public class ProductoController implements Serializable {
         }
 
     }
-
-    public void salidaDeProductosPorVenta() {
+    
+     public void salidaDeProductosPorVenta() {
         Integer resultado;
         resultado = null;
         try {
-            if (salidaV > 0) {
-                if (salidaV <= productos.getCantidad()) {
-                    resultado = productos.getCantidad() - salidaV;
-                    text2 = Integer.toString(total = productos.getPrecio() * salidaV);
-                    productos.setCantidad(resultado);
-                    prodEJB.edit(productos);
-                    registrarSalidaVenta(salidaV, total);
-                    System.out.println("resultado operacion: " + resultado);
-                    System.out.println("total de productos salidos precio: " + text2);
-                    PrimeFaces current = PrimeFaces.current();
-                    current.executeScript("PF('wdialog').show();");
-                    salidaV = 0;
-                } else {
-                    PrimeFaces current = PrimeFaces.current();
-                    current.executeScript("PF('wdialog1').show();");
-                    System.out.println("el dato ingresado es mayor al que esta en el sistema");
-                }
+            if (salidaV <= productos.getCantidad()) {
+                resultado = productos.getCantidad() - salidaV;
+                text2 = Integer.toString(total = productos.getPrecio() * salidaV);
+                productos.setCantidad(resultado);
+                prodEJB.edit(productos);
+                registrarSalidaVenta(salidaV,total);
+                System.out.println("resultado operacion: " + resultado);
+                System.out.println("total de productos salidos precio: " + text2);
+                PrimeFaces current = PrimeFaces.current();
+                current.executeScript("PF('wdialog').show();");
             } else {
                 PrimeFaces current = PrimeFaces.current();
-                current.executeScript("PF('wdialog3').show();");
+                current.executeScript("PF('wdialog1').show();");
+                System.out.println("el dato ingresado es mayor al que esta en el sistema");
             }
 
         } catch (ELException | NullPointerException e) {
@@ -425,54 +414,50 @@ public class ProductoController implements Serializable {
         }
 
     }
-
-    public void registrarSalidaVenta(int salida, Integer total) {
-        try {
-            salidaVenta.setCantidad(salida);
-            salidaVenta.setEstado("inexistente");
-            salidaVenta.setProductosidCodigo(productos);
-            salidaVenta.setTotal(total);
-            salidaVentaEJB.edit(salidaVenta);
-        } catch (Exception e) {
-
-        }
-    }
-
-    public void registrarNombreProducto() {
-        System.out.println("registrando nombre del producto");
-        try {
-
-            EJBnombreProducto.create(nombreProducto);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Nombre del producto registrado"));
-            nombreProducto = new Nombreproducto();
-
-            productos = new Productos();
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void registrarCategoria() {
-        System.out.println("registrando categoria");
-        try {
-            EJBcategoria.create(categorias);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "categoria registrada"));
-            categorias = new Categorias();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void registrarMarca() {
-        System.out.println("registrando marca");
-        try {
-            EJBmarca.create(marca);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "marca registrada"));
-            marca = new Marca();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+     
+     public void registrarSalidaVenta(int salida,Integer total){
+         try{
+             salidaVenta.setCantidad(salida);
+             salidaVenta.setEstado("inexistente");
+             salidaVenta.setProductosidCodigo(productos);
+             salidaVenta.setTotal(total);
+             salidaVentaEJB.edit(salidaVenta);
+         }catch(Exception e){
+             
+         }
+     }
+     
+     public void registrarNombreProducto(){
+         System.out.println("registrando nombre del producto");
+         try{
+             
+             EJBnombreProducto.create(nombreProducto);
+              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Nombre del producto registrado"));
+              nombreProducto = new Nombreproducto();
+              
+         }catch(Exception e){
+             System.out.println(e.getMessage());
+         }
+     }
+     
+     public void registrarCategoria(){
+         System.out.println("registrando categoria");
+         try{
+             EJBcategoria.create(categorias);
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "categoria registrada"));
+         }catch(Exception e){
+             System.out.println(e.getMessage());
+         }
+     }
+     
+     public void registrarMarca(){
+         System.out.println("registrando marca");
+         try{
+             EJBmarca.create(marca);
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "marca registrada"));
+         }catch(Exception e){
+             System.out.println(e.getMessage());
+         }
+     }
 
 }
