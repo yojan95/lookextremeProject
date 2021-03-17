@@ -73,7 +73,8 @@ public class CitaController implements Serializable {
     private HorarioFacadeLocal horarioEJB;
     private Horario horarioE;
     private List<Horario> listHorario;
-
+    
+    
     public List<Horario> getListHorario() {
         return listHorario;
     }
@@ -479,64 +480,7 @@ public class CitaController implements Serializable {
         return suma;
     }
 
-    public boolean ValidarHorarioEstilista() {
-        listHorario = horarioEJB.findAll();
-        Horario hour = new Horario();
-        boolean estado = true;
-
-        try {
-            //listaa = horarioEJB.validarRegistroHorario(estilista.getUsuarioidUsuario());
-            /*
-            for (Horario horario : listHorario) {
-                if (!horario.getEstilistausuarioidUsuario().getUsuarioidUsuario().equals(estilista.getUsuarioidUsuario())) {
-                    horarioE.setDias(dias);
-                    horarioE.setEstilistausuarioidUsuario(estilista);
-                    horarioEJB.create(horarioE);
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Horario registrado"));
-                    
-                } else {
-                    System.out.println("ya existe");
-                }
-            }
-             */
-
-            for (int i = 0; i < listHorario.size(); i++) {
-                if (listHorario.get(i).getEstilistausuarioidUsuario().getUsuarioidUsuario().equals(estilista.getUsuarioidUsuario())) {
-                    hour.setEstilistausuarioidUsuario(listHorario.get(i).getEstilistausuarioidUsuario());
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "ya existe el registro"));
-                    estado = true;
-                    break;
-                } else {
-                    estado = false;
-                }
-
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return estado;
-    }
-
-    public void registrarHorario() {
-        boolean estadod;
-        Short dias = 2;
-        try {
-            estadod = ValidarHorarioEstilista();
-            if (estadod == false) {
-                horarioE.setDias(dias);
-                horarioE.setEstilistausuarioidUsuario(estilista);
-                horarioEJB.create(horarioE);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registro el horario"));
-
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
+   
     public void citasPorFechasEstilista() {
         try {
             usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
