@@ -500,6 +500,4 @@ public class CitaController implements Serializable {
         //Date diaActual = new Date();
         return cita.getFecha() != null;
     }
-
-    
 }
