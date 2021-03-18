@@ -1,0 +1,74 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">
+        <section>
+            <div class="container">
+                <h:form class="needs-validation" id="form10">
+                    <div class="py-5 text-center"> <h2 class="mb-3">Eliminar Atributos </h2> </div>
+                    <p:dataTable id="atributos" var="list" value="#{atributoController.NList}" rowIndexVar="index">
+                        <p:column>
+                            <f:facet name="header">Nombre del producto</f:facet>
+                            <h:outputText value="#{list.nombreProductocol}" />   
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Eliminar" update="form10:atributos" actionListener="#{atributoController.eliminarNombreproducto(list)}" >
+                                <f:event type="preRenderView" listener="#{atributoController.init()}"/>    
+                                <!-- <p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                </h:form>           
+
+                <!-- ////////////////////////// MARCA ///////////////////MARCA/////////////////MARCA//////////////////////////////////////////////////////////////////// -->
+                <h:form class="needs-validation" id="form11">
+
+                    <p:dataTable id="atributos2" var="mar" value="#{marcaController.MList}" rowIndexVar="index">
+                        <p:column>
+                            <f:facet name="header">Nombre de la marca</f:facet>
+                            <h:outputText value="#{mar.maNombre}" />   
+                        </p:column>
+
+                        <p:column>
+                            <p:commandButton value="Eliminar" update="form11" actionListener="#{marcaController.eliminarMarca(mar)}" >
+                                <f:event type="preRenderView" listener="#{marcaController.init()}"/>    
+                                <!-- <p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                </h:form> 
+
+                <!-- ////////////////////////// CATEGORIAS /////////////////CATEGORIAS//////////////CATEGORIAS//////////////////////////////////////////////////////////////////// -->
+                <h:form class="needs-validation" id="form12">
+
+                    <p:dataTable id="atributos3" var="cat" value="#{categoriaController.CList}" rowIndexVar="index">
+                        <p:column>
+                            <f:facet name="header">Nombre de la Categoria</f:facet>
+                            <h:outputText value="#{cat.caNombre}" />   
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Eliminar" update="form12" actionListener="#{categoriaController.eliminarCategorias(cat)}" >
+                                <f:event type="preRenderView" listener="#{categoriaController.init()}"/>    
+                                <!-- <p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                </h:form> 
+            </div>
+        </section>
+    </ui:define>
+</ui:composition>
