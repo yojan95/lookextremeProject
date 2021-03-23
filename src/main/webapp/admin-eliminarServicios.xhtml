@@ -58,7 +58,7 @@
                                 <f:facet name="header"></f:facet>
                                 <p:commandLink value="#{msgs['adminTable.BtnEliminar']}" actionListener="#{serviciosController.eliminarServicio(table_servicios)}" update="form1:UserTable" ajax="true"> 
                                     <f:event type="preRenderView" listener="#{serviciosController.init()}"/>
-                                    <p:confirm header="Confirmación" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>
+                                    <p:confirm header="Confirmación" message="¿Esta seguro de eliminar el servicio?" icon="ui-icon-alert"/>
                                 </p:commandLink>
                             </p:column>
                         </p:dataTable>
