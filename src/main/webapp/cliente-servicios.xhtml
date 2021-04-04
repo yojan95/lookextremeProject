@@ -56,13 +56,14 @@
                     <div class="col-12">
                         <h:form>
                             <p:panel class="p" header="#{msgs['clienteServicios.servicios']}" >
-                                <p:dataGrid value="${citaController.serviciosList}" var="se" >
+                                <p:dataGrid value="${citaController.serviciosList}" var="se">
                                     <div class="card text-center" style="width: 18rem;">
                                         <div class="card-header" style="background-color: #f9fbe7;">
                                             ${se.nombre}
                                         </div>
                                         <br/>
-
+                                        
+                                        <p:graphicImage library="Imagenes" name="#{se.foto}" style="height: 210px;"/>
                                         <h:outputText class="card-text" value="${se.descripcion}"/>
                                         <br/>
                                         $
