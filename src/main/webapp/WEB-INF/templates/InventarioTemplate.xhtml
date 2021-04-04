@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{controllerTranslation.local}" />
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+        <title>Look Extreme</title>        
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <link href="css/utils.css" rel="stylesheet" type="text/css"/>  
+        <f:event type="preRenderView" listener="#{administradorTemplateController.verificarSesion()}" />
+    </h:head>
+
+    <h:body>
+        <ui:insert name="header">
+            <h:form >
+                <header class="navbar navbar-expand-md fixed-top navbar-light bg-light">                 
+                    <h:commandLink class="navbar-brand" onclick="redirect('landing.html')">                                     
+                        <img src="images/LogoMakr_1EYqX1.png" height="55px"/>
+                    </h:commandLink>
+                    <!-- menu usuario -->
+                    <div id="user_login_menu" class="navbar-nav-scroll" >
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item ">                                
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Administrar
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavUsuario']}" outcome="admin-registrarUsuarios"/>                                        
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavMail']}"                 outcome="admin-enviarCorreos" />
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.Drop']}"                         outcome="admin_reporte_agendamiento"/>                                    
+                                    </div>
+                                </li> 
+                            </li>
+                            <div class="btn-group navbar-nav ml-md-auto">
+                                <a class="nav-link dropdown-toggle " data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >                                                            
+                                    <label id="userName">#{msgs['adminTemplate.NavAgendamiento']}</label>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" >
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavGestionarServi']}" outcome="admin-GestionarServicios"/>
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavCrearServicios']}" outcome="admin-CargarServicios"/>
+                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavConsultServicios']}" outcome="admin-ConsultarServicios"/>
+                                    <p:link class="dropdown-item menuUserNotLogin" value="Eliminar Servicios" outcome="admin-eliminarServicios"/>
+                                </div>
+                            </div>
+                            <div class="btn-group navbar-nav ml-md-auto" >
+                                <a class="nav-item " role="button">
+                                    <p:link class="nav-link" outcome="IndexInventario" >Inventario</p:link>
+                                </a>
+                            </div>
+                            <div class="btn-group navbar-nav ml-md-auto" >
+                                <a class="nav-item " role="button">
+                                    <p:link class="nav-link" outcome="administrador_consultarpqrs" >#{msgs['adminTemplate.NavPQRS']}</p:link>
+                                </a>
+                            </div>
+
+                        </ul>
+                    </div>                    
+                    <div class="navbar-nav ml-md-auto">                        
+                        <a class="nav-link dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >                        
+                            <p:outputLabel value="#{administradorTemplateController.userName}"/>
+                            <img src="images/user.svg" height="30px" />                            
+                        </a>                        
+                        <div class="dropdown-menu dropdown-menu-right" >
+                            <!--<p:link class="dropdown-item menuUserNotLogin" value="Mis datos personales" outcome="cliente-datos"/>-->
+                            <p:commandButton class="dropdown-item menuUserNotLogin" value="Cerrar Sesión" action="#{administradorTemplateController.cerrarSesion()}"/>           
+                          <!--  <p:commandButton class="dropdown-item menuUserNotLogin" value="Español" action="#{controllerTranslation.cambiarIdioma('ES')}"></p:commandButton>
+                            <p:commandButton class="dropdown-item menuUserNotLogin" value="English" action="#{controllerTranslation.cambiarIdioma('EN')}"></p:commandButton>-->
+                        </div>
+                    </div>
+                </header>
+            </h:form>
+            <div id="header" class="jumbotron text-light">
+                <h1 class="display-4">Look Extreme</h1>
+                <p class="lead">Comfort and quality.</p>
+            </div>
+        </ui:insert>
+
+
+        <ui:insert name="left">
+            <div class="row">
+                <div class="col-4">
+                    <div class="card-body  ">
+                        <div class="card-header bg-light text-center ">Gestionar Productos</div>
+                        <div class="card-body">
+                            <!-- <p:link class="dropdown-item text-dark" value="Registrar Administrador" outcome="cliente-servicios"/>-->
+                            <p:link class="dropdown-item text-dark" value="Registro de Productos" outcome="admin-RegistroProductos"/>
+                            <p:link class="dropdown-item text-dark" value="Eliminar Productos" outcome="admin-eliminarProductos"/>
+                            <p:link class="dropdown-item text-dark" value="Actualizar Productos" outcome="admin-GestionarProductos"/>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="col-4">
+                    <div class="card-body">
+                        <div class="card-header bg-light text-center ">Gestionar Atributos</div>
+                        <div class="card-body">
+                            <!-- <p:link class="dropdown-item text-dark" value="Registrar Administrador" outcome="cliente-servicios"/>-->
+                            <p:link class="dropdown-item text-dark" value="Registro de Atributos" outcome="admin-RegistroAtributo"/>
+                            <p:link class="dropdown-item text-dark" value="Eliminar Atributos" outcome="admin-EliminarAtributo"/>
+                            <p:link class="dropdown-item text-dark" value="Actualizar Atributos" outcome="admin-ActualizarAtributos"/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-4">
+                    <div class="card-body">
+                        <div class="card-header bg-light text-center ">Gestionar Salidas</div>
+                        <div class="card-body">
+                            <!-- <p:link class="dropdown-item text-dark" value="Registrar Administrador" outcome="cliente-servicios"/>-->
+                            <p:link class="dropdown-item text-dark" value="Salida de Productos" outcome="admin-ConsultaProductos"/>
+                            <p:link class="dropdown-item text-dark" value="Consultar Salidas" outcome="admin-EliminarAtributo"/>
+                            <p:link class="dropdown-item text-dark" value="Carga Masiva" outcome="admin-cargarProductos"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </ui:insert>
+
+
+        <ui:insert name="content">
+
+        </ui:insert>
+
+
+
+        <ui:insert name="bottom">
+            <h:form>
+                <div class="blog-footer">
+                    <p><h:commandLink >Look Extreme</h:commandLink> © All Rights Reserved - 2020</p>
+                    <p>
+                        <h:commandLink >Back to top</h:commandLink>
+                    </p>
+                </div>
+            </h:form>
+        </ui:insert>
+
+
+    </h:body>
+
+</html>
