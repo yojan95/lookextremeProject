@@ -44,9 +44,11 @@ public class Servicios implements Serializable {
     @Basic(optional = false)
     @Column(name = "idServicios")
     private Integer idServicios;
+    @NotNull
     @Size(max = 100)
     @Column(name = "Descripcion")
     private String descripcion;
+    @NotNull
     @Column(name = "Precio")
     private Integer precio;
     @Basic(optional = false)
@@ -64,9 +66,11 @@ public class Servicios implements Serializable {
         this.idServicios = idServicios;
     }
 
-    public Servicios(Integer idServicios, String nombre) {
+    public Servicios(Integer idServicios, String nombre,Integer precio,String descripcion) {
         this.idServicios = idServicios;
         this.nombre = nombre;
+        this.precio = precio;
+        this.descripcion = descripcion;
     }
 
     public Integer getIdServicios() {
