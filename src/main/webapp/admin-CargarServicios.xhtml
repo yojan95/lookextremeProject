@@ -8,85 +8,58 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui">
     <f:view locale="#{controllerTranslation.local}" />
-    <ui:define name="content">        
+    <ui:define name="content"> 
+
+
         <section>
-            <!--<p:growl showDetail="true" />-->
-            <!--<p:messages>
-                    <p:autoUpdate rendered="true"/>
-                </p:messages>-->
-
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-11 mx-auto">
-                        <div class="card">
-                            <div class="card-header">
-                                #{msgs['adminCard.Header']}
+            <p:messages showDetail="true" showSummary="false"/>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <div class="card" >
+                            <div class="card-header">                        
+                                <b style="color: #6c757d;">Crear Servicio</b>
                             </div>
                             <div class="card-body">
-                                <div class="row row-cols-1 row-cols-md-2">
-                                    <div class="col mb-4">
-                                        <!--<p:messages showDetail="true" showSummary="false"/>-->
-                                        
-                                        <h:form id="form1">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        #{msgs['adminCard.Header1']}
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="form-row">
-                                                            <div class="col">
-                                                                <p:outputLabel value="#{msgs['adminCard.Name']}"/>
-                                                                <p:inputText  class="form-control" value="#{serviciosController.servicios.nombre}"  validatorMessage="El nombre es obligatorio">
-                                                                    <!--<f:validateRegex pattern="^([a-zA-Z]+(.)?[\S]*)$"/>-->
-                                                                </p:inputText>
-                                                            </div>
-                                                            <div class="col">
-                                                                <p:outputLabel value="#{msgs['adminCard.Precio']}"/>
 
-                                                                <p:inputNumber  value="#{serviciosController.servicios.precio}" validatorMessage="El precio es obligatorio">
-                                                                    <!--<f:validateLength minimum="6" maximum="7"/>-->
-                                                                </p:inputNumber>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row">
-                                                            <div class="col">
-                                                                <p:outputLabel value="#{msgs['adminCard.Descripcion']}"/>
-                                                                <p:inputTextarea  class="form-control" value="#{serviciosController.servicios.descripcion}" validatorMessage="La descripcion es obligatoria">
-                                                                    <!--<f:validateRegex pattern="^([a-zA-Z]+(.)?[\S]*)$"/>-->
-                                                                </p:inputTextarea>
-                                                            </div>
-                                                        </div>
-                                                        <br/>
-                                                        <div class="form-row">
-                                                            <div class="col">
-                                                                <p:commandButton value="#{msgs['adminBtn.card']}" class="btn btn-primary btn-lg btn-block form-control"  actionListener="#{serviciosController.crearServicio()}" process="@this form1" ajax="false"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>  
-                                            </h:form>
-                                        
+                                <h:form enctype="multipart/form-data">
+
+                                    <p:outputLabel value="Seleccione la imagen"/><br/>
+                                    <p:fileUpload value="#{serviciosController.file}" mode="simple" fileLimit="1" skinSimple="true" accept=".jpg,.jpeg,.png"/><br/>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <p:outputLabel value="Nombre"/>
+                                            <p:inputText class="form-control" value="#{serviciosController.servicios.nombre}" validatorMessage="El nombre es obligatorio"/>
+                                        </div>
                                     </div>
-                                    <div class="col mb-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h:form enctype="multipart/form-data" >                                                      
-                                                    <p:outputLabel value="#{msgs['adminCard1.Label']}"/><br/>
-                                                    <p:fileUpload value="#{cargaDatosServiciosController.file}" mode="simple" skinSimple="true" accept=".xlsx,application/msexcel"/>
-                                                    <p:commandButton value="#{msgs['adminCard1.Btn']}" ajax="false"
-                                                                     action="#{cargaDatosServiciosController.cargarServicios()}" />
-                                                    <p:link value="Servicios" href="js/servicios.xlsx"></p:link>
-                                                </h:form>
-                                            </div>
-                                        </div>                                   
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <p:outputLabel value="Precio"/><br/>
+                                            <p:inputNumber  value="#{serviciosController.servicios.precio}" maxlength="6" validatorMessage="El precio es obligatorio">
+                                                <f:validateLongRange minimum="0" />
+                                            </p:inputNumber>
+                                        </div>
                                     </div>
-                                </div>
-                                <p:messages showDetail="true" showSummary="false"/>
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <p:outputLabel value="Descripción"/>
+                                            <p:inputTextarea class="form-control" value="#{serviciosController.servicios.descripcion}" validatorMessage="La descripcion es obligatoria"/>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <p:commandButton value="Crear" class="btn btn-primary btn-lg btn-block" action="#{serviciosController.registrarServicio()}" ajax="false" />
+                                    <p:dialog id="dialog" widgetVar="wdialog" modal="true" header="Aviso">
+                                        <p:graphicImage value = "/images/check.svg" style="width: 50px; display: block;
+                                                        margin:auto;"/>
+                                        Servicio creado
+                                    </p:dialog>
+                                </h:form>
                             </div>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
         </section>
     </ui:define>

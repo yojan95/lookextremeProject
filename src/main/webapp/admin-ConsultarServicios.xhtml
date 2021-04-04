@@ -12,15 +12,24 @@
         <section>           
             <h:form>
                 <p:panel class="p" header="#{msgs['clienteServicios.servicios']}" >
-                    <p:dataGrid value="${serviciosController.listaServicios}" var="se" >
-                        <p:panel header="${se.nombre}">
-                            <p:panelGrid columns="1" style="border: 0 !important">
-                                <h:outputText value="#{msgs['clienteServicios.descripcion']}"/>
-                                <h:outputText value="${se.descripcion}"/>
-                                <h:outputText value="#{msgs['clienteServicios.precio']}"/>
-                                <h:outputText value="${se.precio}"/>
-                            </p:panelGrid>
-                        </p:panel>
+                    <p:dataGrid value="${serviciosController.listaServicios}" var="se">
+                        <div class="card text-center" style="width: 18rem;">
+                            <div class="card-header" style="background-color: #a8a8a8;">
+                                ${se.nombre}
+                            </div>
+                            <br/>
+
+                            <p:graphicImage library="Imagenes" name="#{se.foto}" style="height: 210px;"/>
+                            <h:outputText class="card-text" value="${se.descripcion}"/>
+                            <br/>
+                            $
+                            <h:outputText  value="${se.precio}"/>
+
+                            <div class="card-footer text-muted" style="background-color: #ffffff;border: none">
+
+                            </div>
+
+                        </div>
                     </p:dataGrid>
                 </p:panel>
             </h:form>

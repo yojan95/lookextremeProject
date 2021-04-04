@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -56,6 +57,13 @@ public class Servicios implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "Nombre")
     private String nombre;
+     @Basic(optional = false)
+    @Size(min = 1, max = 300)
+    @Column(name = "Foto")
+    private String foto;
+    @Lob
+    @Column(name = "Imagen")
+    private byte[] imagen;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "serviciosidServicios")
     private List<ServiciosCitas> serviciosCitasList;
 
@@ -72,6 +80,26 @@ public class Servicios implements Serializable {
         this.precio = precio;
         this.descripcion = descripcion;
     }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+    
+    
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    
+    
 
     public Integer getIdServicios() {
         return idServicios;
