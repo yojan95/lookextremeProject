@@ -27,45 +27,16 @@
                             <li class="nav-item ">                                
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        #{msgs['adminTemplate.NavControlUser']}
+                                        Administrar
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavControlUserDropdown1']}" outcome="admin-registrarUsuarios"/>
-                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavControlUserDropdown2']}" outcome="admin-listarUsuarios"/>
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavUsuario']}" outcome="admin-registrarUsuarios"/>                                        
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavMail']}"                 outcome="admin-enviarCorreos" />
+                                        <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.Drop']}"                         outcome="admin_reporte_agendamiento"/>                                    
                                     </div>
-                                </li>
+                                </li> 
                             </li>
-                            <div class="btn-group navbar-nav ml-md-auto">
-                                <a class="nav-link dropdown-toggle " data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >                                                            
-                                    <label id="userName">#{msgs['adminTemplate.NavInventario']}</label>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" >
-                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavSalidaProductos']}" outcome="admin-SalidaProductos"/>
-                                    <!--<p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavConsumoProductos']}" outcome="admin-ConsumoProducto"/>-->
-                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavRegistroProductos']}" outcome="admin-RegistroProductos"/>
-                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavConsultaProductos']}" outcome="admin-ConsultaProductos"/> 
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Actualizar Productos" outcome="admin-GestionarProductos"/>
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Eliminar Productos" outcome="admin-eliminarProductos"/>
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Carga masiva" outcome="admin-cargarProductos"/>  
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Actualizar atributos" outcome="admin-RegistroAtributos"/> 
-                                    <p:link class="dropdown-item menuUserNotLogin" value="Eliminar atributos" outcome="admin-EliminarAtributo"/> 
-                                     
-                                </div>
-                            </div>
-                            <li class="nav-item">
-                                <p:link class="nav-link" outcome="administrador_consultarpqrs" >#{msgs['adminTemplate.NavPQRS']}</p:link>
-                            </li>
-                            <div class="btn-group navbar-nav ml-md-auto">
-                                <a class="nav-link dropdown-toggle " data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >                                                            
-                                    <label id="userName">#{msgs['adminNav.Nombre']}</label>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" >
-                                    <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminNav.Drop']}" outcome="admin_reporte_agendamiento"/>                                    
-                                </div>
-                            </div>
-                            <li class="nav-item">
-                                <p:link class="nav-link" outcome="admin-enviarCorreos" >#{msgs['adminTemplate.NavMail']}</p:link>
-                            </li>
+                            
                             <div class="btn-group navbar-nav ml-md-auto">
                                 <a class="nav-link dropdown-toggle " data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >                                                            
                                     <label id="userName">#{msgs['adminTemplate.NavAgendamiento']}</label>
@@ -76,6 +47,16 @@
                                     <p:link class="dropdown-item menuUserNotLogin" value="#{msgs['adminTemplate.NavConsultServicios']}" outcome="admin-ConsultarServicios"/>
                                     <p:link class="dropdown-item menuUserNotLogin" value="Eliminar Servicios" outcome="admin-eliminarServicios"/>
                                 </div>
+                            </div>
+                            <div class="btn-group navbar-nav ml-md-auto" >
+                                <a class="nav-item " role="button">
+                                    <p:link class="nav-link" outcome="IndexInventario" >Inventario</p:link>
+                                </a>
+                            </div>
+                            <div class="btn-group navbar-nav ml-md-auto" >
+                                <a class="nav-item " role="button">
+                                <p:link class="nav-link" outcome="administrador_consultarpqrs" >#{msgs['adminTemplate.NavPQRS']}</p:link>
+                                </a>
                             </div>
                         </ul>
                     </div>                    

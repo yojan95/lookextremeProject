@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<ui:composition template="./WEB-INF/templates/AdministradorTemplate.xhtml"
+<ui:composition template="./WEB-INF/templates/InventarioTemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -12,19 +12,12 @@ and open the template in the editor.
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        
-             
         <section id="about">
-
-
-            <div class="container">      
-                <h:form class="needs-validation" id="form2">              
-                    <div class="py-5 text-center">
-                        <h4 class="mb-3"  > #{msgs['admin.h4']} </h4>
-                    </div>
-               
+             <div class="container">      
+                  <div class="card-header bg-light text-center ">Registro de Productos</div>
+                <h:form class="needs-validation" id="form2">
                     <div class="row">
-
+                        
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.NombreProducto']}" />                    
                             <h:selectOneMenu  class="form-control" id="oneMenu"  value="${registrarProductoController.nombrep.idNombreProducto}" > 
@@ -40,11 +33,10 @@ and open the template in the editor.
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminForm.Precio']}" />                    
-                            <p:inputText  class="form-control" id="Precio" maxlength="6" value="${registrarProductoController.productos.precio}" validatorMessage="El precio debe ser un numero mayor de cero" ><f:validateLongRange minimum="0" /></p:inputText>
-                            <div class="invalid-feedback">Por favor introducir el valor correspondinente</div>
-
+                            <p:outputLabel value="#{msgs['adminForm.Tamaño']}" />                                        
+                            <p:inputText  class="form-control" id="Tamaño" maxlength="3" value="${registrarProductoController.productos.tamaño}"  validatorMessage="El tamaño debe ser un numero mayor de cero"><f:validateLongRange minimum="0" /></p:inputText>
                         </div>
+                        
                         <div class="col-md-6 mb-3">
                             <p:outputLabel value="#{msgs['adminForm.Marca']}" />
                             <h:selectOneMenu class="form-control" id="oneMenu1"  value="${registrarProductoController.marcas.idmarca}" >
@@ -72,11 +64,14 @@ and open the template in the editor.
                             <p:outputLabel class="form-control" value="#{msgs['adminForm.Fechadevencimiento']}" />                    
                             <p:calendar value="${registrarProductoController.productos.fechaVencimiento}" validatorMessage="Por favor ingrese una fecha" />
                             <div class="invalid-feedback">Por favor ingresar fecha de vencimiento</div>
-                        </div>                    
-                        <div class="col-md-6 mb-3">
-                            <p:outputLabel value="#{msgs['adminForm.Tamaño']}" />                                        
-                            <p:inputText  class="form-control" id="Tamaño" maxlength="3" value="${registrarProductoController.productos.tamaño}"  validatorMessage="El tamaño debe ser un numero mayor de cero"><f:validateLongRange minimum="0" /></p:inputText>
+                        </div>   
+                        <div class="col-md-2 ">
+                            <p:outputLabel value="#{msgs['adminForm.Precio']}" />                    
+                            <p:inputNumber  class="form-control " id="Precio" maxlength="6" value="${registrarProductoController.productos.precio}" validatorMessage="El precio debe ser un numero mayor de cero" ><f:validateLongRange minimum="0" /></p:inputNumber>
+                            <div class="invalid-feedback">Por favor introducir el valor correspondinente</div>
+
                         </div>
+                        
                     </div>
                     <p:commandButton class="btn btn-outline-secondary" update="form2" value="#{msgs['adminBoton.Guardar']}"  actionListener="${registrarProductoController.registrarProductos()}"   > </p:commandButton>
 
@@ -87,43 +82,6 @@ and open the template in the editor.
              <p:messages showDetail="true" showSummary="false">
                         <p:autoUpdate rendered="true"/>
              </p:messages>
-            <div class="py-5 text-center">
-                        <h4 class="mb-3"  > #{msgs['admin.h9']} </h4>
-                    </div>
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-sm">
-                        <h:form >
-                            <p:outputLabel value="Nombre del Producto"/>
-                            <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}" required="true"/>
-                            <p:commandButton value="Registrar" class="btn btn-outline-secondary"  actionListener="#{productoController.registrarNombreProducto()}" update=":form2:oneMenu"/>
-                            <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
-
-                        </h:form>
-                        <hr class="mb-4"></hr>
-                    </div>
-                    <div class="col-sm">
-                        <h:form>
-                            <p:outputLabel value="Nombre Categoria"/>
-                            <p:inputText class="form-control" value="#{productoController.categorias.caNombre}" required="true"/>
-                            <p:commandButton value="Registrar" class="btn btn-outline-secondary"  actionListener="#{productoController.registrarCategoria()}" update=":form2:oneMenu2"/>
-                            <f:event type="preRenderView" listener="#{productoController.init()}"/>
-                        </h:form>
-                        <hr class="mb-4"></hr>
-                    </div>
-                    <div class="col-sm">
-                        <h:form>
-                            <p:outputLabel value="Nombre Marca"/>
-                            <p:inputText class="form-control" value="#{productoController.marca.maNombre}" required="true"/>
-                            <p:commandButton value="Registrar" class="btn btn-outline-secondary" actionListener="#{productoController.registrarMarca()}" update=":form2:oneMenu1"/>
-                            <f:event type="preRenderView" listener="#{productoController.init()}"/>
-                        </h:form>
-                        <hr class="mb-4"></hr>
-                    </div>
-                </div>
-            </div>
         </section>
-            
     </ui:define>
 </ui:composition>

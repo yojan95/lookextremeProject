@@ -1,0 +1,122 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition template="./WEB-INF/templates/InventarioTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">
+        <section>
+            <div class="container">
+                    <div class="card-header bg-light text-center ">Actualizar Productos</div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="card-body ">
+                                <h:form class="needs-validation" id="form10">                                    
+                                    <p:dataTable id="atributos" var="list" value="#{atributoController.NList}" rowIndexVar="index">
+                                        <p:column>
+                                            <f:facet name="header">Nombre del producto</f:facet>
+                                            <h:outputText value="#{list.nombreProductocol}" />   
+                                        </p:column>
+
+                                        <p:column>                                
+                                            <p:commandLink value="Actualizar"  actionListener="#{atributoController.cargarNombres(list)}" update=":form10:atributos dialogo2" oncomplete="PF('valor').show();">
+                                                <!--<p:confirm header="Confirmación" actionListener="productoController.cargarProductos(prod)}" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                                            </p:commandLink>
+                                        </p:column>
+
+                                    </p:dataTable>
+
+                                </h:form>     
+
+                                <p:dialog id="dialogo2" widgetVar="valor" modal="true" closeOnEscape="true" header="Actualizar Nombre del Producto" resizable="false" draggable="false">
+                                    <h:form>
+                                        <p:panelGrid columns="2">
+                                            <p:outputLabel value="Nombre del producto"/>
+                                            <p:inputText value="#{atributoController.nombreProducto.nombreProductocol}"/>
+
+                                            <p:commandButton value="actualizar" actionListener="#{atributoController.actualizarNombreproducto()}" oncomplete="PF('valor')hide();"></p:commandButton>
+                                        </p:panelGrid>
+                                    </h:form>
+                                </p:dialog>
+                            </div>
+                        </div>    
+                        
+                        <div class="col-4">
+                            <div class="card-body ">
+                                <h:form class="needs-validation" id="form11">
+
+                                    <p:dataTable id="atributos2" var="mar" value="#{marcaController.MList}" rowIndexVar="index">
+                                        <p:column>
+                                            <f:facet name="header">Nombre de la marca</f:facet>
+                                            <h:outputText value="#{mar.maNombre}" />   
+                                        </p:column>
+
+                                        <p:column>                                
+                                            <p:commandLink value="Actualizar"  actionListener="#{marcaController.cargarMarca(mar)}" update=":form11:atributos2 dialogo3" oncomplete="PF('valor').show();">
+                                                <!--<p:confirm header="Confirmación" actionListener="productoController.cargarProductos(prod)}" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                                            </p:commandLink>
+                                        </p:column>
+
+                                    </p:dataTable>
+
+                                </h:form> 
+                                <p:dialog id="dialogo3" widgetVar="valor" modal="true" closeOnEscape="true" header="Actualizar Nombre de la marca" resizable="false" draggable="false">
+                                    <h:form>
+                                        <p:panelGrid columns="2">
+                                            <p:outputLabel value="Nombre de la marca"/>
+                                            <p:inputText value="#{marcaController.marca.maNombre}"/>
+
+                                            <p:commandButton value="actualizar"  actionListener="#{marcaController.actualizarMarca()}" oncomplete="PF('valor')hide();"></p:commandButton>
+                                        </p:panelGrid>
+                                    </h:form>
+                                </p:dialog>
+                            </div>
+                        </div>
+                        
+                        <div class="col-4">
+                            <div class="card-body ">
+                                <h:form class="needs-validation" id="form12">
+
+                                    <p:dataTable id="atributos3" var="cat" value="#{categoriaController.CList}" rowIndexVar="index">
+                                        <p:column>
+                                            <f:facet name="header">Nombre de la Categoria</f:facet>
+                                            <h:outputText value="#{cat.caNombre}" />   
+                                        </p:column>
+
+                                        <p:column>                                
+                                            <p:commandLink value="Actualizar"  actionListener="#{categoriaController.cargarCategorias(cat)}" update=":form12:atributos3 dialogo4" oncomplete="PF('valor').show();">
+                                                <!--<p:confirm header="Confirmación" actionListener="productoController.cargarProductos(prod)}" message="Esta seguro eliminar el servicio?" icon="ui-icon-alert"/>-->
+                                            </p:commandLink>
+                                        </p:column>
+
+                                    </p:dataTable>
+
+                                </h:form> 
+                                <p:dialog id="dialogo4" widgetVar="valor" modal="true" closeOnEscape="true" header="Actualizar Nombre de la Categoria" resizable="false" draggable="false">
+                                    <h:form>
+                                        <p:panelGrid columns="2">
+                                            <p:outputLabel value="Nombre de la Categoria"/>
+                                            <p:inputText value="#{categoriaController.categorias.caNombre}"/>
+
+                                            <p:commandButton value="actualizar"  actionListener="#{categoriaController.actualizarCategorias()}" oncomplete="PF('valor')hide();"></p:commandButton>
+                                        </p:panelGrid>
+                                    </h:form>
+                                </p:dialog>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                 
+            
+        </section>
+    </ui:define>
+</ui:composition>
