@@ -10,22 +10,17 @@
     <f:view locale="#{controllerTranslation.local}" />
     <ui:define name="content">        
         <section>
-             <p:messages showDetail="true" showSummary="false">
-                    <p:autoUpdate rendered="true"/>
-                </p:messages>
+            <p:messages showDetail="true" showSummary="false">
+                <p:autoUpdate rendered="true"/>
+            </p:messages>
             <h:form id="form1">
-               
-
                 <div class="row justify-content-md-start">
-
                     <div class="col-lg-10 mx-auto">
                         <div class="row">
                             <div class="col">
                                 <nav class="navbar navbar-light bg-light  border border-dark justify-content-between">
                                     <a class="navbar-brand"></a>
-                                 
                                     <div class="form-inline">
-
                                     </div>
                                 </nav>
                             </div>
@@ -38,7 +33,6 @@
                                     <p:dataExporter type="xls" target="tbl_pqrs" fileName="usuarios" />
                                 </h:commandLink>
                             </f:facet>
-
                             <p:column >
                                 <f:facet name="header">#{msgs['adminTable.Nombre']}</f:facet>
                                 <h:outputText value="#{table_servicios.nombre}" >
@@ -53,7 +47,6 @@
                                 <f:facet name="header">#{msgs['adminTable.Descripcion']}</f:facet>                        
                                 <h:outputText value="#{table_servicios.descripcion}" />
                             </p:column>
-
                             <p:column>
                                 <f:facet name="header"></f:facet>
                                 <p:commandLink value="#{msgs['adminTable.BtnEliminar']}" actionListener="#{serviciosController.eliminarServicio(table_servicios)}" update="form1:UserTable" ajax="true"> 
@@ -62,7 +55,6 @@
                                 </p:commandLink>
                             </p:column>
                         </p:dataTable>
-
                     </div>
                 </div>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" id="dialogConfirm">
