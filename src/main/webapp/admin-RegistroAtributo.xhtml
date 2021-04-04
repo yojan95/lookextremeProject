@@ -1,0 +1,63 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition template="./WEB-INF/templates/InventarioTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <section id="about">
+            <p:messages showDetail="true" showSummary="false">
+                <p:autoUpdate rendered="true"/>
+            </p:messages>
+            <div class="container">
+                <div class="container">
+                    <div class="row">
+                        
+
+                        <div class="col-sm">
+                            <h:form >
+                                <p:outputLabel value="Nombre del Producto"/>
+                                <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}" required="true"/>
+                                <p:commandButton value="Registrar" class="btn btn-outline-secondary"  actionListener="#{productoController.registrarNombreProducto()}" />
+                                <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
+
+                            </h:form>
+                            <hr class="mb-4"></hr>
+                        </div>
+                        <div class="col-sm">
+                            <h:form>
+                                <p:outputLabel value="Nombre Categoria"/>
+                                <p:inputText class="form-control" value="#{productoController.categorias.caNombre}" required="true"/>
+                                <p:commandButton value="Registrar" class="btn btn-outline-secondary"  actionListener="#{productoController.registrarCategoria()}" />
+                                <f:event type="preRenderView" listener="#{productoController.init()}"/>
+                            </h:form>
+                            <hr class="mb-4"></hr>
+                        </div>
+                        <div class="col-sm">
+                            <h:form>
+                                <p:outputLabel value="Nombre Marca"/>
+                                <p:inputText class="form-control" value="#{productoController.marca.maNombre}" required="true"/>
+                                <p:commandButton value="Registrar" class="btn btn-outline-secondary" actionListener="#{productoController.registrarMarca()}" />
+                                <f:event type="preRenderView" listener="#{productoController.init()}"/>
+                                <p:confirm header="Confirmación" message="¿Esta seguro de eliminar el producto?" icon="ui-icon-alert"/>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" id="dialogConfirm">
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="form1" immediate="true" global="false"/>
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                </p:confirmDialog>
+                            </h:form>
+                            <hr class="mb-4"></hr>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>     
+    </ui:define>
+</ui:composition>
