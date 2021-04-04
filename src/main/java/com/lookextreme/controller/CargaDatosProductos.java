@@ -47,42 +47,14 @@ public class CargaDatosProductos implements Serializable {
 
     @EJB
     private MarcaFacadeLocal marcaEJB;
-    private List<Marca> listaMarca;
 
     @EJB
     private CategoriasFacadeLocal categoriaEJB;
-    private List<Categorias> listaCategorias;
 
     @EJB
     private NombreproductoFacadeLocal nombreProductoEJB;
-    private List<Nombreproducto> listaNombreProducto;
     private Nombreproducto nombreProducto;
-    
 
-
-    public List<Nombreproducto> getListaNombreProducto() {
-        return listaNombreProducto;
-    }
-
-    public void setListaNombreProducto(List<Nombreproducto> listaNombreProducto) {
-        this.listaNombreProducto = listaNombreProducto;
-    }
-
-    public List<Marca> getListaMarca() {
-        return listaMarca;
-    }
-
-    public void setListaMarca(List<Marca> listaMarca) {
-        this.listaMarca = listaMarca;
-    }
-
-    public List<Categorias> getListaCategorias() {
-        return listaCategorias;
-    }
-
-    public void setListaCategorias(List<Categorias> listaCategorias) {
-        this.listaCategorias = listaCategorias;
-    }
 
     public Productos getProductos() {
         return productos;
@@ -108,31 +80,30 @@ public class CargaDatosProductos implements Serializable {
 
     public void cargarProductos() throws ParseException {
         System.out.println("cargando Productos");
-        listaCategorias = categoriaEJB.findAll();
-        listaNombreProducto = nombreProductoEJB.findAll();
-        listaMarca = marcaEJB.findAll();
+
         Integer codigoMarca, codigoCategoria, codigoProducto;
         Categorias categoriass = new Categorias();
         Marca marca1 = new Marca();
-        Productos product = new Productos();  
+        Productos product = new Productos();
         Administrador admin = new Administrador();
         Nombreproducto nombrep = new Nombreproducto();
-        if (file.getSize() > 0) {
-            try {
+
+        try {
+            if (file.getSize() > 0) {
                 InputStream input = file.getInputStream();
                 XSSFWorkbook libro = new XSSFWorkbook(input);
                 Sheet sheet = libro.getSheetAt(0);
                 Iterator<Row> iterator = sheet.iterator();
                 int i = 0;
                 while (iterator.hasNext()) {
-                    
+
                     Row currentRow = iterator.next();
                     if (i > 0) {
                         if (currentRow.getCell(0) == null && currentRow.getCell(1) != null
                                 && currentRow.getCell(2) != null && currentRow.getCell(3) != null && currentRow.getCell(4) != null
                                 && currentRow.getCell(5) != null && currentRow.getCell(6) != null && currentRow.getCell(7) != null
                                 && currentRow.getCell(8) != null) {
-                            
+
                             codigoProducto = (int) currentRow.getCell(1).getNumericCellValue();
                             codigoCategoria = (int) currentRow.getCell(2).getNumericCellValue();
                             codigoMarca = (int) currentRow.getCell(3).getNumericCellValue();
@@ -143,22 +114,11 @@ public class CargaDatosProductos implements Serializable {
                             product.setColor(currentRow.getCell(7).getStringCellValue());
                             product.setPrecio((int) currentRow.getCell(8).getNumericCellValue());
                             product.setEstado("registrado");
-                            for (Nombreproducto nombre : listaNombreProducto) {
-                                if (nombre.getIdNombreProducto().equals(codigoProducto)) {
-                                    nombrep.setIdNombreProducto(nombre.getIdNombreProducto());
-                                }
-                            }
-                            for (Categorias cate : listaCategorias) {
-                                if (cate.getIdcategorias().equals(codigoCategoria)) {
-                                    categoriass.setIdcategorias(cate.getIdcategorias());
 
-                                }
-                            }
-                            for (Marca marcas : listaMarca) {
-                                if (marcas.getIdmarca().equals(codigoMarca)) {
-                                    marca1.setIdmarca(marcas.getIdmarca());
-                                } 
-                            }
+                            nombrep = nombreProductoEJB.find(codigoProducto);
+                            categoriass = categoriaEJB.find(codigoCategoria);
+                            marca1 = marcaEJB.find(codigoMarca);
+
                             admin.setUsuarioidUsuario(1);
                             product.setAdministradorusuarioidUsuario(admin);
 
@@ -180,12 +140,15 @@ public class CargaDatosProductos implements Serializable {
                     i++;
                 }
                 libro.close();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
+
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Por favor seleccione un archivo!"));
             }
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Por favor seleccione un archivo!"));
+        } catch (IOException | NullPointerException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, e.getMessage(), "Algunos datos No pudieron ser subidos. Revise los codigos Marca, Categoria,Nombre Producto!"));
+            System.out.println(e.getMessage());
         }
+
     }
 
 }

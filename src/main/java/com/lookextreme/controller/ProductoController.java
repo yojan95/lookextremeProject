@@ -256,12 +256,13 @@ public class ProductoController implements Serializable {
         salidaVenta.setFechaSalidaVenta(new Date());
         listarEstilistas();
         FacesContext context = FacesContext.getCurrentInstance();
-        ListarProductos();
+        //ListarProductos();
+        
     }
 
-    public void ListarProductos() {
+    public void listarProductos() {
         try {
-            productosList = new ArrayList();
+            //productosList = new ArrayList();
             productosList = prodEJB.findAll();
         } catch (Exception e) {
             System.out.println("Error CONTROLLER CONSULTA");

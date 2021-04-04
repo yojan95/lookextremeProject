@@ -74,8 +74,9 @@ public class CargaDatosServiciosController implements Serializable {
                     i++;
                 }
                 libro.close();
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 System.out.println(e.getMessage());
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, e.getMessage(), "!Algunos datos No se pudieron subir al sistema!"));
             }
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Por favor seleccione un archivo!"));
