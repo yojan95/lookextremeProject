@@ -22,45 +22,45 @@ and open the template in the editor.
                         
 
                         <div class="col-sm">
-                            <h:form >
-                                <p:outputLabel value="Nombre del Producto"/>
+                            <h:form id="form1" >
+                                <p:outputLabel class="form-control" value="Nombre del Producto"/>
                                 <p:inputText class="form-control" value="#{productoController.nombreProducto.nombreProductocol}" required="true"/>
-                                <p:commandLink value="Registrar" class="btn btn-outline-secondary"  actionListener="#{productoController.registrarNombreProducto()}" >
+                                <p:commandLink value="Registrar" update="form1" class="btn btn-outline-secondary"  actionListener="#{productoController.registrarNombreProducto()}" >
                                 <f:event type="preRenderView" listener="#{registrarProductoController.init()}"/>
                                 <p:confirm header="Confirmación" message="¿Esta seguro de registrar el Nombre del Producto?" icon="ui-icon-alert"/>
                                 </p:commandLink>
                                 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" id="dialogConfirm">
-                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="form1" immediate="true" global="false"/>
+                                    <p:commandButton  value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="form1" immediate="true" global="false"/>
                                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                                 </p:confirmDialog>
                             </h:form>
                             <hr class="mb-4"></hr>
                         </div>
                         <div class="col-sm">
-                            <h:form>
-                                <p:outputLabel value="Nombre Categoria"/>
+                            <h:form id="form2">
+                                <p:outputLabel class="form-control" value="Nombre Categoria"/>
                                 <p:inputText class="form-control" value="#{productoController.categorias.caNombre}" required="true"/>
-                                <p:commandLink value="Registrar" class="btn btn-outline-secondary"  actionListener="#{productoController.registrarCategoria()}" >
+                                <p:commandLink value="Registrar" update="form2" class="btn btn-outline-secondary"  actionListener="#{productoController.registrarCategoria()}" >
                                 <f:event type="preRenderView" listener="#{productoController.init()}"/>
                                 <p:confirm header="Confirmación" message="¿Esta seguro de registrar el Nombre de la categoria?" icon="ui-icon-alert"/>
                                 </p:commandLink>
                                 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" id="dialogConfirm">
-                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="form1" immediate="true" global="false"/>
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"  immediate="true" global="false"/>
                                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                                 </p:confirmDialog>
                             </h:form>
                             <hr class="mb-4"></hr>
                         </div>
                         <div class="col-sm">
-                            <h:form>
-                                <p:outputLabel value="Nombre Marca"/>
+                            <h:form id="form3">
+                                <p:outputLabel class="form-control" value="Nombre Marca"/>
                                 <p:inputText class="form-control" value="#{productoController.marca.maNombre}" required="true"/>
-                                <p:commandLink value="Registrar" class="btn btn-outline-secondary" actionListener="#{productoController.registrarMarca()}" >
+                                <p:commandLink value="Registrar" update="form3" class="btn btn-outline-secondary" actionListener="#{productoController.registrarMarca()}" >
                                 <f:event type="preRenderView" listener="#{productoController.init()}"/>
                                 <p:confirm header="Confirmación" message="¿Esta seguro de registrar el Nombre de la Marca?" icon="ui-icon-alert"/>
                                 </p:commandLink>
                                 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" id="dialogConfirm">
-                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="form1" immediate="true" global="false"/>
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="form3" immediate="true" global="false"/>
                                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                                 </p:confirmDialog>
                             </h:form>
