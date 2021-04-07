@@ -60,6 +60,7 @@
                             <p:column headerText="Cantidad" filterBy="#{productos.cantidad}">
                                 <h:outputText value="#{productos.cantidad}" />
                             </p:column>
+                            
 
                             <p:column headerText="Estado" filterBy="#{productos.estado}">
                                 <h:outputText value="#{productos.estado}" />
@@ -97,7 +98,7 @@
                                 </nav>
                             </div>
                         </div>
-                        <p:dataTable id="tbe" var="productos" value="#{productoController.listaSalidaVenta}">
+                        <p:dataTable id="tbe" var="productos"  value="#{productoController.listaSalidaVenta}">
                             <p:column headerText="Codigo">
                                 <h:outputText value="#{productos.productosidCodigo.nombreProductoidNombreProducto.idNombreProducto}" />
                             </p:column>
@@ -118,6 +119,10 @@
 
                             <p:column headerText="Cantidad" filterBy="#{productos.cantidad}">
                                 <h:outputText value="#{productos.cantidad}" />
+                            </p:column>
+                            
+                            <p:column headerText="Total" filterBy="#{productos.total}">
+                                <h:outputText value="#{productos.total}" />
                             </p:column>
 
                             <p:column headerText="Estado" filterBy="#{productos.estado}">
