@@ -103,7 +103,7 @@
                                 <div class="md-form">
                                     <p:outputLabel value="#{msgs['landing.FormDe']}"/>
                                     <i class="fas fa-envelope prefix grey-text"></i>
-                                    <p:inputText id="correoo" placeholder="#{msgs['landing.FormNamePlaceHolder']}" class="form-control" validatorMessage="El correo no es valido" value="#{emailController.smtp.from}">
+                                    <p:inputText id="correoo" placeholder="#{msgs['landing.FormNamePlaceHolder']}" class="form-control" validatorMessage="El correo no es valido" value="#{emailController.smtp.from}" disabled="true">
                                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                     </p:inputText>
                                     <label for="validationTooltip01"></label>

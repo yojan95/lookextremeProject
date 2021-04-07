@@ -36,9 +36,8 @@ and open the template in the editor.
     </h:head>
     <body>
         <h:form>
-            <p:messages>
-                <p:autoUpdate id="password" rendered="true"/>
-                <p:autoUpdate id="usuario" rendered="true"/>
+            <p:messages showDetail="true" showSummary="false">
+                <p:autoUpdate rendered="true"/>
             </p:messages>
             <div style="position: absolute; top: 16px; right: 16px;">
                 <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true" v-for="v in 4" data-delay="3000">          
@@ -55,28 +54,30 @@ and open the template in the editor.
                                     <img src="images/LogoMakr_1EYqX1.png" width="95%"/>
                                 </div>
                                     <div class="form-group">
-                                        <p:outputLabel value="#{msgs['login.FormCorreo']}" />
-                                        <p:inputText type="text" class="form-control" id="usuario" value="#{loginController.usuario.email}" validatorMessage="El usuario es obligatorio" rendered="true"/>
+                                        <p:outputLabel value="Correo" />
+                                        <p:inputText type="text" class="form-control" id="usuario" value="#{usuarioController.usuario.email}" validatorMessage="El correo es obligatorio,Ej: maria@gmail.com" rendered="true" placeholder="Ingrese su correo">
+                                             <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                        </p:inputText>
                                     </div>
-                                    <div class="form-group">
-                                        <p:outputLabel value="#{msgs['login.FormContraseña']}" />
-                                        <p:inputText type="password" class="form-control" id="password" value="#{loginController.usuario.contraseña}" validatorMessage="La contraseña es obligatoria" rendered="true"/>
-                                    </div>
-                                    <div class="form-group">
-                                         <p:link class="card-link" value="#{msgs['login.FormOlvidoContra']}" outcome="recuperarContraseña"/>
-                                        <!-- <a href="#" class="stretched-link">¿No tienes una cuenta? Registrate</a> -->
-                                    </div> 
-                                    <div class="form-group">
-                                        <p:link class="card-link" value="#{msgs['login.FormRegistrarse']}" outcome="registrarse"/>
-                                        <p:link class="card-link" value="#{msgs['login.FormNotieneCuenta']}" outcome="registrarse"/>                                        
-                                    </div>
+                                  
                                     <h:message for="btn_login"/>
-                                    <p:commandButton id="btn_login" binding="#{loginController.buttonLogin}" type="submit" class="btn btn-primary" value="#{msgs['login.FormBtn']}" action="#{loginController.iniciarSesion()}"></p:commandButton>
+                                    <p:commandButton id="btn_login" binding="#{loginController.buttonLogin}" type="submit" class="btn btn-primary btn-lg btn-block" value="Enviar" action="#{usuarioController.recuperarContraseña()}"></p:commandButton>
                             </div>
                         </div>
                     </div>
                 </div>          
             </div>  
         </h:form>
+         <p:dialog id="dialog" widgetVar="wdialog2" modal="true" header="Aviso">
+
+                    <p:graphicImage value = "/images/exclamation.svg" style="width: 50px; display: block;
+                                    margin:auto;"/>
+                    El correo no es valido
+                </p:dialog>
+            <p:dialog id="dialog2" widgetVar="wdialog1" modal="true" header="Aviso">
+                <p:graphicImage value = "/images/check.svg" style="width: 50px; display: block;
+                                                    margin:auto;"/>
+                Se envió un correo para recuperar su contraseña
+            </p:dialog>
     </body>
 </html>

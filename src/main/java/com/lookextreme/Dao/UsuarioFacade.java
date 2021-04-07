@@ -8,6 +8,7 @@ package com.lookextreme.Dao;
 import com.lookextreme.model.Roles;
 import com.lookextreme.model.Usuario;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -61,5 +62,29 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
             System.out.println(e.getMessage());
         }
         return lista;
+    }
+    
+    @Override
+    public Usuario recuperarContraseña(Usuario usuarioEmail){
+       Usuario usuario = new Usuario();
+        List<Usuario> lista = new ArrayList<>();
+        List<Object> result = new ArrayList();
+        try{
+            result = em.createNamedQuery("Usuario.findByRecuperarContraseña")
+                    .setParameter("email", usuarioEmail.getEmail())
+                    .getResultList();
+            Iterator itr = result.iterator();
+            while (itr.hasNext()) {
+                Object[] obj = (Object[]) itr.next();
+                 
+                 usuario.setContraseña(String.valueOf(obj[1]));
+                 usuario.setEmail(String.valueOf(obj[0]));
+               
+            }
+            
+        }catch(Exception e){
+            System.out.println("error al recuperrar contraseña Dao: "+e.getMessage());
+        }
+        return usuario;
     }
 }

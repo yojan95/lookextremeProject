@@ -6,13 +6,18 @@
 package com.lookextreme.controller;
 
 import com.lookextreme.Dao.UsuarioFacadeLocal;
+import com.lookextreme.model.Smtp;
 import com.lookextreme.model.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.mail.MessagingException;
+import org.primefaces.PrimeFaces;
 
 
 @Named
@@ -85,5 +90,30 @@ public class UsuarioController implements Serializable{
         String login = null;
         login = "login";
         return login;
+    }
+    
+    public void recuperarContraseña(){
+        System.out.println("recuperando password");
+        Usuario user = new Usuario();
+                
+        try{
+           user = usuarioEJB.recuperarContraseña(usuario);
+            if (user!= null) {
+                 Smtp smtp = new Smtp();
+                 smtp.setTo(user.getEmail());
+                 smtp.setSubject("Recuperar contraeña");
+                 smtp.setFrom("lookextreme7@gmail.com");
+                 smtp.setDescr("Su contraseña es: "+user.getContraseña());
+                 smtp.enviarCorreo();
+                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Se envió un correo con su contraseña"));
+            }else{
+                System.out.println("el correo no es valido");
+                PrimeFaces current = PrimeFaces.current();
+                current.executeScript("PF('wdialog2').show();");
+            }
+        }catch(MessagingException  | NullPointerException e){
+            System.out.println("error al recuperar contraseña: "+e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, e.getMessage(), "El correo no es valido o no esta registrado en el sistema"));
+        }
     }
 }

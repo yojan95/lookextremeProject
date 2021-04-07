@@ -35,4 +35,6 @@ public interface UsuarioFacadeLocal {
 
     List<Usuario> consultarRoll(Roles rol);
     
+    Usuario recuperarContraseña(Usuario usuarioPassword);
+    
 }
